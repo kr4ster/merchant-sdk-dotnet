@@ -1,7 +1,8 @@
 
-PayPal Merchant SDK for .NET - v0.7.90
---------------------------------------
-
+Version 0.8.90 - July 11, 2012
+    - Nant script added for SDK automation.
+    
+-------------------------------------------
 
 Release Date - 11-June-2012
 
