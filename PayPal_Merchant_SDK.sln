@@ -7,12 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayPal_Merchant_SDK", "PayP
 		Release.AspNetCompiler.Debug = "False"
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MerchantSampleApp", "Sample\MerchantSampleApp\MerchantSampleApp.csproj", "{D7A1CE66-E49C-4081-9138-113711488895}"
-	ProjectSection(WebsiteProperties) = preProject
-		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.Debug = "False"
-	EndProjectSection
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PayPalAPISample", "Sample\PayPalAPISample\PayPalAPISample.csproj", "{B14D8537-E6C6-46E7-BC73-47115346A31B}"
 	ProjectSection(WebsiteProperties) = preProject
 		Debug.AspNetCompiler.Debug = "True"
@@ -39,10 +33,6 @@ Global
 		{1F5FF00B-CE0F-40B8-9BC4-7B5ED2087266}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1F5FF00B-CE0F-40B8-9BC4-7B5ED2087266}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1F5FF00B-CE0F-40B8-9BC4-7B5ED2087266}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D7A1CE66-E49C-4081-9138-113711488895}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D7A1CE66-E49C-4081-9138-113711488895}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D7A1CE66-E49C-4081-9138-113711488895}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D7A1CE66-E49C-4081-9138-113711488895}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B14D8537-E6C6-46E7-BC73-47115346A31B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{B14D8537-E6C6-46E7-BC73-47115346A31B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B14D8537-E6C6-46E7-BC73-47115346A31B}.Release|Any CPU.ActiveCfg = Release|Any CPU
