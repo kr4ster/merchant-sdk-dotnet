@@ -29,7 +29,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 		}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public RefundTransactionResponseType RefundTransaction(RefundTransactionReq RefundTransactionReq, string apiUsername)
@@ -41,7 +40,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public RefundTransactionResponseType RefundTransaction(RefundTransactionReq RefundTransactionReq)
@@ -50,7 +48,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public InitiateRecoupResponseType InitiateRecoup(InitiateRecoupReq InitiateRecoupReq, string apiUsername)
@@ -62,7 +59,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public InitiateRecoupResponseType InitiateRecoup(InitiateRecoupReq InitiateRecoupReq)
@@ -71,7 +67,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public CompleteRecoupResponseType CompleteRecoup(CompleteRecoupReq CompleteRecoupReq, string apiUsername)
@@ -83,7 +78,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public CompleteRecoupResponseType CompleteRecoup(CompleteRecoupReq CompleteRecoupReq)
@@ -92,7 +86,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public CancelRecoupResponseType CancelRecoup(CancelRecoupReq CancelRecoupReq, string apiUsername)
@@ -104,7 +97,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public CancelRecoupResponseType CancelRecoup(CancelRecoupReq CancelRecoupReq)
@@ -113,7 +105,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetTransactionDetailsResponseType GetTransactionDetails(GetTransactionDetailsReq GetTransactionDetailsReq, string apiUsername)
@@ -125,7 +116,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetTransactionDetailsResponseType GetTransactionDetails(GetTransactionDetailsReq GetTransactionDetailsReq)
@@ -134,7 +124,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public BillUserResponseType BillUser(BillUserReq BillUserReq, string apiUsername)
@@ -146,7 +135,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public BillUserResponseType BillUser(BillUserReq BillUserReq)
@@ -155,7 +143,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public TransactionSearchResponseType TransactionSearch(TransactionSearchReq TransactionSearchReq, string apiUsername)
@@ -167,7 +154,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public TransactionSearchResponseType TransactionSearch(TransactionSearchReq TransactionSearchReq)
@@ -176,7 +162,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public MassPayResponseType MassPay(MassPayReq MassPayReq, string apiUsername)
@@ -188,7 +173,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public MassPayResponseType MassPay(MassPayReq MassPayReq)
@@ -197,7 +181,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public BAUpdateResponseType BillAgreementUpdate(BillAgreementUpdateReq BillAgreementUpdateReq, string apiUsername)
@@ -209,7 +192,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public BAUpdateResponseType BillAgreementUpdate(BillAgreementUpdateReq BillAgreementUpdateReq)
@@ -218,7 +200,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public AddressVerifyResponseType AddressVerify(AddressVerifyReq AddressVerifyReq, string apiUsername)
@@ -230,7 +211,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public AddressVerifyResponseType AddressVerify(AddressVerifyReq AddressVerifyReq)
@@ -239,7 +219,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public EnterBoardingResponseType EnterBoarding(EnterBoardingReq EnterBoardingReq, string apiUsername)
@@ -251,7 +230,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public EnterBoardingResponseType EnterBoarding(EnterBoardingReq EnterBoardingReq)
@@ -260,7 +238,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetBoardingDetailsResponseType GetBoardingDetails(GetBoardingDetailsReq GetBoardingDetailsReq, string apiUsername)
@@ -272,7 +249,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetBoardingDetailsResponseType GetBoardingDetails(GetBoardingDetailsReq GetBoardingDetailsReq)
@@ -281,7 +257,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public CreateMobilePaymentResponseType CreateMobilePayment(CreateMobilePaymentReq CreateMobilePaymentReq, string apiUsername)
@@ -293,7 +268,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public CreateMobilePaymentResponseType CreateMobilePayment(CreateMobilePaymentReq CreateMobilePaymentReq)
@@ -302,7 +276,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetMobileStatusResponseType GetMobileStatus(GetMobileStatusReq GetMobileStatusReq, string apiUsername)
@@ -314,7 +287,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetMobileStatusResponseType GetMobileStatus(GetMobileStatusReq GetMobileStatusReq)
@@ -323,7 +295,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public SetMobileCheckoutResponseType SetMobileCheckout(SetMobileCheckoutReq SetMobileCheckoutReq, string apiUsername)
@@ -335,7 +306,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public SetMobileCheckoutResponseType SetMobileCheckout(SetMobileCheckoutReq SetMobileCheckoutReq)
@@ -344,7 +314,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoMobileCheckoutPaymentResponseType DoMobileCheckoutPayment(DoMobileCheckoutPaymentReq DoMobileCheckoutPaymentReq, string apiUsername)
@@ -356,7 +325,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoMobileCheckoutPaymentResponseType DoMobileCheckoutPayment(DoMobileCheckoutPaymentReq DoMobileCheckoutPaymentReq)
@@ -365,7 +333,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetBalanceResponseType GetBalance(GetBalanceReq GetBalanceReq, string apiUsername)
@@ -377,7 +344,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetBalanceResponseType GetBalance(GetBalanceReq GetBalanceReq)
@@ -386,7 +352,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetPalDetailsResponseType GetPalDetails(GetPalDetailsReq GetPalDetailsReq, string apiUsername)
@@ -398,7 +363,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetPalDetailsResponseType GetPalDetails(GetPalDetailsReq GetPalDetailsReq)
@@ -407,7 +371,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoExpressCheckoutPaymentResponseType DoExpressCheckoutPayment(DoExpressCheckoutPaymentReq DoExpressCheckoutPaymentReq, string apiUsername)
@@ -419,7 +382,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoExpressCheckoutPaymentResponseType DoExpressCheckoutPayment(DoExpressCheckoutPaymentReq DoExpressCheckoutPaymentReq)
@@ -428,7 +390,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoUATPExpressCheckoutPaymentResponseType DoUATPExpressCheckoutPayment(DoUATPExpressCheckoutPaymentReq DoUATPExpressCheckoutPaymentReq, string apiUsername)
@@ -440,7 +401,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoUATPExpressCheckoutPaymentResponseType DoUATPExpressCheckoutPayment(DoUATPExpressCheckoutPaymentReq DoUATPExpressCheckoutPaymentReq)
@@ -449,7 +409,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public SetAuthFlowParamResponseType SetAuthFlowParam(SetAuthFlowParamReq SetAuthFlowParamReq, string apiUsername)
@@ -461,7 +420,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public SetAuthFlowParamResponseType SetAuthFlowParam(SetAuthFlowParamReq SetAuthFlowParamReq)
@@ -470,7 +428,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetAuthDetailsResponseType GetAuthDetails(GetAuthDetailsReq GetAuthDetailsReq, string apiUsername)
@@ -482,7 +439,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetAuthDetailsResponseType GetAuthDetails(GetAuthDetailsReq GetAuthDetailsReq)
@@ -491,7 +447,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public SetAccessPermissionsResponseType SetAccessPermissions(SetAccessPermissionsReq SetAccessPermissionsReq, string apiUsername)
@@ -503,7 +458,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public SetAccessPermissionsResponseType SetAccessPermissions(SetAccessPermissionsReq SetAccessPermissionsReq)
@@ -512,7 +466,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public UpdateAccessPermissionsResponseType UpdateAccessPermissions(UpdateAccessPermissionsReq UpdateAccessPermissionsReq, string apiUsername)
@@ -524,7 +477,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public UpdateAccessPermissionsResponseType UpdateAccessPermissions(UpdateAccessPermissionsReq UpdateAccessPermissionsReq)
@@ -533,7 +485,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetAccessPermissionDetailsResponseType GetAccessPermissionDetails(GetAccessPermissionDetailsReq GetAccessPermissionDetailsReq, string apiUsername)
@@ -545,7 +496,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetAccessPermissionDetailsResponseType GetAccessPermissionDetails(GetAccessPermissionDetailsReq GetAccessPermissionDetailsReq)
@@ -554,7 +504,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetIncentiveEvaluationResponseType GetIncentiveEvaluation(GetIncentiveEvaluationReq GetIncentiveEvaluationReq, string apiUsername)
@@ -566,7 +515,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetIncentiveEvaluationResponseType GetIncentiveEvaluation(GetIncentiveEvaluationReq GetIncentiveEvaluationReq)
@@ -575,7 +523,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public SetExpressCheckoutResponseType SetExpressCheckout(SetExpressCheckoutReq SetExpressCheckoutReq, string apiUsername)
@@ -587,7 +534,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public SetExpressCheckoutResponseType SetExpressCheckout(SetExpressCheckoutReq SetExpressCheckoutReq)
@@ -596,7 +542,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public ExecuteCheckoutOperationsResponseType ExecuteCheckoutOperations(ExecuteCheckoutOperationsReq ExecuteCheckoutOperationsReq, string apiUsername)
@@ -608,7 +553,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public ExecuteCheckoutOperationsResponseType ExecuteCheckoutOperations(ExecuteCheckoutOperationsReq ExecuteCheckoutOperationsReq)
@@ -617,7 +561,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetExpressCheckoutDetailsResponseType GetExpressCheckoutDetails(GetExpressCheckoutDetailsReq GetExpressCheckoutDetailsReq, string apiUsername)
@@ -629,7 +572,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetExpressCheckoutDetailsResponseType GetExpressCheckoutDetails(GetExpressCheckoutDetailsReq GetExpressCheckoutDetailsReq)
@@ -638,7 +580,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoDirectPaymentResponseType DoDirectPayment(DoDirectPaymentReq DoDirectPaymentReq, string apiUsername)
@@ -650,7 +591,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoDirectPaymentResponseType DoDirectPayment(DoDirectPaymentReq DoDirectPaymentReq)
@@ -659,7 +599,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public ManagePendingTransactionStatusResponseType ManagePendingTransactionStatus(ManagePendingTransactionStatusReq ManagePendingTransactionStatusReq, string apiUsername)
@@ -671,7 +610,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public ManagePendingTransactionStatusResponseType ManagePendingTransactionStatus(ManagePendingTransactionStatusReq ManagePendingTransactionStatusReq)
@@ -680,7 +618,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoCancelResponseType DoCancel(DoCancelReq DoCancelReq, string apiUsername)
@@ -692,7 +629,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoCancelResponseType DoCancel(DoCancelReq DoCancelReq)
@@ -701,7 +637,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoCaptureResponseType DoCapture(DoCaptureReq DoCaptureReq, string apiUsername)
@@ -713,7 +648,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoCaptureResponseType DoCapture(DoCaptureReq DoCaptureReq)
@@ -722,7 +656,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoReauthorizationResponseType DoReauthorization(DoReauthorizationReq DoReauthorizationReq, string apiUsername)
@@ -734,7 +667,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoReauthorizationResponseType DoReauthorization(DoReauthorizationReq DoReauthorizationReq)
@@ -743,7 +675,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoVoidResponseType DoVoid(DoVoidReq DoVoidReq, string apiUsername)
@@ -755,7 +686,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoVoidResponseType DoVoid(DoVoidReq DoVoidReq)
@@ -764,7 +694,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoAuthorizationResponseType DoAuthorization(DoAuthorizationReq DoAuthorizationReq, string apiUsername)
@@ -776,7 +705,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoAuthorizationResponseType DoAuthorization(DoAuthorizationReq DoAuthorizationReq)
@@ -785,7 +713,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public SetCustomerBillingAgreementResponseType SetCustomerBillingAgreement(SetCustomerBillingAgreementReq SetCustomerBillingAgreementReq, string apiUsername)
@@ -797,7 +724,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public SetCustomerBillingAgreementResponseType SetCustomerBillingAgreement(SetCustomerBillingAgreementReq SetCustomerBillingAgreementReq)
@@ -806,7 +732,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetBillingAgreementCustomerDetailsResponseType GetBillingAgreementCustomerDetails(GetBillingAgreementCustomerDetailsReq GetBillingAgreementCustomerDetailsReq, string apiUsername)
@@ -818,7 +743,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetBillingAgreementCustomerDetailsResponseType GetBillingAgreementCustomerDetails(GetBillingAgreementCustomerDetailsReq GetBillingAgreementCustomerDetailsReq)
@@ -827,7 +751,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public CreateBillingAgreementResponseType CreateBillingAgreement(CreateBillingAgreementReq CreateBillingAgreementReq, string apiUsername)
@@ -839,7 +762,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public CreateBillingAgreementResponseType CreateBillingAgreement(CreateBillingAgreementReq CreateBillingAgreementReq)
@@ -848,7 +770,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoReferenceTransactionResponseType DoReferenceTransaction(DoReferenceTransactionReq DoReferenceTransactionReq, string apiUsername)
@@ -860,7 +781,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoReferenceTransactionResponseType DoReferenceTransaction(DoReferenceTransactionReq DoReferenceTransactionReq)
@@ -869,7 +789,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoNonReferencedCreditResponseType DoNonReferencedCredit(DoNonReferencedCreditReq DoNonReferencedCreditReq, string apiUsername)
@@ -881,7 +800,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoNonReferencedCreditResponseType DoNonReferencedCredit(DoNonReferencedCreditReq DoNonReferencedCreditReq)
@@ -890,7 +808,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoUATPAuthorizationResponseType DoUATPAuthorization(DoUATPAuthorizationReq DoUATPAuthorizationReq, string apiUsername)
@@ -902,7 +819,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public DoUATPAuthorizationResponseType DoUATPAuthorization(DoUATPAuthorizationReq DoUATPAuthorizationReq)
@@ -911,7 +827,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public CreateRecurringPaymentsProfileResponseType CreateRecurringPaymentsProfile(CreateRecurringPaymentsProfileReq CreateRecurringPaymentsProfileReq, string apiUsername)
@@ -923,7 +838,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public CreateRecurringPaymentsProfileResponseType CreateRecurringPaymentsProfile(CreateRecurringPaymentsProfileReq CreateRecurringPaymentsProfileReq)
@@ -932,7 +846,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetRecurringPaymentsProfileDetailsResponseType GetRecurringPaymentsProfileDetails(GetRecurringPaymentsProfileDetailsReq GetRecurringPaymentsProfileDetailsReq, string apiUsername)
@@ -944,7 +857,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public GetRecurringPaymentsProfileDetailsResponseType GetRecurringPaymentsProfileDetails(GetRecurringPaymentsProfileDetailsReq GetRecurringPaymentsProfileDetailsReq)
@@ -953,7 +865,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public ManageRecurringPaymentsProfileStatusResponseType ManageRecurringPaymentsProfileStatus(ManageRecurringPaymentsProfileStatusReq ManageRecurringPaymentsProfileStatusReq, string apiUsername)
@@ -965,7 +876,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public ManageRecurringPaymentsProfileStatusResponseType ManageRecurringPaymentsProfileStatus(ManageRecurringPaymentsProfileStatusReq ManageRecurringPaymentsProfileStatusReq)
@@ -974,7 +884,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public BillOutstandingAmountResponseType BillOutstandingAmount(BillOutstandingAmountReq BillOutstandingAmountReq, string apiUsername)
@@ -986,7 +895,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public BillOutstandingAmountResponseType BillOutstandingAmount(BillOutstandingAmountReq BillOutstandingAmountReq)
@@ -995,7 +903,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public UpdateRecurringPaymentsProfileResponseType UpdateRecurringPaymentsProfile(UpdateRecurringPaymentsProfileReq UpdateRecurringPaymentsProfileReq, string apiUsername)
@@ -1007,7 +914,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public UpdateRecurringPaymentsProfileResponseType UpdateRecurringPaymentsProfile(UpdateRecurringPaymentsProfileReq UpdateRecurringPaymentsProfileReq)
@@ -1016,7 +922,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public ReverseTransactionResponseType ReverseTransaction(ReverseTransactionReq ReverseTransactionReq, string apiUsername)
@@ -1028,7 +933,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public ReverseTransactionResponseType ReverseTransaction(ReverseTransactionReq ReverseTransactionReq)
@@ -1037,7 +941,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 
 		/**	
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public ExternalRememberMeOptOutResponseType ExternalRememberMeOptOut(ExternalRememberMeOptOutReq ExternalRememberMeOptOutReq, string apiUsername)
@@ -1049,7 +952,6 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	}
 	 
 	 	/** 
-          *The Method does not have any comments, this is
           *AUTO_GENERATED
 	 	  */
 	 	public ExternalRememberMeOptOutResponseType ExternalRememberMeOptOut(ExternalRememberMeOptOutReq ExternalRememberMeOptOutReq)
