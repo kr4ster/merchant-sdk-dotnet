@@ -20,8 +20,16 @@ namespace PayPalAPISample.APICalls
         protected void Page_Load(object sender, EventArgs e)
         {
             UriBuilder uriBuilder = new UriBuilder(Request.Url.ToString());
-            uriBuilder.Path = "APICalls/GetBillingAgreementCustomerDetails.aspx";
+            uriBuilder.Path = Request.ApplicationPath
+                + (Request.ApplicationPath.EndsWith("/") ? "" : "/")
+                + "APICalls/GetBillingAgreementCustomerDetails.aspx";
             returnUrl.Value = uriBuilder.Uri.ToString();
+
+            uriBuilder = new UriBuilder(Request.Url.ToString());
+            uriBuilder.Path = Request.ApplicationPath
+                + (Request.ApplicationPath.EndsWith("/") ? "" : "/")
+                + "APICalls/SetCustomerBillingAgreement.aspx";
+            cancelUrl.Value = uriBuilder.Uri.ToString();
         }
 
         protected void Submit_Click(object sender, EventArgs e)

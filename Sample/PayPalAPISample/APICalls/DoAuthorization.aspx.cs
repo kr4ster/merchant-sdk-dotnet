@@ -67,9 +67,7 @@ namespace PayPalAPISample.APICalls
             }
             else
             {
-                CurrContext.Items.Add("Response_error", null);
-                responseParams.Add("Transaction ID", response.TransactionID);
-                responseParams.Add("Payment status", response.AuthorizationInfo.PaymentStatus.ToString());
+                CurrContext.Items.Add("Response_error", null);                
             }
             Server.Transfer("../APIResponse.aspx");
         }
