@@ -40,7 +40,12 @@
 <%  foreach (KeyValuePair<String, String> entry in responseValues) { %>
         <tr>
             <td class="label"><%=entry.Key%>: </td>
-            <td><%=entry.Value%></td>
+            <td>
+                <%--//Selenium Test Case--%>
+                <div id="<%=entry.Key%>">            
+                    <%=entry.Value%>
+                </div>
+            </td>
         </tr>
 <% } %>        
     </table>

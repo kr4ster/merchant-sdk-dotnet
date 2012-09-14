@@ -21,7 +21,10 @@
 					<div class="param_value">
 						<input type="text" id="transactionID" name="transactionID" value="" runat="server"/>
 					</div>
-				</div>        
+				</div>
+				<div class="submit">
+                    <input id="submitBtn" type="submit" name="submitBtn" value="Submit" runat="server" onserverclick="Submit_Click"/>
+                </div>        
         </div>
     </form>
     <div id="relatedcalls"> 

@@ -63,6 +63,10 @@ namespace PayPalAPISample.APICalls
             {
                 CurrContext.Items.Add("Response_error", null);
                 responseParams.Add("Authorization Id", doVoidResponse.AuthorizationID);
+
+                //Selenium Test Case
+                responseParams.Add("Acknowledgement", doVoidResponse.Ack.ToString());
+
             }
             Server.Transfer("../APIResponse.aspx");
 

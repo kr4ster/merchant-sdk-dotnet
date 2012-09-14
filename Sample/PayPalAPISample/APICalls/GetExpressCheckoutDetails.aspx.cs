@@ -53,9 +53,14 @@ namespace PayPalAPISample.APICalls
             CurrContext.Items.Add("Response_responsePayload", service.getLastResponse());
 
             Dictionary<string, string> keyResponseParameters = new Dictionary<string, string>();
+
+            //Selenium Test Case
+            keyResponseParameters.Add("PayerID", Request.QueryString["PayerID"]);
+            keyResponseParameters.Add("EC token", Request.QueryString["token"]);
+
             keyResponseParameters.Add("Correlation Id", response.CorrelationID);
             keyResponseParameters.Add("API Result", response.Ack.ToString());
-
+            
             if (response.Ack.Equals(AckCodeType.FAILURE) ||
                 (response.Errors != null && response.Errors.Count > 0))
             {
