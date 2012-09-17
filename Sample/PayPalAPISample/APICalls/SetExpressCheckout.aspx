@@ -195,6 +195,7 @@
                 <asp:DropDownList ID="billingType" runat="server">
                     <asp:ListItem Value="RECURRINGPAYMENTS" Text="Recurring payments" />
                     <asp:ListItem Value="MERCHANTINITIATEDBILLING" Text="Reference transactions" />
+                    <asp:ListItem Value="MERCHANTINITIATEDBILLINGSINGLEAGREEMENT" Text="Merchant Initiated Billing Single Agreement" />                   
                 </asp:DropDownList>
             </div>            
                         
