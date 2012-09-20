@@ -17,8 +17,11 @@ namespace PayPal.Authentication
         /// The privateKeyPassword used
         /// </summary>
         private string privateKeyPassword = "";
-		
 
+        /// <summary>
+        /// Certificate Subject
+        /// </summary>
+        private string certifySubject;
 
         /// <summary>
         /// The file-name of the certificate to be used.
@@ -35,7 +38,6 @@ namespace PayPal.Authentication
                 this.certificateFile = value;
             }
         }
-
  
         /// <summary>
         /// Password of given Certificate's Private Key
@@ -50,6 +52,15 @@ namespace PayPal.Authentication
             {
                 privateKeyPassword = value;
             }
+        }
+
+        /// <summary>
+        /// Certificate Subject
+        /// </summary>
+        public string CertificateSubject
+        {
+            get { return this.certifySubject; }
+            set { this.certifySubject = value; }
         }
     }
 }
