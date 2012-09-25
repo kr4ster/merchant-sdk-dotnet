@@ -37,13 +37,7 @@
             </div>
             
             <div class="section_header">Shipping details</div>                        
-            <div class="param_name">Require buyer's PayPal Shipping address to be a confirmed address</div>
-            <div class="param_value">
-                <asp:DropDownList ID="reqConfirmShipping" runat="server">
-                    <asp:ListItem Value="0" Text="No" />
-                    <asp:ListItem Value="1" Text="Yes" />
-                </asp:DropDownList>
-            </div>
+            
             <div class="param_name">Requires shipping</div>
             <div class="param_value">
                 <asp:DropDownList ID="noShipping" runat="server">
@@ -53,6 +47,16 @@
                     <asp:ListItem Value="2" Text="Address required - If shipping address not passed, use value in buyer's profile" />
                 </asp:DropDownList>
             </div>
+            
+            <%--//Fix for release--%>
+            <div class="param_name">Require buyer's PayPal Shipping address to be a confirmed address</div>
+            <div class="param_value">
+                <asp:DropDownList ID="reqConfirmShipping" runat="server">
+                    <asp:ListItem Value="0" Text="No" />
+                    <asp:ListItem Value="1" Text="Yes" />
+                </asp:DropDownList>
+            </div>            
+
             <div class="param_name">Allow Address override</div>
             <div class="param_value">
                 <asp:DropDownList ID="addressoverride" runat="server">
@@ -61,6 +65,7 @@
                     <asp:ListItem Value="1" Text="Yes - PayPal should display shipping address" />
                 </asp:DropDownList>
             </div>
+            
             <div class="param_name">Shipping address (if different from buyer's PayPal account address)</div>
             <table class="line_item">
                 <tr>

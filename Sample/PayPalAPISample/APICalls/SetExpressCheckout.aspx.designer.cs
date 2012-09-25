@@ -17,8 +17,8 @@ namespace PayPalAPISample.APICalls {
         protected System.Web.UI.HtmlControls.HtmlInputText cancelUrl;
         protected System.Web.UI.HtmlControls.HtmlInputText buyerEmail;
         protected System.Web.UI.WebControls.DropDownList solutionType;
-        protected System.Web.UI.WebControls.DropDownList reqConfirmShipping;
         protected System.Web.UI.WebControls.DropDownList noShipping;
+        protected System.Web.UI.WebControls.DropDownList reqConfirmShipping;
         protected System.Web.UI.WebControls.DropDownList addressoverride;
         protected System.Web.UI.HtmlControls.HtmlInputText shippingName;
         protected System.Web.UI.HtmlControls.HtmlInputText shippingStreet1;

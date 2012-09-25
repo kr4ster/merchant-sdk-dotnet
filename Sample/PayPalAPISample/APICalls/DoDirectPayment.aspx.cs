@@ -69,6 +69,10 @@ namespace PayPalAPISample.APICalls
                 billingAddr.StateOrProvince = state.Value;
                 billingAddr.Country = (CountryCodeType)Enum.Parse(typeof(CountryCodeType), country.Value);
                 billingAddr.PostalCode = postalCode.Value;
+
+                //Fix for release
+                billingAddr.Phone = phone.Value;
+
                 payer.Address = billingAddr;
             }
 
