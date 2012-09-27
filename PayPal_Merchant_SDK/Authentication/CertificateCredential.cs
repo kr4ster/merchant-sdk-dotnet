@@ -38,6 +38,7 @@ namespace PayPal.Authentication
                 this.certificateFile = value;
             }
         }
+
  
         /// <summary>
         /// Password of given Certificate's Private Key
