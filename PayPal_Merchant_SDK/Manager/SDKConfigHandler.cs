@@ -63,7 +63,7 @@ namespace PayPal.Manager
             return (Account)BaseGet(index);
         }
 
-        public Account Account(String value)
+        public Account Account(string value)
         {
             return (Account)BaseGet(value);
         }
@@ -103,7 +103,7 @@ namespace PayPal.Manager
             new ConfigurationProperty("privateKeyPassword", typeof(string), string.Empty);
 
         private static readonly ConfigurationProperty signSubject =
-         new ConfigurationProperty("signatureSubject", typeof(string), string.Empty);
+           new ConfigurationProperty("signatureSubject", typeof(string), string.Empty);
 
         private static readonly ConfigurationProperty certifySubject =
            new ConfigurationProperty("certificateSubject", typeof(string), string.Empty);
@@ -173,7 +173,7 @@ namespace PayPal.Manager
         {
             get { return (string)this[privateKeyPassword]; }
         }
-
+      
         /// <summary>
         /// Signature Subject
         /// </summary>
