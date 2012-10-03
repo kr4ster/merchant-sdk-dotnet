@@ -9,7 +9,7 @@ namespace PayPal.PayPalAPIInterfaceService {
 	public partial class PayPalAPIInterfaceServiceService : BasePayPalService {
 
 		// Service Version
-		private static string ServiceVersion = "93.0";
+		private static string ServiceVersion = "94.0";
 
 		// Service Name
 		private static string ServiceName = "PayPalAPIInterfaceService";
@@ -32,10 +32,10 @@ namespace PayPal.PayPalAPIInterfaceService {
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public RefundTransactionResponseType RefundTransaction(RefundTransactionReq RefundTransactionReq, string apiUsername)
+	 	public RefundTransactionResponseType RefundTransaction(RefundTransactionReq refundTransactionReq, string apiUserName)
 	 	{
-			setStandardParams(RefundTransactionReq.RefundTransactionRequest);
-			string response = call("RefundTransaction", RefundTransactionReq.toXMLString(), apiUsername);
+			setStandardParams(refundTransactionReq.RefundTransactionRequest);
+			string response = Call("RefundTransaction", refundTransactionReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RefundTransactionResponse']");
@@ -46,18 +46,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public RefundTransactionResponseType RefundTransaction(RefundTransactionReq RefundTransactionReq)
+	 	public RefundTransactionResponseType RefundTransaction(RefundTransactionReq refundTransactionReq)
 	 	{
-	 		return RefundTransaction(RefundTransactionReq, null);
+	 		return RefundTransaction(refundTransactionReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public InitiateRecoupResponseType InitiateRecoup(InitiateRecoupReq InitiateRecoupReq, string apiUsername)
+	 	public InitiateRecoupResponseType InitiateRecoup(InitiateRecoupReq initiateRecoupReq, string apiUserName)
 	 	{
-			setStandardParams(InitiateRecoupReq.InitiateRecoupRequest);
-			string response = call("InitiateRecoup", InitiateRecoupReq.toXMLString(), apiUsername);
+			setStandardParams(initiateRecoupReq.InitiateRecoupRequest);
+			string response = Call("InitiateRecoup", initiateRecoupReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='InitiateRecoupResponse']");
@@ -68,18 +68,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public InitiateRecoupResponseType InitiateRecoup(InitiateRecoupReq InitiateRecoupReq)
+	 	public InitiateRecoupResponseType InitiateRecoup(InitiateRecoupReq initiateRecoupReq)
 	 	{
-	 		return InitiateRecoup(InitiateRecoupReq, null);
+	 		return InitiateRecoup(initiateRecoupReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public CompleteRecoupResponseType CompleteRecoup(CompleteRecoupReq CompleteRecoupReq, string apiUsername)
+	 	public CompleteRecoupResponseType CompleteRecoup(CompleteRecoupReq completeRecoupReq, string apiUserName)
 	 	{
-			setStandardParams(CompleteRecoupReq.CompleteRecoupRequest);
-			string response = call("CompleteRecoup", CompleteRecoupReq.toXMLString(), apiUsername);
+			setStandardParams(completeRecoupReq.CompleteRecoupRequest);
+			string response = Call("CompleteRecoup", completeRecoupReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='CompleteRecoupResponse']");
@@ -90,18 +90,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public CompleteRecoupResponseType CompleteRecoup(CompleteRecoupReq CompleteRecoupReq)
+	 	public CompleteRecoupResponseType CompleteRecoup(CompleteRecoupReq completeRecoupReq)
 	 	{
-	 		return CompleteRecoup(CompleteRecoupReq, null);
+	 		return CompleteRecoup(completeRecoupReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public CancelRecoupResponseType CancelRecoup(CancelRecoupReq CancelRecoupReq, string apiUsername)
+	 	public CancelRecoupResponseType CancelRecoup(CancelRecoupReq cancelRecoupReq, string apiUserName)
 	 	{
-			setStandardParams(CancelRecoupReq.CancelRecoupRequest);
-			string response = call("CancelRecoup", CancelRecoupReq.toXMLString(), apiUsername);
+			setStandardParams(cancelRecoupReq.CancelRecoupRequest);
+			string response = Call("CancelRecoup", cancelRecoupReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='CancelRecoupResponse']");
@@ -112,18 +112,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public CancelRecoupResponseType CancelRecoup(CancelRecoupReq CancelRecoupReq)
+	 	public CancelRecoupResponseType CancelRecoup(CancelRecoupReq cancelRecoupReq)
 	 	{
-	 		return CancelRecoup(CancelRecoupReq, null);
+	 		return CancelRecoup(cancelRecoupReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public GetTransactionDetailsResponseType GetTransactionDetails(GetTransactionDetailsReq GetTransactionDetailsReq, string apiUsername)
+	 	public GetTransactionDetailsResponseType GetTransactionDetails(GetTransactionDetailsReq getTransactionDetailsReq, string apiUserName)
 	 	{
-			setStandardParams(GetTransactionDetailsReq.GetTransactionDetailsRequest);
-			string response = call("GetTransactionDetails", GetTransactionDetailsReq.toXMLString(), apiUsername);
+			setStandardParams(getTransactionDetailsReq.GetTransactionDetailsRequest);
+			string response = Call("GetTransactionDetails", getTransactionDetailsReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetTransactionDetailsResponse']");
@@ -134,18 +134,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public GetTransactionDetailsResponseType GetTransactionDetails(GetTransactionDetailsReq GetTransactionDetailsReq)
+	 	public GetTransactionDetailsResponseType GetTransactionDetails(GetTransactionDetailsReq getTransactionDetailsReq)
 	 	{
-	 		return GetTransactionDetails(GetTransactionDetailsReq, null);
+	 		return GetTransactionDetails(getTransactionDetailsReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public BillUserResponseType BillUser(BillUserReq BillUserReq, string apiUsername)
+	 	public BillUserResponseType BillUser(BillUserReq billUserReq, string apiUserName)
 	 	{
-			setStandardParams(BillUserReq.BillUserRequest);
-			string response = call("BillUser", BillUserReq.toXMLString(), apiUsername);
+			setStandardParams(billUserReq.BillUserRequest);
+			string response = Call("BillUser", billUserReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='BillUserResponse']");
@@ -156,18 +156,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public BillUserResponseType BillUser(BillUserReq BillUserReq)
+	 	public BillUserResponseType BillUser(BillUserReq billUserReq)
 	 	{
-	 		return BillUser(BillUserReq, null);
+	 		return BillUser(billUserReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public TransactionSearchResponseType TransactionSearch(TransactionSearchReq TransactionSearchReq, string apiUsername)
+	 	public TransactionSearchResponseType TransactionSearch(TransactionSearchReq transactionSearchReq, string apiUserName)
 	 	{
-			setStandardParams(TransactionSearchReq.TransactionSearchRequest);
-			string response = call("TransactionSearch", TransactionSearchReq.toXMLString(), apiUsername);
+			setStandardParams(transactionSearchReq.TransactionSearchRequest);
+			string response = Call("TransactionSearch", transactionSearchReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='TransactionSearchResponse']");
@@ -178,18 +178,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public TransactionSearchResponseType TransactionSearch(TransactionSearchReq TransactionSearchReq)
+	 	public TransactionSearchResponseType TransactionSearch(TransactionSearchReq transactionSearchReq)
 	 	{
-	 		return TransactionSearch(TransactionSearchReq, null);
+	 		return TransactionSearch(transactionSearchReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public MassPayResponseType MassPay(MassPayReq MassPayReq, string apiUsername)
+	 	public MassPayResponseType MassPay(MassPayReq massPayReq, string apiUserName)
 	 	{
-			setStandardParams(MassPayReq.MassPayRequest);
-			string response = call("MassPay", MassPayReq.toXMLString(), apiUsername);
+			setStandardParams(massPayReq.MassPayRequest);
+			string response = Call("MassPay", massPayReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='MassPayResponse']");
@@ -200,18 +200,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public MassPayResponseType MassPay(MassPayReq MassPayReq)
+	 	public MassPayResponseType MassPay(MassPayReq massPayReq)
 	 	{
-	 		return MassPay(MassPayReq, null);
+	 		return MassPay(massPayReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public BAUpdateResponseType BillAgreementUpdate(BillAgreementUpdateReq BillAgreementUpdateReq, string apiUsername)
+	 	public BAUpdateResponseType BillAgreementUpdate(BillAgreementUpdateReq billAgreementUpdateReq, string apiUserName)
 	 	{
-			setStandardParams(BillAgreementUpdateReq.BAUpdateRequest);
-			string response = call("BillAgreementUpdate", BillAgreementUpdateReq.toXMLString(), apiUsername);
+			setStandardParams(billAgreementUpdateReq.BAUpdateRequest);
+			string response = Call("BillAgreementUpdate", billAgreementUpdateReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='BAUpdateResponse']");
@@ -222,18 +222,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public BAUpdateResponseType BillAgreementUpdate(BillAgreementUpdateReq BillAgreementUpdateReq)
+	 	public BAUpdateResponseType BillAgreementUpdate(BillAgreementUpdateReq billAgreementUpdateReq)
 	 	{
-	 		return BillAgreementUpdate(BillAgreementUpdateReq, null);
+	 		return BillAgreementUpdate(billAgreementUpdateReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public AddressVerifyResponseType AddressVerify(AddressVerifyReq AddressVerifyReq, string apiUsername)
+	 	public AddressVerifyResponseType AddressVerify(AddressVerifyReq addressVerifyReq, string apiUserName)
 	 	{
-			setStandardParams(AddressVerifyReq.AddressVerifyRequest);
-			string response = call("AddressVerify", AddressVerifyReq.toXMLString(), apiUsername);
+			setStandardParams(addressVerifyReq.AddressVerifyRequest);
+			string response = Call("AddressVerify", addressVerifyReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='AddressVerifyResponse']");
@@ -244,18 +244,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public AddressVerifyResponseType AddressVerify(AddressVerifyReq AddressVerifyReq)
+	 	public AddressVerifyResponseType AddressVerify(AddressVerifyReq addressVerifyReq)
 	 	{
-	 		return AddressVerify(AddressVerifyReq, null);
+	 		return AddressVerify(addressVerifyReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public EnterBoardingResponseType EnterBoarding(EnterBoardingReq EnterBoardingReq, string apiUsername)
+	 	public EnterBoardingResponseType EnterBoarding(EnterBoardingReq enterBoardingReq, string apiUserName)
 	 	{
-			setStandardParams(EnterBoardingReq.EnterBoardingRequest);
-			string response = call("EnterBoarding", EnterBoardingReq.toXMLString(), apiUsername);
+			setStandardParams(enterBoardingReq.EnterBoardingRequest);
+			string response = Call("EnterBoarding", enterBoardingReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='EnterBoardingResponse']");
@@ -266,18 +266,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public EnterBoardingResponseType EnterBoarding(EnterBoardingReq EnterBoardingReq)
+	 	public EnterBoardingResponseType EnterBoarding(EnterBoardingReq enterBoardingReq)
 	 	{
-	 		return EnterBoarding(EnterBoardingReq, null);
+	 		return EnterBoarding(enterBoardingReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public GetBoardingDetailsResponseType GetBoardingDetails(GetBoardingDetailsReq GetBoardingDetailsReq, string apiUsername)
+	 	public GetBoardingDetailsResponseType GetBoardingDetails(GetBoardingDetailsReq getBoardingDetailsReq, string apiUserName)
 	 	{
-			setStandardParams(GetBoardingDetailsReq.GetBoardingDetailsRequest);
-			string response = call("GetBoardingDetails", GetBoardingDetailsReq.toXMLString(), apiUsername);
+			setStandardParams(getBoardingDetailsReq.GetBoardingDetailsRequest);
+			string response = Call("GetBoardingDetails", getBoardingDetailsReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetBoardingDetailsResponse']");
@@ -288,18 +288,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public GetBoardingDetailsResponseType GetBoardingDetails(GetBoardingDetailsReq GetBoardingDetailsReq)
+	 	public GetBoardingDetailsResponseType GetBoardingDetails(GetBoardingDetailsReq getBoardingDetailsReq)
 	 	{
-	 		return GetBoardingDetails(GetBoardingDetailsReq, null);
+	 		return GetBoardingDetails(getBoardingDetailsReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public CreateMobilePaymentResponseType CreateMobilePayment(CreateMobilePaymentReq CreateMobilePaymentReq, string apiUsername)
+	 	public CreateMobilePaymentResponseType CreateMobilePayment(CreateMobilePaymentReq createMobilePaymentReq, string apiUserName)
 	 	{
-			setStandardParams(CreateMobilePaymentReq.CreateMobilePaymentRequest);
-			string response = call("CreateMobilePayment", CreateMobilePaymentReq.toXMLString(), apiUsername);
+			setStandardParams(createMobilePaymentReq.CreateMobilePaymentRequest);
+			string response = Call("CreateMobilePayment", createMobilePaymentReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='CreateMobilePaymentResponse']");
@@ -310,18 +310,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public CreateMobilePaymentResponseType CreateMobilePayment(CreateMobilePaymentReq CreateMobilePaymentReq)
+	 	public CreateMobilePaymentResponseType CreateMobilePayment(CreateMobilePaymentReq createMobilePaymentReq)
 	 	{
-	 		return CreateMobilePayment(CreateMobilePaymentReq, null);
+	 		return CreateMobilePayment(createMobilePaymentReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public GetMobileStatusResponseType GetMobileStatus(GetMobileStatusReq GetMobileStatusReq, string apiUsername)
+	 	public GetMobileStatusResponseType GetMobileStatus(GetMobileStatusReq getMobileStatusReq, string apiUserName)
 	 	{
-			setStandardParams(GetMobileStatusReq.GetMobileStatusRequest);
-			string response = call("GetMobileStatus", GetMobileStatusReq.toXMLString(), apiUsername);
+			setStandardParams(getMobileStatusReq.GetMobileStatusRequest);
+			string response = Call("GetMobileStatus", getMobileStatusReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetMobileStatusResponse']");
@@ -332,18 +332,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public GetMobileStatusResponseType GetMobileStatus(GetMobileStatusReq GetMobileStatusReq)
+	 	public GetMobileStatusResponseType GetMobileStatus(GetMobileStatusReq getMobileStatusReq)
 	 	{
-	 		return GetMobileStatus(GetMobileStatusReq, null);
+	 		return GetMobileStatus(getMobileStatusReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public SetMobileCheckoutResponseType SetMobileCheckout(SetMobileCheckoutReq SetMobileCheckoutReq, string apiUsername)
+	 	public SetMobileCheckoutResponseType SetMobileCheckout(SetMobileCheckoutReq setMobileCheckoutReq, string apiUserName)
 	 	{
-			setStandardParams(SetMobileCheckoutReq.SetMobileCheckoutRequest);
-			string response = call("SetMobileCheckout", SetMobileCheckoutReq.toXMLString(), apiUsername);
+			setStandardParams(setMobileCheckoutReq.SetMobileCheckoutRequest);
+			string response = Call("SetMobileCheckout", setMobileCheckoutReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='SetMobileCheckoutResponse']");
@@ -354,18 +354,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public SetMobileCheckoutResponseType SetMobileCheckout(SetMobileCheckoutReq SetMobileCheckoutReq)
+	 	public SetMobileCheckoutResponseType SetMobileCheckout(SetMobileCheckoutReq setMobileCheckoutReq)
 	 	{
-	 		return SetMobileCheckout(SetMobileCheckoutReq, null);
+	 		return SetMobileCheckout(setMobileCheckoutReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public DoMobileCheckoutPaymentResponseType DoMobileCheckoutPayment(DoMobileCheckoutPaymentReq DoMobileCheckoutPaymentReq, string apiUsername)
+	 	public DoMobileCheckoutPaymentResponseType DoMobileCheckoutPayment(DoMobileCheckoutPaymentReq doMobileCheckoutPaymentReq, string apiUserName)
 	 	{
-			setStandardParams(DoMobileCheckoutPaymentReq.DoMobileCheckoutPaymentRequest);
-			string response = call("DoMobileCheckoutPayment", DoMobileCheckoutPaymentReq.toXMLString(), apiUsername);
+			setStandardParams(doMobileCheckoutPaymentReq.DoMobileCheckoutPaymentRequest);
+			string response = Call("DoMobileCheckoutPayment", doMobileCheckoutPaymentReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoMobileCheckoutPaymentResponse']");
@@ -376,18 +376,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public DoMobileCheckoutPaymentResponseType DoMobileCheckoutPayment(DoMobileCheckoutPaymentReq DoMobileCheckoutPaymentReq)
+	 	public DoMobileCheckoutPaymentResponseType DoMobileCheckoutPayment(DoMobileCheckoutPaymentReq doMobileCheckoutPaymentReq)
 	 	{
-	 		return DoMobileCheckoutPayment(DoMobileCheckoutPaymentReq, null);
+	 		return DoMobileCheckoutPayment(doMobileCheckoutPaymentReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public GetBalanceResponseType GetBalance(GetBalanceReq GetBalanceReq, string apiUsername)
+	 	public GetBalanceResponseType GetBalance(GetBalanceReq getBalanceReq, string apiUserName)
 	 	{
-			setStandardParams(GetBalanceReq.GetBalanceRequest);
-			string response = call("GetBalance", GetBalanceReq.toXMLString(), apiUsername);
+			setStandardParams(getBalanceReq.GetBalanceRequest);
+			string response = Call("GetBalance", getBalanceReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetBalanceResponse']");
@@ -398,18 +398,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public GetBalanceResponseType GetBalance(GetBalanceReq GetBalanceReq)
+	 	public GetBalanceResponseType GetBalance(GetBalanceReq getBalanceReq)
 	 	{
-	 		return GetBalance(GetBalanceReq, null);
+	 		return GetBalance(getBalanceReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public GetPalDetailsResponseType GetPalDetails(GetPalDetailsReq GetPalDetailsReq, string apiUsername)
+	 	public GetPalDetailsResponseType GetPalDetails(GetPalDetailsReq getPalDetailsReq, string apiUserName)
 	 	{
-			setStandardParams(GetPalDetailsReq.GetPalDetailsRequest);
-			string response = call("GetPalDetails", GetPalDetailsReq.toXMLString(), apiUsername);
+			setStandardParams(getPalDetailsReq.GetPalDetailsRequest);
+			string response = Call("GetPalDetails", getPalDetailsReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetPalDetailsResponse']");
@@ -420,18 +420,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public GetPalDetailsResponseType GetPalDetails(GetPalDetailsReq GetPalDetailsReq)
+	 	public GetPalDetailsResponseType GetPalDetails(GetPalDetailsReq getPalDetailsReq)
 	 	{
-	 		return GetPalDetails(GetPalDetailsReq, null);
+	 		return GetPalDetails(getPalDetailsReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public DoExpressCheckoutPaymentResponseType DoExpressCheckoutPayment(DoExpressCheckoutPaymentReq DoExpressCheckoutPaymentReq, string apiUsername)
+	 	public DoExpressCheckoutPaymentResponseType DoExpressCheckoutPayment(DoExpressCheckoutPaymentReq doExpressCheckoutPaymentReq, string apiUserName)
 	 	{
-			setStandardParams(DoExpressCheckoutPaymentReq.DoExpressCheckoutPaymentRequest);
-			string response = call("DoExpressCheckoutPayment", DoExpressCheckoutPaymentReq.toXMLString(), apiUsername);
+			setStandardParams(doExpressCheckoutPaymentReq.DoExpressCheckoutPaymentRequest);
+			string response = Call("DoExpressCheckoutPayment", doExpressCheckoutPaymentReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoExpressCheckoutPaymentResponse']");
@@ -442,18 +442,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public DoExpressCheckoutPaymentResponseType DoExpressCheckoutPayment(DoExpressCheckoutPaymentReq DoExpressCheckoutPaymentReq)
+	 	public DoExpressCheckoutPaymentResponseType DoExpressCheckoutPayment(DoExpressCheckoutPaymentReq doExpressCheckoutPaymentReq)
 	 	{
-	 		return DoExpressCheckoutPayment(DoExpressCheckoutPaymentReq, null);
+	 		return DoExpressCheckoutPayment(doExpressCheckoutPaymentReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public DoUATPExpressCheckoutPaymentResponseType DoUATPExpressCheckoutPayment(DoUATPExpressCheckoutPaymentReq DoUATPExpressCheckoutPaymentReq, string apiUsername)
+	 	public DoUATPExpressCheckoutPaymentResponseType DoUATPExpressCheckoutPayment(DoUATPExpressCheckoutPaymentReq doUATPExpressCheckoutPaymentReq, string apiUserName)
 	 	{
-			setStandardParams(DoUATPExpressCheckoutPaymentReq.DoUATPExpressCheckoutPaymentRequest);
-			string response = call("DoUATPExpressCheckoutPayment", DoUATPExpressCheckoutPaymentReq.toXMLString(), apiUsername);
+			setStandardParams(doUATPExpressCheckoutPaymentReq.DoUATPExpressCheckoutPaymentRequest);
+			string response = Call("DoUATPExpressCheckoutPayment", doUATPExpressCheckoutPaymentReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoUATPExpressCheckoutPaymentResponse']");
@@ -464,18 +464,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public DoUATPExpressCheckoutPaymentResponseType DoUATPExpressCheckoutPayment(DoUATPExpressCheckoutPaymentReq DoUATPExpressCheckoutPaymentReq)
+	 	public DoUATPExpressCheckoutPaymentResponseType DoUATPExpressCheckoutPayment(DoUATPExpressCheckoutPaymentReq doUATPExpressCheckoutPaymentReq)
 	 	{
-	 		return DoUATPExpressCheckoutPayment(DoUATPExpressCheckoutPaymentReq, null);
+	 		return DoUATPExpressCheckoutPayment(doUATPExpressCheckoutPaymentReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public SetAuthFlowParamResponseType SetAuthFlowParam(SetAuthFlowParamReq SetAuthFlowParamReq, string apiUsername)
+	 	public SetAuthFlowParamResponseType SetAuthFlowParam(SetAuthFlowParamReq setAuthFlowParamReq, string apiUserName)
 	 	{
-			setStandardParams(SetAuthFlowParamReq.SetAuthFlowParamRequest);
-			string response = call("SetAuthFlowParam", SetAuthFlowParamReq.toXMLString(), apiUsername);
+			setStandardParams(setAuthFlowParamReq.SetAuthFlowParamRequest);
+			string response = Call("SetAuthFlowParam", setAuthFlowParamReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='SetAuthFlowParamResponse']");
@@ -486,18 +486,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public SetAuthFlowParamResponseType SetAuthFlowParam(SetAuthFlowParamReq SetAuthFlowParamReq)
+	 	public SetAuthFlowParamResponseType SetAuthFlowParam(SetAuthFlowParamReq setAuthFlowParamReq)
 	 	{
-	 		return SetAuthFlowParam(SetAuthFlowParamReq, null);
+	 		return SetAuthFlowParam(setAuthFlowParamReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public GetAuthDetailsResponseType GetAuthDetails(GetAuthDetailsReq GetAuthDetailsReq, string apiUsername)
+	 	public GetAuthDetailsResponseType GetAuthDetails(GetAuthDetailsReq getAuthDetailsReq, string apiUserName)
 	 	{
-			setStandardParams(GetAuthDetailsReq.GetAuthDetailsRequest);
-			string response = call("GetAuthDetails", GetAuthDetailsReq.toXMLString(), apiUsername);
+			setStandardParams(getAuthDetailsReq.GetAuthDetailsRequest);
+			string response = Call("GetAuthDetails", getAuthDetailsReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetAuthDetailsResponse']");
@@ -508,18 +508,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public GetAuthDetailsResponseType GetAuthDetails(GetAuthDetailsReq GetAuthDetailsReq)
+	 	public GetAuthDetailsResponseType GetAuthDetails(GetAuthDetailsReq getAuthDetailsReq)
 	 	{
-	 		return GetAuthDetails(GetAuthDetailsReq, null);
+	 		return GetAuthDetails(getAuthDetailsReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public SetAccessPermissionsResponseType SetAccessPermissions(SetAccessPermissionsReq SetAccessPermissionsReq, string apiUsername)
+	 	public SetAccessPermissionsResponseType SetAccessPermissions(SetAccessPermissionsReq setAccessPermissionsReq, string apiUserName)
 	 	{
-			setStandardParams(SetAccessPermissionsReq.SetAccessPermissionsRequest);
-			string response = call("SetAccessPermissions", SetAccessPermissionsReq.toXMLString(), apiUsername);
+			setStandardParams(setAccessPermissionsReq.SetAccessPermissionsRequest);
+			string response = Call("SetAccessPermissions", setAccessPermissionsReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='SetAccessPermissionsResponse']");
@@ -530,18 +530,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public SetAccessPermissionsResponseType SetAccessPermissions(SetAccessPermissionsReq SetAccessPermissionsReq)
+	 	public SetAccessPermissionsResponseType SetAccessPermissions(SetAccessPermissionsReq setAccessPermissionsReq)
 	 	{
-	 		return SetAccessPermissions(SetAccessPermissionsReq, null);
+	 		return SetAccessPermissions(setAccessPermissionsReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public UpdateAccessPermissionsResponseType UpdateAccessPermissions(UpdateAccessPermissionsReq UpdateAccessPermissionsReq, string apiUsername)
+	 	public UpdateAccessPermissionsResponseType UpdateAccessPermissions(UpdateAccessPermissionsReq updateAccessPermissionsReq, string apiUserName)
 	 	{
-			setStandardParams(UpdateAccessPermissionsReq.UpdateAccessPermissionsRequest);
-			string response = call("UpdateAccessPermissions", UpdateAccessPermissionsReq.toXMLString(), apiUsername);
+			setStandardParams(updateAccessPermissionsReq.UpdateAccessPermissionsRequest);
+			string response = Call("UpdateAccessPermissions", updateAccessPermissionsReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='UpdateAccessPermissionsResponse']");
@@ -552,18 +552,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public UpdateAccessPermissionsResponseType UpdateAccessPermissions(UpdateAccessPermissionsReq UpdateAccessPermissionsReq)
+	 	public UpdateAccessPermissionsResponseType UpdateAccessPermissions(UpdateAccessPermissionsReq updateAccessPermissionsReq)
 	 	{
-	 		return UpdateAccessPermissions(UpdateAccessPermissionsReq, null);
+	 		return UpdateAccessPermissions(updateAccessPermissionsReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public GetAccessPermissionDetailsResponseType GetAccessPermissionDetails(GetAccessPermissionDetailsReq GetAccessPermissionDetailsReq, string apiUsername)
+	 	public GetAccessPermissionDetailsResponseType GetAccessPermissionDetails(GetAccessPermissionDetailsReq getAccessPermissionDetailsReq, string apiUserName)
 	 	{
-			setStandardParams(GetAccessPermissionDetailsReq.GetAccessPermissionDetailsRequest);
-			string response = call("GetAccessPermissionDetails", GetAccessPermissionDetailsReq.toXMLString(), apiUsername);
+			setStandardParams(getAccessPermissionDetailsReq.GetAccessPermissionDetailsRequest);
+			string response = Call("GetAccessPermissionDetails", getAccessPermissionDetailsReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetAccessPermissionDetailsResponse']");
@@ -574,18 +574,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public GetAccessPermissionDetailsResponseType GetAccessPermissionDetails(GetAccessPermissionDetailsReq GetAccessPermissionDetailsReq)
+	 	public GetAccessPermissionDetailsResponseType GetAccessPermissionDetails(GetAccessPermissionDetailsReq getAccessPermissionDetailsReq)
 	 	{
-	 		return GetAccessPermissionDetails(GetAccessPermissionDetailsReq, null);
+	 		return GetAccessPermissionDetails(getAccessPermissionDetailsReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public GetIncentiveEvaluationResponseType GetIncentiveEvaluation(GetIncentiveEvaluationReq GetIncentiveEvaluationReq, string apiUsername)
+	 	public GetIncentiveEvaluationResponseType GetIncentiveEvaluation(GetIncentiveEvaluationReq getIncentiveEvaluationReq, string apiUserName)
 	 	{
-			setStandardParams(GetIncentiveEvaluationReq.GetIncentiveEvaluationRequest);
-			string response = call("GetIncentiveEvaluation", GetIncentiveEvaluationReq.toXMLString(), apiUsername);
+			setStandardParams(getIncentiveEvaluationReq.GetIncentiveEvaluationRequest);
+			string response = Call("GetIncentiveEvaluation", getIncentiveEvaluationReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetIncentiveEvaluationResponse']");
@@ -596,18 +596,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public GetIncentiveEvaluationResponseType GetIncentiveEvaluation(GetIncentiveEvaluationReq GetIncentiveEvaluationReq)
+	 	public GetIncentiveEvaluationResponseType GetIncentiveEvaluation(GetIncentiveEvaluationReq getIncentiveEvaluationReq)
 	 	{
-	 		return GetIncentiveEvaluation(GetIncentiveEvaluationReq, null);
+	 		return GetIncentiveEvaluation(getIncentiveEvaluationReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public SetExpressCheckoutResponseType SetExpressCheckout(SetExpressCheckoutReq SetExpressCheckoutReq, string apiUsername)
+	 	public SetExpressCheckoutResponseType SetExpressCheckout(SetExpressCheckoutReq setExpressCheckoutReq, string apiUserName)
 	 	{
-			setStandardParams(SetExpressCheckoutReq.SetExpressCheckoutRequest);
-			string response = call("SetExpressCheckout", SetExpressCheckoutReq.toXMLString(), apiUsername);
+			setStandardParams(setExpressCheckoutReq.SetExpressCheckoutRequest);
+			string response = Call("SetExpressCheckout", setExpressCheckoutReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='SetExpressCheckoutResponse']");
@@ -618,18 +618,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public SetExpressCheckoutResponseType SetExpressCheckout(SetExpressCheckoutReq SetExpressCheckoutReq)
+	 	public SetExpressCheckoutResponseType SetExpressCheckout(SetExpressCheckoutReq setExpressCheckoutReq)
 	 	{
-	 		return SetExpressCheckout(SetExpressCheckoutReq, null);
+	 		return SetExpressCheckout(setExpressCheckoutReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public ExecuteCheckoutOperationsResponseType ExecuteCheckoutOperations(ExecuteCheckoutOperationsReq ExecuteCheckoutOperationsReq, string apiUsername)
+	 	public ExecuteCheckoutOperationsResponseType ExecuteCheckoutOperations(ExecuteCheckoutOperationsReq executeCheckoutOperationsReq, string apiUserName)
 	 	{
-			setStandardParams(ExecuteCheckoutOperationsReq.ExecuteCheckoutOperationsRequest);
-			string response = call("ExecuteCheckoutOperations", ExecuteCheckoutOperationsReq.toXMLString(), apiUsername);
+			setStandardParams(executeCheckoutOperationsReq.ExecuteCheckoutOperationsRequest);
+			string response = Call("ExecuteCheckoutOperations", executeCheckoutOperationsReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='ExecuteCheckoutOperationsResponse']");
@@ -640,18 +640,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public ExecuteCheckoutOperationsResponseType ExecuteCheckoutOperations(ExecuteCheckoutOperationsReq ExecuteCheckoutOperationsReq)
+	 	public ExecuteCheckoutOperationsResponseType ExecuteCheckoutOperations(ExecuteCheckoutOperationsReq executeCheckoutOperationsReq)
 	 	{
-	 		return ExecuteCheckoutOperations(ExecuteCheckoutOperationsReq, null);
+	 		return ExecuteCheckoutOperations(executeCheckoutOperationsReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public GetExpressCheckoutDetailsResponseType GetExpressCheckoutDetails(GetExpressCheckoutDetailsReq GetExpressCheckoutDetailsReq, string apiUsername)
+	 	public GetExpressCheckoutDetailsResponseType GetExpressCheckoutDetails(GetExpressCheckoutDetailsReq getExpressCheckoutDetailsReq, string apiUserName)
 	 	{
-			setStandardParams(GetExpressCheckoutDetailsReq.GetExpressCheckoutDetailsRequest);
-			string response = call("GetExpressCheckoutDetails", GetExpressCheckoutDetailsReq.toXMLString(), apiUsername);
+			setStandardParams(getExpressCheckoutDetailsReq.GetExpressCheckoutDetailsRequest);
+			string response = Call("GetExpressCheckoutDetails", getExpressCheckoutDetailsReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetExpressCheckoutDetailsResponse']");
@@ -662,18 +662,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public GetExpressCheckoutDetailsResponseType GetExpressCheckoutDetails(GetExpressCheckoutDetailsReq GetExpressCheckoutDetailsReq)
+	 	public GetExpressCheckoutDetailsResponseType GetExpressCheckoutDetails(GetExpressCheckoutDetailsReq getExpressCheckoutDetailsReq)
 	 	{
-	 		return GetExpressCheckoutDetails(GetExpressCheckoutDetailsReq, null);
+	 		return GetExpressCheckoutDetails(getExpressCheckoutDetailsReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public DoDirectPaymentResponseType DoDirectPayment(DoDirectPaymentReq DoDirectPaymentReq, string apiUsername)
+	 	public DoDirectPaymentResponseType DoDirectPayment(DoDirectPaymentReq doDirectPaymentReq, string apiUserName)
 	 	{
-			setStandardParams(DoDirectPaymentReq.DoDirectPaymentRequest);
-			string response = call("DoDirectPayment", DoDirectPaymentReq.toXMLString(), apiUsername);
+			setStandardParams(doDirectPaymentReq.DoDirectPaymentRequest);
+			string response = Call("DoDirectPayment", doDirectPaymentReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoDirectPaymentResponse']");
@@ -684,18 +684,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public DoDirectPaymentResponseType DoDirectPayment(DoDirectPaymentReq DoDirectPaymentReq)
+	 	public DoDirectPaymentResponseType DoDirectPayment(DoDirectPaymentReq doDirectPaymentReq)
 	 	{
-	 		return DoDirectPayment(DoDirectPaymentReq, null);
+	 		return DoDirectPayment(doDirectPaymentReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public ManagePendingTransactionStatusResponseType ManagePendingTransactionStatus(ManagePendingTransactionStatusReq ManagePendingTransactionStatusReq, string apiUsername)
+	 	public ManagePendingTransactionStatusResponseType ManagePendingTransactionStatus(ManagePendingTransactionStatusReq managePendingTransactionStatusReq, string apiUserName)
 	 	{
-			setStandardParams(ManagePendingTransactionStatusReq.ManagePendingTransactionStatusRequest);
-			string response = call("ManagePendingTransactionStatus", ManagePendingTransactionStatusReq.toXMLString(), apiUsername);
+			setStandardParams(managePendingTransactionStatusReq.ManagePendingTransactionStatusRequest);
+			string response = Call("ManagePendingTransactionStatus", managePendingTransactionStatusReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='ManagePendingTransactionStatusResponse']");
@@ -706,18 +706,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public ManagePendingTransactionStatusResponseType ManagePendingTransactionStatus(ManagePendingTransactionStatusReq ManagePendingTransactionStatusReq)
+	 	public ManagePendingTransactionStatusResponseType ManagePendingTransactionStatus(ManagePendingTransactionStatusReq managePendingTransactionStatusReq)
 	 	{
-	 		return ManagePendingTransactionStatus(ManagePendingTransactionStatusReq, null);
+	 		return ManagePendingTransactionStatus(managePendingTransactionStatusReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public DoCancelResponseType DoCancel(DoCancelReq DoCancelReq, string apiUsername)
+	 	public DoCancelResponseType DoCancel(DoCancelReq doCancelReq, string apiUserName)
 	 	{
-			setStandardParams(DoCancelReq.DoCancelRequest);
-			string response = call("DoCancel", DoCancelReq.toXMLString(), apiUsername);
+			setStandardParams(doCancelReq.DoCancelRequest);
+			string response = Call("DoCancel", doCancelReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoCancelResponse']");
@@ -728,18 +728,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public DoCancelResponseType DoCancel(DoCancelReq DoCancelReq)
+	 	public DoCancelResponseType DoCancel(DoCancelReq doCancelReq)
 	 	{
-	 		return DoCancel(DoCancelReq, null);
+	 		return DoCancel(doCancelReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public DoCaptureResponseType DoCapture(DoCaptureReq DoCaptureReq, string apiUsername)
+	 	public DoCaptureResponseType DoCapture(DoCaptureReq doCaptureReq, string apiUserName)
 	 	{
-			setStandardParams(DoCaptureReq.DoCaptureRequest);
-			string response = call("DoCapture", DoCaptureReq.toXMLString(), apiUsername);
+			setStandardParams(doCaptureReq.DoCaptureRequest);
+			string response = Call("DoCapture", doCaptureReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoCaptureResponse']");
@@ -750,18 +750,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public DoCaptureResponseType DoCapture(DoCaptureReq DoCaptureReq)
+	 	public DoCaptureResponseType DoCapture(DoCaptureReq doCaptureReq)
 	 	{
-	 		return DoCapture(DoCaptureReq, null);
+	 		return DoCapture(doCaptureReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public DoReauthorizationResponseType DoReauthorization(DoReauthorizationReq DoReauthorizationReq, string apiUsername)
+	 	public DoReauthorizationResponseType DoReauthorization(DoReauthorizationReq doReauthorizationReq, string apiUserName)
 	 	{
-			setStandardParams(DoReauthorizationReq.DoReauthorizationRequest);
-			string response = call("DoReauthorization", DoReauthorizationReq.toXMLString(), apiUsername);
+			setStandardParams(doReauthorizationReq.DoReauthorizationRequest);
+			string response = Call("DoReauthorization", doReauthorizationReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoReauthorizationResponse']");
@@ -772,18 +772,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public DoReauthorizationResponseType DoReauthorization(DoReauthorizationReq DoReauthorizationReq)
+	 	public DoReauthorizationResponseType DoReauthorization(DoReauthorizationReq doReauthorizationReq)
 	 	{
-	 		return DoReauthorization(DoReauthorizationReq, null);
+	 		return DoReauthorization(doReauthorizationReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public DoVoidResponseType DoVoid(DoVoidReq DoVoidReq, string apiUsername)
+	 	public DoVoidResponseType DoVoid(DoVoidReq doVoidReq, string apiUserName)
 	 	{
-			setStandardParams(DoVoidReq.DoVoidRequest);
-			string response = call("DoVoid", DoVoidReq.toXMLString(), apiUsername);
+			setStandardParams(doVoidReq.DoVoidRequest);
+			string response = Call("DoVoid", doVoidReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoVoidResponse']");
@@ -794,18 +794,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public DoVoidResponseType DoVoid(DoVoidReq DoVoidReq)
+	 	public DoVoidResponseType DoVoid(DoVoidReq doVoidReq)
 	 	{
-	 		return DoVoid(DoVoidReq, null);
+	 		return DoVoid(doVoidReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public DoAuthorizationResponseType DoAuthorization(DoAuthorizationReq DoAuthorizationReq, string apiUsername)
+	 	public DoAuthorizationResponseType DoAuthorization(DoAuthorizationReq doAuthorizationReq, string apiUserName)
 	 	{
-			setStandardParams(DoAuthorizationReq.DoAuthorizationRequest);
-			string response = call("DoAuthorization", DoAuthorizationReq.toXMLString(), apiUsername);
+			setStandardParams(doAuthorizationReq.DoAuthorizationRequest);
+			string response = Call("DoAuthorization", doAuthorizationReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoAuthorizationResponse']");
@@ -816,18 +816,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public DoAuthorizationResponseType DoAuthorization(DoAuthorizationReq DoAuthorizationReq)
+	 	public DoAuthorizationResponseType DoAuthorization(DoAuthorizationReq doAuthorizationReq)
 	 	{
-	 		return DoAuthorization(DoAuthorizationReq, null);
+	 		return DoAuthorization(doAuthorizationReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public SetCustomerBillingAgreementResponseType SetCustomerBillingAgreement(SetCustomerBillingAgreementReq SetCustomerBillingAgreementReq, string apiUsername)
+	 	public SetCustomerBillingAgreementResponseType SetCustomerBillingAgreement(SetCustomerBillingAgreementReq setCustomerBillingAgreementReq, string apiUserName)
 	 	{
-			setStandardParams(SetCustomerBillingAgreementReq.SetCustomerBillingAgreementRequest);
-			string response = call("SetCustomerBillingAgreement", SetCustomerBillingAgreementReq.toXMLString(), apiUsername);
+			setStandardParams(setCustomerBillingAgreementReq.SetCustomerBillingAgreementRequest);
+			string response = Call("SetCustomerBillingAgreement", setCustomerBillingAgreementReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='SetCustomerBillingAgreementResponse']");
@@ -838,18 +838,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public SetCustomerBillingAgreementResponseType SetCustomerBillingAgreement(SetCustomerBillingAgreementReq SetCustomerBillingAgreementReq)
+	 	public SetCustomerBillingAgreementResponseType SetCustomerBillingAgreement(SetCustomerBillingAgreementReq setCustomerBillingAgreementReq)
 	 	{
-	 		return SetCustomerBillingAgreement(SetCustomerBillingAgreementReq, null);
+	 		return SetCustomerBillingAgreement(setCustomerBillingAgreementReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public GetBillingAgreementCustomerDetailsResponseType GetBillingAgreementCustomerDetails(GetBillingAgreementCustomerDetailsReq GetBillingAgreementCustomerDetailsReq, string apiUsername)
+	 	public GetBillingAgreementCustomerDetailsResponseType GetBillingAgreementCustomerDetails(GetBillingAgreementCustomerDetailsReq getBillingAgreementCustomerDetailsReq, string apiUserName)
 	 	{
-			setStandardParams(GetBillingAgreementCustomerDetailsReq.GetBillingAgreementCustomerDetailsRequest);
-			string response = call("GetBillingAgreementCustomerDetails", GetBillingAgreementCustomerDetailsReq.toXMLString(), apiUsername);
+			setStandardParams(getBillingAgreementCustomerDetailsReq.GetBillingAgreementCustomerDetailsRequest);
+			string response = Call("GetBillingAgreementCustomerDetails", getBillingAgreementCustomerDetailsReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetBillingAgreementCustomerDetailsResponse']");
@@ -860,18 +860,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public GetBillingAgreementCustomerDetailsResponseType GetBillingAgreementCustomerDetails(GetBillingAgreementCustomerDetailsReq GetBillingAgreementCustomerDetailsReq)
+	 	public GetBillingAgreementCustomerDetailsResponseType GetBillingAgreementCustomerDetails(GetBillingAgreementCustomerDetailsReq getBillingAgreementCustomerDetailsReq)
 	 	{
-	 		return GetBillingAgreementCustomerDetails(GetBillingAgreementCustomerDetailsReq, null);
+	 		return GetBillingAgreementCustomerDetails(getBillingAgreementCustomerDetailsReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public CreateBillingAgreementResponseType CreateBillingAgreement(CreateBillingAgreementReq CreateBillingAgreementReq, string apiUsername)
+	 	public CreateBillingAgreementResponseType CreateBillingAgreement(CreateBillingAgreementReq createBillingAgreementReq, string apiUserName)
 	 	{
-			setStandardParams(CreateBillingAgreementReq.CreateBillingAgreementRequest);
-			string response = call("CreateBillingAgreement", CreateBillingAgreementReq.toXMLString(), apiUsername);
+			setStandardParams(createBillingAgreementReq.CreateBillingAgreementRequest);
+			string response = Call("CreateBillingAgreement", createBillingAgreementReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='CreateBillingAgreementResponse']");
@@ -882,18 +882,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public CreateBillingAgreementResponseType CreateBillingAgreement(CreateBillingAgreementReq CreateBillingAgreementReq)
+	 	public CreateBillingAgreementResponseType CreateBillingAgreement(CreateBillingAgreementReq createBillingAgreementReq)
 	 	{
-	 		return CreateBillingAgreement(CreateBillingAgreementReq, null);
+	 		return CreateBillingAgreement(createBillingAgreementReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public DoReferenceTransactionResponseType DoReferenceTransaction(DoReferenceTransactionReq DoReferenceTransactionReq, string apiUsername)
+	 	public DoReferenceTransactionResponseType DoReferenceTransaction(DoReferenceTransactionReq doReferenceTransactionReq, string apiUserName)
 	 	{
-			setStandardParams(DoReferenceTransactionReq.DoReferenceTransactionRequest);
-			string response = call("DoReferenceTransaction", DoReferenceTransactionReq.toXMLString(), apiUsername);
+			setStandardParams(doReferenceTransactionReq.DoReferenceTransactionRequest);
+			string response = Call("DoReferenceTransaction", doReferenceTransactionReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoReferenceTransactionResponse']");
@@ -904,18 +904,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public DoReferenceTransactionResponseType DoReferenceTransaction(DoReferenceTransactionReq DoReferenceTransactionReq)
+	 	public DoReferenceTransactionResponseType DoReferenceTransaction(DoReferenceTransactionReq doReferenceTransactionReq)
 	 	{
-	 		return DoReferenceTransaction(DoReferenceTransactionReq, null);
+	 		return DoReferenceTransaction(doReferenceTransactionReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public DoNonReferencedCreditResponseType DoNonReferencedCredit(DoNonReferencedCreditReq DoNonReferencedCreditReq, string apiUsername)
+	 	public DoNonReferencedCreditResponseType DoNonReferencedCredit(DoNonReferencedCreditReq doNonReferencedCreditReq, string apiUserName)
 	 	{
-			setStandardParams(DoNonReferencedCreditReq.DoNonReferencedCreditRequest);
-			string response = call("DoNonReferencedCredit", DoNonReferencedCreditReq.toXMLString(), apiUsername);
+			setStandardParams(doNonReferencedCreditReq.DoNonReferencedCreditRequest);
+			string response = Call("DoNonReferencedCredit", doNonReferencedCreditReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoNonReferencedCreditResponse']");
@@ -926,18 +926,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public DoNonReferencedCreditResponseType DoNonReferencedCredit(DoNonReferencedCreditReq DoNonReferencedCreditReq)
+	 	public DoNonReferencedCreditResponseType DoNonReferencedCredit(DoNonReferencedCreditReq doNonReferencedCreditReq)
 	 	{
-	 		return DoNonReferencedCredit(DoNonReferencedCreditReq, null);
+	 		return DoNonReferencedCredit(doNonReferencedCreditReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public DoUATPAuthorizationResponseType DoUATPAuthorization(DoUATPAuthorizationReq DoUATPAuthorizationReq, string apiUsername)
+	 	public DoUATPAuthorizationResponseType DoUATPAuthorization(DoUATPAuthorizationReq doUATPAuthorizationReq, string apiUserName)
 	 	{
-			setStandardParams(DoUATPAuthorizationReq.DoUATPAuthorizationRequest);
-			string response = call("DoUATPAuthorization", DoUATPAuthorizationReq.toXMLString(), apiUsername);
+			setStandardParams(doUATPAuthorizationReq.DoUATPAuthorizationRequest);
+			string response = Call("DoUATPAuthorization", doUATPAuthorizationReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoUATPAuthorizationResponse']");
@@ -948,18 +948,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public DoUATPAuthorizationResponseType DoUATPAuthorization(DoUATPAuthorizationReq DoUATPAuthorizationReq)
+	 	public DoUATPAuthorizationResponseType DoUATPAuthorization(DoUATPAuthorizationReq doUATPAuthorizationReq)
 	 	{
-	 		return DoUATPAuthorization(DoUATPAuthorizationReq, null);
+	 		return DoUATPAuthorization(doUATPAuthorizationReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public CreateRecurringPaymentsProfileResponseType CreateRecurringPaymentsProfile(CreateRecurringPaymentsProfileReq CreateRecurringPaymentsProfileReq, string apiUsername)
+	 	public CreateRecurringPaymentsProfileResponseType CreateRecurringPaymentsProfile(CreateRecurringPaymentsProfileReq createRecurringPaymentsProfileReq, string apiUserName)
 	 	{
-			setStandardParams(CreateRecurringPaymentsProfileReq.CreateRecurringPaymentsProfileRequest);
-			string response = call("CreateRecurringPaymentsProfile", CreateRecurringPaymentsProfileReq.toXMLString(), apiUsername);
+			setStandardParams(createRecurringPaymentsProfileReq.CreateRecurringPaymentsProfileRequest);
+			string response = Call("CreateRecurringPaymentsProfile", createRecurringPaymentsProfileReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='CreateRecurringPaymentsProfileResponse']");
@@ -970,18 +970,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public CreateRecurringPaymentsProfileResponseType CreateRecurringPaymentsProfile(CreateRecurringPaymentsProfileReq CreateRecurringPaymentsProfileReq)
+	 	public CreateRecurringPaymentsProfileResponseType CreateRecurringPaymentsProfile(CreateRecurringPaymentsProfileReq createRecurringPaymentsProfileReq)
 	 	{
-	 		return CreateRecurringPaymentsProfile(CreateRecurringPaymentsProfileReq, null);
+	 		return CreateRecurringPaymentsProfile(createRecurringPaymentsProfileReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public GetRecurringPaymentsProfileDetailsResponseType GetRecurringPaymentsProfileDetails(GetRecurringPaymentsProfileDetailsReq GetRecurringPaymentsProfileDetailsReq, string apiUsername)
+	 	public GetRecurringPaymentsProfileDetailsResponseType GetRecurringPaymentsProfileDetails(GetRecurringPaymentsProfileDetailsReq getRecurringPaymentsProfileDetailsReq, string apiUserName)
 	 	{
-			setStandardParams(GetRecurringPaymentsProfileDetailsReq.GetRecurringPaymentsProfileDetailsRequest);
-			string response = call("GetRecurringPaymentsProfileDetails", GetRecurringPaymentsProfileDetailsReq.toXMLString(), apiUsername);
+			setStandardParams(getRecurringPaymentsProfileDetailsReq.GetRecurringPaymentsProfileDetailsRequest);
+			string response = Call("GetRecurringPaymentsProfileDetails", getRecurringPaymentsProfileDetailsReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetRecurringPaymentsProfileDetailsResponse']");
@@ -992,18 +992,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public GetRecurringPaymentsProfileDetailsResponseType GetRecurringPaymentsProfileDetails(GetRecurringPaymentsProfileDetailsReq GetRecurringPaymentsProfileDetailsReq)
+	 	public GetRecurringPaymentsProfileDetailsResponseType GetRecurringPaymentsProfileDetails(GetRecurringPaymentsProfileDetailsReq getRecurringPaymentsProfileDetailsReq)
 	 	{
-	 		return GetRecurringPaymentsProfileDetails(GetRecurringPaymentsProfileDetailsReq, null);
+	 		return GetRecurringPaymentsProfileDetails(getRecurringPaymentsProfileDetailsReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public ManageRecurringPaymentsProfileStatusResponseType ManageRecurringPaymentsProfileStatus(ManageRecurringPaymentsProfileStatusReq ManageRecurringPaymentsProfileStatusReq, string apiUsername)
+	 	public ManageRecurringPaymentsProfileStatusResponseType ManageRecurringPaymentsProfileStatus(ManageRecurringPaymentsProfileStatusReq manageRecurringPaymentsProfileStatusReq, string apiUserName)
 	 	{
-			setStandardParams(ManageRecurringPaymentsProfileStatusReq.ManageRecurringPaymentsProfileStatusRequest);
-			string response = call("ManageRecurringPaymentsProfileStatus", ManageRecurringPaymentsProfileStatusReq.toXMLString(), apiUsername);
+			setStandardParams(manageRecurringPaymentsProfileStatusReq.ManageRecurringPaymentsProfileStatusRequest);
+			string response = Call("ManageRecurringPaymentsProfileStatus", manageRecurringPaymentsProfileStatusReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='ManageRecurringPaymentsProfileStatusResponse']");
@@ -1014,18 +1014,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public ManageRecurringPaymentsProfileStatusResponseType ManageRecurringPaymentsProfileStatus(ManageRecurringPaymentsProfileStatusReq ManageRecurringPaymentsProfileStatusReq)
+	 	public ManageRecurringPaymentsProfileStatusResponseType ManageRecurringPaymentsProfileStatus(ManageRecurringPaymentsProfileStatusReq manageRecurringPaymentsProfileStatusReq)
 	 	{
-	 		return ManageRecurringPaymentsProfileStatus(ManageRecurringPaymentsProfileStatusReq, null);
+	 		return ManageRecurringPaymentsProfileStatus(manageRecurringPaymentsProfileStatusReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public BillOutstandingAmountResponseType BillOutstandingAmount(BillOutstandingAmountReq BillOutstandingAmountReq, string apiUsername)
+	 	public BillOutstandingAmountResponseType BillOutstandingAmount(BillOutstandingAmountReq billOutstandingAmountReq, string apiUserName)
 	 	{
-			setStandardParams(BillOutstandingAmountReq.BillOutstandingAmountRequest);
-			string response = call("BillOutstandingAmount", BillOutstandingAmountReq.toXMLString(), apiUsername);
+			setStandardParams(billOutstandingAmountReq.BillOutstandingAmountRequest);
+			string response = Call("BillOutstandingAmount", billOutstandingAmountReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='BillOutstandingAmountResponse']");
@@ -1036,18 +1036,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public BillOutstandingAmountResponseType BillOutstandingAmount(BillOutstandingAmountReq BillOutstandingAmountReq)
+	 	public BillOutstandingAmountResponseType BillOutstandingAmount(BillOutstandingAmountReq billOutstandingAmountReq)
 	 	{
-	 		return BillOutstandingAmount(BillOutstandingAmountReq, null);
+	 		return BillOutstandingAmount(billOutstandingAmountReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public UpdateRecurringPaymentsProfileResponseType UpdateRecurringPaymentsProfile(UpdateRecurringPaymentsProfileReq UpdateRecurringPaymentsProfileReq, string apiUsername)
+	 	public UpdateRecurringPaymentsProfileResponseType UpdateRecurringPaymentsProfile(UpdateRecurringPaymentsProfileReq updateRecurringPaymentsProfileReq, string apiUserName)
 	 	{
-			setStandardParams(UpdateRecurringPaymentsProfileReq.UpdateRecurringPaymentsProfileRequest);
-			string response = call("UpdateRecurringPaymentsProfile", UpdateRecurringPaymentsProfileReq.toXMLString(), apiUsername);
+			setStandardParams(updateRecurringPaymentsProfileReq.UpdateRecurringPaymentsProfileRequest);
+			string response = Call("UpdateRecurringPaymentsProfile", updateRecurringPaymentsProfileReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='UpdateRecurringPaymentsProfileResponse']");
@@ -1058,18 +1058,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public UpdateRecurringPaymentsProfileResponseType UpdateRecurringPaymentsProfile(UpdateRecurringPaymentsProfileReq UpdateRecurringPaymentsProfileReq)
+	 	public UpdateRecurringPaymentsProfileResponseType UpdateRecurringPaymentsProfile(UpdateRecurringPaymentsProfileReq updateRecurringPaymentsProfileReq)
 	 	{
-	 		return UpdateRecurringPaymentsProfile(UpdateRecurringPaymentsProfileReq, null);
+	 		return UpdateRecurringPaymentsProfile(updateRecurringPaymentsProfileReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public ReverseTransactionResponseType ReverseTransaction(ReverseTransactionReq ReverseTransactionReq, string apiUsername)
+	 	public ReverseTransactionResponseType ReverseTransaction(ReverseTransactionReq reverseTransactionReq, string apiUserName)
 	 	{
-			setStandardParams(ReverseTransactionReq.ReverseTransactionRequest);
-			string response = call("ReverseTransaction", ReverseTransactionReq.toXMLString(), apiUsername);
+			setStandardParams(reverseTransactionReq.ReverseTransactionRequest);
+			string response = Call("ReverseTransaction", reverseTransactionReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='ReverseTransactionResponse']");
@@ -1080,18 +1080,18 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public ReverseTransactionResponseType ReverseTransaction(ReverseTransactionReq ReverseTransactionReq)
+	 	public ReverseTransactionResponseType ReverseTransaction(ReverseTransactionReq reverseTransactionReq)
 	 	{
-	 		return ReverseTransaction(ReverseTransactionReq, null);
+	 		return ReverseTransaction(reverseTransactionReq, null);
 	 	}
 
 		/**	
           *AUTO_GENERATED
 	 	  */
-	 	public ExternalRememberMeOptOutResponseType ExternalRememberMeOptOut(ExternalRememberMeOptOutReq ExternalRememberMeOptOutReq, string apiUsername)
+	 	public ExternalRememberMeOptOutResponseType ExternalRememberMeOptOut(ExternalRememberMeOptOutReq externalRememberMeOptOutReq, string apiUserName)
 	 	{
-			setStandardParams(ExternalRememberMeOptOutReq.ExternalRememberMeOptOutRequest);
-			string response = call("ExternalRememberMeOptOut", ExternalRememberMeOptOutReq.toXMLString(), apiUsername);
+			setStandardParams(externalRememberMeOptOutReq.ExternalRememberMeOptOutRequest);
+			string response = Call("ExternalRememberMeOptOut", externalRememberMeOptOutReq.ToXMLString(), apiUserName);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='ExternalRememberMeOptOutResponse']");
@@ -1102,9 +1102,9 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	/** 
           *AUTO_GENERATED
 	 	  */
-	 	public ExternalRememberMeOptOutResponseType ExternalRememberMeOptOut(ExternalRememberMeOptOutReq ExternalRememberMeOptOutReq)
+	 	public ExternalRememberMeOptOutResponseType ExternalRememberMeOptOut(ExternalRememberMeOptOutReq externalRememberMeOptOutReq)
 	 	{
-	 		return ExternalRememberMeOptOut(ExternalRememberMeOptOutReq, null);
+	 		return ExternalRememberMeOptOut(externalRememberMeOptOutReq, null);
 	 	}
 	}
 }
