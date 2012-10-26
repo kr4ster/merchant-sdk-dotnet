@@ -20,7 +20,7 @@
                 <input type="text" name="transactionId" id="transactionId" value="0A3763720H988743L" runat="server" />
             </div>
             <div class="submit">
-                <input id="Submit1" type="submit" name="search" value="Search" runat="server" onserverclick="Search_Submit"/>
+                <input id="Submit" type="submit" name="search" value="Search" runat="server" onserverclick="Search_Submit"/>
             </div>
         </div>
     </form>

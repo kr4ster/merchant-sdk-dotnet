@@ -62,7 +62,7 @@
                 </asp:DropDownList>                
             </div>                                    
             <div class="submit">
-                <input id="Submit1" type="submit" name="submit" value="Submit" runat="server" onserverclick="Submit_Click"/>
+                <input id="Submit" type="submit" name="submit" value="Submit" runat="server" onserverclick="Submit_Click"/>
             </div>
         </div>
     </form>

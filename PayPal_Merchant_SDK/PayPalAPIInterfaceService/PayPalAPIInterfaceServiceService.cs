@@ -3,20 +3,27 @@ using PayPal;
 using PayPal.Authentication;
 using PayPal.Util;
 using PayPal.Manager;
+using PayPal.SOAP;
 using PayPal.PayPalAPIInterfaceService.Model;
 
-namespace PayPal.PayPalAPIInterfaceService {
-	public partial class PayPalAPIInterfaceServiceService : BasePayPalService {
+namespace PayPal.PayPalAPIInterfaceService 
+{
+	public partial class PayPalAPIInterfaceServiceService : BasePayPalService 
+	{
 
 		// Service Version
-		private static string ServiceVersion = "94.0";
+		private const string ServiceVersion = "94.0";
 
 		// Service Name
-		private static string ServiceName = "PayPalAPIInterfaceService";
+		private const string ServiceName = "PayPalAPIInterfaceService";
+		
+		//SDK Name
+		private const string SDKName = "sdkname";
+	
+		//SDK Version
+		private const string SDKVersion = "sdkversion";
 
-		public PayPalAPIInterfaceServiceService() : base(ServiceName, ServiceVersion)
-		{
-		}
+		public PayPalAPIInterfaceServiceService() {}
 	
 		private void setStandardParams(AbstractRequestType request) {
 			if (request.Version == null)
@@ -34,8 +41,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public RefundTransactionResponseType RefundTransaction(RefundTransactionReq refundTransactionReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(refundTransactionReq.RefundTransactionRequest);
-			string response = Call("RefundTransaction", refundTransactionReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(refundTransactionReq.ToXMLString(null, "RefundTransactionReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RefundTransactionResponse']");
@@ -48,7 +60,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public RefundTransactionResponseType RefundTransaction(RefundTransactionReq refundTransactionReq)
 	 	{
-	 		return RefundTransaction(refundTransactionReq, null);
+	 		return RefundTransaction(refundTransactionReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public RefundTransactionResponseType RefundTransaction(RefundTransactionReq refundTransactionReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(refundTransactionReq.RefundTransactionRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(refundTransactionReq.ToXMLString(null, "RefundTransactionReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='RefundTransactionResponse']");
+			return new RefundTransactionResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -56,8 +87,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public InitiateRecoupResponseType InitiateRecoup(InitiateRecoupReq initiateRecoupReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(initiateRecoupReq.InitiateRecoupRequest);
-			string response = Call("InitiateRecoup", initiateRecoupReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(initiateRecoupReq.ToXMLString(null, "InitiateRecoupReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='InitiateRecoupResponse']");
@@ -70,7 +106,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public InitiateRecoupResponseType InitiateRecoup(InitiateRecoupReq initiateRecoupReq)
 	 	{
-	 		return InitiateRecoup(initiateRecoupReq, null);
+	 		return InitiateRecoup(initiateRecoupReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public InitiateRecoupResponseType InitiateRecoup(InitiateRecoupReq initiateRecoupReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(initiateRecoupReq.InitiateRecoupRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(initiateRecoupReq.ToXMLString(null, "InitiateRecoupReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='InitiateRecoupResponse']");
+			return new InitiateRecoupResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -78,8 +133,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public CompleteRecoupResponseType CompleteRecoup(CompleteRecoupReq completeRecoupReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(completeRecoupReq.CompleteRecoupRequest);
-			string response = Call("CompleteRecoup", completeRecoupReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(completeRecoupReq.ToXMLString(null, "CompleteRecoupReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='CompleteRecoupResponse']");
@@ -92,7 +152,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public CompleteRecoupResponseType CompleteRecoup(CompleteRecoupReq completeRecoupReq)
 	 	{
-	 		return CompleteRecoup(completeRecoupReq, null);
+	 		return CompleteRecoup(completeRecoupReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public CompleteRecoupResponseType CompleteRecoup(CompleteRecoupReq completeRecoupReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(completeRecoupReq.CompleteRecoupRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(completeRecoupReq.ToXMLString(null, "CompleteRecoupReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='CompleteRecoupResponse']");
+			return new CompleteRecoupResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -100,8 +179,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public CancelRecoupResponseType CancelRecoup(CancelRecoupReq cancelRecoupReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(cancelRecoupReq.CancelRecoupRequest);
-			string response = Call("CancelRecoup", cancelRecoupReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(cancelRecoupReq.ToXMLString(null, "CancelRecoupReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='CancelRecoupResponse']");
@@ -114,7 +198,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public CancelRecoupResponseType CancelRecoup(CancelRecoupReq cancelRecoupReq)
 	 	{
-	 		return CancelRecoup(cancelRecoupReq, null);
+	 		return CancelRecoup(cancelRecoupReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public CancelRecoupResponseType CancelRecoup(CancelRecoupReq cancelRecoupReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(cancelRecoupReq.CancelRecoupRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(cancelRecoupReq.ToXMLString(null, "CancelRecoupReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='CancelRecoupResponse']");
+			return new CancelRecoupResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -122,8 +225,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetTransactionDetailsResponseType GetTransactionDetails(GetTransactionDetailsReq getTransactionDetailsReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(getTransactionDetailsReq.GetTransactionDetailsRequest);
-			string response = Call("GetTransactionDetails", getTransactionDetailsReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getTransactionDetailsReq.ToXMLString(null, "GetTransactionDetailsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetTransactionDetailsResponse']");
@@ -136,7 +244,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetTransactionDetailsResponseType GetTransactionDetails(GetTransactionDetailsReq getTransactionDetailsReq)
 	 	{
-	 		return GetTransactionDetails(getTransactionDetailsReq, null);
+	 		return GetTransactionDetails(getTransactionDetailsReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public GetTransactionDetailsResponseType GetTransactionDetails(GetTransactionDetailsReq getTransactionDetailsReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(getTransactionDetailsReq.GetTransactionDetailsRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getTransactionDetailsReq.ToXMLString(null, "GetTransactionDetailsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetTransactionDetailsResponse']");
+			return new GetTransactionDetailsResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -144,8 +271,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public BillUserResponseType BillUser(BillUserReq billUserReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(billUserReq.BillUserRequest);
-			string response = Call("BillUser", billUserReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(billUserReq.ToXMLString(null, "BillUserReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='BillUserResponse']");
@@ -158,7 +290,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public BillUserResponseType BillUser(BillUserReq billUserReq)
 	 	{
-	 		return BillUser(billUserReq, null);
+	 		return BillUser(billUserReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public BillUserResponseType BillUser(BillUserReq billUserReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(billUserReq.BillUserRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(billUserReq.ToXMLString(null, "BillUserReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='BillUserResponse']");
+			return new BillUserResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -166,8 +317,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public TransactionSearchResponseType TransactionSearch(TransactionSearchReq transactionSearchReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(transactionSearchReq.TransactionSearchRequest);
-			string response = Call("TransactionSearch", transactionSearchReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(transactionSearchReq.ToXMLString(null, "TransactionSearchReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='TransactionSearchResponse']");
@@ -180,7 +336,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public TransactionSearchResponseType TransactionSearch(TransactionSearchReq transactionSearchReq)
 	 	{
-	 		return TransactionSearch(transactionSearchReq, null);
+	 		return TransactionSearch(transactionSearchReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public TransactionSearchResponseType TransactionSearch(TransactionSearchReq transactionSearchReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(transactionSearchReq.TransactionSearchRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(transactionSearchReq.ToXMLString(null, "TransactionSearchReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='TransactionSearchResponse']");
+			return new TransactionSearchResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -188,8 +363,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public MassPayResponseType MassPay(MassPayReq massPayReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(massPayReq.MassPayRequest);
-			string response = Call("MassPay", massPayReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(massPayReq.ToXMLString(null, "MassPayReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='MassPayResponse']");
@@ -202,7 +382,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public MassPayResponseType MassPay(MassPayReq massPayReq)
 	 	{
-	 		return MassPay(massPayReq, null);
+	 		return MassPay(massPayReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public MassPayResponseType MassPay(MassPayReq massPayReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(massPayReq.MassPayRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(massPayReq.ToXMLString(null, "MassPayReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='MassPayResponse']");
+			return new MassPayResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -210,8 +409,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public BAUpdateResponseType BillAgreementUpdate(BillAgreementUpdateReq billAgreementUpdateReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(billAgreementUpdateReq.BAUpdateRequest);
-			string response = Call("BillAgreementUpdate", billAgreementUpdateReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(billAgreementUpdateReq.ToXMLString(null, "BillAgreementUpdateReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='BAUpdateResponse']");
@@ -224,7 +428,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public BAUpdateResponseType BillAgreementUpdate(BillAgreementUpdateReq billAgreementUpdateReq)
 	 	{
-	 		return BillAgreementUpdate(billAgreementUpdateReq, null);
+	 		return BillAgreementUpdate(billAgreementUpdateReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public BAUpdateResponseType BillAgreementUpdate(BillAgreementUpdateReq billAgreementUpdateReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(billAgreementUpdateReq.BAUpdateRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(billAgreementUpdateReq.ToXMLString(null, "BillAgreementUpdateReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='BAUpdateResponse']");
+			return new BAUpdateResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -232,8 +455,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public AddressVerifyResponseType AddressVerify(AddressVerifyReq addressVerifyReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(addressVerifyReq.AddressVerifyRequest);
-			string response = Call("AddressVerify", addressVerifyReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(addressVerifyReq.ToXMLString(null, "AddressVerifyReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='AddressVerifyResponse']");
@@ -246,7 +474,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public AddressVerifyResponseType AddressVerify(AddressVerifyReq addressVerifyReq)
 	 	{
-	 		return AddressVerify(addressVerifyReq, null);
+	 		return AddressVerify(addressVerifyReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public AddressVerifyResponseType AddressVerify(AddressVerifyReq addressVerifyReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(addressVerifyReq.AddressVerifyRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(addressVerifyReq.ToXMLString(null, "AddressVerifyReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='AddressVerifyResponse']");
+			return new AddressVerifyResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -254,8 +501,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public EnterBoardingResponseType EnterBoarding(EnterBoardingReq enterBoardingReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(enterBoardingReq.EnterBoardingRequest);
-			string response = Call("EnterBoarding", enterBoardingReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(enterBoardingReq.ToXMLString(null, "EnterBoardingReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='EnterBoardingResponse']");
@@ -268,7 +520,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public EnterBoardingResponseType EnterBoarding(EnterBoardingReq enterBoardingReq)
 	 	{
-	 		return EnterBoarding(enterBoardingReq, null);
+	 		return EnterBoarding(enterBoardingReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public EnterBoardingResponseType EnterBoarding(EnterBoardingReq enterBoardingReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(enterBoardingReq.EnterBoardingRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(enterBoardingReq.ToXMLString(null, "EnterBoardingReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='EnterBoardingResponse']");
+			return new EnterBoardingResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -276,8 +547,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetBoardingDetailsResponseType GetBoardingDetails(GetBoardingDetailsReq getBoardingDetailsReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(getBoardingDetailsReq.GetBoardingDetailsRequest);
-			string response = Call("GetBoardingDetails", getBoardingDetailsReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getBoardingDetailsReq.ToXMLString(null, "GetBoardingDetailsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetBoardingDetailsResponse']");
@@ -290,7 +566,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetBoardingDetailsResponseType GetBoardingDetails(GetBoardingDetailsReq getBoardingDetailsReq)
 	 	{
-	 		return GetBoardingDetails(getBoardingDetailsReq, null);
+	 		return GetBoardingDetails(getBoardingDetailsReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public GetBoardingDetailsResponseType GetBoardingDetails(GetBoardingDetailsReq getBoardingDetailsReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(getBoardingDetailsReq.GetBoardingDetailsRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getBoardingDetailsReq.ToXMLString(null, "GetBoardingDetailsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetBoardingDetailsResponse']");
+			return new GetBoardingDetailsResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -298,8 +593,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public CreateMobilePaymentResponseType CreateMobilePayment(CreateMobilePaymentReq createMobilePaymentReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(createMobilePaymentReq.CreateMobilePaymentRequest);
-			string response = Call("CreateMobilePayment", createMobilePaymentReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(createMobilePaymentReq.ToXMLString(null, "CreateMobilePaymentReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='CreateMobilePaymentResponse']");
@@ -312,7 +612,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public CreateMobilePaymentResponseType CreateMobilePayment(CreateMobilePaymentReq createMobilePaymentReq)
 	 	{
-	 		return CreateMobilePayment(createMobilePaymentReq, null);
+	 		return CreateMobilePayment(createMobilePaymentReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public CreateMobilePaymentResponseType CreateMobilePayment(CreateMobilePaymentReq createMobilePaymentReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(createMobilePaymentReq.CreateMobilePaymentRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(createMobilePaymentReq.ToXMLString(null, "CreateMobilePaymentReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='CreateMobilePaymentResponse']");
+			return new CreateMobilePaymentResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -320,8 +639,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetMobileStatusResponseType GetMobileStatus(GetMobileStatusReq getMobileStatusReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(getMobileStatusReq.GetMobileStatusRequest);
-			string response = Call("GetMobileStatus", getMobileStatusReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getMobileStatusReq.ToXMLString(null, "GetMobileStatusReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetMobileStatusResponse']");
@@ -334,7 +658,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetMobileStatusResponseType GetMobileStatus(GetMobileStatusReq getMobileStatusReq)
 	 	{
-	 		return GetMobileStatus(getMobileStatusReq, null);
+	 		return GetMobileStatus(getMobileStatusReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public GetMobileStatusResponseType GetMobileStatus(GetMobileStatusReq getMobileStatusReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(getMobileStatusReq.GetMobileStatusRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getMobileStatusReq.ToXMLString(null, "GetMobileStatusReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetMobileStatusResponse']");
+			return new GetMobileStatusResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -342,8 +685,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public SetMobileCheckoutResponseType SetMobileCheckout(SetMobileCheckoutReq setMobileCheckoutReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(setMobileCheckoutReq.SetMobileCheckoutRequest);
-			string response = Call("SetMobileCheckout", setMobileCheckoutReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(setMobileCheckoutReq.ToXMLString(null, "SetMobileCheckoutReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='SetMobileCheckoutResponse']");
@@ -356,7 +704,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public SetMobileCheckoutResponseType SetMobileCheckout(SetMobileCheckoutReq setMobileCheckoutReq)
 	 	{
-	 		return SetMobileCheckout(setMobileCheckoutReq, null);
+	 		return SetMobileCheckout(setMobileCheckoutReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public SetMobileCheckoutResponseType SetMobileCheckout(SetMobileCheckoutReq setMobileCheckoutReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(setMobileCheckoutReq.SetMobileCheckoutRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(setMobileCheckoutReq.ToXMLString(null, "SetMobileCheckoutReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='SetMobileCheckoutResponse']");
+			return new SetMobileCheckoutResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -364,8 +731,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoMobileCheckoutPaymentResponseType DoMobileCheckoutPayment(DoMobileCheckoutPaymentReq doMobileCheckoutPaymentReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(doMobileCheckoutPaymentReq.DoMobileCheckoutPaymentRequest);
-			string response = Call("DoMobileCheckoutPayment", doMobileCheckoutPaymentReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doMobileCheckoutPaymentReq.ToXMLString(null, "DoMobileCheckoutPaymentReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoMobileCheckoutPaymentResponse']");
@@ -378,7 +750,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoMobileCheckoutPaymentResponseType DoMobileCheckoutPayment(DoMobileCheckoutPaymentReq doMobileCheckoutPaymentReq)
 	 	{
-	 		return DoMobileCheckoutPayment(doMobileCheckoutPaymentReq, null);
+	 		return DoMobileCheckoutPayment(doMobileCheckoutPaymentReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public DoMobileCheckoutPaymentResponseType DoMobileCheckoutPayment(DoMobileCheckoutPaymentReq doMobileCheckoutPaymentReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(doMobileCheckoutPaymentReq.DoMobileCheckoutPaymentRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doMobileCheckoutPaymentReq.ToXMLString(null, "DoMobileCheckoutPaymentReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoMobileCheckoutPaymentResponse']");
+			return new DoMobileCheckoutPaymentResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -386,8 +777,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetBalanceResponseType GetBalance(GetBalanceReq getBalanceReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(getBalanceReq.GetBalanceRequest);
-			string response = Call("GetBalance", getBalanceReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getBalanceReq.ToXMLString(null, "GetBalanceReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetBalanceResponse']");
@@ -400,7 +796,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetBalanceResponseType GetBalance(GetBalanceReq getBalanceReq)
 	 	{
-	 		return GetBalance(getBalanceReq, null);
+	 		return GetBalance(getBalanceReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public GetBalanceResponseType GetBalance(GetBalanceReq getBalanceReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(getBalanceReq.GetBalanceRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getBalanceReq.ToXMLString(null, "GetBalanceReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetBalanceResponse']");
+			return new GetBalanceResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -408,8 +823,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetPalDetailsResponseType GetPalDetails(GetPalDetailsReq getPalDetailsReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(getPalDetailsReq.GetPalDetailsRequest);
-			string response = Call("GetPalDetails", getPalDetailsReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getPalDetailsReq.ToXMLString(null, "GetPalDetailsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetPalDetailsResponse']");
@@ -422,7 +842,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetPalDetailsResponseType GetPalDetails(GetPalDetailsReq getPalDetailsReq)
 	 	{
-	 		return GetPalDetails(getPalDetailsReq, null);
+	 		return GetPalDetails(getPalDetailsReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public GetPalDetailsResponseType GetPalDetails(GetPalDetailsReq getPalDetailsReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(getPalDetailsReq.GetPalDetailsRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getPalDetailsReq.ToXMLString(null, "GetPalDetailsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetPalDetailsResponse']");
+			return new GetPalDetailsResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -430,8 +869,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoExpressCheckoutPaymentResponseType DoExpressCheckoutPayment(DoExpressCheckoutPaymentReq doExpressCheckoutPaymentReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(doExpressCheckoutPaymentReq.DoExpressCheckoutPaymentRequest);
-			string response = Call("DoExpressCheckoutPayment", doExpressCheckoutPaymentReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doExpressCheckoutPaymentReq.ToXMLString(null, "DoExpressCheckoutPaymentReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoExpressCheckoutPaymentResponse']");
@@ -444,7 +888,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoExpressCheckoutPaymentResponseType DoExpressCheckoutPayment(DoExpressCheckoutPaymentReq doExpressCheckoutPaymentReq)
 	 	{
-	 		return DoExpressCheckoutPayment(doExpressCheckoutPaymentReq, null);
+	 		return DoExpressCheckoutPayment(doExpressCheckoutPaymentReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public DoExpressCheckoutPaymentResponseType DoExpressCheckoutPayment(DoExpressCheckoutPaymentReq doExpressCheckoutPaymentReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(doExpressCheckoutPaymentReq.DoExpressCheckoutPaymentRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doExpressCheckoutPaymentReq.ToXMLString(null, "DoExpressCheckoutPaymentReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoExpressCheckoutPaymentResponse']");
+			return new DoExpressCheckoutPaymentResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -452,8 +915,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoUATPExpressCheckoutPaymentResponseType DoUATPExpressCheckoutPayment(DoUATPExpressCheckoutPaymentReq doUATPExpressCheckoutPaymentReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(doUATPExpressCheckoutPaymentReq.DoUATPExpressCheckoutPaymentRequest);
-			string response = Call("DoUATPExpressCheckoutPayment", doUATPExpressCheckoutPaymentReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doUATPExpressCheckoutPaymentReq.ToXMLString(null, "DoUATPExpressCheckoutPaymentReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoUATPExpressCheckoutPaymentResponse']");
@@ -466,7 +934,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoUATPExpressCheckoutPaymentResponseType DoUATPExpressCheckoutPayment(DoUATPExpressCheckoutPaymentReq doUATPExpressCheckoutPaymentReq)
 	 	{
-	 		return DoUATPExpressCheckoutPayment(doUATPExpressCheckoutPaymentReq, null);
+	 		return DoUATPExpressCheckoutPayment(doUATPExpressCheckoutPaymentReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public DoUATPExpressCheckoutPaymentResponseType DoUATPExpressCheckoutPayment(DoUATPExpressCheckoutPaymentReq doUATPExpressCheckoutPaymentReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(doUATPExpressCheckoutPaymentReq.DoUATPExpressCheckoutPaymentRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doUATPExpressCheckoutPaymentReq.ToXMLString(null, "DoUATPExpressCheckoutPaymentReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoUATPExpressCheckoutPaymentResponse']");
+			return new DoUATPExpressCheckoutPaymentResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -474,8 +961,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public SetAuthFlowParamResponseType SetAuthFlowParam(SetAuthFlowParamReq setAuthFlowParamReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(setAuthFlowParamReq.SetAuthFlowParamRequest);
-			string response = Call("SetAuthFlowParam", setAuthFlowParamReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(setAuthFlowParamReq.ToXMLString(null, "SetAuthFlowParamReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='SetAuthFlowParamResponse']");
@@ -488,7 +980,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public SetAuthFlowParamResponseType SetAuthFlowParam(SetAuthFlowParamReq setAuthFlowParamReq)
 	 	{
-	 		return SetAuthFlowParam(setAuthFlowParamReq, null);
+	 		return SetAuthFlowParam(setAuthFlowParamReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public SetAuthFlowParamResponseType SetAuthFlowParam(SetAuthFlowParamReq setAuthFlowParamReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(setAuthFlowParamReq.SetAuthFlowParamRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(setAuthFlowParamReq.ToXMLString(null, "SetAuthFlowParamReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='SetAuthFlowParamResponse']");
+			return new SetAuthFlowParamResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -496,8 +1007,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetAuthDetailsResponseType GetAuthDetails(GetAuthDetailsReq getAuthDetailsReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(getAuthDetailsReq.GetAuthDetailsRequest);
-			string response = Call("GetAuthDetails", getAuthDetailsReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getAuthDetailsReq.ToXMLString(null, "GetAuthDetailsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetAuthDetailsResponse']");
@@ -510,7 +1026,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetAuthDetailsResponseType GetAuthDetails(GetAuthDetailsReq getAuthDetailsReq)
 	 	{
-	 		return GetAuthDetails(getAuthDetailsReq, null);
+	 		return GetAuthDetails(getAuthDetailsReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public GetAuthDetailsResponseType GetAuthDetails(GetAuthDetailsReq getAuthDetailsReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(getAuthDetailsReq.GetAuthDetailsRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getAuthDetailsReq.ToXMLString(null, "GetAuthDetailsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetAuthDetailsResponse']");
+			return new GetAuthDetailsResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -518,8 +1053,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public SetAccessPermissionsResponseType SetAccessPermissions(SetAccessPermissionsReq setAccessPermissionsReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(setAccessPermissionsReq.SetAccessPermissionsRequest);
-			string response = Call("SetAccessPermissions", setAccessPermissionsReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(setAccessPermissionsReq.ToXMLString(null, "SetAccessPermissionsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='SetAccessPermissionsResponse']");
@@ -532,7 +1072,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public SetAccessPermissionsResponseType SetAccessPermissions(SetAccessPermissionsReq setAccessPermissionsReq)
 	 	{
-	 		return SetAccessPermissions(setAccessPermissionsReq, null);
+	 		return SetAccessPermissions(setAccessPermissionsReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public SetAccessPermissionsResponseType SetAccessPermissions(SetAccessPermissionsReq setAccessPermissionsReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(setAccessPermissionsReq.SetAccessPermissionsRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(setAccessPermissionsReq.ToXMLString(null, "SetAccessPermissionsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='SetAccessPermissionsResponse']");
+			return new SetAccessPermissionsResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -540,8 +1099,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public UpdateAccessPermissionsResponseType UpdateAccessPermissions(UpdateAccessPermissionsReq updateAccessPermissionsReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(updateAccessPermissionsReq.UpdateAccessPermissionsRequest);
-			string response = Call("UpdateAccessPermissions", updateAccessPermissionsReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(updateAccessPermissionsReq.ToXMLString(null, "UpdateAccessPermissionsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='UpdateAccessPermissionsResponse']");
@@ -554,7 +1118,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public UpdateAccessPermissionsResponseType UpdateAccessPermissions(UpdateAccessPermissionsReq updateAccessPermissionsReq)
 	 	{
-	 		return UpdateAccessPermissions(updateAccessPermissionsReq, null);
+	 		return UpdateAccessPermissions(updateAccessPermissionsReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public UpdateAccessPermissionsResponseType UpdateAccessPermissions(UpdateAccessPermissionsReq updateAccessPermissionsReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(updateAccessPermissionsReq.UpdateAccessPermissionsRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(updateAccessPermissionsReq.ToXMLString(null, "UpdateAccessPermissionsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='UpdateAccessPermissionsResponse']");
+			return new UpdateAccessPermissionsResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -562,8 +1145,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetAccessPermissionDetailsResponseType GetAccessPermissionDetails(GetAccessPermissionDetailsReq getAccessPermissionDetailsReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(getAccessPermissionDetailsReq.GetAccessPermissionDetailsRequest);
-			string response = Call("GetAccessPermissionDetails", getAccessPermissionDetailsReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getAccessPermissionDetailsReq.ToXMLString(null, "GetAccessPermissionDetailsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetAccessPermissionDetailsResponse']");
@@ -576,7 +1164,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetAccessPermissionDetailsResponseType GetAccessPermissionDetails(GetAccessPermissionDetailsReq getAccessPermissionDetailsReq)
 	 	{
-	 		return GetAccessPermissionDetails(getAccessPermissionDetailsReq, null);
+	 		return GetAccessPermissionDetails(getAccessPermissionDetailsReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public GetAccessPermissionDetailsResponseType GetAccessPermissionDetails(GetAccessPermissionDetailsReq getAccessPermissionDetailsReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(getAccessPermissionDetailsReq.GetAccessPermissionDetailsRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getAccessPermissionDetailsReq.ToXMLString(null, "GetAccessPermissionDetailsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetAccessPermissionDetailsResponse']");
+			return new GetAccessPermissionDetailsResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -584,8 +1191,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetIncentiveEvaluationResponseType GetIncentiveEvaluation(GetIncentiveEvaluationReq getIncentiveEvaluationReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(getIncentiveEvaluationReq.GetIncentiveEvaluationRequest);
-			string response = Call("GetIncentiveEvaluation", getIncentiveEvaluationReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getIncentiveEvaluationReq.ToXMLString(null, "GetIncentiveEvaluationReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetIncentiveEvaluationResponse']");
@@ -598,7 +1210,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetIncentiveEvaluationResponseType GetIncentiveEvaluation(GetIncentiveEvaluationReq getIncentiveEvaluationReq)
 	 	{
-	 		return GetIncentiveEvaluation(getIncentiveEvaluationReq, null);
+	 		return GetIncentiveEvaluation(getIncentiveEvaluationReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public GetIncentiveEvaluationResponseType GetIncentiveEvaluation(GetIncentiveEvaluationReq getIncentiveEvaluationReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(getIncentiveEvaluationReq.GetIncentiveEvaluationRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getIncentiveEvaluationReq.ToXMLString(null, "GetIncentiveEvaluationReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetIncentiveEvaluationResponse']");
+			return new GetIncentiveEvaluationResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -606,8 +1237,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public SetExpressCheckoutResponseType SetExpressCheckout(SetExpressCheckoutReq setExpressCheckoutReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(setExpressCheckoutReq.SetExpressCheckoutRequest);
-			string response = Call("SetExpressCheckout", setExpressCheckoutReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(setExpressCheckoutReq.ToXMLString(null, "SetExpressCheckoutReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='SetExpressCheckoutResponse']");
@@ -620,7 +1256,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public SetExpressCheckoutResponseType SetExpressCheckout(SetExpressCheckoutReq setExpressCheckoutReq)
 	 	{
-	 		return SetExpressCheckout(setExpressCheckoutReq, null);
+	 		return SetExpressCheckout(setExpressCheckoutReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public SetExpressCheckoutResponseType SetExpressCheckout(SetExpressCheckoutReq setExpressCheckoutReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(setExpressCheckoutReq.SetExpressCheckoutRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(setExpressCheckoutReq.ToXMLString(null, "SetExpressCheckoutReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='SetExpressCheckoutResponse']");
+			return new SetExpressCheckoutResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -628,8 +1283,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public ExecuteCheckoutOperationsResponseType ExecuteCheckoutOperations(ExecuteCheckoutOperationsReq executeCheckoutOperationsReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(executeCheckoutOperationsReq.ExecuteCheckoutOperationsRequest);
-			string response = Call("ExecuteCheckoutOperations", executeCheckoutOperationsReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(executeCheckoutOperationsReq.ToXMLString(null, "ExecuteCheckoutOperationsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='ExecuteCheckoutOperationsResponse']");
@@ -642,7 +1302,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public ExecuteCheckoutOperationsResponseType ExecuteCheckoutOperations(ExecuteCheckoutOperationsReq executeCheckoutOperationsReq)
 	 	{
-	 		return ExecuteCheckoutOperations(executeCheckoutOperationsReq, null);
+	 		return ExecuteCheckoutOperations(executeCheckoutOperationsReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public ExecuteCheckoutOperationsResponseType ExecuteCheckoutOperations(ExecuteCheckoutOperationsReq executeCheckoutOperationsReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(executeCheckoutOperationsReq.ExecuteCheckoutOperationsRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(executeCheckoutOperationsReq.ToXMLString(null, "ExecuteCheckoutOperationsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='ExecuteCheckoutOperationsResponse']");
+			return new ExecuteCheckoutOperationsResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -650,8 +1329,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetExpressCheckoutDetailsResponseType GetExpressCheckoutDetails(GetExpressCheckoutDetailsReq getExpressCheckoutDetailsReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(getExpressCheckoutDetailsReq.GetExpressCheckoutDetailsRequest);
-			string response = Call("GetExpressCheckoutDetails", getExpressCheckoutDetailsReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getExpressCheckoutDetailsReq.ToXMLString(null, "GetExpressCheckoutDetailsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetExpressCheckoutDetailsResponse']");
@@ -664,7 +1348,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetExpressCheckoutDetailsResponseType GetExpressCheckoutDetails(GetExpressCheckoutDetailsReq getExpressCheckoutDetailsReq)
 	 	{
-	 		return GetExpressCheckoutDetails(getExpressCheckoutDetailsReq, null);
+	 		return GetExpressCheckoutDetails(getExpressCheckoutDetailsReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public GetExpressCheckoutDetailsResponseType GetExpressCheckoutDetails(GetExpressCheckoutDetailsReq getExpressCheckoutDetailsReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(getExpressCheckoutDetailsReq.GetExpressCheckoutDetailsRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getExpressCheckoutDetailsReq.ToXMLString(null, "GetExpressCheckoutDetailsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetExpressCheckoutDetailsResponse']");
+			return new GetExpressCheckoutDetailsResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -672,8 +1375,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoDirectPaymentResponseType DoDirectPayment(DoDirectPaymentReq doDirectPaymentReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(doDirectPaymentReq.DoDirectPaymentRequest);
-			string response = Call("DoDirectPayment", doDirectPaymentReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doDirectPaymentReq.ToXMLString(null, "DoDirectPaymentReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoDirectPaymentResponse']");
@@ -686,7 +1394,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoDirectPaymentResponseType DoDirectPayment(DoDirectPaymentReq doDirectPaymentReq)
 	 	{
-	 		return DoDirectPayment(doDirectPaymentReq, null);
+	 		return DoDirectPayment(doDirectPaymentReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public DoDirectPaymentResponseType DoDirectPayment(DoDirectPaymentReq doDirectPaymentReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(doDirectPaymentReq.DoDirectPaymentRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doDirectPaymentReq.ToXMLString(null, "DoDirectPaymentReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoDirectPaymentResponse']");
+			return new DoDirectPaymentResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -694,8 +1421,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public ManagePendingTransactionStatusResponseType ManagePendingTransactionStatus(ManagePendingTransactionStatusReq managePendingTransactionStatusReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(managePendingTransactionStatusReq.ManagePendingTransactionStatusRequest);
-			string response = Call("ManagePendingTransactionStatus", managePendingTransactionStatusReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(managePendingTransactionStatusReq.ToXMLString(null, "ManagePendingTransactionStatusReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='ManagePendingTransactionStatusResponse']");
@@ -708,7 +1440,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public ManagePendingTransactionStatusResponseType ManagePendingTransactionStatus(ManagePendingTransactionStatusReq managePendingTransactionStatusReq)
 	 	{
-	 		return ManagePendingTransactionStatus(managePendingTransactionStatusReq, null);
+	 		return ManagePendingTransactionStatus(managePendingTransactionStatusReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public ManagePendingTransactionStatusResponseType ManagePendingTransactionStatus(ManagePendingTransactionStatusReq managePendingTransactionStatusReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(managePendingTransactionStatusReq.ManagePendingTransactionStatusRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(managePendingTransactionStatusReq.ToXMLString(null, "ManagePendingTransactionStatusReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='ManagePendingTransactionStatusResponse']");
+			return new ManagePendingTransactionStatusResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -716,8 +1467,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoCancelResponseType DoCancel(DoCancelReq doCancelReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(doCancelReq.DoCancelRequest);
-			string response = Call("DoCancel", doCancelReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doCancelReq.ToXMLString(null, "DoCancelReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoCancelResponse']");
@@ -730,7 +1486,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoCancelResponseType DoCancel(DoCancelReq doCancelReq)
 	 	{
-	 		return DoCancel(doCancelReq, null);
+	 		return DoCancel(doCancelReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public DoCancelResponseType DoCancel(DoCancelReq doCancelReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(doCancelReq.DoCancelRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doCancelReq.ToXMLString(null, "DoCancelReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoCancelResponse']");
+			return new DoCancelResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -738,8 +1513,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoCaptureResponseType DoCapture(DoCaptureReq doCaptureReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(doCaptureReq.DoCaptureRequest);
-			string response = Call("DoCapture", doCaptureReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doCaptureReq.ToXMLString(null, "DoCaptureReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoCaptureResponse']");
@@ -752,7 +1532,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoCaptureResponseType DoCapture(DoCaptureReq doCaptureReq)
 	 	{
-	 		return DoCapture(doCaptureReq, null);
+	 		return DoCapture(doCaptureReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public DoCaptureResponseType DoCapture(DoCaptureReq doCaptureReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(doCaptureReq.DoCaptureRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doCaptureReq.ToXMLString(null, "DoCaptureReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoCaptureResponse']");
+			return new DoCaptureResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -760,8 +1559,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoReauthorizationResponseType DoReauthorization(DoReauthorizationReq doReauthorizationReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(doReauthorizationReq.DoReauthorizationRequest);
-			string response = Call("DoReauthorization", doReauthorizationReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doReauthorizationReq.ToXMLString(null, "DoReauthorizationReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoReauthorizationResponse']");
@@ -774,7 +1578,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoReauthorizationResponseType DoReauthorization(DoReauthorizationReq doReauthorizationReq)
 	 	{
-	 		return DoReauthorization(doReauthorizationReq, null);
+	 		return DoReauthorization(doReauthorizationReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public DoReauthorizationResponseType DoReauthorization(DoReauthorizationReq doReauthorizationReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(doReauthorizationReq.DoReauthorizationRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doReauthorizationReq.ToXMLString(null, "DoReauthorizationReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoReauthorizationResponse']");
+			return new DoReauthorizationResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -782,8 +1605,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoVoidResponseType DoVoid(DoVoidReq doVoidReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(doVoidReq.DoVoidRequest);
-			string response = Call("DoVoid", doVoidReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doVoidReq.ToXMLString(null, "DoVoidReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoVoidResponse']");
@@ -796,7 +1624,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoVoidResponseType DoVoid(DoVoidReq doVoidReq)
 	 	{
-	 		return DoVoid(doVoidReq, null);
+	 		return DoVoid(doVoidReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public DoVoidResponseType DoVoid(DoVoidReq doVoidReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(doVoidReq.DoVoidRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doVoidReq.ToXMLString(null, "DoVoidReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoVoidResponse']");
+			return new DoVoidResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -804,8 +1651,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoAuthorizationResponseType DoAuthorization(DoAuthorizationReq doAuthorizationReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(doAuthorizationReq.DoAuthorizationRequest);
-			string response = Call("DoAuthorization", doAuthorizationReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doAuthorizationReq.ToXMLString(null, "DoAuthorizationReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoAuthorizationResponse']");
@@ -818,7 +1670,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoAuthorizationResponseType DoAuthorization(DoAuthorizationReq doAuthorizationReq)
 	 	{
-	 		return DoAuthorization(doAuthorizationReq, null);
+	 		return DoAuthorization(doAuthorizationReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public DoAuthorizationResponseType DoAuthorization(DoAuthorizationReq doAuthorizationReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(doAuthorizationReq.DoAuthorizationRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doAuthorizationReq.ToXMLString(null, "DoAuthorizationReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoAuthorizationResponse']");
+			return new DoAuthorizationResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -826,8 +1697,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public SetCustomerBillingAgreementResponseType SetCustomerBillingAgreement(SetCustomerBillingAgreementReq setCustomerBillingAgreementReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(setCustomerBillingAgreementReq.SetCustomerBillingAgreementRequest);
-			string response = Call("SetCustomerBillingAgreement", setCustomerBillingAgreementReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(setCustomerBillingAgreementReq.ToXMLString(null, "SetCustomerBillingAgreementReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='SetCustomerBillingAgreementResponse']");
@@ -840,7 +1716,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public SetCustomerBillingAgreementResponseType SetCustomerBillingAgreement(SetCustomerBillingAgreementReq setCustomerBillingAgreementReq)
 	 	{
-	 		return SetCustomerBillingAgreement(setCustomerBillingAgreementReq, null);
+	 		return SetCustomerBillingAgreement(setCustomerBillingAgreementReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public SetCustomerBillingAgreementResponseType SetCustomerBillingAgreement(SetCustomerBillingAgreementReq setCustomerBillingAgreementReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(setCustomerBillingAgreementReq.SetCustomerBillingAgreementRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(setCustomerBillingAgreementReq.ToXMLString(null, "SetCustomerBillingAgreementReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='SetCustomerBillingAgreementResponse']");
+			return new SetCustomerBillingAgreementResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -848,8 +1743,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetBillingAgreementCustomerDetailsResponseType GetBillingAgreementCustomerDetails(GetBillingAgreementCustomerDetailsReq getBillingAgreementCustomerDetailsReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(getBillingAgreementCustomerDetailsReq.GetBillingAgreementCustomerDetailsRequest);
-			string response = Call("GetBillingAgreementCustomerDetails", getBillingAgreementCustomerDetailsReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getBillingAgreementCustomerDetailsReq.ToXMLString(null, "GetBillingAgreementCustomerDetailsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetBillingAgreementCustomerDetailsResponse']");
@@ -862,7 +1762,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetBillingAgreementCustomerDetailsResponseType GetBillingAgreementCustomerDetails(GetBillingAgreementCustomerDetailsReq getBillingAgreementCustomerDetailsReq)
 	 	{
-	 		return GetBillingAgreementCustomerDetails(getBillingAgreementCustomerDetailsReq, null);
+	 		return GetBillingAgreementCustomerDetails(getBillingAgreementCustomerDetailsReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public GetBillingAgreementCustomerDetailsResponseType GetBillingAgreementCustomerDetails(GetBillingAgreementCustomerDetailsReq getBillingAgreementCustomerDetailsReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(getBillingAgreementCustomerDetailsReq.GetBillingAgreementCustomerDetailsRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getBillingAgreementCustomerDetailsReq.ToXMLString(null, "GetBillingAgreementCustomerDetailsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetBillingAgreementCustomerDetailsResponse']");
+			return new GetBillingAgreementCustomerDetailsResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -870,8 +1789,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public CreateBillingAgreementResponseType CreateBillingAgreement(CreateBillingAgreementReq createBillingAgreementReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(createBillingAgreementReq.CreateBillingAgreementRequest);
-			string response = Call("CreateBillingAgreement", createBillingAgreementReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(createBillingAgreementReq.ToXMLString(null, "CreateBillingAgreementReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='CreateBillingAgreementResponse']");
@@ -884,7 +1808,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public CreateBillingAgreementResponseType CreateBillingAgreement(CreateBillingAgreementReq createBillingAgreementReq)
 	 	{
-	 		return CreateBillingAgreement(createBillingAgreementReq, null);
+	 		return CreateBillingAgreement(createBillingAgreementReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public CreateBillingAgreementResponseType CreateBillingAgreement(CreateBillingAgreementReq createBillingAgreementReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(createBillingAgreementReq.CreateBillingAgreementRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(createBillingAgreementReq.ToXMLString(null, "CreateBillingAgreementReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='CreateBillingAgreementResponse']");
+			return new CreateBillingAgreementResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -892,8 +1835,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoReferenceTransactionResponseType DoReferenceTransaction(DoReferenceTransactionReq doReferenceTransactionReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(doReferenceTransactionReq.DoReferenceTransactionRequest);
-			string response = Call("DoReferenceTransaction", doReferenceTransactionReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doReferenceTransactionReq.ToXMLString(null, "DoReferenceTransactionReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoReferenceTransactionResponse']");
@@ -906,7 +1854,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoReferenceTransactionResponseType DoReferenceTransaction(DoReferenceTransactionReq doReferenceTransactionReq)
 	 	{
-	 		return DoReferenceTransaction(doReferenceTransactionReq, null);
+	 		return DoReferenceTransaction(doReferenceTransactionReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public DoReferenceTransactionResponseType DoReferenceTransaction(DoReferenceTransactionReq doReferenceTransactionReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(doReferenceTransactionReq.DoReferenceTransactionRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doReferenceTransactionReq.ToXMLString(null, "DoReferenceTransactionReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoReferenceTransactionResponse']");
+			return new DoReferenceTransactionResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -914,8 +1881,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoNonReferencedCreditResponseType DoNonReferencedCredit(DoNonReferencedCreditReq doNonReferencedCreditReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(doNonReferencedCreditReq.DoNonReferencedCreditRequest);
-			string response = Call("DoNonReferencedCredit", doNonReferencedCreditReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doNonReferencedCreditReq.ToXMLString(null, "DoNonReferencedCreditReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoNonReferencedCreditResponse']");
@@ -928,7 +1900,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoNonReferencedCreditResponseType DoNonReferencedCredit(DoNonReferencedCreditReq doNonReferencedCreditReq)
 	 	{
-	 		return DoNonReferencedCredit(doNonReferencedCreditReq, null);
+	 		return DoNonReferencedCredit(doNonReferencedCreditReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public DoNonReferencedCreditResponseType DoNonReferencedCredit(DoNonReferencedCreditReq doNonReferencedCreditReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(doNonReferencedCreditReq.DoNonReferencedCreditRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doNonReferencedCreditReq.ToXMLString(null, "DoNonReferencedCreditReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoNonReferencedCreditResponse']");
+			return new DoNonReferencedCreditResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -936,8 +1927,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoUATPAuthorizationResponseType DoUATPAuthorization(DoUATPAuthorizationReq doUATPAuthorizationReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(doUATPAuthorizationReq.DoUATPAuthorizationRequest);
-			string response = Call("DoUATPAuthorization", doUATPAuthorizationReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doUATPAuthorizationReq.ToXMLString(null, "DoUATPAuthorizationReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoUATPAuthorizationResponse']");
@@ -950,7 +1946,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public DoUATPAuthorizationResponseType DoUATPAuthorization(DoUATPAuthorizationReq doUATPAuthorizationReq)
 	 	{
-	 		return DoUATPAuthorization(doUATPAuthorizationReq, null);
+	 		return DoUATPAuthorization(doUATPAuthorizationReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public DoUATPAuthorizationResponseType DoUATPAuthorization(DoUATPAuthorizationReq doUATPAuthorizationReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(doUATPAuthorizationReq.DoUATPAuthorizationRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(doUATPAuthorizationReq.ToXMLString(null, "DoUATPAuthorizationReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoUATPAuthorizationResponse']");
+			return new DoUATPAuthorizationResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -958,8 +1973,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public CreateRecurringPaymentsProfileResponseType CreateRecurringPaymentsProfile(CreateRecurringPaymentsProfileReq createRecurringPaymentsProfileReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(createRecurringPaymentsProfileReq.CreateRecurringPaymentsProfileRequest);
-			string response = Call("CreateRecurringPaymentsProfile", createRecurringPaymentsProfileReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(createRecurringPaymentsProfileReq.ToXMLString(null, "CreateRecurringPaymentsProfileReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='CreateRecurringPaymentsProfileResponse']");
@@ -972,7 +1992,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public CreateRecurringPaymentsProfileResponseType CreateRecurringPaymentsProfile(CreateRecurringPaymentsProfileReq createRecurringPaymentsProfileReq)
 	 	{
-	 		return CreateRecurringPaymentsProfile(createRecurringPaymentsProfileReq, null);
+	 		return CreateRecurringPaymentsProfile(createRecurringPaymentsProfileReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public CreateRecurringPaymentsProfileResponseType CreateRecurringPaymentsProfile(CreateRecurringPaymentsProfileReq createRecurringPaymentsProfileReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(createRecurringPaymentsProfileReq.CreateRecurringPaymentsProfileRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(createRecurringPaymentsProfileReq.ToXMLString(null, "CreateRecurringPaymentsProfileReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='CreateRecurringPaymentsProfileResponse']");
+			return new CreateRecurringPaymentsProfileResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -980,8 +2019,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetRecurringPaymentsProfileDetailsResponseType GetRecurringPaymentsProfileDetails(GetRecurringPaymentsProfileDetailsReq getRecurringPaymentsProfileDetailsReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(getRecurringPaymentsProfileDetailsReq.GetRecurringPaymentsProfileDetailsRequest);
-			string response = Call("GetRecurringPaymentsProfileDetails", getRecurringPaymentsProfileDetailsReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getRecurringPaymentsProfileDetailsReq.ToXMLString(null, "GetRecurringPaymentsProfileDetailsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetRecurringPaymentsProfileDetailsResponse']");
@@ -994,7 +2038,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public GetRecurringPaymentsProfileDetailsResponseType GetRecurringPaymentsProfileDetails(GetRecurringPaymentsProfileDetailsReq getRecurringPaymentsProfileDetailsReq)
 	 	{
-	 		return GetRecurringPaymentsProfileDetails(getRecurringPaymentsProfileDetailsReq, null);
+	 		return GetRecurringPaymentsProfileDetails(getRecurringPaymentsProfileDetailsReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public GetRecurringPaymentsProfileDetailsResponseType GetRecurringPaymentsProfileDetails(GetRecurringPaymentsProfileDetailsReq getRecurringPaymentsProfileDetailsReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(getRecurringPaymentsProfileDetailsReq.GetRecurringPaymentsProfileDetailsRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(getRecurringPaymentsProfileDetailsReq.ToXMLString(null, "GetRecurringPaymentsProfileDetailsReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='GetRecurringPaymentsProfileDetailsResponse']");
+			return new GetRecurringPaymentsProfileDetailsResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -1002,8 +2065,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public ManageRecurringPaymentsProfileStatusResponseType ManageRecurringPaymentsProfileStatus(ManageRecurringPaymentsProfileStatusReq manageRecurringPaymentsProfileStatusReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(manageRecurringPaymentsProfileStatusReq.ManageRecurringPaymentsProfileStatusRequest);
-			string response = Call("ManageRecurringPaymentsProfileStatus", manageRecurringPaymentsProfileStatusReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(manageRecurringPaymentsProfileStatusReq.ToXMLString(null, "ManageRecurringPaymentsProfileStatusReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='ManageRecurringPaymentsProfileStatusResponse']");
@@ -1016,7 +2084,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public ManageRecurringPaymentsProfileStatusResponseType ManageRecurringPaymentsProfileStatus(ManageRecurringPaymentsProfileStatusReq manageRecurringPaymentsProfileStatusReq)
 	 	{
-	 		return ManageRecurringPaymentsProfileStatus(manageRecurringPaymentsProfileStatusReq, null);
+	 		return ManageRecurringPaymentsProfileStatus(manageRecurringPaymentsProfileStatusReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public ManageRecurringPaymentsProfileStatusResponseType ManageRecurringPaymentsProfileStatus(ManageRecurringPaymentsProfileStatusReq manageRecurringPaymentsProfileStatusReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(manageRecurringPaymentsProfileStatusReq.ManageRecurringPaymentsProfileStatusRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(manageRecurringPaymentsProfileStatusReq.ToXMLString(null, "ManageRecurringPaymentsProfileStatusReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='ManageRecurringPaymentsProfileStatusResponse']");
+			return new ManageRecurringPaymentsProfileStatusResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -1024,8 +2111,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public BillOutstandingAmountResponseType BillOutstandingAmount(BillOutstandingAmountReq billOutstandingAmountReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(billOutstandingAmountReq.BillOutstandingAmountRequest);
-			string response = Call("BillOutstandingAmount", billOutstandingAmountReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(billOutstandingAmountReq.ToXMLString(null, "BillOutstandingAmountReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='BillOutstandingAmountResponse']");
@@ -1038,7 +2130,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public BillOutstandingAmountResponseType BillOutstandingAmount(BillOutstandingAmountReq billOutstandingAmountReq)
 	 	{
-	 		return BillOutstandingAmount(billOutstandingAmountReq, null);
+	 		return BillOutstandingAmount(billOutstandingAmountReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public BillOutstandingAmountResponseType BillOutstandingAmount(BillOutstandingAmountReq billOutstandingAmountReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(billOutstandingAmountReq.BillOutstandingAmountRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(billOutstandingAmountReq.ToXMLString(null, "BillOutstandingAmountReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='BillOutstandingAmountResponse']");
+			return new BillOutstandingAmountResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -1046,8 +2157,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public UpdateRecurringPaymentsProfileResponseType UpdateRecurringPaymentsProfile(UpdateRecurringPaymentsProfileReq updateRecurringPaymentsProfileReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(updateRecurringPaymentsProfileReq.UpdateRecurringPaymentsProfileRequest);
-			string response = Call("UpdateRecurringPaymentsProfile", updateRecurringPaymentsProfileReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(updateRecurringPaymentsProfileReq.ToXMLString(null, "UpdateRecurringPaymentsProfileReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='UpdateRecurringPaymentsProfileResponse']");
@@ -1060,7 +2176,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public UpdateRecurringPaymentsProfileResponseType UpdateRecurringPaymentsProfile(UpdateRecurringPaymentsProfileReq updateRecurringPaymentsProfileReq)
 	 	{
-	 		return UpdateRecurringPaymentsProfile(updateRecurringPaymentsProfileReq, null);
+	 		return UpdateRecurringPaymentsProfile(updateRecurringPaymentsProfileReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public UpdateRecurringPaymentsProfileResponseType UpdateRecurringPaymentsProfile(UpdateRecurringPaymentsProfileReq updateRecurringPaymentsProfileReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(updateRecurringPaymentsProfileReq.UpdateRecurringPaymentsProfileRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(updateRecurringPaymentsProfileReq.ToXMLString(null, "UpdateRecurringPaymentsProfileReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='UpdateRecurringPaymentsProfileResponse']");
+			return new UpdateRecurringPaymentsProfileResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -1068,8 +2203,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public ReverseTransactionResponseType ReverseTransaction(ReverseTransactionReq reverseTransactionReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(reverseTransactionReq.ReverseTransactionRequest);
-			string response = Call("ReverseTransaction", reverseTransactionReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(reverseTransactionReq.ToXMLString(null, "ReverseTransactionReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='ReverseTransactionResponse']");
@@ -1082,7 +2222,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public ReverseTransactionResponseType ReverseTransaction(ReverseTransactionReq reverseTransactionReq)
 	 	{
-	 		return ReverseTransaction(reverseTransactionReq, null);
+	 		return ReverseTransaction(reverseTransactionReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public ReverseTransactionResponseType ReverseTransaction(ReverseTransactionReq reverseTransactionReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(reverseTransactionReq.ReverseTransactionRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(reverseTransactionReq.ToXMLString(null, "ReverseTransactionReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='ReverseTransactionResponse']");
+			return new ReverseTransactionResponseType(xmlNode);
+			
 	 	}
 
 		/**	
@@ -1090,8 +2249,13 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public ExternalRememberMeOptOutResponseType ExternalRememberMeOptOut(ExternalRememberMeOptOutReq externalRememberMeOptOutReq, string apiUserName)
 	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
 			setStandardParams(externalRememberMeOptOutReq.ExternalRememberMeOptOutRequest);
-			string response = Call("ExternalRememberMeOptOut", externalRememberMeOptOutReq.ToXMLString(), apiUserName);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(externalRememberMeOptOutReq.ToXMLString(null, "ExternalRememberMeOptOutReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
 			XmlDocument xmlDocument = new XmlDocument();
 			xmlDocument.LoadXml(response);
 			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='ExternalRememberMeOptOutResponse']");
@@ -1104,7 +2268,26 @@ namespace PayPal.PayPalAPIInterfaceService {
 	 	  */
 	 	public ExternalRememberMeOptOutResponseType ExternalRememberMeOptOut(ExternalRememberMeOptOutReq externalRememberMeOptOutReq)
 	 	{
-	 		return ExternalRememberMeOptOut(externalRememberMeOptOutReq, null);
+	 		return ExternalRememberMeOptOut(externalRememberMeOptOutReq,(string) null);
+	 	}
+	 	
+	 	/**	
+          *AUTO_GENERATED
+	 	  */
+	 	public ExternalRememberMeOptOutResponseType ExternalRememberMeOptOut(ExternalRememberMeOptOutReq externalRememberMeOptOutReq, ICredential credential)
+	 	{
+	 		IAPICallPreHandler apiCallPreHandler = null;
+			setStandardParams(externalRememberMeOptOutReq.ExternalRememberMeOptOutRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(externalRememberMeOptOutReq.ToXMLString(null, "ExternalRememberMeOptOutReq"), null, null);
+			apiCallPreHandler = new MerchantAPICallPreHandler(defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			string response = Call(apiCallPreHandler);
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(response);
+			XmlNode xmlNode = xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='ExternalRememberMeOptOutResponse']");
+			return new ExternalRememberMeOptOutResponseType(xmlNode);
+			
 	 	}
 	}
 }
