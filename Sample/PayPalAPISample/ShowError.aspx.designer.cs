@@ -8,14 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace PayPalAPISample.APICalls {
+namespace PayPalAPISample {
     
-    public partial class DoExpressCheckout {
-        protected System.Web.UI.HtmlControls.HtmlHead Head1;
+    public partial class ShowError {
         protected System.Web.UI.HtmlControls.HtmlForm form1;
-        protected System.Web.UI.HtmlControls.HtmlInputText token;
-        protected System.Web.UI.HtmlControls.HtmlInputText payerId;
-        protected System.Web.UI.WebControls.DropDownList paymentAction;
-        protected System.Web.UI.HtmlControls.HtmlInputSubmit submit;
+        protected System.Web.UI.WebControls.LinkButton DetailLinkButton;
+        protected System.Web.UI.WebControls.Panel MessagePanel;
+        protected System.Web.UI.WebControls.TextBox MessageTextBox;
     }
 }
