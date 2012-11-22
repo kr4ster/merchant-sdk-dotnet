@@ -1,4 +1,4 @@
-This repository contains .NET SDK and samples for Adaptive Accounts API.
+This repository contains .NET SDK and samples for Merchant API.
 
 Prerequisites:
 --------------
@@ -42,9 +42,10 @@ Please refer to the sample web.config file in 'PayPalAPISample' sample applicati
 *	PayPal (Multiple) Accounts API credentials
 	•	apiUsername
 	•	apiPassword
-	•	apiSignature
 	•	applicationId
-	•	subject
+	•	apiSignature
+	•	apiCertificate
+	•	privateKeyPassword
 	
 Tool:
 ------
