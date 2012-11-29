@@ -62,6 +62,9 @@
                 </div>
                 <div class="submit">
                     <input id="submit" type="submit" name="submit" value="Submit" runat="server" onserverclick="Submit_Click" />
+                    <br />
+                    <br />
+                    <a href="../Default.aspx">Home</a>&nbsp;&nbsp;<a href="javascript:history.back();">Back</a>
                 </div>
             </div>
         </form>

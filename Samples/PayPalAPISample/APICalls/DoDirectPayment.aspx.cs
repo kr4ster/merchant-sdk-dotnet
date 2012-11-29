@@ -18,7 +18,10 @@ namespace PayPalAPISample.APICalls
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Page.IsPostBack)
+            {
+                this.cardExpiryDate.Text = DateTime.Now.AddYears(2).ToString("MM/yyyy");
+            }
         }
 
         protected void calDate_SelectionChanged(object sender, EventArgs e)

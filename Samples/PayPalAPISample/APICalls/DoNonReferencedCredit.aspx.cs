@@ -18,7 +18,10 @@ namespace PayPalAPISample.APICalls
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!Page.IsPostBack)
+            {
+                this.cardExpiryDate.Text = DateTime.Now.AddYears(2).ToString("MM/yyyy");
+            }
         }
 
         protected void calDate_SelectionChanged(object sender, EventArgs e)
@@ -43,8 +46,20 @@ namespace PayPalAPISample.APICalls
                 Enum.Parse(typeof(CreditCardTypeType), creditCardType.SelectedValue);
             creditCard.CVV2 = cvv.Value;
             string[] cardExpiryDetails = cardExpiryDate.Text.Split(new char[] { '/' });
-            creditCard.ExpMonth = Int32.Parse(cardExpiryDetails[0]);
-            creditCard.ExpYear = Int32.Parse(cardExpiryDetails[1]);
+           
+            if (cardExpiryDetails.Length > 0 && !string.IsNullOrEmpty(cardExpiryDetails[0]))
+            {
+                int month = 0;
+                Int32.TryParse(cardExpiryDetails[0], out month);
+                creditCard.ExpMonth = month;
+            }
+
+            if (cardExpiryDetails.Length > 1 && !string.IsNullOrEmpty(cardExpiryDetails[1]))
+            {
+                int year = 0;
+                Int32.TryParse(cardExpiryDetails[1], out year);
+                creditCard.ExpYear = year;
+            }
 
             if (comment.Value != "")
             {

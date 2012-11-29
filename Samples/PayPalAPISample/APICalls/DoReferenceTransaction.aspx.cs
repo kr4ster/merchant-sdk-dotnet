@@ -125,11 +125,11 @@ namespace PayPalAPISample.APICalls
                 itemDetails.ItemCategory = (ItemCategoryType)
                     Enum.Parse(typeof(ItemCategoryType), itemCategory.SelectedValue);
                 itemTotal += Double.Parse(itemDetails.Amount.value) * itemDetails.Quantity.Value;
-                if (salesTax.Value != "")
-                {
-                    itemDetails.Tax = new BasicAmountType(currency, salesTax.Value);
-                    orderTotal += Double.Parse(salesTax.Value);
-                }
+                //if (salesTax.Value != "")
+                //{
+                //    itemDetails.Tax = new BasicAmountType(currency, salesTax.Value);
+                //    orderTotal += Double.Parse(salesTax.Value);
+                //}
                 if (itemDescription.Value != "")
                 {
                     itemDetails.Description = itemDescription.Value;

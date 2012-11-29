@@ -8,6 +8,9 @@ SDK Integration:
 ----------------
 *	Create a new ASP.NET Web Application with appropriate web application and solution name
 
+*	Execute 'Merchant.bat' batch commands to ensure that the Merchant stubs are up-to-date 
+	[Note: Also ensure that the path to 'devenv.com' in 'Merchant.bat' file is correct as per Visual Studio installation]
+	
 *	Add reference to 'PayPal_Merchant_SDK.dll'
 
 *	Add reference to 'PayPal_Core_SDK.dll'

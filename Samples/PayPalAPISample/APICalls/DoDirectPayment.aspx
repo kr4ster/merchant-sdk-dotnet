@@ -68,7 +68,7 @@
                         <div id="dateField" style="display: none;">
                             <asp:Calendar ID="calDate" OnSelectionChanged="calDate_SelectionChanged" runat="server" />
                         </div>
-                        <asp:TextBox ID="cardExpiryDate" runat="server" Text="04/2012" />
+                        <asp:TextBox ID="cardExpiryDate" runat="server" />
                         <img src="calendar_icon.png" alt="calendar" onclick="popupCalendar()" />
                     </div>
                 </div>
@@ -171,8 +171,10 @@
                     </tr>
                 </table>
                 <div class="submit">
-                    <input id="submitBtn" type="submit" name="submitBtn" value="Submit" runat="server"
-                        onserverclick="Submit_Click" />
+                    <input id="submitBtn" type="submit" name="submitBtn" value="Submit" runat="server" onserverclick="Submit_Click" />
+                    <br />
+                    <br />
+                    <a href="../Default.aspx">Home</a>&nbsp;&nbsp;<a href="javascript:history.back();">Back</a>
                 </div>
             </div>
         </form>

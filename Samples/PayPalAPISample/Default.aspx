@@ -56,6 +56,7 @@
                             <li><a href="APICalls/CreateBillingAgreement.aspx">CreateBillingAgreement</a></li>
                             <li><a href="APICalls/GetBillingAgreementCustomerDetails.aspx">GetBillingAgreementCustomerDetails</a></li>
                             <li><a href="APICalls/SetCustomerBillingAgreement.aspx">SetCustomerBillingAgreement</a></li>
+                            <li><a href="APICalls/DoReferenceTransaction.aspx">DoReferenceTransaction</a></li>
                         </ul>
                     </td>
                     <td>
@@ -68,6 +69,7 @@
                             <li><a href="APICalls/DoVoid.aspx">DoVoid</a></li>
                             <li><a href="APICalls/RefundTransaction.aspx">RefundTransaction</a></li>
                             <li><a href="APICalls/ReverseTransaction.aspx">ReverseTransaction</a></li>
+                            <li><a href="APICalls/DoNonReferencedCredit.aspx">DoNonReferencedCredit</a></li>
                         </ul>
                     </td>
                     <td>

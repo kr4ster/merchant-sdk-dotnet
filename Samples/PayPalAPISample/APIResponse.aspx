@@ -77,7 +77,7 @@
         <%} %>
         <br />
         <br />
-        <a href="../Default.aspx">Home</a>&nbsp;&nbsp; <a href="<%=apiName%>.aspx">Back</a>
+        <a href="../Default.aspx">Home</a>&nbsp;&nbsp;<a href="<%=apiName%>.aspx">Back</a>
     </div>
 </body>
 </html>

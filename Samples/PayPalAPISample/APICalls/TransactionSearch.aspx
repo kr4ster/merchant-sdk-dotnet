@@ -152,6 +152,9 @@
                 </div>
                 <div class="submit">
                     <input id="Submit" type="submit" name="search" value="Search" runat="server" onserverclick="Search_Submit" />
+                    <br />
+                    <br />
+                    <a href="../Default.aspx">Home</a>&nbsp;&nbsp;<a href="javascript:history.back();">Back</a>
                 </div>
             </div>
         </form>

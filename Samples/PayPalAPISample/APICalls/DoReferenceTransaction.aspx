@@ -33,7 +33,7 @@
                         <asp:ListItem Text="EUR" Value="EUR" />
                         <asp:ListItem Text="GBP" Value="GBP" />
                         <asp:ListItem Text="JPY" Value="JPY" />
-                        <asp:ListItem Text="USD" Value="USD" />
+                        <asp:ListItem Text="USD" Value="USD" Selected="True"/>
                         <asp:ListItem Text="SGD" Value="SGD" />
                         <asp:ListItem Text="HKD" Value="HKD" />
                     </asp:DropDownList>
@@ -127,6 +127,9 @@
                 </table>
                 <div class="submit">
                     <input id="submit" type="submit" name="submit" value="Submit" runat="server" onserverclick="Submit_Click" />
+                    <br />
+                    <br />
+                    <a href="../Default.aspx">Home</a>&nbsp;&nbsp;<a href="javascript:history.back();">Back</a>
                 </div>
             </div>
         </form>

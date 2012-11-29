@@ -18,7 +18,6 @@ namespace PayPalAPISample.APICalls
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Fix for release
             if (!Page.IsPostBack)
             {
                 this.startDate.Text = DateTime.Now.AddDays(-1).ToString("yyyy-MM-ddTHH:mm:ss");

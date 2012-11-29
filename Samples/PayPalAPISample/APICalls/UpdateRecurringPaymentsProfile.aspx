@@ -346,8 +346,10 @@
                     </tr>
                 </table>
                 <div class="submit">
-                    <input id="submitBtn" type="submit" name="submitBtn" value="Submit" runat="server"
-                        onserverclick="Submit_Click" />
+                    <input id="submitBtn" type="submit" name="submitBtn" value="Submit" runat="server" onserverclick="Submit_Click" />
+                    <br />
+                    <br />
+                    <a href="../Default.aspx">Home</a>&nbsp;&nbsp;<a href="javascript:history.back();">Back</a>
                 </div>
             </div>
         </form>
