@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("PayPal Merchant SDK for .NET")]
-[assembly: AssemblyCompany("eBay Inc.,")]
+[assembly: AssemblyCompany("eBay Inc.")]
 [assembly: AssemblyProduct("PayPal_Merchant_SDK")]
 [assembly: AssemblyCopyright("Copyright © eBay Inc., 2009-2012")]
 
