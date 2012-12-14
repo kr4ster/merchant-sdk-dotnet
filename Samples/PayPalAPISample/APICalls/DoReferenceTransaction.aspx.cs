@@ -139,7 +139,7 @@ namespace PayPalAPISample.APICalls
             orderTotal += itemTotal;
             paymentDetails.ItemTotal = new BasicAmountType(currency, itemTotal.ToString());
             paymentDetails.OrderTotal = new BasicAmountType(currency, orderTotal.ToString());
-
+            paymentDetails.NotifyURL = ipnNotificationUrl.Value.Trim();
         }
 
     }

@@ -86,7 +86,7 @@ namespace PayPalAPISample.APICalls
                 Enum.Parse(typeof(CurrencyCodeType), currencyCode.SelectedValue);
             BasicAmountType paymentAmount = new BasicAmountType(currency, amount.Value);            
             requestDetails.PaymentDetails.OrderTotal = paymentAmount;
-
+            requestDetails.PaymentDetails.NotifyURL = ipnNotificationUrl.Value.Trim();
 
             // Invoke the API
             DoDirectPaymentReq wrapper = new DoDirectPaymentReq();

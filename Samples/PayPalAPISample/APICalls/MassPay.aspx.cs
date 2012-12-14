@@ -64,7 +64,6 @@ namespace PayPalAPISample.APICalls
             }
             request.MassPayItem.Add(massPayItem);            
 
-
             // Invoke the API
             MassPayReq wrapper = new MassPayReq();
             wrapper.MassPayRequest = request;

@@ -170,7 +170,7 @@
                         </td>
                     </tr>
                 </table>
-                 <div class="params">
+                <div class="params">
                     <div class="param_name">
                         IPN Notification Url</div>
                     <div class="param_value">
