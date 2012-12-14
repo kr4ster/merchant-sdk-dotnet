@@ -19,13 +19,22 @@ namespace PayPalAPISample.APICalls
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            UriBuilder uriBuilder = new UriBuilder(Request.Url.ToString());
+            string requestUrl = Request.Url.OriginalString;
+            string authority = Request.Url.Authority;
+            string dnsSafeHost = Request.Url.DnsSafeHost;
+
+            if (requestUrl.ToLower().Contains("pagekite.me:"))
+            {
+                requestUrl = requestUrl.Replace(authority, dnsSafeHost);
+            }
+
+            UriBuilder uriBuilder = new UriBuilder(requestUrl);
             uriBuilder.Path = Request.ApplicationPath
                 + (Request.ApplicationPath.EndsWith("/") ? "" : "/")
                 + "APICalls/GetBillingAgreementCustomerDetails.aspx";
             returnUrl.Value = uriBuilder.Uri.ToString();
 
-            uriBuilder = new UriBuilder(Request.Url.ToString());
+            uriBuilder = new UriBuilder(requestUrl);
             uriBuilder.Path = Request.ApplicationPath
                 + (Request.ApplicationPath.EndsWith("/") ? "" : "/")
                 + "APICalls/SetCustomerBillingAgreement.aspx";
