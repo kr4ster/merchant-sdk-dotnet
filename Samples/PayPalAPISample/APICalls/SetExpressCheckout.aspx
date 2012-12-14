@@ -28,6 +28,11 @@
                     <input type="text" name="cancelUrl" id="cancelUrl" value="" runat="server" />
                 </div>
                 <div class="param_name">
+                    IPN Notification URL</div>
+                <div class="param_value">
+                    <input type="text" name="ipnNotificationUrl" id="ipnNotificationUrl" value="" runat="server" />
+                </div>
+                <div class="param_name">
                     Buyer's Email address</div>
                 <div class="param_value">
                     <input type="text" name="buyerEmail" id="buyerEmail" value="sdk-three@sdk.com" runat="server" />
