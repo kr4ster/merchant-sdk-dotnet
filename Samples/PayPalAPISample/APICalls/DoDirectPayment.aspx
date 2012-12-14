@@ -170,6 +170,13 @@
                         </td>
                     </tr>
                 </table>
+                 <div class="params">
+                    <div class="param_name">
+                        IPN Notification Url</div>
+                    <div class="param_value">
+                        <input id="ipnNotificationUrl" name="ipnNotificationUrl" value="" runat="server" />
+                    </div>
+                </div>
                 <div class="submit">
                     <input id="submitBtn" type="submit" name="submitBtn" value="Submit" runat="server" onserverclick="Submit_Click" />
                     <br />

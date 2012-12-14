@@ -81,6 +81,7 @@
     <Content Include="APICalls\DoAuthorization.aspx" />
     <Content Include="APICalls\DoVoid.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="IPNListener.aspx" />
     <Content Include="lib\log4net.dll" />
     <Content Include="lib\PayPal_Core_SDK.dll" />
     <Content Include="lib\PayPal_Merchant_SDK.dll" />
@@ -337,6 +338,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="IPNListener.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>IPNListener.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="IPNListener.aspx.designer.cs">
+      <DependentUpon>IPNListener.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ShowError.aspx.cs">
       <SubType>ASPXCodeBehind</SubType>
@@ -347,6 +355,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <None Include="IPN-README.md" />
     <None Include="paypal_cert.p12" />
     <None Include="README.md" />
   </ItemGroup>

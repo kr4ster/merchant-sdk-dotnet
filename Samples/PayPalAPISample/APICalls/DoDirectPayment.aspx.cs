@@ -61,6 +61,8 @@ namespace PayPalAPISample.APICalls
             }
 
             requestDetails.PaymentDetails = new PaymentDetailsType();
+            requestDetails.PaymentDetails.NotifyURL = ipnNotificationUrl.Value.Trim();
+
             AddressType billingAddr = new AddressType();
             if (firstName.Value != "" && lastName.Value != ""
                 && street1.Value != "" && country.Value != "")
