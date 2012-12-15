@@ -10,14 +10,85 @@
 
 namespace PayPalAPISample.APICalls {
     
+    
+    /// <summary>
+    /// SetCustomerBillingAgreement class.
+    /// </summary>
+    /// <remarks>
+    /// Auto-generated class.
+    /// </remarks>
     public partial class SetCustomerBillingAgreement {
-        protected System.Web.UI.HtmlControls.HtmlHead Head1;
-        protected System.Web.UI.HtmlControls.HtmlForm form1;
-        protected System.Web.UI.HtmlControls.HtmlInputText buyerEmail;
-        protected System.Web.UI.HtmlControls.HtmlInputText returnUrl;
-        protected System.Web.UI.HtmlControls.HtmlInputText cancelUrl;
-        protected System.Web.UI.HtmlControls.HtmlTextArea billingAgreementText;
-        protected System.Web.UI.WebControls.DropDownList billingType;
-        protected System.Web.UI.HtmlControls.HtmlInputSubmit submit;
+        
+        /// <summary>
+        /// Head1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlHead Head1;
+        
+        /// <summary>
+        /// form1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        
+        /// <summary>
+        /// buyerEmail control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText buyerEmail;
+        
+        /// <summary>
+        /// returnUrl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText returnUrl;
+        
+        /// <summary>
+        /// cancelUrl control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputText cancelUrl;
+        
+        /// <summary>
+        /// billingAgreementText control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea billingAgreementText;
+        
+        /// <summary>
+        /// billingType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList billingType;
+        
+        /// <summary>
+        /// submit control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputSubmit submit;
     }
 }

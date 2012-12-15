@@ -92,7 +92,7 @@
                     <tr>
                         <td>
                             <div class="param_value">
-                                <input type="text" name="itemName" id="itemName" value="" runat="server" />
+                                <input type="text" name="itemName" id="itemName" value="Test item name" runat="server" />
                             </div>
                         </td>
                         <td>

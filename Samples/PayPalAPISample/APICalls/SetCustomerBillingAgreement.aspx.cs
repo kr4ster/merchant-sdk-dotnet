@@ -19,14 +19,17 @@ namespace PayPalAPISample.APICalls
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            string requestUrl = Request.Url.OriginalString;
-            string authority = Request.Url.Authority;
-            string dnsSafeHost = Request.Url.DnsSafeHost;
+            //string requestUrl = Request.Url.OriginalString;
+            //string authority = Request.Url.Authority;
+            //string dnsSafeHost = Request.Url.DnsSafeHost;
 
-            if (requestUrl.ToLower().Contains("pagekite.me:"))
-            {
-                requestUrl = requestUrl.Replace(authority, dnsSafeHost);
-            }
+            //if (Request.UrlReferrer != null && Request.UrlReferrer.Scheme == "https")
+            //{
+            //    requestUrl = requestUrl.Replace("http://", "https://");
+            //    requestUrl = requestUrl.Replace(authority, dnsSafeHost);
+            //}
+
+            string requestUrl = ConfigManager.Instance.GetProperty("HostingEndpoint");
 
             UriBuilder uriBuilder = new UriBuilder(requestUrl);
             uriBuilder.Path = Request.ApplicationPath
@@ -49,6 +52,7 @@ namespace PayPalAPISample.APICalls
             requestDetails.BuyerEmail = buyerEmail.Value;
             requestDetails.ReturnURL = returnUrl.Value;
             requestDetails.CancelURL = cancelUrl.Value;
+
             BillingAgreementDetailsType baDetails = new BillingAgreementDetailsType();
             baDetails.BillingAgreementDescription = billingAgreementText.Value;
             baDetails.BillingType = (BillingCodeType)

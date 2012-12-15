@@ -51,7 +51,7 @@
                     <tr>
                         <td>
                             <span class="param_value">
-                                <input type="text" name="emailId" id="emailId" value="sdk-three@sdk.com" runat="server" />
+                                <input type="text" name="emailId" id="emailId" value="platfo_1255077030_biz@gmail.com" runat="server" />
                             </span>
                         </td>
                         <td>

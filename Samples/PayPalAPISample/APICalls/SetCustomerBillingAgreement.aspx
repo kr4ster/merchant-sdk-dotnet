@@ -21,7 +21,7 @@
                 <div class="param_name">
                     Buyer's Email address</div>
                 <div class="param_value">
-                    <input type="text" name="buyerEmail" id="buyerEmail" value="sdk-three@sdk.com" runat="server" />
+                    <input type="text" name="buyerEmail" id="buyerEmail" value="platfo_1255077030_biz@gmail.com" runat="server" />
                 </div>
                 <div class="param_name">
                     Return URL *</div>

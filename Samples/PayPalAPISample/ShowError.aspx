@@ -17,6 +17,9 @@
             <asp:LinkButton ID="DetailLinkButton" runat="server" OnClick="DetailLinkButton_Click">Show Details</asp:LinkButton>
             <br />
             <br />
+            <a href="../Default.aspx">Home</a>
+            <br />
+            <br />
             <asp:Panel ID="MessagePanel" runat="server" Height="100%" Visible="False" Width="100%">
                 <br />
                 <asp:TextBox ID="MessageTextBox" runat="server" Height="307px" ReadOnly="True" TextMode="MultiLine"

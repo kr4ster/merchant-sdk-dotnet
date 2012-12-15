@@ -11,6 +11,7 @@ using System.Web.UI.HtmlControls;
 
 using PayPal.PayPalAPIInterfaceService;
 using PayPal.PayPalAPIInterfaceService.Model;
+using PayPal.Manager;
 
 namespace PayPalAPISample.APICalls
 {
@@ -18,7 +19,7 @@ namespace PayPalAPISample.APICalls
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            ipnNotificationUrl.Value = ConfigManager.Instance.GetProperty("IPNListenerUrl");
         }
 
         protected void Submit_Click(object sender, EventArgs e)
@@ -59,8 +60,13 @@ namespace PayPalAPISample.APICalls
                 CurrContext.Items.Add("Response_error", null);
                 DoReferenceTransactionResponseDetailsType transactionDetails = response.DoReferenceTransactionResponseDetails;
                 responseParams.Add("Transaction ID", transactionDetails.TransactionID);
-                responseParams.Add("Payment status", transactionDetails.PaymentInfo.PaymentStatus.ToString());
-                if (transactionDetails.PaymentInfo.PendingReason != null)
+
+                if (transactionDetails.PaymentInfo != null)
+                {
+                    responseParams.Add("Payment status", transactionDetails.PaymentInfo.PaymentStatus.ToString());
+                }
+
+                if (transactionDetails.PaymentInfo != null)
                 {
                     responseParams.Add("Pending reason", transactionDetails.PaymentInfo.PendingReason.ToString());
                 }

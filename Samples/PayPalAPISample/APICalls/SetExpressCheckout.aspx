@@ -35,7 +35,7 @@
                 <div class="param_name">
                     Buyer's Email address</div>
                 <div class="param_value">
-                    <input type="text" name="buyerEmail" id="buyerEmail" value="sdk-three@sdk.com" runat="server" />
+                    <input type="text" name="buyerEmail" id="buyerEmail" value="platfo_1255077030_biz@gmail.com" runat="server" />
                 </div>
                 <div class="param_name">
                     Solution type</div>
@@ -248,7 +248,7 @@
                 <div class="param_name">
                     Billing Agreement Description *</div>
                 <div class="param_value">
-                    <textarea cols="80" rows="10" id="billingAgreementText" runat="server"></textarea>
+                    <textarea cols="80" rows="10" id="billingAgreementText" runat="server">Test</textarea>
                 </div>
                 <div class="param_name">
                     Billing type *</div>

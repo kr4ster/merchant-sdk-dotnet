@@ -11,6 +11,7 @@ using System.Web.UI.HtmlControls;
 
 using PayPal.PayPalAPIInterfaceService;
 using PayPal.PayPalAPIInterfaceService.Model;
+using PayPal.Manager;
 
 namespace PayPalAPISample.APICalls
 {
@@ -22,6 +23,8 @@ namespace PayPalAPISample.APICalls
             {
                 this.cardExpiryDate.Text = DateTime.Now.AddYears(2).ToString("MM/yyyy");
             }
+
+            ipnNotificationUrl.Value = ConfigManager.Instance.GetProperty("IPNListenerUrl");
         }
 
         protected void calDate_SelectionChanged(object sender, EventArgs e)

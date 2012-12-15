@@ -21,7 +21,7 @@
                 <div class="param_name">
                     Buyer's Email address *</div>
                 <div class="param_value">
-                    <input type="text" name="email" id="email" value="sdk-three@sdk.com" runat="server" />
+                    <input type="text" name="email" id="email" value="platfo_1255077030_biz@gmail.com" runat="server" />
                 </div>
                 <div class="param_name">
                     First line of street address *</div>
