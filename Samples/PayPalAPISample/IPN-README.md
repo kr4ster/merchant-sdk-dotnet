@@ -24,6 +24,11 @@ IPN Deployment:
 * The IPN call back from PayPal would be logged in the log file of the IPN sample
 
 
+IPN Listener Configuration:
+--------------------------
+* IPNListenerUrl - should be configured to point to LocalTunnel Host Url
+
+
 IPN variables :
 --------------
 
