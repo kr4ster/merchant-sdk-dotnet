@@ -25,7 +25,6 @@ namespace PayPalAPISample.APICalls
         {
             // Create request object
             GetBalanceRequestType request = new GetBalanceRequestType();
-            request.Version = "84.0";
             request.ReturnAllCurrencies = returnAllCurrencies.SelectedValue;
 
             // Invoke the API

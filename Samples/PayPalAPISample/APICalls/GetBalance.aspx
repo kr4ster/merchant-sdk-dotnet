@@ -20,8 +20,8 @@
                     Return all currencies</div>
                 <div class="param_value">
                     <asp:DropDownList ID="returnAllCurrencies" runat="server">
-                        <asp:ListItem Text="No - Return balance for only the primary currency holding" Value="False" />
-                        <asp:ListItem Text="Yes - Return balance holding for all currencies" Value="True"
+                        <asp:ListItem Text="No - Return balance for only the primary currency holding" Value="0" />
+                        <asp:ListItem Text="Yes - Return balance holding for all currencies" Value="1"
                             Selected="true" />
                     </asp:DropDownList>
                 </div>
