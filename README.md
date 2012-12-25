@@ -1,4 +1,4 @@
-This repository contains the PayPal Merchant SDK C#.NET Class Library Application and the PayPalAPISample Sample ASP.NET C# Web Application.
+The repository contains the PayPal Merchant SDK C#.NET Class Library Application and the PayPalAPISample Sample ASP.NET C# Web Application.
 
 
 SDK Integration
