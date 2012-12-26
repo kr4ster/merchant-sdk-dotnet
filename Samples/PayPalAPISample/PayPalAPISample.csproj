@@ -30,8 +30,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL" />
-    <Reference Include="PayPal_Core_SDK, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
-    <Reference Include="PayPal_Merchant_SDK, Version=2.1.96.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="PayPalCoreSDK, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="PayPalMerchantSDK, Version=2.1.96.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="PayPalPermissionsSDK, Version=2.1.96.0, Culture=neutral, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -83,8 +84,9 @@
     <Content Include="Global.asax" />
     <Content Include="IPNListener.aspx" />
     <Content Include="lib\log4net.dll" />
-    <Content Include="lib\PayPal_Core_SDK.dll" />
-    <Content Include="lib\PayPal_Merchant_SDK.dll" />
+    <Content Include="lib\PayPalCoreSDK.dll" />
+    <Content Include="lib\PayPalMerchantSDK.dll" />
+    <Content Include="lib\PayPalPermissionsSDK.dll" />
     <Content Include="ShowError.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -377,7 +379,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>3089</DevelopmentServerPort>
+          <DevelopmentServerPort>64912</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
