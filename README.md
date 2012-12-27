@@ -13,7 +13,8 @@ SDK Integration
 	•	'log4net.dll'
 	•	'PayPalCoreSDK.dll'	
 	•	'PayPalMerchantSDK.dll'
-
+	•	'PayPalPermissionsSDK.dll'
+	
 *	Namespaces:
 	•	PayPal
 	•	PayPal.PayPalAPIInterfaceService

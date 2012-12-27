@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("PayPal Merchant Sample for .NET")]
+[assembly: AssemblyTitle("PayPal Merchant API Sample for .NET")]
 [assembly: AssemblyCompany("eBay Inc.")]
 [assembly: AssemblyProduct("PayPalAPISample")]
 [assembly: AssemblyCopyright("Copyright © eBay Inc., 2009-2012")]
