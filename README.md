@@ -5,7 +5,7 @@ SDK Integration
 ---------------
 *	Integrate the PayPal Merchant SDK with an ASP.NET Web Application
 
-*	Use NuGet to install the 'PayPal_Merchant_SDK' package 
+*	Use NuGet to install the 'PayPalMerchantSDK' package 
 
 *	The NuGet package installs the dependencies to the solution and automatically updates the project
 
