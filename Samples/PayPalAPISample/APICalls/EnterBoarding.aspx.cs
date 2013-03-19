@@ -48,7 +48,7 @@ namespace PayPalAPISample.APICalls
             CurrContext.Items.Add("Response_apiName", "EnterBoarding");
             if (response.Token != null)
             {
-                CurrContext.Items.Add("Response_redirectURL", ConfigManager.Instance.GetProperty("paypalUrl")
+                CurrContext.Items.Add("Response_redirectURL", ConfigurationManager.AppSettings["paypalUrl"].ToString()
                     + "_partner-onboard-flow&onboarding_token=" + response.Token);
             }
             CurrContext.Items.Add("Response_requestPayload", service.getLastRequest());

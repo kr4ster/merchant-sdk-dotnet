@@ -24,7 +24,7 @@ namespace PayPalAPISample.APICalls
                 this.cardExpiryDate.Text = DateTime.Now.AddYears(2).ToString("MM/yyyy");
             }
 
-            ipnNotificationUrl.Value = ConfigManager.Instance.GetProperty("IPNListenerUrl");
+            ipnNotificationUrl.Value = ConfigurationManager.AppSettings["IPNListenerUrl"];
         }
 
         protected void calDate_SelectionChanged(object sender, EventArgs e)
