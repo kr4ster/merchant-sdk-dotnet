@@ -1,76 +1,99 @@
-The PayPal Merchant SDK C#.NET Class Library project contains the PayPal Merchant Stubs.
+PayPal Merchant SDK
+===================
+
+The PayPal Merchant SDK C#.NET Class Library project contains classes that allow you to integrate with the Merchant APIs.
+The PayPal Merchant SDK provides the following:
+
+   * ExpressCheckout: The ExpressCheckout family of API operations allow you to accept paypal payments on your website.
+   * DoDirectPayment: The DoDirectPayment API Operation enables you to process a credit card payment.
+   * MassPay: The MassPay API operation makes a payment to one or more PayPal account holders.
+   * RecurringPayments: The Recurring Payment family of APIs allow you to create and manage automatically recurring payments.
+   * Reference Transactions: The DoReferenceTransaction API operation processes a payment from a buyer’s account, which is identified by a previous transaction.
 
 
-Prerequisites
--------------
-*	Visual Studio 2005 or higher
-*	NuGet 2.2
-*	.NET Framework 4.0
+## Prerequisites
+
+   * Visual Studio 2005 or higher
+   * .NET Framework 2.0 or higher
+   * (Optional) NuGet 2.2 for managing dependencies
+
+## SDK Configuration
+
+  An application that uses the PayPal SDKs can be configured in one of two ways -
+  
+  * Using the Web.Config / App.Config files.
+
+	&lt;configSections&gt;
+	&lt;section name="paypal" type="PayPal.Manager.SDKConfigHandler, PayPalCoreSDK" /&gt;
+	&lt;section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" /&gt;
+	&lt;/configSections&gt;
+	&lt;!-- PayPal SDK config --&gt;
+	&lt;paypal&gt;
+	&lt;settings&gt;
+	    &lt;add name="mode" value="sandbox"/&gt;
+	    &lt;add name="connectionTimeout" value="30000"/&gt;
+	    .....
+	&lt;/settings&gt;
+	&lt;accounts&gt;
+	    &lt;account apiUsername="jb-us-seller_api1.paypal.com" apiPassword="..." apiSignature="..."/&gt;
+	    &lt;account apiUsername="enduser_biz_api1.gmail.com" apiPassword="..." apiCertificate="..." privateKeyPassword="..."/&gt;
+	&lt;/accounts&gt;
+	&lt;/paypal&gt;
+  
+  * Or, by dynamically passing in a dictionary (that you can load from a database or as suits your needs).
+
+        Dictionary<string, string> config = new Dictionary<string, string>();
+	config.Add("mode", "sandbox");
+	config.Add("account1.apiUsername", "jb-us-seller_api1.paypal.com");
+	config.Add("account1.apiPassword", "...");
+	config.Add("account1.apiSignature", "...");
+	
+	 PayPalAPIInterfaceService s = new  PayPalAPIInterfaceService(config);
 
 
-The PayPal Merchant SDK
---------------------------------
-*	The PayPal Merchant SDK lets you do API operations within the PayPal Merchant API WSDL viz., Express Checkout, DoDirectPayment, Mass Pay, Recurring Payments, and DoReferenceTransaction.
 
-*	The PayPal Merchant SDK provides the following:
-	SetExpressCheckout API Operation (NVP/SOAP): The SetExpressCheckout API operation initiates an Express Checkout transaction.
-	DoDirectPayment API Operation (NVP/SOAP): The DoDirectPayment API Operation enables you to process a credit card payment.
-	MassPay API Operation (NVP/SOAP): The MassPay API operation makes a payment to one or more PayPal account holders.
-	GetRecurringPaymentsProfileDetails API Operation (NVP/SOAP): Obtain information about a recurring payments profile.
-	ManageRecurringPaymentsProfileStatus API Operation (NVP/SOAP): The ManageRecurringPaymentsProfileStatus API operation cancels, suspends, or reactivates a recurring payments profile.
-	UpdateRecurringPaymentsProfile API Operation (NVP/SOAP): The UpdateRecurringPaymentsProfile API operation updates a recurring payments profile.
-	DoReferenceTransaction API Operation (NVP/SOAP): The DoReferenceTransaction API operation processes a payment from a buyer’s account, which is identified by a previous transaction.
+## NuGet
+
+NuGet is a Visual Studio extension that makes it easy to install and update third-party libraries and tools in Visual Studio. NuGet is not mandatory but makes managing dependencies hassle free.  To install NuGet,
+
+### Installing NuGet in Visual Studio 2010 and 2012
 
 
-NuGet – Installing NuGet in Visual Studio 2010 and 2012
--------------------------------------------------------
+   * Go to Visual Studio 2010 Menu --> Tools
+   * Select Extension Manager…
+   * Enter NuGet in the search box and click Online Gallery. Let it Retrieve information…
+   * Select the retrieved NuGet Package Manager, click Download. Let it Download…
+   * Click Install on the Visual Studio Extension Installer NuGet Package Manager. Wait for the installation to complete.
+   * Click Close and 'Restart Now'.
+   * Go to Visual Studio 2010 Menu --> Tools, select Options…
+   * Click Package Manager --> Package Sources
+   * Verify the following
+      * Available package sources - Check box (checked) and NuGet official package source is set to "https://nuget.org/api/v2/"
+      * Name is set to "NuGet official package source"
+      * Source is set to "https://nuget.org/api/v2/"
+   * Click OK. 
+   * Go to Menu --> Tools --> Library Package Manage --> Package Manager Console
+   * Select NuGet official package source from the Package source dropdown box in the Package Manager Console
+   * Go to Solution Explorer and note the existing references
+   * Enter at PM> Install-Package PayPalCoreSDK
+   * On enter key-press, the output window should display:
 
-Go to Visual Studio 2010 Menu --> Tools
-Select Extension Manager…
-Enter NuGet in the search box and click Online Gallery
-Let it Retrieve information…
-Select the retrieved NuGet Package Manager, click Download
-Let it Download…
-Click Install on the Visual Studio Extension Installer NuGet Package Manager
-Let it Install…
-Click Close and Restart Now
-
-Go to Visual Studio 2010 Menu --> Tools, select Options…
-Verify the following on the Options popup
-Click Package Manager --> Package Sources
-Available package sources:
-Check box (checked) NuGet official package source
-https://nuget.org/api/v2/
-Name: NuGet official package source
-Source: https://nuget.org/api/v2/
-And click OK
- 
-Go to Menu --> Tools --> Library Package Manage --> Package Manager Console
-Select NuGet official package source from the Package source dropdown box in the Package Manager Console
-Go to Solution Explorer and note the existing references
-Enter at PM> Install-Package PayPalCoreSDK
-
-On enter key-press, the output window should display:
-
-Attempting to resolve dependency 'log4net (= 1.2.10)'.
-Successfully installed 'log4net 1.2.10'.
-You are downloading PayPalCoreSDK from PayPal, the license agreement to which is available at https://github.com/paypal/sdk-core-dotnet/blob/master/LICENSE.txt. Check the package for additional dependencies, which may come with their own license agreement(s). Your use of the package and dependencies constitutes your acceptance of their license agreements. If you do not accept the license agreement(s), then delete the relevant components from your device.
-Successfully installed 'PayPalCoreSDK 1.0.0'.
-Successfully added 'log4net 1.2.10' to PayPalCoreSDK.
-Successfully added 'PayPalCoreSDK 1.0.0' to PayPalCoreSDK.
-
-After successful installation, note that the new references get added automatically
-
-Also, go to Menu --> Tools --> Library Package Manager, select Manage NuGet Packages for Solution…
-On Manage NuGet Packages, search for 'PayPalCoreSDK' to get the details
+	Attempting to resolve dependency 'log4net (= 1.2.10)'.
+	Successfully installed 'log4net 1.2.10'.
+	You are downloading PayPalCoreSDK from PayPal, the license agreement to which is available at https://github.com/paypal/sdk-core-dotnet/blob/master/LICENSE.txt. Check the package for additional dependencies, which may come with their own license agreement(s). Your use of the package and dependencies constitutes your acceptance of their license agreements. If you do not accept the license agreement(s), then delete the relevant components from your device.
+	Successfully installed 'PayPalCoreSDK 1.0.0'.
+	Successfully added 'log4net 1.2.10' to PayPalCoreSDK.
+	Successfully added 'PayPalCoreSDK 1.0.0' to PayPalCoreSDK.
+   * After successful installation, note that the new references get added automatically.
+   * Also, go to Menu --> Tools --> Library Package Manager, select Manage NuGet Packages for Solution…
+   * On Manage NuGet Packages, search for 'PayPalCoreSDK' to get the details
 	
 
-NuGet - Integrating NuGet with Visual Studio 2005 and 2008
-----------------------------------------------------------
+### Integrating NuGet with Visual Studio 2005 and 2008
 
 Prerequisites:
-•	.NET Framework 4.0
-•	NuGet.exe
+   * .NET Framework 4.0
+   * NuGet.exe
 	
 Check if .NET Framework 4.0 is installed in the computer from Control Panel --> Get programs
 
