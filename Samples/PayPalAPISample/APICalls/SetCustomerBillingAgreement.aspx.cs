@@ -29,7 +29,7 @@ namespace PayPalAPISample.APICalls
             //    requestUrl = requestUrl.Replace(authority, dnsSafeHost);
             //}
 
-            string requestUrl = ConfigurationManager.AppSettings["HostingEndpoint"];
+            string requestUrl = ConfigurationManager.AppSettings["HOSTING_ENDPOINT"].ToString();
 
             UriBuilder uriBuilder = new UriBuilder(requestUrl);
             uriBuilder.Path = Request.ApplicationPath
@@ -85,7 +85,8 @@ namespace PayPalAPISample.APICalls
             {
                 CurrContext.Items.Add("Response_error", null);
                 keyResponseParameters.Add("Token", response.Token);
-                CurrContext.Items.Add("Response_redirectURL", ConfigurationManager.AppSettings["paypalUrl"]
+                string baseUrl = ConfigurationManager.AppSettings["PAYPAL_REDIRECT_URL"].ToString();
+                CurrContext.Items.Add("Response_redirectURL", baseUrl
                     + "_customer-billing-agreement&token=" + response.Token);
             }            
             CurrContext.Items.Add("Response_keyResponseObject", keyResponseParameters);
