@@ -23,34 +23,36 @@ The PayPal Merchant SDK provides the following:
   
   * Using the Web.Config / App.Config files.
 
-	&lt;configSections&gt;
-	&lt;section name="paypal" type="PayPal.Manager.SDKConfigHandler, PayPalCoreSDK" /&gt;
-	&lt;section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" /&gt;
-	&lt;/configSections&gt;
-	&lt;!-- PayPal SDK config --&gt;
-	&lt;paypal&gt;
-	&lt;settings&gt;
-	    &lt;add name="mode" value="sandbox"/&gt;
-	    &lt;add name="connectionTimeout" value="30000"/&gt;
+	```html
+    <configSections>
+	<section name="paypal" type="PayPal.Manager.SDKConfigHandler, PayPalCoreSDK" />
+	<section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net" />
+	</configSections>
+	<!-- PayPal SDK config -->
+	<paypal>
+	<settings>
+	    <add name="mode" value="sandbox"/>
+	    <add name="connectionTimeout" value="30000"/>
 	    .....
-	&lt;/settings&gt;
-	&lt;accounts&gt;
-	    &lt;account apiUsername="jb-us-seller_api1.paypal.com" apiPassword="..." apiSignature="..."/&gt;
-	    &lt;account apiUsername="enduser_biz_api1.gmail.com" apiPassword="..." apiCertificate="..." privateKeyPassword="..."/&gt;
-	&lt;/accounts&gt;
-	&lt;/paypal&gt;
+	</settings>
+	<accounts>
+	    <account apiUsername="jb-us-seller_api1.paypal.com" apiPassword="..." apiSignature="..."/>
+	    <account apiUsername="enduser_biz_api1.gmail.com" apiPassword="..." apiCertificate="..." privateKeyPassword="..."/>
+	</accounts>
+	</paypal>
+    ```
   
   * Or, by dynamically passing in a dictionary (that you can load from a database or as suits your needs).
 
-        Dictionary<string, string> config = new Dictionary<string, string>();
-	config.Add("mode", "sandbox");
-	config.Add("account1.apiUsername", "jb-us-seller_api1.paypal.com");
-	config.Add("account1.apiPassword", "...");
-	config.Add("account1.apiSignature", "...");
-	
-	 PayPalAPIInterfaceService s = new  PayPalAPIInterfaceService(config);
+    ```csharp
+    Dictionary<string, string> config = new Dictionary<string, string>();
+    config.Add("mode", "sandbox");
+    config.Add("account1.apiUsername", "jb-us-seller_api1.paypal.com");
+    config.Add("account1.apiPassword", "...");
+    config.Add("account1.apiSignature", "...");
 
-
+    PayPalAPIInterfaceService s = new  PayPalAPIInterfaceService(config);
+    ```
 
 ## NuGet
 
