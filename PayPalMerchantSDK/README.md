@@ -1,8 +1,8 @@
-PayPal Merchant SDK
-===================
 
-The PayPal Merchant SDK C#.NET Class Library project contains classes that allow you to integrate with the Merchant APIs.
-The PayPal Merchant SDK provides the following:
+# PayPal Merchant SDK
+
+
+The PayPal Merchant SDK C#.NET Class Library project contains classes that allow you to integrate with the Merchant APIs. The PayPal Merchant SDK provides the following:
 
    * ExpressCheckout: The ExpressCheckout family of API operations allow you to accept paypal payments on your website.
    * DoDirectPayment: The DoDirectPayment API Operation enables you to process a credit card payment.
@@ -22,6 +22,7 @@ The PayPal Merchant SDK provides the following:
    To use the SDK in your application, you must
    
    * Get the PayPalMerchantSDK dll via NuGet or from the download bundle and add references to the PayPalMerchantSDK and PayPalCoreSDK libraries.
+   * Additionally, if you want to use third party permissioning in your app, add a reference to the PayPalPermissionsSDK library.
    * Configure your app as detailed in the configuration section below.
    
 ## SDK Configuration
