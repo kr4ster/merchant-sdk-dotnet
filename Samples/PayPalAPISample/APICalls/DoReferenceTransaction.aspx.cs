@@ -19,7 +19,6 @@ namespace PayPalAPISample.APICalls
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            ipnNotificationUrl.Value = ConfigurationManager.AppSettings["IPNListenerUrl"].ToString();
         }
 
         protected void Submit_Click(object sender, EventArgs e)
