@@ -14,6 +14,7 @@ using PayPal.PayPalAPIInterfaceService.Model;
 
 namespace PayPalAPISample.APICalls
 {
+    // The GetBalance API Operation obtains the available balance for a PayPal account.
     public partial class GetBalance : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -25,12 +26,19 @@ namespace PayPalAPISample.APICalls
         {
             // Create request object
             GetBalanceRequestType request = new GetBalanceRequestType();
+            // (Optional) Indicates whether to return all currencies. It is one of the following values:
+            // * 0 – Return only the balance for the primary currency holding.
+            // * 1 – Return the balance for each currency holding.
+            // Note: This field is available since version 51. Prior versions return only the balance for the primary currency holding.
             request.ReturnAllCurrencies = returnAllCurrencies.SelectedValue;
 
             // Invoke the API
             GetBalanceReq wrapper = new GetBalanceReq();
             wrapper.GetBalanceRequest = request;
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            // # API call 
+            // Invoke the GetBalance method in service wrapper object  
             GetBalanceResponseType getBalanceResponse = service.GetBalance(wrapper);
 
             // Check for API return status

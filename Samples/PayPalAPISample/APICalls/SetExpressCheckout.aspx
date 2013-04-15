@@ -254,11 +254,14 @@
                     Billing type *</div>
                 <div class="param_value">
                     <asp:DropDownList ID="billingType" runat="server">
+                        <asp:ListItem Value="NONE" Text="None" />
                         <asp:ListItem Value="RECURRINGPAYMENTS" Text="Recurring payments" />
                         <asp:ListItem Value="MERCHANTINITIATEDBILLING" Text="Reference transactions" />
                         <asp:ListItem Value="MERCHANTINITIATEDBILLINGSINGLEAGREEMENT" Text="Merchant Initiated Billing Single Agreement" />
+                        <asp:ListItem Value="CHANNELINITIATEDBILLING" Text="Channel Initiated Billing" /> 
                     </asp:DropDownList>
                 </div>
+
                 <!-- PayPal page styling attributes -->
                 <div class="section_header">
                     PayPal page styling attributes (optional)</div>

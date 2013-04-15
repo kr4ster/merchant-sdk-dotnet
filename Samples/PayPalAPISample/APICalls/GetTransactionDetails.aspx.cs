@@ -14,6 +14,7 @@ using PayPal.PayPalAPIInterfaceService.Model;
 
 namespace PayPalAPISample.APICalls
 {
+    // The GetTransactionDetails API operation obtains information about a specific transaction.
     public partial class GetTransactionDetails : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -25,12 +26,17 @@ namespace PayPalAPISample.APICalls
         {
             // Create request object
             GetTransactionDetailsRequestType request = new GetTransactionDetailsRequestType();
+            // (Required) Unique identifier of a transaction.
+            // Note: The details for some kinds of transactions cannot be retrieved with GetTransactionDetails. You cannot obtain details of bank transfer withdrawals, for example.
             request.TransactionID = transactionId.Value;            
 
             // Invoke the API
             GetTransactionDetailsReq wrapper = new GetTransactionDetailsReq();
-            wrapper.GetTransactionDetailsRequest = request;            
+            wrapper.GetTransactionDetailsRequest = request;
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            // # API call 
+            // Invoke the GetTransactionDetails method in service wrapper object  
             GetTransactionDetailsResponseType transactionDetails = service.GetTransactionDetails(wrapper);
 
             // Check for API return status

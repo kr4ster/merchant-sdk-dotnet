@@ -14,6 +14,7 @@ using PayPal.PayPalAPIInterfaceService.Model;
 
 namespace PayPalAPISample.APICalls
 {
+    // The GetBillingAgreementCustomerDetails API operation obtains information about a billing agreement's PayPal account holder.
     public partial class GetBillingAgreementCustomerDetails : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -28,12 +29,17 @@ namespace PayPalAPISample.APICalls
         {
             // Create request object
             GetBillingAgreementCustomerDetailsRequestType request = new GetBillingAgreementCustomerDetailsRequestType();
+            // (Required) The time-stamped token returned in the SetCustomerBillingAgreement response.
+            // Note: The token expires after 3 hours.
             request.Token = token.Value;
 
             // Invoke the API
             GetBillingAgreementCustomerDetailsReq wrapper = new GetBillingAgreementCustomerDetailsReq();
             wrapper.GetBillingAgreementCustomerDetailsRequest = request;
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            // # API call 
+            // Invoke the GetBillingAgreementCustomerDetails method in service wrapper object  
             GetBillingAgreementCustomerDetailsResponseType getBillingAgreementCustomerDetailsResponse =
                     service.GetBillingAgreementCustomerDetails(wrapper);
 

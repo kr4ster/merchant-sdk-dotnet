@@ -14,6 +14,7 @@ using PayPal.PayPalAPIInterfaceService.Model;
 
 namespace PayPalAPISample.APICalls
 {
+    // The GetExpressCheckoutDetails API operation obtains information about an Express Checkout transaction
     public partial class GetExpressCheckoutDetails : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -29,12 +30,17 @@ namespace PayPalAPISample.APICalls
         {
             // Create request object
             GetExpressCheckoutDetailsRequestType request = new GetExpressCheckoutDetailsRequestType();
+            // (Required) A timestamped token, the value of which was returned by SetExpressCheckout response.
+            // Character length and limitations: 20 single-byte characters
             request.Token = token.Value;
 
             // Invoke the API
             GetExpressCheckoutDetailsReq wrapper = new GetExpressCheckoutDetailsReq();
             wrapper.GetExpressCheckoutDetailsRequest = request;
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            // # API call 
+            // Invoke the GetExpressCheckoutDetails method in service wrapper object
             GetExpressCheckoutDetailsResponseType ecResponse = service.GetExpressCheckoutDetails(wrapper);
 
             // Check for API return status

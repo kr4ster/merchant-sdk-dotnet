@@ -14,6 +14,7 @@ using PayPal.PayPalAPIInterfaceService.Model;
 
 namespace PayPalAPISample.APICalls
 {
+    // Obtain your Pal ID, which is the PayPal–assigned merchant account number, and other informaton about your account. You need the account number when working with dynamic versions of PayPalbuttons and logos.
     public partial class GetPalDetails : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -30,7 +31,10 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             GetPalDetailsReq wrapper = new GetPalDetailsReq();
             wrapper.GetPalDetailsRequest = request;
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            // # API call 
+            // Invoke the GetPalDetails method in service wrapper object 
             GetPalDetailsResponseType palDetails = service.GetPalDetails(wrapper);
 
             // Check for API return status

@@ -44,11 +44,6 @@
                     <input type="text" name="shippingTotal" id="shippingTotal" value="0.50" runat="server" />
                 </div>
                 <div class="param_name">
-                    Total insurance cost</div>
-                <div class="param_value">
-                    <input type="text" name="insuranceTotal" id="insuranceTotal" value="0.00" runat="server" />
-                </div>
-                <div class="param_name">
                     Total handling cost</div>
                 <div class="param_value">
                     <input type="text" name="handlingTotal" id="handlingTotal" value="0.00" runat="server" />

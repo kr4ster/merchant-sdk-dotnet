@@ -14,6 +14,7 @@ using PayPal.PayPalAPIInterfaceService.Model;
 
 namespace PayPalAPISample.APICalls
 {
+    // The DoNonReferencedCredit API issues a credit to a card not referenced by the original transaction.
     public partial class DoNonReferencedCredit : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -35,18 +36,30 @@ namespace PayPalAPISample.APICalls
             DoNonReferencedCreditRequestType request = new DoNonReferencedCreditRequestType();
             request.DoNonReferencedCreditRequestDetails = new DoNonReferencedCreditRequestDetailsType();
 
+            // (Required) Total of order, including shipping, handling, and tax. Amount = NetAmount + ShippingAmount + TaxAmount
+            // Character length and limitations: Must not exceed $10,000 USD in any currency. No currency symbol. Must have 2 decimal places, decimal separator must be a period (.), and the optional thousands separator must be a comma (,).
             CurrencyCodeType currency = (CurrencyCodeType)
                 Enum.Parse( typeof(CurrencyCodeType), currencyId.Value);
             request.DoNonReferencedCreditRequestDetails.Amount = new BasicAmountType(currency, itemAmount.Value);
-
+            // (Required) Information about the credit card to be charged.
             CreditCardDetailsType creditCard = new CreditCardDetailsType();
             request.DoNonReferencedCreditRequestDetails.CreditCard = creditCard;
+            // (Required) Credit card number.
             creditCard.CreditCardNumber = creditCardNumber.Value;
+            // (Optional) Type of credit card. For UK, only Maestro, MasterCard, Discover, and Visa are allowable. For Canada, only MasterCard and Visa are allowable and Interac debit cards are not supported. It is one of the following values:
+            // * Visa
+            // * MasterCard
+            // * Discover
+            // * Amex
+            // * Maestro: See note.
+            // Note: If the credit card type is Maestro, you must set currencyId to GBP. In addition, you must specify either StartMonth and StartYear or IssueNumber.
             creditCard.CreditCardType = (CreditCardTypeType)
                 Enum.Parse(typeof(CreditCardTypeType), creditCardType.SelectedValue);
+            // Card Verification Value, version 2. Your Merchant Account settings determine whether this field is required. To comply with credit card processing regulations, you must not store this value after a transaction has been completed.
             creditCard.CVV2 = cvv.Value;
             string[] cardExpiryDetails = cardExpiryDate.Text.Split(new char[] { '/' });
-           
+
+            // (Required) Credit card expiration month.
             if (cardExpiryDetails.Length > 0 && !string.IsNullOrEmpty(cardExpiryDetails[0]))
             {
                 int month = 0;
@@ -54,6 +67,7 @@ namespace PayPalAPISample.APICalls
                 creditCard.ExpMonth = month;
             }
 
+            // (Required) Credit card expiration year.
             if (cardExpiryDetails.Length > 1 && !string.IsNullOrEmpty(cardExpiryDetails[1]))
             {
                 int year = 0;
@@ -61,6 +75,7 @@ namespace PayPalAPISample.APICalls
                 creditCard.ExpYear = year;
             }
 
+            // (Optional) Field used by merchant to record why this credit was issued to a buyer. It is similar to a "memo" field (freeform text or string field).
             if (comment.Value != "")
             {
                 request.DoNonReferencedCreditRequestDetails.Comment = comment.Value;
@@ -68,7 +83,10 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             DoNonReferencedCreditReq wrapper = new DoNonReferencedCreditReq();
             wrapper.DoNonReferencedCreditRequest = request;
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            // # API call 
+            // Invoke the DoNonReferencedCredit method in service wrapper object  
             DoNonReferencedCreditResponseType DoNonReferencedCreditResponse = service.DoNonReferencedCredit(wrapper);
 
             // Check for API return status

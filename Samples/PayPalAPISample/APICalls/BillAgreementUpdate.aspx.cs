@@ -40,7 +40,10 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             BillAgreementUpdateReq wrapper = new BillAgreementUpdateReq();
             wrapper.BAUpdateRequest = request;
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            // # API call 
+            // Invoke the BillAgreementUpdate method in service wrapper object  
             BAUpdateResponseType billingAgreementResponse =
                     service.BillAgreementUpdate(wrapper);
 

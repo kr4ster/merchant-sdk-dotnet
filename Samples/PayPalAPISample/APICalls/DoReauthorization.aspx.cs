@@ -14,6 +14,7 @@ using PayPal.PayPalAPIInterfaceService.Model;
 
 namespace PayPalAPISample.APICalls
 {
+    // Authorize a payment.
     public partial class DoReauthorization : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -28,7 +29,10 @@ namespace PayPalAPISample.APICalls
             DoReauthorizationRequestType request =
                 new DoReauthorizationRequestType();
 
+            // (Required) Value of a previously authorized transaction identification number returned by PayPal.
             request.AuthorizationID = authorizationId.Value;
+
+            // (Required) Amount to reauthorize.
             CurrencyCodeType currency = (CurrencyCodeType)
                 Enum.Parse(typeof(CurrencyCodeType), currencyCode.SelectedValue);
             request.Amount = new BasicAmountType(currency, amount.Value);
@@ -36,7 +40,10 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             DoReauthorizationReq wrapper = new DoReauthorizationReq();
             wrapper.DoReauthorizationRequest = request;
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            // # API call 
+            // Invoke the DoReauthorization method in service wrapper object  
             DoReauthorizationResponseType doReauthorizationResponse =
                     service.DoReauthorization(wrapper);
 

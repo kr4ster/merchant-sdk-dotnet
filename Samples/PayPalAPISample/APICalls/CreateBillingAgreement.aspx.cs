@@ -26,12 +26,17 @@ namespace PayPalAPISample.APICalls
         {
             // Create request object
             CreateBillingAgreementRequestType request = new CreateBillingAgreementRequestType();
+            // (Required) The time-stamped token returned in the SetCustomerBillingAgreement response.
+            // Note: The token expires after 3 hours.
             request.Token = token.Value;
 
             // Invoke the API
             CreateBillingAgreementReq wrapper = new CreateBillingAgreementReq();
             wrapper.CreateBillingAgreementRequest = request;
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            // # API call 
+            // Invoke the CreateBillingAgreement method in service wrapper object 
             CreateBillingAgreementResponseType billingAgreementResponse =
                     service.CreateBillingAgreement(wrapper);
 

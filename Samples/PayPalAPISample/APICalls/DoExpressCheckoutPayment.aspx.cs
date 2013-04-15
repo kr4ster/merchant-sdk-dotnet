@@ -14,6 +14,7 @@ using PayPal.PayPalAPIInterfaceService.Model;
 
 namespace PayPalAPISample.APICalls
 {
+    // The DoExpressCheckoutPayment API operation completes an Express Checkout transaction. If you set up a billing agreement in your SetExpressCheckout API call, the billing agreement is created when you call the DoExpressCheckoutPayment API operation.
     public partial class DoExpressCheckout : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -23,9 +24,14 @@ namespace PayPalAPISample.APICalls
 
         protected void Submit_Click(object sender, EventArgs e)
         {
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
             GetExpressCheckoutDetailsReq getECWrapper = new GetExpressCheckoutDetailsReq();
+            // (Required) A timestamped token, the value of which was returned by SetExpressCheckout response.
+            // Character length and limitations: 20 single-byte characters
             getECWrapper.GetExpressCheckoutDetailsRequest = new GetExpressCheckoutDetailsRequestType(token.Value);
+            // # API call 
+            // Invoke the GetExpressCheckoutDetails method in service wrapper object
             GetExpressCheckoutDetailsResponseType getECResponse = service.GetExpressCheckoutDetails(getECWrapper);
 
             // Create request object
@@ -34,14 +40,23 @@ namespace PayPalAPISample.APICalls
             request.DoExpressCheckoutPaymentRequestDetails = requestDetails;
 
             requestDetails.PaymentDetails = getECResponse.GetExpressCheckoutDetailsResponseDetails.PaymentDetails;
+            // (Required) The timestamped token value that was returned in the SetExpressCheckout response and passed in the GetExpressCheckoutDetails request.
             requestDetails.Token = token.Value;
+            // (Required) Unique PayPal buyer account identification number as returned in the GetExpressCheckoutDetails response
             requestDetails.PayerID = payerId.Value;
+            // (Required) How you want to obtain payment. It is one of the following values:
+            // * Authorization – This payment is a basic authorization subject to settlement with PayPal Authorization and Capture.
+            // * Order – This payment is an order authorization subject to settlement with PayPal Authorization and Capture.
+            // * Sale – This is a final sale for which you are requesting payment.
+            // Note: You cannot set this value to Sale in the SetExpressCheckout request and then change this value to Authorization in the DoExpressCheckoutPayment request.
             requestDetails.PaymentAction = (PaymentActionCodeType)
                 Enum.Parse(typeof(PaymentActionCodeType), paymentAction.SelectedValue);
 
             // Invoke the API
             DoExpressCheckoutPaymentReq wrapper = new DoExpressCheckoutPaymentReq();
-            wrapper.DoExpressCheckoutPaymentRequest = request;            
+            wrapper.DoExpressCheckoutPaymentRequest = request;
+            // # API call 
+            // Invoke the DoExpressCheckoutPayment method in service wrapper object
             DoExpressCheckoutPaymentResponseType doECResponse = service.DoExpressCheckoutPayment(wrapper);
 
             // Check for API return status

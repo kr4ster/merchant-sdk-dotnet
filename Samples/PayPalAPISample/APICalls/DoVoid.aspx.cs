@@ -14,6 +14,7 @@ using PayPal.PayPalAPIInterfaceService.Model;
 
 namespace PayPalAPISample.APICalls
 {
+    // Void an order or an authorization.
     public partial class DoVoid : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -24,8 +25,11 @@ namespace PayPalAPISample.APICalls
         {
             // Create request object
             DoVoidRequestType request =
-                new DoVoidRequestType();     
+                new DoVoidRequestType();   
+            // (Required) Original authorization ID specifying the authorization to void or, to void an order, the order ID.
+            // Important: If you are voiding a transaction that has been reauthorized, use the ID from the original authorization, and not the reauthorization.
             request.AuthorizationID = authorizationId.Value;
+            // (Optional) Informational note about this void that is displayed to the buyer in email and in their transaction history.
             if (note.Value != "")
             {
                 request.Note = note.Value;                
@@ -34,7 +38,10 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             DoVoidReq wrapper = new DoVoidReq();
             wrapper.DoVoidRequest = request;
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            // # API call 
+            // Invoke the DoVoid method in service wrapper object  
             DoVoidResponseType doVoidResponse =
                     service.DoVoid(wrapper);
 

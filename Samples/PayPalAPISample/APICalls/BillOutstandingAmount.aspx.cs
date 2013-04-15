@@ -12,6 +12,7 @@ using System.Web.UI.HtmlControls;
 using PayPal.PayPalAPIInterfaceService;
 using PayPal.PayPalAPIInterfaceService.Model;
 
+// The BillOutstandingAmount API operation bills the buyer for the outstanding balance associated with a recurring payments profile.
 namespace PayPalAPISample.APICalls
 {
     public partial class BillOutstandingAmount : System.Web.UI.Page
@@ -31,13 +32,18 @@ namespace PayPalAPISample.APICalls
             BillOutstandingAmountRequestDetailsType details =
                 new BillOutstandingAmountRequestDetailsType();
             request.BillOutstandingAmountRequestDetails = details;
+            // (Required) Recurring payments profile ID returned in the CreateRecurringPaymentsProfile response.
+            // Note:The profile must have a status of either Active or Suspended.
             details.ProfileID = profileId.Value;
+
+            // (Optional) The amount to bill. The amount must be less than or equal to the current outstanding balance of the profile. If no value is specified, PayPal attempts to bill the entire outstanding balance amount.
             if (currencyCode.SelectedIndex != 0 && amount.Value != "")
             {
                 CurrencyCodeType currency = (CurrencyCodeType)
                     Enum.Parse(typeof(CurrencyCodeType), currencyCode.SelectedValue);
                 details.Amount = new BasicAmountType(currency, amount.Value);
             }
+            // (Optional) The reason for the non-scheduled payment. For profiles created using Express Checkout, this message is included in the email notification to the buyer for the non-scheduled payment transaction, and can also be seen by both you and the buyer on the Status History page of the PayPal account.
             if (note.Value != "")
             {
                 details.Note = note.Value;
@@ -46,7 +52,10 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             BillOutstandingAmountReq wrapper = new BillOutstandingAmountReq();
             wrapper.BillOutstandingAmountRequest = request;
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            // # API call 
+            // Invoke the BillOutstandingAmount method in service wrapper object  
             BillOutstandingAmountResponseType response =
                     service.BillOutstandingAmount(wrapper);
 

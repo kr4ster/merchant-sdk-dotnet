@@ -12,6 +12,7 @@ using System.Web.UI.HtmlControls;
 using PayPal.PayPalAPIInterfaceService;
 using PayPal.PayPalAPIInterfaceService.Model;
 
+// The AddressVerify API operation confirms whether a postal address and postal code match those of the specified PayPal account holder.
 namespace PayPalAPISample.APICalls
 {
     public partial class AddressVerify : System.Web.UI.Page
@@ -25,14 +26,23 @@ namespace PayPalAPISample.APICalls
         {
             // Create request object
             AddressVerifyRequestType request = new AddressVerifyRequestType();
+
+            // (Required) Email address of a PayPal member to verify.
             request.Email = email.Value;
+
+            // (Required) First line of the billing or shipping postal address to verify. To pass verification, the value of Street must match the first 3 single-byte characters of a postal address on file for the PayPal member.
             request.Street = street.Value;
+
+            // (Required) Postal code to verify. To pass verification, the value of Zip must match the first 5 single-byte characters of the postal code of the verified postal address for the verified PayPal member.
             request.Zip = zip.Value;
 
             // Invoke the API
             AddressVerifyReq wrapper = new AddressVerifyReq();
             wrapper.AddressVerifyRequest = request;
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            // # API call 
+            // Invoke the AddressVerify method in service wrapper object  
             AddressVerifyResponseType addressVerifyResponse = service.AddressVerify(wrapper);
 
             // Check for API return status

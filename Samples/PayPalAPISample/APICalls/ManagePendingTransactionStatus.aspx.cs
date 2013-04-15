@@ -14,6 +14,7 @@ using PayPal.PayPalAPIInterfaceService.Model;
 
 namespace PayPalAPISample.APICalls
 {
+    // The ManagePendingTransactionStatus API operation accepts or denys a pending transaction held by Fraud Management Filters.
     public partial class ManagePendingTransactionStatus : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -26,14 +27,21 @@ namespace PayPalAPISample.APICalls
             // Create request object
             ManagePendingTransactionStatusRequestType request =
                 new ManagePendingTransactionStatusRequestType();
+            // (Required) The transaction ID of the payment transaction.
             request.TransactionID = transactionId.Value;
+            // (Required) The operation you want to perform on the transaction. It is one of the following values:
+            // * Accept – Accepts the payment
+            // * Deny – Rejects the payment
             request.Action = (FMFPendingTransactionActionType)
                 Enum.Parse(typeof(FMFPendingTransactionActionType), action.SelectedValue);
 
             // Invoke the API
             ManagePendingTransactionStatusReq wrapper = new ManagePendingTransactionStatusReq();
             wrapper.ManagePendingTransactionStatusRequest = request;
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            // # API call 
+            // Invoke the ManagePendingTransactionStatus method in service wrapper object  
             ManagePendingTransactionStatusResponseType manageProfileStatusResponse =
                     service.ManagePendingTransactionStatus(wrapper);
 

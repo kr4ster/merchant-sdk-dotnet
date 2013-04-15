@@ -14,6 +14,7 @@ using PayPal.PayPalAPIInterfaceService.Model;
 
 namespace PayPalAPISample.APICalls
 {
+    // Obtain information about a recurring payments profile.
     public partial class GetRecurringPaymentsProfileDetails : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -25,12 +26,16 @@ namespace PayPalAPISample.APICalls
         {
             // Create request object
             GetRecurringPaymentsProfileDetailsRequestType request = new GetRecurringPaymentsProfileDetailsRequestType();
+            // Required) Recurring payments profile ID returned in the CreateRecurringPaymentsProfile response. 19-character profile IDs are supported for compatibility with previous versions of the PayPal API.
             request.ProfileID = profileId.Value;
 
             // Invoke the API
             GetRecurringPaymentsProfileDetailsReq wrapper = new GetRecurringPaymentsProfileDetailsReq();
             wrapper.GetRecurringPaymentsProfileDetailsRequest = request;
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            // # API call 
+            // Invoke the GetRecurringPaymentsProfileDetails method in service wrapper object 
             GetRecurringPaymentsProfileDetailsResponseType recurringPaymentsProfileDetailsResponse =
                     service.GetRecurringPaymentsProfileDetails(wrapper);
 

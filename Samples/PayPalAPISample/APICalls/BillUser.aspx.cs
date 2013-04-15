@@ -90,7 +90,10 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             BillUserReq wrapper = new BillUserReq();
             wrapper.BillUserRequest = request;
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            // # API call 
+            // Invoke the BillUser method in service wrapper object 
             BillUserResponseType billUserResponse = service.BillUser(wrapper);
 
             // Check for API return status
