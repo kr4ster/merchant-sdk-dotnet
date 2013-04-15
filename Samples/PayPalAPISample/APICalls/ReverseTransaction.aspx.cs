@@ -30,7 +30,10 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             ReverseTransactionReq wrapper = new ReverseTransactionReq();
             wrapper.ReverseTransactionRequest = request;
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            // # API call 
+            // Invoke the ReverseTransaction method in service wrapper object  
             ReverseTransactionResponseType ReverseTransactionResponse = service.ReverseTransaction(wrapper);
 
             // Check for API return status

@@ -14,6 +14,7 @@ using PayPal.PayPalAPIInterfaceService.Model;
 
 namespace PayPalAPISample.APICalls
 {
+    // The RefundTransaction API operation issues a refund to the PayPal account holder associated with a transaction.
     public partial class RefundTransaction : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
@@ -28,11 +29,20 @@ namespace PayPalAPISample.APICalls
         {
             // Create request object
             RefundTransactionRequestType request = new RefundTransactionRequestType();
+            // (Required) Unique identifier of the transaction to be refunded.
+            // Note: Either the transaction ID or the payer ID must be specified.
             request.TransactionID = transactionId.Value;
+            // Type of refund you are making. It is one of the following values:
+            // * Full – Full refund (default).
+            // * Partial – Partial refund.
+            // * ExternalDispute – External dispute. (Value available since version 82.0)
+            // * Other – Other type of refund. (Value available since version 82.0)
             if (refundType.SelectedIndex != 0)
             {
                 request.RefundType = (RefundType)
                     Enum.Parse(typeof(RefundType), refundType.SelectedValue);
+                // (Optional) Refund amount. The amount is required if RefundType is Partial.
+                // Note: If RefundType is Full, do not set the amount.
                 if (request.RefundType.Equals(RefundType.PARTIAL) && refundAmount.Value != "")
                 {
                     CurrencyCodeType currency = (CurrencyCodeType)
@@ -40,14 +50,22 @@ namespace PayPalAPISample.APICalls
                     request.Amount = new BasicAmountType(currency, refundAmount.Value);
                 }
             }
+            // (Optional) Custom memo about the refund.
             if (memo.Value != "")
             {
                 request.Memo = memo.Value;
             }
+            // (Optional) Maximum time until you must retry the refund.
             if (retryUntil.Text != "")
             {
                 request.RetryUntil = retryUntil.Text;
             }
+            // (Optional)Type of PayPal funding source (balance or eCheck) that can be used for auto refund. It is one of the following values:
+            // * any – The merchant does not have a preference. Use any available funding source.
+            // * default – Use the merchant's preferred funding source, as configured in the merchant's profile.
+            // * instant – Use the merchant's balance as the funding source.
+            // * eCheck – The merchant prefers using the eCheck funding source. If the merchant's PayPal balance can cover the refund amount, use the PayPal balance.
+            // Note: This field does not apply to point-of-sale transactions.
             if (refundSource.SelectedIndex != 0)
             {
                 request.RefundSource = (RefundSourceCodeType)
@@ -58,7 +76,10 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             RefundTransactionReq wrapper = new RefundTransactionReq();
             wrapper.RefundTransactionRequest = request;
+            // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            // # API call 
+            // Invoke the RefundTransaction method in service wrapper object  
             RefundTransactionResponseType refundTransactionResponse = service.RefundTransaction(wrapper);
 
             // Check for API return status
