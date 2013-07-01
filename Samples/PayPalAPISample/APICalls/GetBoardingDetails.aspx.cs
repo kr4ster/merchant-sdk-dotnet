@@ -1,13 +1,6 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 
 using PayPal.PayPalAPIInterfaceService;
 using PayPal.PayPalAPIInterfaceService.Model;
@@ -29,7 +22,13 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             GetBoardingDetailsReq wrapper = new GetBoardingDetailsReq();
             wrapper.GetBoardingDetailsRequest = request;
-            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer at 
+            // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
+            Dictionary<String, String> configurationMap = Configuration.GetSignatureConfig();
+
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
             GetBoardingDetailsResponseType enterBoardingResponse = service.GetBoardingDetails(wrapper);
 
             // Check for API return status

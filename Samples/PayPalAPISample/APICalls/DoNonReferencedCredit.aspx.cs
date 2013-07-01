@@ -1,13 +1,7 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 
 using PayPal.PayPalAPIInterfaceService;
 using PayPal.PayPalAPIInterfaceService.Model;
@@ -76,15 +70,22 @@ namespace PayPalAPISample.APICalls
             }
 
             // (Optional) Field used by merchant to record why this credit was issued to a buyer. It is similar to a "memo" field (freeform text or string field).
-            if (comment.Value != "")
+            if (comment.Value != string.Empty)
             {
                 request.DoNonReferencedCreditRequestDetails.Comment = comment.Value;
             }
             // Invoke the API
             DoNonReferencedCreditReq wrapper = new DoNonReferencedCreditReq();
             wrapper.DoNonReferencedCreditRequest = request;
+
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer at 
+            // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
+            Dictionary<String, String> configurationMap = Configuration.GetSignatureConfig();
+
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
-            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
+
             // # API call 
             // Invoke the DoNonReferencedCredit method in service wrapper object  
             DoNonReferencedCreditResponseType DoNonReferencedCreditResponse = service.DoNonReferencedCredit(wrapper);

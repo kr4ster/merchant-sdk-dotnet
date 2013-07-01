@@ -1,17 +1,9 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 
 using PayPal.PayPalAPIInterfaceService;
 using PayPal.PayPalAPIInterfaceService.Model;
-using PayPal.Manager;
 
 namespace PayPalAPISample.APICalls
 {
@@ -31,8 +23,15 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             DoReferenceTransactionReq wrapper = new DoReferenceTransactionReq();
             wrapper.DoReferenceTransactionRequest = request;
+
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer at 
+            // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
+            Dictionary<String, String> configurationMap = Configuration.GetSignatureConfig();
+            
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
-            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
+
             // # API call 
             // Invoke the DoReferenceTransaction method in service wrapper object  
             DoReferenceTransactionResponseType doReferenceTxnResponse = service.DoReferenceTransaction(wrapper);
@@ -104,28 +103,28 @@ namespace PayPalAPISample.APICalls
 
             // (Optional) Total shipping costs for this order.
             // Note: You must set the currencyID attribute to one of the 3-character currency codes for any of the supported PayPal currencies.
-            if (shippingTotal.Value != "")
+            if (shippingTotal.Value != string.Empty)
             {
                 paymentDetails.ShippingTotal = new BasicAmountType(currency, shippingTotal.Value);
                 orderTotal += Double.Parse(shippingTotal.Value);
             }
             // (Optional) Total handling costs for this order.
             // Note: You must set the currencyID attribute to one of the 3-character currency codes for any of the supported PayPal currencies.
-            if (handlingTotal.Value != "")
+            if (handlingTotal.Value != string.Empty)
             {
                 paymentDetails.HandlingTotal = new BasicAmountType(currency, handlingTotal.Value);
                 orderTotal += Double.Parse(handlingTotal.Value);
             }
             // (Optional) Sum of tax for all items in this order.
             // Note: You must set the currencyID attribute to one of the 3-character currency codes for any of the supported PayPal currencies.
-            if (taxTotal.Value != "")
+            if (taxTotal.Value != string.Empty)
             {
                 paymentDetails.TaxTotal = new BasicAmountType(currency, taxTotal.Value);
                 orderTotal += Double.Parse(taxTotal.Value);
             }
             // (Optional) Description of items the buyer is purchasing.
             // Note: The value you specify is available only if the transaction includes a purchase. This field is ignored if you set up a billing agreement for a recurring payment that is not immediately charged.
-            if (orderDescription.Value != "")
+            if (orderDescription.Value != string.Empty)
             {
                 paymentDetails.OrderDescription = orderDescription.Value;
             }
@@ -148,14 +147,14 @@ namespace PayPalAPISample.APICalls
                 itemDetails.ItemCategory = (ItemCategoryType)
                     Enum.Parse(typeof(ItemCategoryType), itemCategory.SelectedValue);
                 itemTotal += Double.Parse(itemDetails.Amount.value) * itemDetails.Quantity.Value;
-                //if (salesTax.Value != "")
+                //if (salesTax.Value != string.Empty)
                 //{
                 //    itemDetails.Tax = new BasicAmountType(currency, salesTax.Value);
                 //    orderTotal += Double.Parse(salesTax.Value);
                 //}
                 // (Optional) Item description.
                 // This field is available since version 53.0.
-                if (itemDescription.Value != "")
+                if (itemDescription.Value != string.Empty)
                 {
                     itemDetails.Description = itemDescription.Value;
                 }

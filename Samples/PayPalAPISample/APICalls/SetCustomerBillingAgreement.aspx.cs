@@ -1,15 +1,8 @@
 using System;
-using System.Data;
 using System.Configuration;
-using System.Collections;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 
-using PayPal.Manager;
 using PayPal.PayPalAPIInterfaceService;
 using PayPal.PayPalAPIInterfaceService.Model;
 
@@ -35,13 +28,13 @@ namespace PayPalAPISample.APICalls
 
             UriBuilder uriBuilder = new UriBuilder(requestUrl);
             uriBuilder.Path = Request.ApplicationPath
-                + (Request.ApplicationPath.EndsWith("/") ? "" : "/")
+                + (Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
                 + "APICalls/GetBillingAgreementCustomerDetails.aspx";
             returnUrl.Value = uriBuilder.Uri.ToString();
 
             uriBuilder = new UriBuilder(requestUrl);
             uriBuilder.Path = Request.ApplicationPath
-                + (Request.ApplicationPath.EndsWith("/") ? "" : "/")
+                + (Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
                 + "APICalls/SetCustomerBillingAgreement.aspx";
             cancelUrl.Value = uriBuilder.Uri.ToString();
         }
@@ -78,8 +71,15 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             SetCustomerBillingAgreementReq wrapper = new SetCustomerBillingAgreementReq();
             wrapper.SetCustomerBillingAgreementRequest = request;
+
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer at 
+            // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
+            Dictionary<String, String> configurationMap = Configuration.GetSignatureConfig();
+
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
-            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
+
             // # API call 
             // Invoke the SetCustomerBillingAgreement method in service wrapper object  
             SetCustomerBillingAgreementResponseType setCustomerBillingAgreementResponse =

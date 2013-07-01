@@ -1,13 +1,6 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 
 using PayPal.PayPalAPIInterfaceService;
 using PayPal.PayPalAPIInterfaceService.Model;
@@ -31,7 +24,7 @@ namespace PayPalAPISample.APICalls
 
              request.ReceiverType = receiverInfoType;
              // (Optional) The subject line of the email that PayPal sends when the transaction completes. The subject line is the same for all recipients.
-            if (emailSubject.Value != "")
+            if (emailSubject.Value != string.Empty)
             {
                 request.EmailSubject = emailSubject.Value;
             }
@@ -49,24 +42,24 @@ namespace PayPalAPISample.APICalls
             // * EmailAddress
             // * UserID
             // * PhoneNumber
-            if (receiverInfoType.Equals(ReceiverInfoCodeType.EMAILADDRESS) && emailId.Value != "")
+            if (receiverInfoType.Equals(ReceiverInfoCodeType.EMAILADDRESS) && emailId.Value != string.Empty)
             {
                 massPayItem.ReceiverEmail = emailId.Value;
             }
-            else if (receiverInfoType.Equals(ReceiverInfoCodeType.PHONENUMBER) && phoneNumber.Value != "")
+            else if (receiverInfoType.Equals(ReceiverInfoCodeType.PHONENUMBER) && phoneNumber.Value != string.Empty)
             {
                 massPayItem.ReceiverPhone = phoneNumber.Value;
             }
-            else if (receiverInfoType.Equals(ReceiverInfoCodeType.USERID) && receiverId.Value != "")
+            else if (receiverInfoType.Equals(ReceiverInfoCodeType.USERID) && receiverId.Value != string.Empty)
             {
                 massPayItem.ReceiverID = receiverId.Value;
             }
 
-            if (note.Value != "")
+            if (note.Value != string.Empty)
             {
                 massPayItem.Note = note.Value;
             }
-            if (uniqueId.Value != "")
+            if (uniqueId.Value != string.Empty)
             {
                 massPayItem.UniqueId = uniqueId.Value;
             }
@@ -75,8 +68,15 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             MassPayReq wrapper = new MassPayReq();
             wrapper.MassPayRequest = request;
+
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer at 
+            // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
+            Dictionary<String, String> configurationMap = Configuration.GetSignatureConfig();
+            
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
-            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
+
             // # API call 
             // Invoke the MassPay method in service wrapper object  
             MassPayResponseType massPayResponse = service.MassPay(wrapper);

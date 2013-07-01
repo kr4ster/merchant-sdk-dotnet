@@ -1,13 +1,6 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 
 using PayPal.PayPalAPIInterfaceService;
 using PayPal.PayPalAPIInterfaceService.Model;
@@ -43,7 +36,7 @@ namespace PayPalAPISample.APICalls
                     Enum.Parse(typeof(RefundType), refundType.SelectedValue);
                 // (Optional) Refund amount. The amount is required if RefundType is Partial.
                 // Note: If RefundType is Full, do not set the amount.
-                if (request.RefundType.Equals(RefundType.PARTIAL) && refundAmount.Value != "")
+                if (request.RefundType.Equals(RefundType.PARTIAL) && refundAmount.Value != string.Empty)
                 {
                     CurrencyCodeType currency = (CurrencyCodeType)
                         Enum.Parse(typeof(CurrencyCodeType), currencyCode.SelectedValue);
@@ -51,12 +44,12 @@ namespace PayPalAPISample.APICalls
                 }
             }
             // (Optional) Custom memo about the refund.
-            if (memo.Value != "")
+            if (memo.Value != string.Empty)
             {
                 request.Memo = memo.Value;
             }
             // (Optional) Maximum time until you must retry the refund.
-            if (retryUntil.Text != "")
+            if (retryUntil.Text != string.Empty)
             {
                 request.RetryUntil = retryUntil.Text;
             }
@@ -76,8 +69,15 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             RefundTransactionReq wrapper = new RefundTransactionReq();
             wrapper.RefundTransactionRequest = request;
+
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer at 
+            // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
+            Dictionary<String, String> configurationMap = Configuration.GetSignatureConfig();
+
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
-            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
+
             // # API call 
             // Invoke the RefundTransaction method in service wrapper object  
             RefundTransactionResponseType refundTransactionResponse = service.RefundTransaction(wrapper);

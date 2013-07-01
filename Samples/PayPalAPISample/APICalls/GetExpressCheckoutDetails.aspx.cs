@@ -1,13 +1,6 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 
 using PayPal.PayPalAPIInterfaceService;
 using PayPal.PayPalAPIInterfaceService.Model;
@@ -20,7 +13,7 @@ namespace PayPalAPISample.APICalls
         protected void Page_Load(object sender, EventArgs e)
         {
             // Prepopulate EC Token value if coming from another page
-            if (Request.Params["token"] != null && token.Value == "")
+            if (Request.Params["token"] != null && token.Value == string.Empty)
             {
                 token.Value = Request.Params["token"];
             }
@@ -37,8 +30,15 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             GetExpressCheckoutDetailsReq wrapper = new GetExpressCheckoutDetailsReq();
             wrapper.GetExpressCheckoutDetailsRequest = request;
+
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer at 
+            // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
+            Dictionary<String, String> configurationMap = Configuration.GetSignatureConfig();
+
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
-            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
+
             // # API call 
             // Invoke the GetExpressCheckoutDetails method in service wrapper object
             GetExpressCheckoutDetailsResponseType ecResponse = service.GetExpressCheckoutDetails(wrapper);
