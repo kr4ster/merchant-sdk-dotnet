@@ -39,7 +39,7 @@ namespace PayPalAPISample.APICalls
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
             // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
-            Dictionary<String, String> configurationMap = Configuration.GetSignatureConfig();
+            Dictionary<string, string> configurationMap = Configuration.GetSignatureConfig();
 
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
             DoUATPExpressCheckoutPaymentResponseType response = service.DoUATPExpressCheckoutPayment(wrapper);

@@ -27,7 +27,7 @@ namespace PayPalAPISample.APICalls
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
             // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
-            Dictionary<String, String> configurationMap = Configuration.GetSignatureConfig();
+            Dictionary<string, string> configurationMap = Configuration.GetSignatureConfig();
             
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
@@ -106,21 +106,21 @@ namespace PayPalAPISample.APICalls
             if (shippingTotal.Value != string.Empty)
             {
                 paymentDetails.ShippingTotal = new BasicAmountType(currency, shippingTotal.Value);
-                orderTotal += Double.Parse(shippingTotal.Value);
+                orderTotal += Convert.ToDouble(shippingTotal.Value);
             }
             // (Optional) Total handling costs for this order.
             // Note: You must set the currencyID attribute to one of the 3-character currency codes for any of the supported PayPal currencies.
             if (handlingTotal.Value != string.Empty)
             {
                 paymentDetails.HandlingTotal = new BasicAmountType(currency, handlingTotal.Value);
-                orderTotal += Double.Parse(handlingTotal.Value);
+                orderTotal += Convert.ToDouble(handlingTotal.Value);
             }
             // (Optional) Sum of tax for all items in this order.
             // Note: You must set the currencyID attribute to one of the 3-character currency codes for any of the supported PayPal currencies.
             if (taxTotal.Value != string.Empty)
             {
                 paymentDetails.TaxTotal = new BasicAmountType(currency, taxTotal.Value);
-                orderTotal += Double.Parse(taxTotal.Value);
+                orderTotal += Convert.ToDouble(taxTotal.Value);
             }
             // (Optional) Description of items the buyer is purchasing.
             // Note: The value you specify is available only if the transaction includes a purchase. This field is ignored if you set up a billing agreement for a recurring payment that is not immediately charged.
@@ -139,18 +139,18 @@ namespace PayPalAPISample.APICalls
                 // Cost of item. This field is required when you pass a value for ItemCategory.
                 itemDetails.Amount = new BasicAmountType(currency, itemAmount.Value);
                 // Item quantity. This field is required when you pass a value forItemCategory.
-                itemDetails.Quantity = Int32.Parse(itemQuantity.Value);
+                itemDetails.Quantity = Convert.ToInt32(itemQuantity.Value);
                 // Indicates whether the item is digital or physical. For digital goods, this field is required and you must set it to Digital to get the best rates. It is one of the following values:
                 // * Digital
                 // * Physical
                 // This field is introduced in version 69.0.
                 itemDetails.ItemCategory = (ItemCategoryType)
                     Enum.Parse(typeof(ItemCategoryType), itemCategory.SelectedValue);
-                itemTotal += Double.Parse(itemDetails.Amount.value) * itemDetails.Quantity.Value;
+                itemTotal += Convert.ToDouble(itemDetails.Amount.value) * itemDetails.Quantity.Value;
                 //if (salesTax.Value != string.Empty)
                 //{
                 //    itemDetails.Tax = new BasicAmountType(currency, salesTax.Value);
-                //    orderTotal += Double.Parse(salesTax.Value);
+                //    orderTotal += Convert.ToDouble(salesTax.Value);
                 //}
                 // (Optional) Item description.
                 // This field is available since version 53.0.

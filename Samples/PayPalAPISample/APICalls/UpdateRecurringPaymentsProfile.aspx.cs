@@ -31,7 +31,7 @@ namespace PayPalAPISample.APICalls
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
             // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
-            Dictionary<String, String> configurationMap = Configuration.GetSignatureConfig();
+            Dictionary<string, string> configurationMap = Configuration.GetSignatureConfig();
 
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
@@ -100,7 +100,7 @@ namespace PayPalAPISample.APICalls
             // (Optional) The number of additional billing cycles to add to this profile.
             if (additionalBillingCycles.Value != string.Empty)
             {
-                profileDetails.AdditionalBillingCycles = Int32.Parse(additionalBillingCycles.Value);
+                profileDetails.AdditionalBillingCycles = Convert.ToInt32(additionalBillingCycles.Value);
             }
             // (Optional) Billing amount for each cycle in the subscription period, not including shipping and tax amounts.
             // Note: For recurring payments with Express Checkout, the payment amount can be increased by no more than 20% every 180 days (starting when the profile is created).
@@ -117,7 +117,7 @@ namespace PayPalAPISample.APICalls
             // (Optional) The number of failed payments allowed before the profile is automatically suspended. The specified value cannot be less than the current number of failed payments for this profile.
             if (maxFailedPayments.Value != string.Empty)
             {
-                profileDetails.MaxFailedPayments = Int32.Parse(maxFailedPayments.Value);
+                profileDetails.MaxFailedPayments = Convert.ToInt32(maxFailedPayments.Value);
             }
             // (Optional) This field indicates whether you would like PayPal to automatically bill the outstanding balance amount in the next billing cycle. It is one of the following values:
             // * NoAutoBill – PayPal does not automatically bill the outstanding balance.
@@ -142,9 +142,9 @@ namespace PayPalAPISample.APICalls
                 // Card Verification Value, version 2. Your Merchant Account settings determine whether this field is required. To comply with credit card processing regulations, you must not store this value after a transaction has been completed.
                 cc.CVV2 = cvv.Value;
                 // (Required) Credit card expiration month.
-                cc.ExpMonth = Int32.Parse(expMonth.SelectedValue);
+                cc.ExpMonth = Convert.ToInt32(expMonth.SelectedValue);
                 // (Required) Credit card expiration year.
-                cc.ExpYear = Int32.Parse(expYear.SelectedValue);
+                cc.ExpYear = Convert.ToInt32(expYear.SelectedValue);
                 profileDetails.CreditCard = cc;
             }
             
@@ -169,7 +169,7 @@ namespace PayPalAPISample.APICalls
                 // if the billing cycle is Week, the maximum value for billing frequency is 52.
                 // Note:
                 // If the billing period is SemiMonth, the billing frequency must be 1.
-                trialPeriod.BillingFrequency = Int32.Parse(trialBillingFrequency.Value);
+                trialPeriod.BillingFrequency = Convert.ToInt32(trialBillingFrequency.Value);
                 //Billing amount for each billing cycle during this payment period; 
                 //required if you specify an optional trial period. 
                 //This amount does not include shipping and tax amounts.
@@ -183,7 +183,7 @@ namespace PayPalAPISample.APICalls
                 //and the optional thousands separator must be a comma (,).
                 trialPeriod.Amount = new BasicAmountType(currency, trialBillingAmount.Value);
 
-                trialPeriod.TotalBillingCycles = Int32.Parse(trialBillingCycles.Value);
+                trialPeriod.TotalBillingCycles = Convert.ToInt32(trialBillingCycles.Value);
                 //(Optional) Shipping amount for each billing cycle during this payment period.
                 //Note:
                 //All amounts in the request must have the same currency.
@@ -226,7 +226,7 @@ namespace PayPalAPISample.APICalls
                 // if the billing cycle is Week, the maximum value for billing frequency is 52.
                 // Note:
                 // If the billing period is SemiMonth, the billing frequency must be 1.
-                paymentPeriod.BillingFrequency = Int32.Parse(billingFrequency.Value);
+                paymentPeriod.BillingFrequency = Convert.ToInt32(billingFrequency.Value);
                 //Billing amount for each billing cycle during this payment period; 
                 //required if you specify an optional trial period. 
                 //This amount does not include shipping and tax amounts.
@@ -240,7 +240,7 @@ namespace PayPalAPISample.APICalls
                 //and the optional thousands separator must be a comma (,).
                 paymentPeriod.Amount = new BasicAmountType(currency, billingAmount.Value);
 
-                paymentPeriod.TotalBillingCycles = Int32.Parse(totalBillingCycles.Value);
+                paymentPeriod.TotalBillingCycles = Convert.ToInt32(totalBillingCycles.Value);
                 //(Optional) Shipping amount for each billing cycle during this payment period.
                 //Note:
                 //All amounts in the request must have the same currency.

@@ -19,8 +19,8 @@ namespace PayPalAPISample.APICalls
             DoUATPAuthorizationRequestType request = new DoUATPAuthorizationRequestType();
             request.UATPDetails = new UATPDetailsType();
             request.UATPDetails.UATPNumber = uatpNumber.Value;
-            request.UATPDetails.ExpMonth = Int32.Parse(expMonth.Value);
-            request.UATPDetails.ExpYear = Int32.Parse(expYear.Value);
+            request.UATPDetails.ExpMonth = Convert.ToInt32(expMonth.Value);
+            request.UATPDetails.ExpYear = Convert.ToInt32(expYear.Value);
 
             request.TransactionEntity = (TransactionEntityType)
                 Enum.Parse(typeof(TransactionEntityType), transactionEntity.SelectedValue);
@@ -37,7 +37,7 @@ namespace PayPalAPISample.APICalls
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
             // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
-            Dictionary<String, String> configurationMap = Configuration.GetSignatureConfig();
+            Dictionary<string, string> configurationMap = Configuration.GetSignatureConfig();
 
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
             DoUATPAuthorizationResponseType response = service.DoUATPAuthorization(wrapper);

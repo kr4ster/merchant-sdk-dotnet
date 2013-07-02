@@ -69,9 +69,9 @@ namespace PayPalAPISample.APICalls
             if (cardExpiryDetails.Length == 2)
             {
                 // (Required) Credit card expiration month.
-                creditCard.ExpMonth = Int32.Parse(cardExpiryDetails[0]);
+                creditCard.ExpMonth = Convert.ToInt32(cardExpiryDetails[0]);
                 // (Required) Credit card expiration year.
-                creditCard.ExpYear = Int32.Parse(cardExpiryDetails[1]);
+                creditCard.ExpYear = Convert.ToInt32(cardExpiryDetails[1]);
             }
 
             requestDetails.PaymentDetails = new PaymentDetailsType();
@@ -118,7 +118,7 @@ namespace PayPalAPISample.APICalls
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
             // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
-            Dictionary<String, String> configurationMap = Configuration.GetSignatureConfig();
+            Dictionary<string, string> configurationMap = Configuration.GetSignatureConfig();
 
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
