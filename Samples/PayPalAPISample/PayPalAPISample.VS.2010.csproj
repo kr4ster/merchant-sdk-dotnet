@@ -381,7 +381,9 @@
     <None Include="IPN-README.md" />
     <None Include="paypal_cert.p12" />
     <None Include="README.md" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
