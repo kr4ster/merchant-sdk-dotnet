@@ -15,14 +15,11 @@
         <h2>Merchant UseCase Samples</h2>
         <div>
             <ul>
-                <li><a href="UseCaseSamples/SetExpressCheckoutForRecurringPayments.aspx">RecurringPayments
-                    Using PayPal ExpressCheckout</a></li>
+                <li><a href="UseCaseSamples/SetExpressCheckoutForRecurringPayments.aspx">SetExpressCheckoutForRecurringPayments</a></li>
                 <li><a href="UseCaseSamples/RecurringPaymentsUsingCreditCard.aspx">RecurringPaymentsUsingCreditCard</a></li>
-                <li><a href="UseCaseSamples/SetExpressCheckoutPaymentAuthorization.aspx">SetExpressCheckout
-                    Payment Authorization And Capture</a></li>
-                <li><a href="UseCaseSamples/SetExpressCheckoutPaymentOrder.aspx">SetExpressCheckout
-                    Payment Order And Capture</a></li>
-                <li><a href="UseCaseSamples/ParallelPayment.aspx">ExpressCheckout Parallel Payment</a></li>
+                <li><a href="UseCaseSamples/SetExpressCheckoutPaymentAuthorization.aspx">SetExpressCheckoutPaymentAuthorization</a></li>
+                <li><a href="UseCaseSamples/SetExpressCheckoutPaymentOrder.aspx">SetExpressCheckoutPaymentOrder</a></li>
+                <li><a href="UseCaseSamples/ParallelPayment.aspx">ParallelPayment</a></li>
             </ul>
        </div>
         <br />

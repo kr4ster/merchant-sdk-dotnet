@@ -246,11 +246,12 @@
                         <td>
                             <span class="param_value">
                                 <asp:DropDownList ID="trialBillingPeriod" runat="server">
+                                    <asp:ListItem Text="NoBillingPeriodType" Value="NOBILLINGPERIODTYPE" />
                                     <asp:ListItem Text="Day" Value="DAY" />
-                                    <asp:ListItem Text="Week" Value="WEEK" />
-                                    <asp:ListItem Text="SemiMonth" Value="SEMIMONTH" />
-                                    <asp:ListItem Text="Month" Value="MONTH" />
-                                    <asp:ListItem Text="Year" Value="YEAR" />
+                                    <asp:ListItem Text="WEEK" Value="WEEK" />
+                                    <asp:ListItem Text="SEMIMONTH" Value="SEMIMONTH" />
+                                    <asp:ListItem Text="MONTH" Value="MONTH" />
+                                    <asp:ListItem Text="YEAR" Value="YEAR" />
                                 </asp:DropDownList>
                             </span>
                         </td>

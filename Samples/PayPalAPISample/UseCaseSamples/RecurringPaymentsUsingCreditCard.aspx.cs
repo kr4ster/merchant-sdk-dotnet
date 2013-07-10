@@ -6,7 +6,7 @@ namespace PayPalAPISample.UseCaseSamples
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            billingStartDate.Value = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss");
         }
     }
 }
