@@ -360,6 +360,44 @@
     <Compile Include="ShowError.aspx.designer.cs">
       <DependentUpon>ShowError.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UseCaseSamples\ParallelPayment.aspx.cs">
+      <DependentUpon>ParallelPayment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UseCaseSamples\ParallelPayment.aspx.designer.cs">
+      <DependentUpon>ParallelPayment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UseCaseSamples\Payments.ashx.cs">
+      <DependentUpon>Payments.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="UseCaseSamples\RecurringPaymentsUsingCreditCard.aspx.cs">
+      <DependentUpon>RecurringPaymentsUsingCreditCard.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UseCaseSamples\RecurringPaymentsUsingCreditCard.aspx.designer.cs">
+      <DependentUpon>RecurringPaymentsUsingCreditCard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UseCaseSamples\SetExpressCheckoutForRecurringPayments.aspx.cs">
+      <DependentUpon>SetExpressCheckoutForRecurringPayments.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UseCaseSamples\SetExpressCheckoutForRecurringPayments.aspx.designer.cs">
+      <DependentUpon>SetExpressCheckoutForRecurringPayments.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UseCaseSamples\SetExpressCheckoutPaymentAuthorization.aspx.cs">
+      <DependentUpon>SetExpressCheckoutPaymentAuthorization.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UseCaseSamples\SetExpressCheckoutPaymentAuthorization.aspx.designer.cs">
+      <DependentUpon>SetExpressCheckoutPaymentAuthorization.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UseCaseSamples\SetExpressCheckoutPaymentOrder.aspx.cs">
+      <DependentUpon>SetExpressCheckoutPaymentOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UseCaseSamples\SetExpressCheckoutPaymentOrder.aspx.designer.cs">
+      <DependentUpon>SetExpressCheckoutPaymentOrder.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="IPN-README.md" />
