@@ -1835,7 +1835,7 @@ namespace PayPalAPISample.UseCaseSamples
                 context.Response.Write("<div id=\"related_calls\">");
 		        context.Response.Write("See also");
                 string transactionID = responseValues["TransactionID"];
-                context.Response.Write("<ul>If paymentType is <b>Authorization</b>. You can capture the payment directly using DoCapture API<li><a id=\"DoCapture\" href='/UseCaseSamples/PaymentCapture.aspx?TransactionId=" + transactionID + "'>DoCapture</a></li>If  paymentType is <b>Order</b>. you need to call DoAuthorization API, before you can capture the payment using DoCapture API.<li><a href='/UseCaseSamples/DoAuthorizationForOrderPayment.aspx?TransactionId=" + transactionID + "'>DoAuthorization</a></li></ul>");
+                context.Response.Write("<ul>If the Payment Type is <b>Authorization</b>, you can capture the payment directly using DoCapture API<li><a id=\"DoCapture\" href='/UseCaseSamples/PaymentCapture.aspx?TransactionId=" + transactionID + "'>DoCapture</a></li>If the Payment Type is <b>Order</b>. you need to call DoAuthorization API, before you can capture the payment using DoCapture API.<li><a href='/UseCaseSamples/DoAuthorizationForOrderPayment.aspx?TransactionId=" + transactionID + "'>DoAuthorization</a></li></ul>");
                 context.Response.Write("</div>");
             }
         }
