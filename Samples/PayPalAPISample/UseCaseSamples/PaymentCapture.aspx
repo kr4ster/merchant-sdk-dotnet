@@ -12,7 +12,7 @@
         <div id="header">
             <h3>DoCapture</h3>
 			<div id="apidetails">
-                <p>Used to captures an authorized payment.</p>
+                <p><i>Used to captures an authorized payment.</i></p>
 			</div>
         </div>
         <br />

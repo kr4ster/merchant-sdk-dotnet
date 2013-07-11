@@ -12,7 +12,7 @@
         <div id="header">
             <h3>SetExpressCheckoutPaymentAuthorization</h3>
 			    <div id="apidetails">
-                    <p>Set the details for express checkout. Payment Type should be set to <b>Authorization</b> to create Payment Authorization. Authorized payment can be captured directly using DoCapture API.</p>                    
+                    <p><i>Set the details for <b>ExpressCheckout</b>. Payment Type should be set to <b>Authorization</b> to Create Payment Authorization. Authorized Payment can be Captured using DoCapture API.</i></p>             
                 </div>
 		</div>
         <br />

@@ -1791,12 +1791,12 @@ namespace PayPalAPISample.UseCaseSamples
             }
             if (redirectUrl != null)
             {
-                string red = "<div>This API involves a web flow. You must now redirect your user to " + redirectUrl;
-                red = red + "<br />Please click <a href='" + redirectUrl + "' target='_self'>here</a> to try the flow.</div><br/>";
+                string red = "<div><p><i>The API has web flow, hence the user has to be redirected to " + redirectUrl;
+                red = red + "<br/>Please click <a href='" + redirectUrl + "' target='_self'>here</a> to redirect to the web flow.</i></p></div><br/>";
                 context.Response.Write(red);
             }
-            context.Response.Write("<div class='section_header'>Key values from Response</div>");
-            context.Response.Write("<div class='note'>Consult Response object and reference doc for complete list of Response values.</div><table>");
+            context.Response.Write("<div class='section_header'>Key Values From Response</div>");
+            context.Response.Write("<div class='note'>Consult Response object and reference doc for the complete list of Response values.</div><table>");
                        
             foreach (KeyValuePair<string, string> entry in responseValues)
             {
@@ -1823,12 +1823,13 @@ namespace PayPalAPISample.UseCaseSamples
                 context.Response.Write("</td></tr>");
             }
 
-            context.Response.Write("</table><h4>Request:</h4><br/><textarea rows=15 cols=80 readonly>");
+            context.Response.Write("</table><h4>Request</h4><textarea rows=15 cols=80 readonly>");
             context.Response.Write(requestPayload);
-            context.Response.Write("</textarea><br/><h4>Response</h4><br/><textarea rows=15 cols=80 readonly>");
+            context.Response.Write("</textarea><br/><h4>Response</h4><textarea rows=15 cols=80 readonly>");
             context.Response.Write(responsePayload);
             context.Response.Write("</textarea>");
-            context.Response.Write("<br/><br/><a href='../Default.aspx'>Home<a><br/><br/></body></html>");
+            context.Response.Write("<br/><br/><a href='../Default.aspx'>Home<a>");
+            context.Response.Write("<br/><br/><a href='javascript:history.back();'>Back<a></body></html>");
 
             if (apiName == "DoExpressCheckout")
             {

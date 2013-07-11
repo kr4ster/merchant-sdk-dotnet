@@ -11,7 +11,7 @@
     <div id="wrapper">
         <div id="header">
             <h3>DoAuthorization</h3>
-            <div id="apidetails">Used to authorize an Order Payment, created using ExpressCheckout using Order Payment Type.</div>
+            <div id="apidetails"><p><i>Used to authorize an Order Payment, created using ExpressCheckout for Order Payment Type.</i></p></div>
         </div>
         <br />
         <form id="form1" runat="server" method="post">

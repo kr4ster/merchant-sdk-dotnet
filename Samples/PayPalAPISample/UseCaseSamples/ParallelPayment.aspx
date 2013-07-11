@@ -12,7 +12,7 @@
         <div id="header">
             <h3>ParallelPaymentUsingSetExpressCheckout</h3>
             <div id="apidetails">
-                <p>Use ExpressCheckout for making Payments to multiple receivers.</p>
+                <p><i>Use ExpressCheckout for making Payments to multiple receivers.</i></p>
             </div>
         </div>
         <br />

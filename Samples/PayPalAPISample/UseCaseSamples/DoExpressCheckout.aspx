@@ -11,7 +11,7 @@
     <div id="wrapper">
         <div id="header">
             <h3>DoExpressCheckout</h3>
-            <div id="apidetails">Used to make ExpressCheckout payment. Please select the appropriate Payment Type to be set in SetExpressCheckout.</div>
+            <div id="apidetails"><p><i>Used to make ExpressCheckout payment. Please select the appropriate Payment Type to be set in SetExpressCheckout.</i></p></div>
         </div>
         <br />
         <form id="form1" runat="server" method="post">

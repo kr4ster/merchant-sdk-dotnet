@@ -6,7 +6,17 @@ namespace PayPalAPISample.UseCaseSamples
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            billingStartDate.Value = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss");
+            if (!Page.IsPostBack)
+            {
+                billingStartDate.Text = DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss");
+            }
+        }
+
+        protected void CalendarDate_SelectionChanged(object sender, EventArgs e)
+        {
+            // (Required) The date when billing for this profile begins.
+            // Note: The profile may take up to 24 hours for activation.
+            billingStartDate.Text = CalendarDate.SelectedDate.ToString("yyyy-MM-ddTHH:mm:ss");
         }
     }
 }

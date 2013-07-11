@@ -344,8 +344,8 @@
                     Auto billing of outstanding amount</div>
                 <div class="param_value">
                     <asp:DropDownList ID="autoBillOutstandingAmount" runat="server">
-                        <asp:ListItem Text="No Auto billing" Value="NOAUTOBILL"></asp:ListItem>
-                        <asp:ListItem Text="Add to next billing" Value="ADDTONEXTBILLING"></asp:ListItem>
+                        <asp:ListItem Text="No Auto Billing" Value="NOAUTOBILL"></asp:ListItem>
+                        <asp:ListItem Text="Add To Next billing" Value="ADDTONEXTBILLING"></asp:ListItem>
                     </asp:DropDownList>
                 </div>
                 <div class="submit">

@@ -20,5 +20,50 @@ namespace PayPalAPISample {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        
+        /// <summary>
+        /// HyperLinkSetExpressCheckoutForRecurringPayments control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLinkSetExpressCheckoutForRecurringPayments;
+        
+        /// <summary>
+        /// HyperLinkRecurringPaymentsUsingCreditCard control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLinkRecurringPaymentsUsingCreditCard;
+        
+        /// <summary>
+        /// HyperLinkSetExpressCheckoutPaymentAuthorization control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLinkSetExpressCheckoutPaymentAuthorization;
+        
+        /// <summary>
+        /// HyperLinkSetExpressCheckoutPaymentOrder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLinkSetExpressCheckoutPaymentOrder;
+        
+        /// <summary>
+        /// HyperLinkParallelPayment control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLinkParallelPayment;
     }
 }

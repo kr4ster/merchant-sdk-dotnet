@@ -12,7 +12,7 @@
         <div id="header">
             <h3>SetExpressCheckoutPaymentOrder</h3>
             <div id="apidetails">
-                <p>Set the details for express checkout. Payment Type should be set to <b>Order</b> to create Payment Order and Authorized using <b>DoAuthorize</b> API, before it can be captured using <b>DoCapture</b> API.</p>
+                <p><i>Set the details for <b>ExpressCheckout</b>. Payment Type should be set to <b>Order</b> to Create Payment Order and Authorize using <b>DoAuthorize</b> API, also Capture using <b>DoCapture</b> API.</i></p>
             </div>
         </div>
         <br />

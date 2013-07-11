@@ -15,11 +15,11 @@
             <h2>Merchant UseCase Samples</h2>
             <div>
                 <ul>
-                    <li><a href="UseCaseSamples/SetExpressCheckoutForRecurringPayments.aspx">SetExpressCheckoutForRecurringPayments</a></li>
-                    <li><a href="UseCaseSamples/RecurringPaymentsUsingCreditCard.aspx">RecurringPaymentsUsingCreditCard</a></li>
-                    <li><a href="UseCaseSamples/SetExpressCheckoutPaymentAuthorization.aspx">SetExpressCheckoutPaymentAuthorization</a></li>
-                    <li><a href="UseCaseSamples/SetExpressCheckoutPaymentOrder.aspx">SetExpressCheckoutPaymentOrder</a></li>
-                    <li><a href="UseCaseSamples/ParallelPayment.aspx">ParallelPayment</a></li>
+                    <li><asp:HyperLink runat="server" ID="HyperLinkSetExpressCheckoutForRecurringPayments" NavigateUrl="~/UseCaseSamples/SetExpressCheckoutForRecurringPayments.aspx" Text="SetExpressCheckoutForRecurringPayments" /></li>
+                    <li><asp:HyperLink runat="server" ID="HyperLinkRecurringPaymentsUsingCreditCard" NavigateUrl="~/UseCaseSamples/RecurringPaymentsUsingCreditCard.aspx" Text="RecurringPaymentsUsingCreditCard" /></li>
+                    <li><asp:HyperLink runat="server" ID="HyperLinkSetExpressCheckoutPaymentAuthorization" NavigateUrl="~/UseCaseSamples/SetExpressCheckoutPaymentAuthorization.aspx" Text="SetExpressCheckoutPaymentAuthorization" /></li>
+                    <li><asp:HyperLink runat="server" ID="HyperLinkSetExpressCheckoutPaymentOrder" NavigateUrl="~/UseCaseSamples/SetExpressCheckoutPaymentOrder.aspx" Text="SetExpressCheckoutPaymentOrder" /></li>
+                    <li><asp:HyperLink runat="server" ID="HyperLinkParallelPayment" NavigateUrl="~/UseCaseSamples/ParallelPayment.aspx" Text="ParallelPayment" /></li>
                 </ul>
             </div>
             <br />

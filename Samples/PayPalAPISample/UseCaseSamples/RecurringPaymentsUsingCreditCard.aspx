@@ -1,7 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RecurringPaymentsUsingCreditCard.aspx.cs" Inherits="PayPalAPISample.UseCaseSamples.RecurringPaymentsUsingCreditCard" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="RecurringPaymentsUsingCreditCard.aspx.cs"
+    Inherits="PayPalAPISample.UseCaseSamples.RecurringPaymentsUsingCreditCard" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>PayPal Merchant SDK - RecurringPaymentsProfileUsingCreditCard</title>
@@ -11,267 +11,398 @@
     <div id="wrapper">
         <div id="header">
             <h3>Create Recurring Payments Profile Using Credit Card</h3>
-			<div id="apidetails">
-				<p>CreateRecurringPaymentsProfile API operation creates a recurring payments profile. You can directly use Credit Card for creating a Profile.</p>
-			</div>
-        </div>
-        <br />
-        <form id="form1" runat="server" method="post">
-            <div id="request_form">
-               <div class="params">
-					<div class="param_name">
-						<b><span style="text-decoration: underline">Credit Card *</span>
-						</b>
-					</div>
-				</div>
-				<br />
-				<table class="params">
-					<tr>
-						<th class="param_name">Credit Card number</th>
-						<th class="param_name">Expiry date</th>
-						<th class="param_name">Buyer Email Id</th>
-						<th class="param_name">Credit Card type</th>
-						<th class="param_name">CVV</th>
-					</tr>
-					<tr>
-						<td><div class="param_value">
-								<input type="text" name="creditCardNumber" id="creditCardNumber"
-									value="4917760970795152" />
-							</div>
-						</td>
-						<td><div class="param_value">
-								<select name="expMonth">
-									<option value="1">Jan</option>
-									<option value="2">Feb</option>
-									<option value="3">Mar</option>
-									<option value="4">Apr</option>
-									<option value="5">May</option>
-									<option value="6">Jun</option>
-									<option value="7">Jul</option>
-									<option value="8">Aug</option>
-									<option value="9">Sep</option>
-									<option value="10">Oct</option>
-									<option value="11">Nov</option>
-									<option value="12">Dec</option>
-								</select> <select name="expYear">
-									<option value="2011">2011</option>
-									<option value="2012">2012</option>
-									<option value="2013">2013</option>
-									<option value="2014" selected="selected">2014</option>
-									<option value="2015">2015</option>
-									<option value="2016">2016</option>
-								</select>
-							</div>
-						</td>
-						<td><div class="param_value">
-								<input type="text" name="BuyerEmailId" id="BuyerEmailId"
-									value="" />
-							</div>
-						</td>
-						<td><div class="param_value">
-								<select name="creditCardType">
-									<option value="VISA">Visa</option>
-									<option value="MASTERCARD">MasterCard</option>
-									<option value="DISCOVER">Discover</option>
-									<option value="AMEX">Amex</option>
-                                    <option value="SWITCH">Switch</option>
-									<option value="SOLO">Solo</option>
-									<option value="MAESTRO">Maestro</option>
-
-								</select>
-							</div>
-						</td>
-						<td><div class="param_value">
-								<input type="text" name="cvv" id="cvv" value="962"/>
-							</div>
-						</td>
-					</tr>
-				</table>
-
-				<div class="section_header">Recurring payments profile details</div>
-				<div class="param_name">Subscriber Name</div>
-				<div class="param_value">
-					<input type="text" name="subscriberName" id="subscriberName" />
-				</div>
-				<div class="param_name">Billing start date</div>
-				<div class="param_value">
-					<input type="text" name="billingStartDate" id="billingStartDate" runat="server" />
-				</div>
-				<div class="param_name">Subscriber shipping address (if
-					different from buyer's PayPal account address)</div>
-				<table class="line_item">
-					<tr>
-						<th>Name</th>
-						<th>Street 1</th>
-						<th>Street 2</th>
-						<th>City</th>
-						<th>State</th>
-						<th>Postal Code</th>
-						<th>Country</th>
-						<th>Phone</th>
-					</tr>
-					<tr>
-						<td><span class="param_value"> <input type="text"
-								id="shippingName" name="shippingName" value="" /> </span></td>
-						<td><span class="param_value"> <input type="text"
-								id="shippingStreet1" name="shippingStreet1" value="" /> </span></td>
-						<td><span class="param_value"> <input type="text"
-								id="shippingStreet2" name="shippingStreet2" value="" /> </span></td>
-						<td><span class="param_value"> <input type="text"
-								id="shippingCity" name="shippingCity" value="" /> </span></td>
-						<td><span class="param_value"> <input type="text"
-								id="shippingState" name="shippingState" value="" /> </span></td>
-						<td><span class="param_value"> <input type="text"
-								id="shippingPostalCode" name="shippingPostalCode" value="" /> </span>
-						</td>
-						<td><span class="param_value"> <input type="text"
-								id="shippingCountry" name="shippingCountry" value="" /> </span></td>
-						<td><span class="param_value"> <input type="text"
-								id="shippingPhone" name="shippingPhone" value="" /> </span></td>
-					</tr>
-				</table>
-				<div class="section_header">
-					<b><u>Schedule Details:</u> </b>
-				</div>
-				<div class="params">
-					<div class="param_name">Description* </div>
-					<div class="param_value">
-						<textarea rows="5" cols="60" name="profileDescription">Sample profile description</textarea>
-					</div>
-				</div>
-				<div class="section_header">Activation Details</div>
-				<table class="params">
-					<tr>
-						<th>Initial Amount</th>
-						<th>Failed Payment Action</th>
-					</tr>
-					<tr>
-						<td><span class="param_value"> <input
-								id="initialAmount" name="initialAmount" /> </span></td>
-						<td><span class="param_value"> <select
-								name="failedInitialAmountAction">
-									<option value="ContinueOnFailure">Continue On Failure</option>
-									<option value="CancelOnFailure">Cancel On Failure</option>
-							</select> </span></td>
-					</tr>
-				</table>
-
-				<div class="section_header">
-					<b>Trial Period</b>
-				</div>
-				<table class="params">
-					<tr>
-						<th>Billing frequency</th>
-						<th>Billing period</th>
-						<th>Total billing cycles</th>
-						<th>Per billing cycle amount</th>
-						<th>Shipping amount</th>
-						<th>Tax</th>
-					</tr>
-					<tr>
-						<td>
-                            <span class="param_value"> 
-                                <input type="text" id="trialBillingFrequency" name="trialBillingFrequency" value="1" /> 
-                            </span>
-						</td>
-						<td>
-                            <span class="param_value"> 
-                                <select name="trialBillingPeriod">
-                                    <option value="NOBILLINGPERIODTYPE">NoBillingPeriodType</option>
-									<option value="DAY" selected="selected">Day</option>
-									<option value="WEEK">Week</option>
-									<option value="SemiMonth">SemiMonth</option>
-									<option value="Month">Month</option>
-									<option value="Year">Year</option>
-							    </select> 
-                            </span>
-						</td>
-						<td><span class="param_value"> <input type="text"
-								id="trialBillingCycles" name="trialBillingCycles" value="2" />
-						</span>
-						</td>
-						<td><span class="param_value"> <input type="text"
-								id="trialBillingAmount" name="trialBillingAmount" value="2.0" />
-						</span>
-						</td>
-						<td><span class="param_value"> <input type="text"
-								id="trialShippingAmount" name="trialShippingAmount" value="0.0" />
-						</span>
-						</td>
-						<td><span class="param_value"> <input type="text"
-								id="trialTaxAmount" name="trialTaxAmount" value="0.0" /> </span>
-						</td>
-					</tr>
-				</table>
-
-				<div class="section_header">
-					<b>Payment Period *</b>
-				</div>
-				<table class="params_name">
-					<tr>
-						<th>Billing frequency</th>
-						<th>Billing period</th>
-						<th>Total billing cycles</th>
-						<th>Per billing cycle amount</th>
-						<th>Shipping amount</th>
-						<th>Tax</th>
-					</tr>
-					<tr>
-						<td>
-                        <span class="param_value"> 
-                            <input type="text" id="billingFrequency" name="billingFrequency" value="1" /> 
-                        </span>
-						</td>						
-                        <td>
-                            <span class="param_value"> 
-                                <select name="billingPeriod">
-                                    <option value="NOBILLINGPERIODTYPE">NoBillingPeriodType</option>
-									<option value="DAY" selected="selected">Day</option>
-									<option value="WEEK">Week</option>
-									<option value="SemiMonth">SemiMonth</option>
-									<option value="Month">Month</option>
-									<option value="Year">Year</option>
-							    </select> 
-                            </span>
-						</td>
-						<td><span class="param_value"> <input type="text"
-								id="totalBillingCycles" name="totalBillingCycles" value="8" />
-						</span>
-						</td>
-						<td><span class="param_value"> <input type="text"
-								id="billingAmount" name="billingAmount" value="5.0" /> </span>
-						</td>
-						<td><span class="param_value"> <input type="text"
-								id="shippingAmount" name="shippingAmount" value="1.0" /> </span>
-						</td>
-						<td><span class="param_value"> <input type="text"
-								id="taxAmount" name="taxAmount" value="0.0" /> </span>
-						</td>
-					</tr>
-				</table>
-				<div class="params">
-					<div class="param_name">Maximum failed payments before
-						profile suspension</div>
-					<div class="param_value">
-						<input type="text" name="maxFailedPayments" id="maxFailedPayments"
-							value="3" />
-					</div>
-				</div>
-				<div class="param_name">Auto billing of outstanding amount</div>
-				<div class="param_value">
-					<select name="autoBillOutstandingAmount">
-						<option value="NOAUTOBILL">No Auto billing</option>
-						<option value="ADDTONEXTBILLING">Add to next billing</option>
-					</select>
-				</div>
-				<br />
-				<div class="submit">
-                    <asp:Button ID="ButtonPayments" Text="CreateRecurringPaymentsProfile"  runat="server" PostBackUrl="~/UseCaseSamples/Payments.ashx" />
-				</div>
-				<br />
-                <a href="../Default.aspx">Home</a>
+            <div id="apidetails">
+                <p><i>CreateRecurringPaymentsProfile API operation creates Recurring Payments Profile. Directly use Credit Card for creating Profile.</i></p>
             </div>
+        </div>
+        <form id="form1" runat="server" method="post">
+        <div id="request_form">
+            <div class="params">
+                <div class="param_name">
+                    <asp:Label runat="server" ID="LabelCreditCard" Text="Credit Card *" Font-Underline="true"
+                        Font-Bold="true"></asp:Label>
+                </div>
+            </div>
+            <br />
+            <table class="params">
+                <tr>
+                    <th class="param_name">
+                        Credit Card Number
+                    </th>
+                    <th class="param_name">
+                        Expiry
+                    </th>
+                    <th class="param_name">
+                        Buyer Email
+                    </th>
+                    <th class="param_name">
+                        Credit Card
+                    </th>
+                    <th class="param_name">
+                        CVV
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="creditCardNumber" Text="4917760970795152" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                            <asp:DropDownList runat="server" ID="expMonth">
+                                <asp:ListItem Value="01" Text="January" />
+                                <asp:ListItem Value="02" Text="February" />
+                                <asp:ListItem Value="03" Text="March" />
+                                <asp:ListItem Value="04" Text="April" />
+                                <asp:ListItem Value="05" Text="May" />
+                                <asp:ListItem Value="06" Text="June" />
+                                <asp:ListItem Value="07" Text="July" />
+                                <asp:ListItem Value="08" Text="August" />
+                                <asp:ListItem Value="09" Text="September" />
+                                <asp:ListItem Value="10" Text="October" />
+                                <asp:ListItem Value="11" Text="November" />
+                                <asp:ListItem Value="12" Text="December" Selected="True" />
+                            </asp:DropDownList>
+                            <asp:DropDownList runat="server" ID="expYear">
+                                <asp:ListItem Value="2013" Text="2013" />
+                                <asp:ListItem Value="2014" Text="2014" Selected="True" />
+                                <asp:ListItem Value="2015" Text="2015" />
+                                <asp:ListItem Value="2016" Text="2016" />
+                                <asp:ListItem Value="2017" Text="2017" />
+                                <asp:ListItem Value="2018" Text="2018" />
+                                <asp:ListItem Value="2019" Text="2019" />
+                                <asp:ListItem Value="2020" Text="2020" />
+                                <asp:ListItem Value="2021" Text="2021" />
+                                <asp:ListItem Value="2022" Text="2022" />
+                                <asp:ListItem Value="2023" Text="2023" />
+                            </asp:DropDownList>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="BuyerEmailId" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                            <asp:DropDownList runat="server" ID="creditCardType">
+                                <asp:ListItem Value="VISA" Text="Visa" />
+                                <asp:ListItem Value="MASTERCARD" Text="Mastercard" />
+                                <asp:ListItem Value="DISCOVER" Text="Discover" />
+                                <asp:ListItem Value="AMEX" Text="Amex" />
+                                <asp:ListItem Value="SWITCH" Text="Switch" />
+                                <asp:ListItem Value="SOLO" Text="Solo" />
+                                <asp:ListItem Value="MAESTRO" Text="Maestro" />
+                            </asp:DropDownList>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="cvv" Text="962" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <asp:Label runat="server" ID="LabelRecurringPaymentsProfileDetails" Text="Recurring Payments Profile Details"
+                Font-Underline="true" Font-Bold="true"></asp:Label>
+            <br />
+            <br />
+            <div class="param_name">
+                Subscriber Name</div>
+            <div class="param_value">
+                <asp:TextBox runat="server" ID="subscriberName" />
+            </div>
+            <div class="param_name">
+                Billing Start Date</div>
+            <div id="DivCalendar" style="display: none;">
+                <asp:Calendar runat="server" ID="CalendarDate" OnSelectionChanged="CalendarDate_SelectionChanged" />
+            </div>
+            <div class="param_value">
+                <asp:TextBox ID="billingStartDate" runat="server" />
+                <img src="../APICalls/calendar_icon.png" alt="calendar" onclick="popupCalendar()" />
+            </div>
+            <div class="param_name">
+                Subscriber Shipping Address (If different from Buyer's PayPal Account)</div>
+            <table class="line_item">
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <th>
+                        Street 1
+                    </th>
+                    <th>
+                        Street 2
+                    </th>
+                    <th>
+                        City
+                    </th>
+                    <th>
+                        State
+                    </th>
+                    <th>
+                        Postal Code
+                    </th>
+                    <th>
+                        Country
+                    </th>
+                    <th>
+                        Phone
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="shippingName" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="shippingStreet1" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="shippingStreet2" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="shippingCity" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="shippingState" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="shippingPostalCode" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="shippingCountry" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="shippingPhone" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <br />
+            <div class="section_header">
+                <asp:Label runat="server" ID="LabelScheduleDetails" Text="Schedule Details" Font-Underline="true"
+                    Font-Bold="true"></asp:Label>
+            </div>
+            <br />
+            <div class="params">
+                <div class="param_name">
+                    Description*</div>
+                <div class="param_value">
+                    <asp:TextBox runat="server" ID="profileDescription" Rows="5" Columns="60" Text="Sample Profile Description" />
+                </div>
+            </div>
+            <br />
+            <asp:Label runat="server" ID="LabelActivationDetails" Text="Activation Details" Font-Underline="true"
+                Font-Bold="true"></asp:Label>
+            <br />
+            <br />
+            <table class="params">
+                <tr>
+                    <th>
+                        Initial Amount
+                    </th>
+                    <th>
+                        Failed Payment Action
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="initialAmount" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                            <asp:DropDownList runat="server" ID="failedInitialAmountAction">
+                                <asp:ListItem Text="Continue On Failure" Value="CONTINUEONFAILURE" />
+                                <asp:ListItem Text="Cancel On Failure" Value="CANCELONFAILURE" />
+                            </asp:DropDownList>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="section_header">
+                <b>Trial Period</b>
+            </div>
+            <table class="params">
+                <tr>
+                    <th>
+                        Billing Frequency
+                    </th>
+                    <th>
+                        Billing Period
+                    </th>
+                    <th>
+                        Total Billing Cycles
+                    </th>
+                    <th>
+                        Amount Per Billing Cycle
+                    </th>
+                    <th>
+                        Shipping Amount
+                    </th>
+                    <th>
+                        Tax
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="trialBillingFrequency" Text="1" Width="200" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                             <asp:DropDownList runat="server" ID="trialBillingPeriod">
+                                <asp:ListItem Text="NoBillingPeriodType" Value="NOBILLINGPERIODTYPE" />
+                                <asp:ListItem Text="Day" Value="DAY" Selected="True" />
+                                <asp:ListItem Text="WEEK" Value="WEEK" />
+                                <asp:ListItem Text="SEMIMONTH" Value="SEMIMONTH" />
+                                <asp:ListItem Text="MONTH" Value="MONTH" />
+                                <asp:ListItem Text="YEAR" Value="YEAR" />
+                            </asp:DropDownList>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="trialBillingCycles" Text="2" Width="200" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="trialBillingAmount" Text="2.0" Width="200" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="trialShippingAmount" Text="0.0" Width="200" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="trialTaxAmount" Text="0.0" Width="200" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="section_header">
+                <b>Payment Period*</b>
+            </div>
+            <table class="params_name">
+                <tr>
+                    <th>
+                        Billing Frequency
+                    </th>
+                    <th>
+                        Billing Period
+                    </th>
+                    <th>
+                        Total Billing Cycles
+                    </th>
+                    <th>
+                        Amount Per Billing Cycle
+                    </th>
+                    <th>
+                        Shipping Amount
+                    </th>
+                    <th>
+                        Tax
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="billingFrequency" Text="1" Width="200" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                             <asp:DropDownList runat="server" ID="billingPeriod">
+                                    <asp:ListItem Text="NoBillingPeriodType" Value="NOBILLINGPERIODTYPE" />
+                                    <asp:ListItem Text="Day" Value="DAY" Selected="True" />
+                                    <asp:ListItem Text="WEEK" Value="WEEK" />
+                                    <asp:ListItem Text="SEMIMONTH" Value="SEMIMONTH" />
+                                    <asp:ListItem Text="MONTH" Value="MONTH" />
+                                    <asp:ListItem Text="YEAR" Value="YEAR" />
+                            </asp:DropDownList>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                            <asp:TextBox runat="server" ID="totalBillingCycles" Text="8" Width="200" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                             <asp:TextBox runat="server" ID="billingAmount" Text="5.0" Width="200" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                             <asp:TextBox runat="server" ID="shippingAmount" Text="1.0" Width="200" />
+                        </div>
+                    </td>
+                    <td>
+                        <div class="param_value">
+                             <asp:TextBox runat="server" ID="taxAmount" Text="0.0" Width="200" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div class="params">
+                <div class="param_name">
+                    Maximum Failed Payments Before Profile Suspension</div>
+                <div class="param_value">
+                    <asp:TextBox runat="server" ID="maxFailedPayments" Text="3" />
+                </div>
+            </div>
+            <div class="param_name">
+                Auto Billing Of Outstanding Amount</div>
+            <div class="param_value">
+                <asp:DropDownList ID="autoBillOutstandingAmount" runat="server">
+                    <asp:ListItem Text="No Auto Billing" Value="NOAUTOBILL"></asp:ListItem>
+                    <asp:ListItem Text="Add To Next billing" Value="ADDTONEXTBILLING"></asp:ListItem>
+                </asp:DropDownList>
+            </div>
+            <br />
+            <div class="submit">
+                <asp:Button ID="ButtonPayments" Text="CreateRecurringPaymentsProfile" runat="server"
+                    PostBackUrl="~/UseCaseSamples/Payments.ashx" />
+            </div>
+            <br />
+            <asp:HyperLink runat="server" ID="HyperLinkHome" NavigateUrl="~/Default.aspx" Text="Home" />
+            <br />
+            <br />
+            <asp:HyperLink ID="HyperLinkBack" runat="server" NavigateUrl="javascript:history.back();"
+                Text="Back" />
+        </div>
         </form>
+        <script type="text/javascript">
+            function popupCalendar() {
+                var dateField = document.getElementById('DivCalendar');
+                if (dateField.style.display == 'none')
+                    dateField.style.display = 'block';
+                else
+                    dateField.style.display = 'none';
+            }
+        </script>
     </div>
 </body>
 </html>
