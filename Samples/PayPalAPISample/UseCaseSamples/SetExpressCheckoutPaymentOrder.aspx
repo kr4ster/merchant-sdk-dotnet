@@ -4,18 +4,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>PayPal Merchant SDK - SetExpressCheckoutPaymentOrder</title>
 </head>
 <body>
     <img src="https://devtools-paypal.com/image/bdg_payments_by_pp_2line.png" alt="PAYMENTS BY PayPal" />
     <div id="wrapper">
         <div id="header">
-            <h3>
-                SetExpressCheckout For Order Payments</h3>
+            <h3>SetExpressCheckoutPaymentOrder</h3>
             <div id="apidetails">
-                Set the details for express checkout. PaymentType should be set to <b>Order</b>
-                to create a payment Order. It should be authorized using <b>DoAuthorize</b> api,
-                before it can be captured using <b>DoCapture</b> api.
+                <p>Set the details for express checkout. Payment Type should be set to <b>Order</b> to create Payment Order and Authorized using <b>DoAuthorize</b> API, before it can be captured using <b>DoCapture</b> API.</p>
             </div>
         </div>
         <br />
@@ -56,33 +53,29 @@
             </div>
         </div>
         <div class="params">
-            <div class="param_name">
-                Total Tax</div>
+            <div class="param_name">Total Tax</div>
             <div class="param_value">
                 <input type="text" name="taxTotal" id="taxTotal" value="" />
             </div>
         </div>
         <div class="params">
-            <div class="param_name">
-                Order description</div>
+            <div class="param_name">Order description</div>
             <div class="param_value">
                 <textarea cols="40" rows="5" name="orderDescription"></textarea>
             </div>
         </div>
         <div class="params">
-            <div class="param_name">
-                CurrencyCode</div>
+            <div class="param_name">CurrencyCode</div>
             <div class="param_value">
                 <input type="text" name="currencyCode" value="USD" size="50" maxlength="260" />
             </div>
         </div>
         <div class="params">
-            <div class="param_name">
-                PaymentType</div>
+            <div class="param_name">PaymentType</div>
             <div class="param_value">
                 <select name="paymentType">
-                    <option value="AUTHORIZATION">Authorization</option>
-                    <option value="SALE">Sale</option>
+                    <option disabled="disabled" value="AUTHORIZATION">Authorization</option>
+                    <option disabled="disabled" value="SALE">Sale</option>
                     <option value="ORDER" selected="selected">Order</option>
                 </select>
             </div>
@@ -134,7 +127,7 @@
                 <td>
                     <div class="param_value">
                         <select name="itemCategory">
-                            option value="PHYSICAL">Physical</option>
+                            <option value="PHYSICAL">Physical</option>
                             <option value="DIGITAL">Digital</option>
                         </select>
                     </div>
@@ -150,7 +143,7 @@
             <div class="param_name">
                 IPN Notification Url (Receive IPN call back from PayPal)</div>
             <div class="param_value">
-                <input type="text" size="50" name="notifyURL" value="">
+                <input type="text" size="50" name="notifyURL" />
             </div>
         </div>
         <br />

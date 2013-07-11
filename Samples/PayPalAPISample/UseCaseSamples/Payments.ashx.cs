@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using PayPal.PayPalAPIInterfaceService;
 using PayPal.PayPalAPIInterfaceService.Model;
 using System.Configuration;
+using System.Web.SessionState;
 using PayPal.Permissions.Model;
 
 namespace PayPalAPISample.UseCaseSamples
@@ -12,7 +13,7 @@ namespace PayPalAPISample.UseCaseSamples
     /// <summary>
     /// Summary description for Payments
     /// </summary>
-    public class Payments : IHttpHandler
+    public class Payments : IHttpHandler, IRequiresSessionState
     {
         public void ProcessRequest(HttpContext context)
         {
@@ -38,6 +39,18 @@ namespace PayPalAPISample.UseCaseSamples
             else if (strCall.Equals("ParallelPayment"))
             {
                 ParallelPayment(context);
+            }
+            else if (strCall.Equals("DoExpressCheckout"))
+            {
+                DoExpressCheckout(context);
+            }
+            else if (strCall.Equals("DoAuthorization"))
+            {
+                DoAuthorization(context);
+            }
+            else if (strCall.Equals("DoCapture"))
+            {
+                DoCapture(context);
             }
         }
 
@@ -800,7 +813,7 @@ namespace PayPalAPISample.UseCaseSamples
             UriBuilder uriBuilder = new UriBuilder(requestUrl);
             uriBuilder.Path = context.Request.ApplicationPath
                 + (context.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
-                + "UseCaseSamples/SetExpressCheckoutPaymentAuthorization.aspx";
+                + "UseCaseSamples/DoExpressCheckout.aspx";
             string returnUrl = uriBuilder.Uri.ToString();
 
             //(Required) URL to which the buyer is returned if the buyer does not approve the use of PayPal to pay you. For digital goods, you must add JavaScript to this page to close the in-context experience.
@@ -821,7 +834,7 @@ namespace PayPalAPISample.UseCaseSamples
                  confirms the order and payment or billing agreement.
                  Character length and limitations: 2048 single-byte characters
               */
-            details.ReturnURL = returnUrl + "?currencyCodeType=" + parameters["currencyCode"];
+            details.ReturnURL = returnUrl + "?currencyCodeType=" + parameters["currencyCode"] + "&paymentType=" + parameters["paymentType"];
             details.CancelURL = cancelUrl;
 
             /*
@@ -1042,6 +1055,7 @@ namespace PayPalAPISample.UseCaseSamples
             string redirectUrl = null;
             if (!(resp.Ack.Equals(AckCode.FAILURE) && !(resp.Ack.Equals(AckCode.FAILUREWITHWARNING))))
             {
+                redirectUrl = ConfigurationManager.AppSettings["PAYPAL_REDIRECT_URL"].ToString() + "_express-checkout&token=" + resp.Token;
                 keyResponseParams.Add("Acknowledgement", resp.Ack.ToString());
             }
             displayResponse(context, "SetExpressCheckoutPaymentAuthorization", keyResponseParams, service.getLastRequest(), service.getLastResponse(), resp.Errors, redirectUrl);
@@ -1074,7 +1088,7 @@ namespace PayPalAPISample.UseCaseSamples
             UriBuilder uriBuilder = new UriBuilder(requestUrl);
             uriBuilder.Path = context.Request.ApplicationPath
                 + (context.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
-                + "UseCaseSamples/SetExpressCheckoutPaymentAuthorization.aspx";
+                + "UseCaseSamples/DoExpressCheckout.aspx";
             string returnUrl = uriBuilder.Uri.ToString();
 
             //(Required) URL to which the buyer is returned if the buyer does not approve the use of PayPal to pay you. For digital goods, you must add JavaScript to this page to close the in-context experience.
@@ -1095,7 +1109,7 @@ namespace PayPalAPISample.UseCaseSamples
                  confirms the order and payment or billing agreement.
                  Character length and limitations: 2048 single-byte characters
               */
-            details.ReturnURL = returnUrl + "?currencyCodeType=" + parameters["currencyCode"];
+            details.ReturnURL = returnUrl + "?currencyCodeType=" + parameters["currencyCode"] + "&paymentType=" + parameters["paymentType"];
             details.CancelURL = cancelUrl;
 
             /*
@@ -1316,9 +1330,326 @@ namespace PayPalAPISample.UseCaseSamples
             string redirectUrl = null;
             if (!(resp.Ack.Equals(AckCode.FAILURE) && !(resp.Ack.Equals(AckCode.FAILUREWITHWARNING))))
             {
+                redirectUrl = ConfigurationManager.AppSettings["PAYPAL_REDIRECT_URL"].ToString() + "_express-checkout&token=" + resp.Token;
                 keyResponseParams.Add("Acknowledgement", resp.Ack.ToString());
             }
             displayResponse(context, "SetExpressCheckoutPaymentOrder", keyResponseParams, service.getLastRequest(), service.getLastResponse(), resp.Errors, redirectUrl);
+        }
+        
+        /// <summary>
+        /// Handles DoExpressCheckout
+        /// </summary>
+        /// <param name="context"></param>
+        private void DoExpressCheckout(HttpContext context)
+        {
+            NameValueCollection parameters = context.Request.Params;
+
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer at 
+            // [https://github.com/paypal/merchant-sdk-java/wiki/SDK-Configuration-Parameters]
+            Dictionary<String, String> configurationMap = Configuration.GetSignatureConfig();
+
+            // Creating service wrapper object to make an API call by loading configuration map.
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
+
+            DoExpressCheckoutPaymentRequestType doCheckoutPaymentRequestType = new DoExpressCheckoutPaymentRequestType();
+            DoExpressCheckoutPaymentRequestDetailsType details = new DoExpressCheckoutPaymentRequestDetailsType();
+
+            /*
+             * A timestamped token by which you identify to PayPal that you are processing
+             * this payment with Express Checkout. The token expires after three hours. 
+             * If you set the token in the SetExpressCheckout request, the value of the token
+             * in the response is identical to the value in the request.
+               Character length and limitations: 20 single-byte characters
+             */
+            details.Token = parameters["token"];
+
+            /*
+             * Unique PayPal Customer Account identification number.
+               Character length and limitations: 13 single-byte alphanumeric characters
+             */
+            details.PayerID = parameters["payerID"];
+
+            /*
+             *  (Optional) How you want to obtain payment. If the transaction does not include
+             *  a one-time purchase, this field is ignored. 
+             *  It is one of the following values:
+                    Sale – This is a final sale for which you are requesting payment (default).
+                    Authorization – This payment is a basic authorization subject to settlement with PayPal Authorization and Capture.
+                    Order – This payment is an order authorization subject to settlement with PayPal Authorization and Capture.
+                Note:
+                You cannot set this field to Sale in SetExpressCheckout request and then change 
+                this value to Authorization or Order in the DoExpressCheckoutPayment request. 
+                If you set the field to Authorization or Order in SetExpressCheckout, 
+                you may set the field to Sale.
+                Character length and limitations: Up to 13 single-byte alphabetic characters
+                This field is deprecated. Use PaymentAction in PaymentDetailsType instead.
+             */
+            details.PaymentAction = (PaymentActionCodeType)Enum.Parse(typeof(PaymentActionCodeType), parameters["paymentType"]);
+
+            decimal itemTotalAmt = 0.0M;
+            decimal orderTotalAmt = 0.0M;
+            String amt = parameters["amt"];
+            String quantity = parameters["itemQuantity"];
+            itemTotalAmt = Convert.ToDecimal(amt) * Convert.ToDecimal(quantity);
+            orderTotalAmt += itemTotalAmt;
+
+            PaymentDetailsType paymentDetails = new PaymentDetailsType();
+            BasicAmountType orderTotal = new BasicAmountType();
+            orderTotal.value = Convert.ToString(orderTotalAmt);
+
+            //PayPal uses 3-character ISO-4217 codes for specifying currencies in fields and variables.
+            orderTotal.currencyID = (CurrencyCodeType)Enum.Parse(typeof(CurrencyCodeType), parameters["currencyCode"]);
+            /*
+             *  (Required) The total cost of the transaction to the buyer. 
+             *  If shipping cost (not applicable to digital goods) and tax charges are known, 
+             *  include them in this value. If not, this value should be the current sub-total 
+             *  of the order. If the transaction includes one or more one-time purchases, this 
+             *  field must be equal to the sum of the purchases. Set this field to 0 if the 
+             *  transaction does not include a one-time purchase such as when you set up a 
+             *  billing agreement for a recurring payment that is not immediately charged. 
+             *  When the field is set to 0, purchase-specific fields are ignored. 
+             *  For digital goods, the following must be true:
+                total cost > 0
+                total cost <= total cost passed in the call to SetExpressCheckout
+             Note:
+                You must set the currencyID attribute to one of the 3-character currency codes 
+                for any of the supported PayPal currencies.
+                When multiple payments are passed in one transaction, all of the payments must 
+                have the same currency code.
+                Character length and limitations: Value is a positive number which cannot 
+                exceed $10,000 USD in any currency. It includes no currency symbol. 
+                It must have 2 decimal places, the decimal separator must be a period (.), 
+                and the optional thousands separator must be a comma (,).
+             */
+            paymentDetails.OrderTotal = orderTotal;
+
+            BasicAmountType itemTotal = new BasicAmountType();
+            itemTotal.value = Convert.ToString(itemTotalAmt);
+
+            //PayPal uses 3-character ISO-4217 codes for specifying currencies in fields and variables.
+            itemTotal.currencyID = (CurrencyCodeType)Enum.Parse(typeof(CurrencyCodeType), parameters["currencyCode"]);
+
+            /*
+             *  Sum of cost of all items in this order. For digital goods, this field is 
+             *  required. PayPal recommends that you pass the same value in the call to 
+             *  DoExpressCheckoutPayment that you passed in the call to SetExpressCheckout.
+             Note:
+                You must set the currencyID attribute to one of the 3-character currency 
+                codes for any of the supported PayPal currencies.
+                Character length and limitations: Value is a positive number which cannot 
+                exceed $10,000 USD in any currency. It includes no currency symbol. 
+                It must have 2 decimal places, the decimal separator must be a period (.), 
+                and the optional thousands separator must be a comma (,).
+             */
+            paymentDetails.ItemTotal = itemTotal;
+
+            List<PaymentDetailsItemType> paymentItems = new List<PaymentDetailsItemType>();
+            PaymentDetailsItemType paymentItem = new PaymentDetailsItemType();
+
+            /*
+             * Item name. This field is required when you pass a value for ItemCategory.
+               Character length and limitations: 127 single-byte characters
+               This field is introduced in version 53.0. 
+             */
+            paymentItem.Name = parameters["itemName"];
+            /*
+             * Item quantity. This field is required when you pass a value for ItemCategory. 
+             * For digital goods (ItemCategory=Digital), this field is required.
+                Character length and limitations: Any positive integer
+                This field is introduced in version 53.0. 
+             */
+            paymentItem.Quantity = Convert.ToInt32(parameters["itemQuantity"]);
+            BasicAmountType amount = new BasicAmountType();
+
+            /*
+             * Cost of item. This field is required when you pass a value for ItemCategory.
+            Note:
+            You must set the currencyID attribute to one of the 3-character currency codes for
+            any of the supported PayPal currencies.
+            Character length and limitations: Value is a positive number which cannot 
+            exceed $10,000 USD in any currency. It includes no currency symbol.
+            It must have 2 decimal places, the decimal separator must be a period (.), 
+            and the optional thousands separator must be a comma (,).
+            This field is introduced in version 53.0.
+             */
+            amount.value = parameters["amt"];
+
+            //PayPal uses 3-character ISO-4217 codes for specifying currencies in fields and variables.
+            amount.currencyID = (CurrencyCodeType)Enum.Parse(typeof(CurrencyCodeType), parameters["currencyCode"]);
+            paymentItem.Amount = amount;
+            paymentItems.Add(paymentItem);
+            paymentDetails.PaymentDetailsItem = paymentItems;
+
+            /*
+             *  (Optional) Your URL for receiving Instant Payment Notification (IPN) 
+             *  about this transaction. If you do not specify this value in the request, 
+             *  the notification URL from your Merchant Profile is used, if one exists.
+                Important:
+                The notify URL applies only to DoExpressCheckoutPayment. 
+                This value is ignored when set in SetExpressCheckout or GetExpressCheckoutDetails.
+                Character length and limitations: 2,048 single-byte alphanumeric characters
+             */
+            paymentDetails.NotifyURL = parameters["notifyURL"];
+
+            List<PaymentDetailsType> payDetailType = new List<PaymentDetailsType>();
+            payDetailType.Add(paymentDetails);
+
+            /*
+             * When implementing parallel payments, you can create up to 10 sets of payment 
+             * details type parameter fields, each representing one payment you are hosting 
+             * on your marketplace.
+             */
+            details.PaymentDetails = payDetailType;
+
+            doCheckoutPaymentRequestType.DoExpressCheckoutPaymentRequestDetails = details;
+            DoExpressCheckoutPaymentReq doExpressCheckoutPaymentReq = new DoExpressCheckoutPaymentReq();
+            doExpressCheckoutPaymentReq.DoExpressCheckoutPaymentRequest = doCheckoutPaymentRequestType;
+            DoExpressCheckoutPaymentResponseType resp = null;
+            try
+            {
+                
+                resp = service.DoExpressCheckoutPayment(doExpressCheckoutPaymentReq);
+            }
+            catch (System.Exception ex)
+            {
+                context.Response.Write(ex.StackTrace);
+                return;
+            }
+
+            // Display response values. 
+            Dictionary<string, string> keyResponseParams = new Dictionary<string, string>();
+            string redirectUrl = null;
+            if (!(resp.Ack.Equals(AckCode.FAILURE) && !(resp.Ack.Equals(AckCode.FAILUREWITHWARNING))))
+            {
+                keyResponseParams.Add("Acknowledgement", resp.Ack.ToString());
+                keyResponseParams.Add("TransactionID", resp.DoExpressCheckoutPaymentResponseDetails.PaymentInfo[0].TransactionID);
+            }
+            displayResponse(context, "DoExpressCheckout", keyResponseParams, service.getLastRequest(), service.getLastResponse(), resp.Errors, redirectUrl);
+        }
+
+        /// <summary>
+        /// Handles DoCapture
+        /// </summary>
+        /// <param name="context"></param>
+        private void DoCapture(HttpContext context)
+        {
+            NameValueCollection parameters = context.Request.Params;
+
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer at 
+            // [https://github.com/paypal/merchant-sdk-java/wiki/SDK-Configuration-Parameters]
+            Dictionary<String, String> configurationMap = Configuration.GetSignatureConfig();
+
+            // Creating service wrapper object to make an API call by loading configuration map.
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
+
+            // ## DoCaptureReq
+            DoCaptureReq req = new DoCaptureReq();
+            // `Amount` to capture which takes mandatory params:
+            //
+            // * `currencyCode`
+            // * `amount`
+            BasicAmountType amount = new BasicAmountType(((CurrencyCodeType)Enum.Parse(typeof(CurrencyCodeType), parameters["currencyCode"])), parameters["amt"]);
+
+            // `DoCaptureRequest` which takes mandatory params:
+            //
+            // * `Authorization ID` - Authorization identification number of the
+            // payment you want to capture. This is the transaction ID returned from
+            // DoExpressCheckoutPayment, DoDirectPayment, or CheckOut. For
+            // point-of-sale transactions, this is the transaction ID returned by
+            // the CheckOut call when the payment action is Authorization.
+            // * `amount` - Amount to capture
+            // * `CompleteCode` - Indicates whether or not this is your last capture.
+            // It is one of the following values:
+            // * Complete – This is the last capture you intend to make.
+            // * NotComplete – You intend to make additional captures.
+            // `Note:
+            // If Complete, any remaining amount of the original authorized
+            // transaction is automatically voided and all remaining open
+            // authorizations are voided.`
+            DoCaptureRequestType reqType = new DoCaptureRequestType
+            (
+                    parameters["authID"], 
+                    amount,
+                    (CompleteCodeType)Enum.Parse(typeof(CompleteCodeType), parameters["completeCodeType"])
+            );    
+            
+            req.DoCaptureRequest = reqType;
+            DoCaptureResponseType resp = null;
+            try
+            {
+                resp = service.DoCapture(req);
+            }
+            catch (System.Exception ex)
+            {
+                context.Response.Write(ex.StackTrace);
+                return;
+            }
+
+            // Display response values. 
+            Dictionary<string, string> keyResponseParams = new Dictionary<string, string>();
+            string redirectUrl = null;
+            if (!(resp.Ack.Equals(AckCode.FAILURE) && !(resp.Ack.Equals(AckCode.FAILUREWITHWARNING))))
+            {
+                keyResponseParams.Add("Acknowledgement", resp.Ack.ToString());               
+            }
+            displayResponse(context, "DoCapture", keyResponseParams, service.getLastRequest(), service.getLastResponse(), resp.Errors, redirectUrl);
+        }
+
+        // <summary>
+        /// Handles DoAuthorization
+        /// </summary>
+        /// <param name="context"></param>
+        private void DoAuthorization(HttpContext context)
+        {
+            NameValueCollection parameters = context.Request.Params;
+
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer at 
+            // [https://github.com/paypal/merchant-sdk-java/wiki/SDK-Configuration-Parameters]
+            Dictionary<String, String> configurationMap = Configuration.GetSignatureConfig();
+
+            // Creating service wrapper object to make an API call by loading configuration map.
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
+
+            // ## DoAuthorizationReq
+            DoAuthorizationReq req = new DoAuthorizationReq();
+
+            // `Amount` which takes mandatory params:
+            //
+            // * `currencyCode`
+            // * `amount
+            BasicAmountType amount = new BasicAmountType(((CurrencyCodeType)Enum.Parse(typeof(CurrencyCodeType), parameters["currencyCode"])), parameters["amt"]);
+
+            // `DoAuthorizationRequest` which takes mandatory params:
+            //
+            // * `Transaction ID` - Value of the order's transaction identification
+            // number returned by PayPal.
+            // * `Amount` - Amount to authorize.
+            DoAuthorizationRequestType reqType = new DoAuthorizationRequestType(parameters["authID"], amount);
+
+            req.DoAuthorizationRequest = reqType;
+            DoAuthorizationResponseType resp = null;
+            try
+            {
+                resp = service.DoAuthorization(req);
+            }
+            catch (System.Exception ex)
+            {
+                context.Response.Write(ex.StackTrace);
+                return;
+            }
+
+            // Display response values. 
+            Dictionary<string, string> keyResponseParams = new Dictionary<string, string>();
+            string redirectUrl = null;
+            if (!(resp.Ack.Equals(AckCode.FAILURE) && !(resp.Ack.Equals(AckCode.FAILUREWITHWARNING))))
+            {
+                keyResponseParams.Add("Acknowledgement", resp.Ack.ToString());                
+            }
+            displayResponse(context, "DoAuthorization", keyResponseParams, service.getLastRequest(), service.getLastResponse(), resp.Errors, redirectUrl);
+            ;
         }
 
         /// <summary>
@@ -1398,7 +1729,7 @@ namespace PayPalAPISample.UseCaseSamples
             orderTotal2.currencyID = (CurrencyCodeType)Enum.Parse(typeof(CurrencyCodeType), parameters["currencyCode"]);
             orderTotal2.value = parameters["orderTotal"];
             paymentDetails2.OrderTotal = orderTotal2;
-            
+
             List<PaymentDetailsType> payDetails = new List<PaymentDetailsType>();
             payDetails.Add(paymentDetails1);
             payDetails.Add(paymentDetails2);
@@ -1427,9 +1758,8 @@ namespace PayPalAPISample.UseCaseSamples
             {
                 keyResponseParams.Add("Acknowledgement", resp.Ack.ToString());
             }
-            displayResponse(context, "SetExpressCheckoutPaymentOrder", keyResponseParams, service.getLastRequest(), service.getLastResponse(), resp.Errors, redirectUrl);
+            displayResponse(context, "ParallelPayment", keyResponseParams, service.getLastRequest(), service.getLastResponse(), resp.Errors, redirectUrl);
         }
-
 
         /// <summary>
         /// Utility method for displaying API response
@@ -1448,11 +1778,11 @@ namespace PayPalAPISample.UseCaseSamples
             context.Response.Write("<html><head><title>");
             context.Response.Write("PayPal Adaptive Payments - " + apiName);
             context.Response.Write("</title><link rel='stylesheet' href='../APICalls/sdk.css' type='text/css'/></head><body>");
-            context.Response.Write("<h3>" + apiName + " response</h3>");
+            context.Response.Write("<h3>" + apiName + " Response</h3>");
             if (errorMessages != null && errorMessages.Count > 0)
             {
                 context.Response.Write("<div class='section_header'>Error messages</div>");
-                context.Response.Write("<div class='note'>Investigate the response object for further error information</div><ul>");
+                context.Response.Write("<div class='note'>Investigate the Response object for further error information</div><ul>");
                 foreach (ErrorType error in errorMessages)
                 {
                     context.Response.Write("<li>" + error.LongMessage + "</li>");
@@ -1465,12 +1795,11 @@ namespace PayPalAPISample.UseCaseSamples
                 red = red + "<br />Please click <a href='" + redirectUrl + "' target='_self'>here</a> to try the flow.</div><br/>";
                 context.Response.Write(red);
             }
-            context.Response.Write("<div class='section_header'>Key values from response</div>");
-            context.Response.Write("<div class='note'>Consult response object and reference doc for complete list of response values.</div><table>");
+            context.Response.Write("<div class='section_header'>Key values from Response</div>");
+            context.Response.Write("<div class='note'>Consult Response object and reference doc for complete list of Response values.</div><table>");
                        
             foreach (KeyValuePair<string, string> entry in responseValues)
             {
-
                 context.Response.Write("<tr><td class='label'>");
                 context.Response.Write(entry.Key);
                 context.Response.Write(": </td><td>");
@@ -1500,6 +1829,15 @@ namespace PayPalAPISample.UseCaseSamples
             context.Response.Write(responsePayload);
             context.Response.Write("</textarea>");
             context.Response.Write("<br/><br/><a href='../Default.aspx'>Home<a><br/><br/></body></html>");
+
+            if (apiName == "DoExpressCheckout")
+            {
+                context.Response.Write("<div id=\"related_calls\">");
+		        context.Response.Write("See also");
+                string transactionID = responseValues["TransactionID"];
+                context.Response.Write("<ul>If paymentType is <b>Authorization</b>. You can capture the payment directly using DoCapture API<li><a id=\"DoCapture\" href='/UseCaseSamples/PaymentCapture.aspx?TransactionId=" + transactionID + "'>DoCapture</a></li>If  paymentType is <b>Order</b>. you need to call DoAuthorization API, before you can capture the payment using DoCapture API.<li><a href='/UseCaseSamples/DoAuthorizationForOrderPayment.aspx?TransactionId=" + transactionID + "'>DoAuthorization</a></li></ul>");
+                context.Response.Write("</div>");
+            }
         }
     }
 }

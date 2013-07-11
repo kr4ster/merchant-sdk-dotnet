@@ -382,12 +382,33 @@
     <Compile Include="ShowError.aspx.designer.cs">
       <DependentUpon>ShowError.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UseCaseSamples\DoAuthorizationForOrderPayment.aspx.cs">
+      <DependentUpon>DoAuthorizationForOrderPayment.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UseCaseSamples\DoAuthorizationForOrderPayment.aspx.designer.cs">
+      <DependentUpon>DoAuthorizationForOrderPayment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UseCaseSamples\DoExpressCheckout.aspx.cs">
+      <DependentUpon>DoExpressCheckout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UseCaseSamples\DoExpressCheckout.aspx.designer.cs">
+      <DependentUpon>DoExpressCheckout.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UseCaseSamples\ParallelPayment.aspx.cs">
       <DependentUpon>ParallelPayment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UseCaseSamples\ParallelPayment.aspx.designer.cs">
       <DependentUpon>ParallelPayment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UseCaseSamples\PaymentCapture.aspx.cs">
+      <DependentUpon>PaymentCapture.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UseCaseSamples\PaymentCapture.aspx.designer.cs">
+      <DependentUpon>PaymentCapture.aspx</DependentUpon>
     </Compile>
     <Compile Include="UseCaseSamples\Payments.ashx.cs">
       <DependentUpon>Payments.ashx</DependentUpon>
@@ -425,7 +446,10 @@
     <None Include="IPN-README.md" />
     <None Include="paypal_cert.p12" />
     <None Include="README.md" />
+    <Content Include="UseCaseSamples\DoAuthorizationForOrderPayment.aspx" />
+    <Content Include="UseCaseSamples\DoExpressCheckout.aspx" />
     <Content Include="UseCaseSamples\ParallelPayment.aspx" />
+    <Content Include="UseCaseSamples\PaymentCapture.aspx" />
     <Content Include="UseCaseSamples\RecurringPaymentsUsingCreditCard.aspx" />
     <Content Include="UseCaseSamples\SetExpressCheckoutForRecurringPayments.aspx" />
     <Content Include="UseCaseSamples\SetExpressCheckoutPaymentAuthorization.aspx" />
@@ -454,8 +478,8 @@
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
-          <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>59137</DevelopmentServerPort>
+          <AutoAssignPort>False</AutoAssignPort>
+          <DevelopmentServerPort>3035</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

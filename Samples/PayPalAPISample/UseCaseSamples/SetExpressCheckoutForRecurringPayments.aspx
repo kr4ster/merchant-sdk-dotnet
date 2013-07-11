@@ -4,16 +4,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>PayPal Merchant SDK - SetExpressCheckoutForRecurringPayments</title>
 </head>
 <body>
     <img src="https://devtools-paypal.com/image/bdg_payments_by_pp_2line.png" alt="PAYMENTS BY PayPal" />
     <div id="wrapper">
         <div id="header">
-            <h3>SetExpressCheckout for creating a billing agreement for recurring payments</h3>
+            <h3>SetExpressCheckoutForRecurringPayments</h3>
             <div id="apidetails">
-                Set the details for express checkout, you can set up billing agreements for reference
-                transactions and recurring payments.
+              <p>Set the details of ExpressCheckout Billing Agreements for Reference Transactions and Recurring Payments.</p>
             </div>
         </div>
         <br />
@@ -24,8 +23,7 @@
                         <b>BuyerMail</b>
                     </div>
                     <div class="param_value">
-                        <input type="text" name="buyerMail" value="platfo_1255077030_biz@gmail.com" size="50"
-                            maxlength="260" />
+                        <input type="text" name="buyerMail" value="platfo_1255077030_biz@gmail.com" size="50" maxlength="260" />
                     </div>
                 </div>
                 <br />
@@ -34,8 +32,7 @@
                 </div>
                 <br />
                 <div class="params">
-                    <div class="param_name">
-                        Total Shipping costs
+                    <div class="param_name">Total Shipping costs
                     </div>
                     <div class="param_value">
                         <input type="text" name="shippingTotal" id="shippingTotal" value="0.50" />
@@ -74,9 +71,7 @@
                     </div>
                 </div>
                 <div class="params">
-                    <div class="param_name">
-                        CurrencyCode
-                    </div>
+                    <div class="param_name">CurrencyCode</div>
                     <div class="param_value">
                         <input type="text" name="currencyCode" value="USD" size="50" maxlength="260" />
                     </div>

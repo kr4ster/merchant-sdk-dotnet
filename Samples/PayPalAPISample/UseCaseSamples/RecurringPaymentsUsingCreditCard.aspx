@@ -4,17 +4,15 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>PayPal Merchant SDK - RecurringPaymentsProfileUsingCreditCard</title>
 </head>
 <body>
     <img src="https://devtools-paypal.com/image/bdg_payments_by_pp_2line.png" alt="PAYMENTS BY PayPal" />
     <div id="wrapper">
         <div id="header">
-            <h3>CreateRecurringPaymentsProfile Using Credit Card</h3>
+            <h3>Create Recurring Payments Profile Using Credit Card</h3>
 			<div id="apidetails">
-				<p>The CreateRecurringPaymentsProfile API operation creates a
-					recurring payments profile. You can directly use Credit Card for
-					creating a profile</p>
+				<p>CreateRecurringPaymentsProfile API operation creates a recurring payments profile. You can directly use Credit Card for creating a Profile.</p>
 			</div>
         </div>
         <br />
@@ -22,7 +20,7 @@
             <div id="request_form">
                <div class="params">
 					<div class="param_name">
-						<b><span style="text-decoration: underline">Credit Card * <</span>
+						<b><span style="text-decoration: underline">Credit Card *</span>
 						</b>
 					</div>
 				</div>
