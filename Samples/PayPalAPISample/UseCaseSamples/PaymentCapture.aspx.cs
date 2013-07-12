@@ -12,7 +12,7 @@ namespace PayPalAPISample.UseCaseSamples
             {
                 if (Context.Request.QueryString["TransactionId"] != null)
                 {
-                    authID.Value = Request.QueryString["TransactionId"];
+                    authID.Text = Request.QueryString["TransactionId"];
                 }
             }
         }

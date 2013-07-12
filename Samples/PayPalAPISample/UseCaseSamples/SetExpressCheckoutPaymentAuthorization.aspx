@@ -12,114 +12,119 @@
         <div id="header">
             <h3>SetExpressCheckoutPaymentAuthorization</h3>
 			    <div id="apidetails">
-                    <p><i>Set the details for <b>ExpressCheckout</b>. Payment Type should be set to <b>Authorization</b> to Create Payment Authorization. Authorized Payment can be Captured using DoCapture API.</i></p>             
+                    <ul><li><i>Set the details for <b>ExpressCheckout</b></i></li><li><i>Payment Type should be set to <b>Authorization</b> to Create Payment Authorization</i></li><li><i>Authorized Payment can be Captured directly using DoCapture API</i></li></ul>             
                 </div>
 		</div>
         <br />
         <form id="form1" runat="server" method="post">
             <div id="request_form">
-               <div class="params">
-					<div class="param_name"><b>BuyerMail</b></div>
-					<div class="param_value">
-						<input type="text" name="buyerMail" value="platfo_1255077030_biz@gmail.com" size="50" maxlength="260" />
-					</div>
-				</div>
+                <div class="params">
+                    <div class="param_name">
+                        <asp:Label runat="server" ID="LabelBuyerMail" Text="Buyer Email" Font-Bold="true" />
+                        <asp:TextBox runat="server" ID="buyerMail" Text="platfo_1255077030_biz@gmail.com" Width="20%" />
+                    </div>
+                </div>
 				<br />
 				<div class="section_header">
-					<b><u>Payment Details:</u></b>
+					<asp:Label runat="server" ID="LabelPaymentDetails" Text="Payment Details" Font-Underline="true"
+                    Font-Bold="true" />
 				</div>
                 <br />
 				<div class="params">
-					<div class="param_name">Total Shipping costs</div>
+					<div class="param_name">Total Shipping Cost</div>
 					<div class="param_value">
-						<input type="text" name="shippingTotal" id="shippingTotal"
-							value="0.50" />
+                        <asp:TextBox runat="server" ID="shippingTotal" Text="0.50" />
 					</div>
 				</div>
 				<div class="params">
-					<div class="param_name">Total insurance cost</div>
+					<div class="param_name">Total Insurance Cost</div>
 					<div class="param_value">
-						<input type="text" name="insuranceTotal" id="insuranceTotal" />
+                        <asp:TextBox runat="server" ID="insuranceTotal" />
 					</div>
 				</div>
 				<div class="params">
-					<div class="param_name">Total handling cost</div>
+					<div class="param_name">Total Handling Cost</div>
 					<div class="param_value">
-						<input type="text" name="handlingTotal" id="handlingTotal" />
+                        <asp:TextBox runat="server" ID="handlingTotal" />
 					</div>
 				</div>
 				<div class="params">
 					<div class="param_name">Total Tax</div>
 					<div class="param_value">
-						<input type="text" name="taxTotal" id="taxTotal" value="" />
+                        <asp:TextBox runat="server" ID="taxTotal" />
 					</div>
 				</div>
 				<div class="params">
-					<div class="param_name">Order description</div>
+					<div class="param_name">Order Description</div>
 					<div class="param_value">
-						<textarea cols="40" rows="5" name="orderDescription"></textarea>
+                        <asp:TextBox runat="server" ID="orderDescription" Text="Description" />
 					</div>
 				</div>
 				<div class="params">
 					<div class="param_name">CurrencyCode</div>
 					<div class="param_value">
-						<input type="text" name="currencyCode" value="USD" size="50" maxlength="260" />
+                        <asp:TextBox runat="server" ID="currencyCode" Text="USD"  />
 					</div>
 				</div>
 				<div class="params">
-					<div class="param_name">PaymentType (Select Authorization UseCase)</div>
+					<div class="param_name">Payment Type (Select Authorization UseCase)</div>
 					<div class="param_value">
-						<select name="paymentType">
-							<option value="AUTHORIZATION" selected="selected">Authorization</option>
-							<option disabled="disabled" value="SALE">Sale</option>
-							<option disabled="disabled" value="ORDER">Order</option>
-						</select>
+                        <asp:DropDownList runat="server" ID="paymentType">
+                            <asp:ListItem Text="Sale" Value="SALE" Enabled="false" />
+                            <asp:ListItem Text="Authorization" Value="AUTHORIZATION" Selected="True" />
+                            <asp:ListItem Text="Order" Value="ORDER" Enabled="false" />
+                        </asp:DropDownList>
 					</div>
 				</div>
-				<div class="param_name">Item Details</div>
+                <br />
+				<div class="section_header">
+					<asp:Label runat="server" ID="LabelItemDetails" Text="Item Details" Font-Underline="true"
+                    Font-Bold="true" />
+				</div>
+                <br />
 				<table class="params">
 					<tr>
 						<th class="param_name">Name</th>
 						<th class="param_name">Cost</th>
 						<th class="param_name">Quantity</th>
-						<th class="param_name">Sales tax</th>
+						<th class="param_name">Sales Tax</th>
 						<th class="param_name">Item Category</th>
-						<th class="param_name">Description (optional)</th>
 					</tr>
 
 					<tr>
-						<td><div class="param_value">
-								<input type="text" name="itemName" id="itemName" value="Item Name" />
+						<td>
+                            <div class="param_value">
+                                <asp:TextBox runat="server" ID="itemName" Text="Item Name" />
+							</div>
+                        </td>
+						<td>
+                            <div class="param_value">
+	                            <asp:TextBox runat="server" ID="itemAmount" Text="5.27" />
 							</div></td>
-
-						<td><div class="param_value">
-								<input type="text" name="itemAmount" id="itemAmount" value="5.27" />
-							</div></td>
-
-						<td><div class="param_value">
-								<input type="text" name="itemQuantity" id="itemQuantity" value="2" />
-							</div></td>
-
-						<td><div class="param_value">
-								<input type="text" name="salesTax" id="salesTax" value="" />
-							</div></td>
-
-						<td><div class="param_value">
-								<select name="itemCategory">
-                                    <option value="PHYSICAL">Physical</option>
-                                    <option value="DIGITAL">Digital</option>
-                                </select>
-							</div></td>
-
-						<td><div class="param_value">
-								<input type="text" name="itemDescription" id="itemDescription" />
-							</div></td>
+						<td>
+                            <div class="param_value">
+	                            <asp:TextBox runat="server" ID="itemQuantity" Text="2" />
+							</div>
+                        </td>
+						<td>
+                            <div class="param_value">
+	                            <asp:TextBox runat="server" ID="salesTax" />
+							</div>
+                        </td>
+						<td>
+                            <div class="param_value">
+                                <asp:DropDownList runat="server" ID="itemCategory">
+                                    <asp:ListItem Text="Physical" Value="PHYSICAL" />
+                                    <asp:ListItem Text="Digital" Value="DIGITAL" />
+                                </asp:DropDownList>
+							</div>
+                        </td>			
 					</tr>
 				</table>
 				<div class="params">
 					<div class="param_name">IPN Notification Url (Receive IPN call back from PayPal)</div>
 					<div class="param_value">
-						<input type="text" size="50" name="notifyURL" />
+                        <asp:TextBox runat="server" ID="notifyURL" />
 					</div>
 				</div>				
 				<br />
@@ -127,7 +132,10 @@
                     <asp:Button ID="ButtonPayments" Text="SetExpressCheckoutPaymentAuthorization"  runat="server" PostBackUrl="~/UseCaseSamples/Payments.ashx" />
 				</div>
 				<br />
-                <a href="../Default.aspx">Home</a>
+                <asp:HyperLink runat="server" ID="HyperLinkHome" NavigateUrl="~/Default.aspx" Text="Home" />
+                <br />
+                <br />
+                <asp:HyperLink ID="HyperLinkBack" runat="server" NavigateUrl="javascript:history.back();" Text="Back" />
             </div>
         </form>
     </div>

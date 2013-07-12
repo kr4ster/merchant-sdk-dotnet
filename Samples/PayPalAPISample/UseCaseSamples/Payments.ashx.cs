@@ -162,14 +162,6 @@ namespace PayPalAPISample.UseCaseSamples
             item.ItemCategory = (ItemCategoryType)Enum.Parse(typeof(ItemCategoryType), parameters["itemCategory"]);
 
             /*
-             *  (Optional) Item description.
-                Character length and limitations: 127 single-byte characters
-                This field is introduced in version 53.0. 
-             */
-            item.Description = parameters["itemDescription"];
-            lineItems.Add(item);
-
-            /*
              * (Optional) Item sales tax.
                 Note: You must set the currencyID attribute to one of 
                 the 3-character currency codes for any of the supported PayPal currencies.
@@ -286,7 +278,6 @@ namespace PayPalAPISample.UseCaseSamples
                 paydtl.OrderDescription = parameters["orderDescription"];
             }
 
-
             BasicAmountType itemsTotal = new BasicAmountType();
             itemsTotal.value = Convert.ToString(itemTotal);
 
@@ -398,73 +389,7 @@ namespace PayPalAPISample.UseCaseSamples
                 Character length and limitations: Must be a valid date, in UTC/GMT format
              */
             RecurringPaymentsProfileDetailsType profileDetails = new RecurringPaymentsProfileDetailsType(parameters["billingStartDate"] + "T00:00:00:000Z");
-            
-            /*
-             *  (Optional) Full name of the person receiving the product or service paid for
-             *   by the recurring payment. If not present, the name in the buyer's PayPal
-             *   account is used.
-                Character length and limitations: 32 single-byte characters
-             */
-            if (parameters["subscriberName"] != string.Empty)
-            {
-                profileDetails.SubscriberName = parameters["subscriberName"];
-            }
-            else if (parameters["shippingName"] != string.Empty)
-            {
-                AddressType shippingAddr = new AddressType();
-                
-                /*
-                 * Person's name associated with this shipping address. 
-                 * It is required if using a shipping address.
-                   Character length and limitations: 32 single-byte characters
-                 */
-                shippingAddr.Name = parameters["shippingName"];
-
-                /*
-                 * First street address. It is required if using a shipping address.
-                   Character length and limitations: 100 single-byte characters
-                 */
-                shippingAddr.Street1 = parameters["shippingStreet1"];
-
-                /*
-                 *  (Optional) Second street address.
-                    Character length and limitations: 100 single-byte characters
-                 */
-                shippingAddr.Street2 = parameters["shippingStreet2"];
-
-                /*
-                 * Optional) Phone number.
-                   Character length and limitations: 20 single-byte characters
-                 */
-                shippingAddr.Phone = parameters["shippingPhone"];
-
-                /*
-                 * Name of city. It is required if using a shipping address.
-                   Character length and limitations: 40 single-byte characters
-                 */
-                shippingAddr.CityName = parameters["shippingCity"];
-
-                /*
-                 * State or province. It is required if using a shipping address.
-                   Character length and limitations: 40 single-byte characters
-                 */
-                shippingAddr.StateOrProvince = parameters["shippingState"];
-
-                /*
-                 * Country code. It is required if using a shipping address.
-                  Character length and limitations: 2 single-byte characters
-                 */
-                shippingAddr.CountryName = parameters["shippingCountry"];
-                /*
-                 * U.S. ZIP code or other country-specific postal code. 
-                 * It is required if using a U.S. shipping address; may be required 
-                 * for other countries.
-                   Character length and limitations: 20 single-byte characters
-                 */
-                shippingAddr.PostalCode = parameters["shippingPostalCode"];
-                profileDetails.SubscriberShippingAddress = shippingAddr;
-            }
-
+                                   
             // Populate schedule details
             ScheduleDetailsType scheduleDetails = new ScheduleDetailsType();
 
@@ -504,46 +429,6 @@ namespace PayPalAPISample.UseCaseSamples
 
             CurrencyCodeType currency = (CurrencyCodeType)Enum.Parse(typeof(CurrencyCodeType), "USD");
 
-            /*
-             *  (Optional) Initial non-recurring payment amount due immediately upon profile creation.
-             *   Use an initial amount for enrolment or set-up fees.
-                 Note:
-                 All amounts included in the request must have the same currency.
-                 Character length and limitations:
-                  Value is a positive number which cannot exceed $10,000 USD in any currency.
-                  It includes no currency symbol. 
-                  It must have 2 decimal places, the decimal separator must be a period (.),
-                  and the optional thousands separator must be a comma (,). 
-             */
-            if (parameters["initialAmount"] != string.Empty)
-            {
-                ActivationDetailsType activationDetails = new ActivationDetailsType(new BasicAmountType(currency, parameters["initialAmount"]));
-                /*
-                 *  (Optional) Action you can specify when a payment fails. 
-                 *  It is one of the following values:
-                    1. ContinueOnFailure – By default, PayPal suspends the pending profile in the event that
-                     the initial payment amount fails. You can override this default behavior by setting 
-                     this field to ContinueOnFailure. Then, if the initial payment amount fails, 
-                     PayPal adds the failed payment amount to the outstanding balance for this 
-                     recurring payment profile. When you specify ContinueOnFailure, a success code is
-                     returned to you in the CreateRecurringPaymentsProfile response and the recurring
-                     payments profile is activated for scheduled billing immediately. 
-                     You should check your IPN messages or PayPal account for updates of the
-                     payment status.
-                    2. CancelOnFailure – If this field is not set or you set it to CancelOnFailure,
-                     PayPal creates the recurring payment profile, but places it into a pending status
-                     until the initial payment completes. If the initial payment clears, 
-                     PayPal notifies you by IPN that the pending profile has been activated. 
-                     If the payment fails, PayPal notifies you by IPN that the pending profile 
-                     has been canceled.
-
-                 */
-                if (parameters["failedInitialAmountAction"] != string.Empty)
-                {
-                    activationDetails.FailedInitialAmountAction = (FailedPaymentActionType)Enum.Parse(typeof(FailedPaymentActionType), parameters["failedInitialAmountAction"]);
-                }
-                scheduleDetails.ActivationDetails = activationDetails;
-            }
             if (parameters["trialBillingAmount"] != string.Empty)
             {
                 /*
@@ -599,31 +484,6 @@ namespace PayPalAPISample.UseCaseSamples
                 BillingPeriodDetailsType trialPeriod = new BillingPeriodDetailsType(period, frequency, paymentAmount);
                 trialPeriod.TotalBillingCycles = numCycles;
 
-                /*
-                 *  (Optional) Shipping amount for each billing cycle during this payment period.
-                    Note:
-                    All amounts in the request must have the same currency.
-                 */
-                if (parameters["trialShippingAmount"] != string.Empty)
-                {
-                    trialPeriod.ShippingAmount = new BasicAmountType(currency, parameters["trialShippingAmount"]);
-                }
-
-                /*
-                 *  (Optional) Tax amount for each billing cycle during this payment period.
-                    Note:
-                    All amounts in the request must have the same currency.
-                    Character length and limitations: 
-                    Value is a positive number which cannot exceed $10,000 USD in any currency.
-                    It includes no currency symbol. It must have 2 decimal places, 
-                    the decimal separator must be a period (.), and the optional 
-                    thousands separator must be a comma (,).
-                 */
-                if (parameters["trialTaxAmount"] != string.Empty)
-                {
-                    trialPeriod.TaxAmount = new BasicAmountType(currency, parameters["trialTaxAmount"]);
-                }
-
                 scheduleDetails.TrialPeriod = trialPeriod;
             }
 
@@ -676,30 +536,8 @@ namespace PayPalAPISample.UseCaseSamples
 
                 BillingPeriodDetailsType paymentPeriod = new BillingPeriodDetailsType(period, frequency, paymentAmount);
 
-                paymentPeriod.TotalBillingCycles = numCycles;
-                /*
-                 *  (Optional) Shipping amount for each billing cycle during this payment period.
-                    Note:
-                    All amounts in the request must have the same currency.
-                 */
-                if (parameters["shippingAmount"] != string.Empty)
-                {
-                    paymentPeriod.ShippingAmount = new BasicAmountType(currency, parameters["shippingAmount"]);
-                }
-                /*
-                 *  (Optional) Tax amount for each billing cycle during this payment period.
-                    Note:
-                    All amounts in the request must have the same currency.
-                    Character length and limitations: 
-                    Value is a positive number which cannot exceed $10,000 USD in any currency.
-                    It includes no currency symbol. It must have 2 decimal places, 
-                    the decimal separator must be a period (.), and the optional 
-                    thousands separator must be a comma (,).
-                 */
-                if (parameters["taxAmount"] != string.Empty)
-                {
-                    paymentPeriod.TaxAmount = new BasicAmountType(currency, parameters["taxAmount"]);
-                }
+                paymentPeriod.TotalBillingCycles = numCycles;          
+
                 scheduleDetails.PaymentPeriod = paymentPeriod;
             }
 
@@ -736,14 +574,6 @@ namespace PayPalAPISample.UseCaseSamples
 
             //Expiry Year
             cc.ExpYear = Convert.ToInt32(parameters["expYear"]);
-            PayerInfoType payerInfo = new PayerInfoType();
-
-            /*
-             *  (Required) Email address of buyer.
-                Character length and limitations: 127 single-byte characters
-             */
-            payerInfo.Payer = parameters["BuyerEmailId"];
-            cc.CardOwner = payerInfo;
 
             /*
              * (Optional) Type of credit card. 
@@ -756,8 +586,7 @@ namespace PayPalAPISample.UseCaseSamples
               In addition, you must specify either STARTDATE or ISSUENUMBER.
              */
             CreditCardTypeType type =  (CreditCardTypeType)Enum.Parse(typeof(CreditCardTypeType), parameters["creditCardType"]);
-            cc.CreditCardType = type;
-                       
+            cc.CreditCardType = type;                       
 
             reqDetails.CreditCard = cc;
 
@@ -884,14 +713,6 @@ namespace PayPalAPISample.UseCaseSamples
                This field is available since version 65.1. 
              */
             item.ItemCategory = (ItemCategoryType)Enum.Parse(typeof(ItemCategoryType), parameters["itemCategory"]);
-
-            /*
-             *  (Optional) Item description.
-                Character length and limitations: 127 single-byte characters
-                This field is introduced in version 53.0. 
-             */
-            item.Description = parameters["itemDescription"];
-            lineItems.Add(item);
 
             /*
              * (Optional) Item sales tax.
@@ -1160,12 +981,6 @@ namespace PayPalAPISample.UseCaseSamples
              */
             item.ItemCategory = (ItemCategoryType)Enum.Parse(typeof(ItemCategoryType), parameters["itemCategory"]);
 
-            /*
-             *  (Optional) Item description.
-                Character length and limitations: 127 single-byte characters
-                This field is introduced in version 53.0. 
-             */
-            item.Description = parameters["itemDescription"];
             lineItems.Add(item);
 
             /*
@@ -1524,6 +1339,7 @@ namespace PayPalAPISample.UseCaseSamples
             {
                 keyResponseParams.Add("Acknowledgement", resp.Ack.ToString());
                 keyResponseParams.Add("TransactionID", resp.DoExpressCheckoutPaymentResponseDetails.PaymentInfo[0].TransactionID);
+                keyResponseParams.Add("PaymentType", parameters["paymentType"]);
             }
             displayResponse(context, "DoExpressCheckout", keyResponseParams, service.getLastRequest(), service.getLastResponse(), resp.Errors, redirectUrl);
         }
@@ -1646,10 +1462,10 @@ namespace PayPalAPISample.UseCaseSamples
             string redirectUrl = null;
             if (!(resp.Ack.Equals(AckCode.FAILURE) && !(resp.Ack.Equals(AckCode.FAILUREWITHWARNING))))
             {
-                keyResponseParams.Add("Acknowledgement", resp.Ack.ToString());                
+                keyResponseParams.Add("Acknowledgement", resp.Ack.ToString());
+                keyResponseParams.Add("TransactionID", resp.TransactionID);
             }
             displayResponse(context, "DoAuthorization", keyResponseParams, service.getLastRequest(), service.getLastResponse(), resp.Errors, redirectUrl);
-            ;
         }
 
         /// <summary>
@@ -1782,7 +1598,7 @@ namespace PayPalAPISample.UseCaseSamples
             if (errorMessages != null && errorMessages.Count > 0)
             {
                 context.Response.Write("<div class='section_header'>Error messages</div>");
-                context.Response.Write("<div class='note'>Investigate the Response object for further error information</div><ul>");
+                context.Response.Write("<div class='note'>Investigate the Response object for further Error information</div><ul>");
                 foreach (ErrorType error in errorMessages)
                 {
                     context.Response.Write("<li>" + error.LongMessage + "</li>");
@@ -1791,12 +1607,12 @@ namespace PayPalAPISample.UseCaseSamples
             }
             if (redirectUrl != null)
             {
-                string red = "<div><p><i>The API has web flow, hence the user has to be redirected to " + redirectUrl;
-                red = red + "<br/>Please click <a href='" + redirectUrl + "' target='_self'>here</a> to redirect to the web flow.</i></p></div><br/>";
+                string red = "<div><ul><li><i>The API has web flow, hence the user has to be redirected to " + redirectUrl;
+                red = red + "</i></li><li><i>Please click <a href='" + redirectUrl + "' target='_self'>here</a> to be redirected to the web flow</i></li></ul></div>";
                 context.Response.Write(red);
             }
             context.Response.Write("<div class='section_header'>Key Values From Response</div>");
-            context.Response.Write("<div class='note'>Consult Response object and reference doc for the complete list of Response values.</div><table>");
+            context.Response.Write("<div class='note'><ul><li><i>Consult Response object and reference doc for the complete list of Response values</i></li></ul></div><table>");
                        
             foreach (KeyValuePair<string, string> entry in responseValues)
             {
@@ -1827,18 +1643,37 @@ namespace PayPalAPISample.UseCaseSamples
             context.Response.Write(requestPayload);
             context.Response.Write("</textarea><br/><h4>Response</h4><textarea rows=15 cols=80 readonly>");
             context.Response.Write(responsePayload);
-            context.Response.Write("</textarea>");
-            context.Response.Write("<br/><br/><a href='../Default.aspx'>Home<a>");
-            context.Response.Write("<br/><br/><a href='javascript:history.back();'>Back<a></body></html>");
+            context.Response.Write("</textarea>");           
 
             if (apiName == "DoExpressCheckout")
             {
-                context.Response.Write("<div id=\"related_calls\">");
-		        context.Response.Write("See also");
+                context.Response.Write("<br/><br/><div id=\"related_calls\">");
+		        context.Response.Write("<b>Note</b>");
                 string transactionID = responseValues["TransactionID"];
-                context.Response.Write("<ul>If the Payment Type is <b>Authorization</b>, you can capture the payment directly using DoCapture API<li><a id=\"DoCapture\" href='/UseCaseSamples/PaymentCapture.aspx?TransactionId=" + transactionID + "'>DoCapture</a></li>If the Payment Type is <b>Order</b>. you need to call DoAuthorization API, before you can capture the payment using DoCapture API.<li><a href='/UseCaseSamples/DoAuthorizationForOrderPayment.aspx?TransactionId=" + transactionID + "'>DoAuthorization</a></li></ul>");
+                string paymentType = responseValues["PaymentType"];
+
+                if (paymentType.ToUpper() == "AUTHORIZATION")
+                {
+                    context.Response.Write("<br/><ul><li><i>As the Payment Type is <b>Authorization</b>, you can Capture Payment directly using DoCapture API <a id=\"DoCapture\" href='/UseCaseSamples/PaymentCapture.aspx?TransactionId=" + transactionID + "'>DoCapture</a></i></li></ul>");
+                }
+                else if (paymentType.ToUpper() == "ORDER")
+                {
+                    context.Response.Write("<br/><ul><li><i>As the Payment Type is <b>Order</b>, you need to call DoAuthorization API <a href='/UseCaseSamples/DoAuthorizationForOrderPayment.aspx?TransactionId=" + transactionID + "'>DoAuthorization</a> before you can Capture Payment using DoCapture API</i></li></ul>");
+                }
                 context.Response.Write("</div>");
             }
+
+            if (apiName == "DoAuthorization")
+            {
+                string transactionID = responseValues["TransactionID"];
+                context.Response.Write("<br/><br/><div id=\"related_calls\">");
+                context.Response.Write("<b>Note</b>");
+                context.Response.Write("<br/><ul><li><i>Capture Payment using DoCapture API <a id=\"DoCapture\" href='/UseCaseSamples/PaymentCapture.aspx?TransactionId=" + transactionID + "'>DoCapture</a></i></li></ul>");   
+                context.Response.Write("</div>");
+            }
+
+            context.Response.Write("<br/><br/><a href='../Default.aspx'>Home<a>");
+            context.Response.Write("<br/><br/><a href='javascript:history.back();'>Back<a></body></html>");
         }
     }
 }

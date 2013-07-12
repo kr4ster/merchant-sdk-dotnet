@@ -28,7 +28,7 @@ namespace PayPalAPISample.UseCaseSamples {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText authID;
+        protected global::System.Web.UI.WebControls.TextBox authID;
         
         /// <summary>
         /// ButtonPayments control.
@@ -38,5 +38,23 @@ namespace PayPalAPISample.UseCaseSamples {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonPayments;
+        
+        /// <summary>
+        /// HyperLinkHome control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLinkHome;
+        
+        /// <summary>
+        /// HyperLinkBack control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLinkBack;
     }
 }

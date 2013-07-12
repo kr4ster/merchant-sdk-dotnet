@@ -11,35 +11,38 @@
     <div id="wrapper">
         <div id="header">
             <h3>DoExpressCheckout</h3>
-            <div id="apidetails"><p><i>Used to make ExpressCheckout payment. Please select the appropriate Payment Type to be set in SetExpressCheckout.</i></p></div>
+            <div id="apidetails"><ul><li><i>Used to make ExpressCheckout payment. Please select the appropriate Payment Type to be set in SetExpressCheckout</i></li></ul></div>
         </div>
-        <br />
         <form id="form1" runat="server" method="post">
         <div id="request_form">
             <div class="params">
                 <div class="param_name">Token*(Get Token via SetExpressCheckout)</div>
                 <div class="param_value">
-                    <input type="text" name="token" value="<%= Token %>" size="50" maxlength="260" readonly="readonly" />
+                    <asp:TextBox runat="server" ID="token" ReadOnly="true"/>
                 </div>
             </div>
+            <br />
+            <div class="section_header">
+                <asp:Label runat="server" ID="LabelPaymentDetails" Text="Payment Details" Font-Underline="true"
+                    Font-Bold="true" />
+            </div>
+            <br />
             <div class="params">
                 <div class="param_name">Payer ID*</div>
                 <div class="param_value">
-                    <input type="text" name="payerID" value="<%= PayerId %>" size="50" maxlength="260"
-                        readonly="readonly" />
+                    <asp:TextBox runat="server" ID="payerId" ReadOnly="true"/>
                 </div>
             </div>
             <div class="params">
                 <div class="param_name">Payment Type</div>
-                <div class="param_value">
-                    <select name="paymentType" id="paymentType" runat="server">
-                        <option value="AUTHORIZATION">Authorization</option>
-                        <option value="SALE">Sale</option>
-                        <option value="ORDER">Order</option>
-                    </select>
+                <div class="param_value">             
+                    <asp:DropDownList runat="server" ID="paymentType">
+                        <asp:ListItem Text="Sale" Value="SALE" />
+                        <asp:ListItem Text="Authorization" Value="AUTHORIZATION" />
+                        <asp:ListItem Text="Order" Value="ORDER" />
+                    </asp:DropDownList>
                 </div>
             </div>
-            <div class="section_header">Payment Details*</div>
             <table class="params">
                 <tr>
                     <th class="param_name">
@@ -58,23 +61,22 @@
                 <tr>
                     <td>
                         <div class="param_value">
-                            <input type="text" name="itemName" id="itemName" value="Item Name" />
+                            <asp:TextBox runat="server" ID="itemName" Text="Name" />
                         </div>
                     </td>
                     <td>
                         <div class="param_value">
-                            <input type="text" name="amt" id="amt" value="5.27" />
+                            <asp:TextBox runat="server" ID="amt" Text="5.27" />
                         </div>
                     </td>
                     <td>
                         <div class="param_value">
-                            <input type="text" name="currencyCode" id="currencyCode" value="USD" runat="server"
-                                readonly="readonly" />
+                            <asp:TextBox runat="server" ID="currencyCode" Text="USD" ReadOnly="true" />
                         </div>
                     </td>
                     <td>
                         <div class="param_value">
-                            <input type="text" name="itemQuantity" id="itemQuantity" value="2" />
+                            <asp:TextBox runat="server" ID="itemQuantity" Text="2" />
                         </div>
                     </td>
                 </tr>
@@ -82,7 +84,7 @@
             <div class="params">
                 <div class="param_name">IPN Notification Url (Receive IPN call back from PayPal)</div>
                 <div class="param_value">
-                    <input type="text" size="50" name="notifyURL" />
+                    <asp:TextBox runat="server" ID="notifyURL" />
                 </div>
             </div>
         </div>
@@ -91,7 +93,10 @@
             <asp:Button ID="ButtonPayments" Text="DoExpressCheckout" runat="server" PostBackUrl="~/UseCaseSamples/Payments.ashx" />
         </div>
         <br />
-        <a href="../Default.aspx">Home</a>
+        <asp:HyperLink runat="server" ID="HyperLinkHome" NavigateUrl="~/Default.aspx" Text="Home" />
+        <br />
+        <br />
+        <asp:HyperLink ID="HyperLinkBack" runat="server" NavigateUrl="javascript:history.back();" Text="Back" />
         </form>
     </div>
 </body>

@@ -12,38 +12,35 @@
         <div id="header">
             <h3>DoCapture</h3>
 			<div id="apidetails">
-                <p><i>Used to captures an authorized payment.</i></p>
+                <ul><li><i>Used to captures an authorized payment</i></li></ul>
 			</div>
         </div>
-        <br />
         <form id="form1" runat="server" method="post">
         <div id="request_form">
-            <div class="param_name">AuthorizationID*</div>
+            <div class="param_name">Authorization ID*</div>
 					<div class="param_value">
-						<input type="text" name="authID" id="authID" size="50" maxlength="260" runat="server" readonly="readonly" />
+                        <asp:TextBox runat="server" ID="authID" ReadOnly="true" />
 					</div>
 				</div>
 				<div class="params">
 					<div class="param_name">Amount*</div>
 					<div class="param_value">
-						<input type="text" name="amt" value="1.00" size="50"
-							maxlength="260" />
+                        <asp:TextBox runat="server" ID="amt" Text="1.00" />
 					</div>
 				</div>
 				<div class="params">
 					<div class="param_name">Currency Code*</div>
 					<div class="param_value">
-						<input type="text" name="currencyCode" value="USD" size="50"
-							maxlength="260" />
+                        <asp:TextBox runat="server" ID="currencyCode" Text="USD" />
 					</div>
 				</div>
 				<div class="params">
-					<div class="param_name">CompleteCodeType*</div>
+					<div class="param_name">Complete Code Type*</div>
 					<div class="param_value">
-						<select name="completeCodeType">
-							<option value="COMPLETE">Complete</option>
-							<option value="NOTCOMPLETE">NotComplete</option>
-						</select>
+                        <asp:DropDownList runat="server" ID="completeCodeType">
+                            <asp:ListItem Text="Complete" Value="COMPLETE" />
+                            <asp:ListItem Text="Not Complete" Value="NOTCOMPLETE" />
+                        </asp:DropDownList>
 					</div>
 				</div>
         <br />
@@ -51,7 +48,10 @@
             <asp:Button ID="ButtonPayments" Text="DoCapture" runat="server" PostBackUrl="~/UseCaseSamples/Payments.ashx" />
         </div>
         <br />
-        <a href="../Default.aspx">Home</a>        
+        <asp:HyperLink runat="server" ID="HyperLinkHome" NavigateUrl="~/Default.aspx" Text="Home" />
+        <br />
+        <br />
+        <asp:HyperLink ID="HyperLinkBack" runat="server" NavigateUrl="javascript:history.back();" Text="Back" />     
         </form>
     </div>
 </body>

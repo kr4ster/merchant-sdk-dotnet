@@ -166,15 +166,6 @@ namespace PayPalAPISample.UseCaseSamples {
         protected global::System.Web.UI.WebControls.DropDownList itemCategory;
         
         /// <summary>
-        /// itemDescription control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox itemDescription;
-        
-        /// <summary>
         /// notifyURL control.
         /// </summary>
         /// <remarks>
@@ -184,13 +175,13 @@ namespace PayPalAPISample.UseCaseSamples {
         protected global::System.Web.UI.WebControls.TextBox notifyURL;
         
         /// <summary>
-        /// Label1 control.
+        /// LabelBillingAgreement control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label LabelBillingAgreement;
         
         /// <summary>
         /// billingAgreementText control.

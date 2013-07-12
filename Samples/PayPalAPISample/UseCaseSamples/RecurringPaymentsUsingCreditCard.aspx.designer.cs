@@ -58,15 +58,6 @@ namespace PayPalAPISample.UseCaseSamples {
         protected global::System.Web.UI.WebControls.DropDownList expYear;
         
         /// <summary>
-        /// BuyerEmailId control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox BuyerEmailId;
-        
-        /// <summary>
         /// creditCardType control.
         /// </summary>
         /// <remarks>
@@ -94,15 +85,6 @@ namespace PayPalAPISample.UseCaseSamples {
         protected global::System.Web.UI.WebControls.Label LabelRecurringPaymentsProfileDetails;
         
         /// <summary>
-        /// subscriberName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox subscriberName;
-        
-        /// <summary>
         /// CalendarDate control.
         /// </summary>
         /// <remarks>
@@ -119,78 +101,6 @@ namespace PayPalAPISample.UseCaseSamples {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox billingStartDate;
-        
-        /// <summary>
-        /// shippingName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox shippingName;
-        
-        /// <summary>
-        /// shippingStreet1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox shippingStreet1;
-        
-        /// <summary>
-        /// shippingStreet2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox shippingStreet2;
-        
-        /// <summary>
-        /// shippingCity control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox shippingCity;
-        
-        /// <summary>
-        /// shippingState control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox shippingState;
-        
-        /// <summary>
-        /// shippingPostalCode control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox shippingPostalCode;
-        
-        /// <summary>
-        /// shippingCountry control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox shippingCountry;
-        
-        /// <summary>
-        /// shippingPhone control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox shippingPhone;
         
         /// <summary>
         /// LabelScheduleDetails control.
@@ -218,15 +128,6 @@ namespace PayPalAPISample.UseCaseSamples {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label LabelActivationDetails;
-        
-        /// <summary>
-        /// initialAmount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox initialAmount;
         
         /// <summary>
         /// failedInitialAmountAction control.
@@ -274,24 +175,6 @@ namespace PayPalAPISample.UseCaseSamples {
         protected global::System.Web.UI.WebControls.TextBox trialBillingAmount;
         
         /// <summary>
-        /// trialShippingAmount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox trialShippingAmount;
-        
-        /// <summary>
-        /// trialTaxAmount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox trialTaxAmount;
-        
-        /// <summary>
         /// billingFrequency control.
         /// </summary>
         /// <remarks>
@@ -326,24 +209,6 @@ namespace PayPalAPISample.UseCaseSamples {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox billingAmount;
-        
-        /// <summary>
-        /// shippingAmount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox shippingAmount;
-        
-        /// <summary>
-        /// taxAmount control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox taxAmount;
         
         /// <summary>
         /// maxFailedPayments control.

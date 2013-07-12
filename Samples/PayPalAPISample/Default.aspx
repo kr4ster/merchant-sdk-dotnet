@@ -11,18 +11,16 @@
     <form id="form1" runat="server">
         <div>
             <br />
-            <br />
             <h2>Merchant UseCase Samples</h2>
             <div>
                 <ul>
-                    <li><asp:HyperLink runat="server" ID="HyperLinkSetExpressCheckoutForRecurringPayments" NavigateUrl="~/UseCaseSamples/SetExpressCheckoutForRecurringPayments.aspx" Text="SetExpressCheckoutForRecurringPayments" /></li>
-                    <li><asp:HyperLink runat="server" ID="HyperLinkRecurringPaymentsUsingCreditCard" NavigateUrl="~/UseCaseSamples/RecurringPaymentsUsingCreditCard.aspx" Text="RecurringPaymentsUsingCreditCard" /></li>
-                    <li><asp:HyperLink runat="server" ID="HyperLinkSetExpressCheckoutPaymentAuthorization" NavigateUrl="~/UseCaseSamples/SetExpressCheckoutPaymentAuthorization.aspx" Text="SetExpressCheckoutPaymentAuthorization" /></li>
-                    <li><asp:HyperLink runat="server" ID="HyperLinkSetExpressCheckoutPaymentOrder" NavigateUrl="~/UseCaseSamples/SetExpressCheckoutPaymentOrder.aspx" Text="SetExpressCheckoutPaymentOrder" /></li>
-                    <li><asp:HyperLink runat="server" ID="HyperLinkParallelPayment" NavigateUrl="~/UseCaseSamples/ParallelPayment.aspx" Text="ParallelPayment" /></li>
+                    <li><asp:HyperLink runat="server" ID="HyperLinkSetExpressCheckoutForRecurringPayments" NavigateUrl="~/UseCaseSamples/SetExpressCheckoutForRecurringPayments.aspx" Text="SetExpressCheckout - RecurringPayments" /></li>
+                    <li><asp:HyperLink runat="server" ID="HyperLinkRecurringPaymentsUsingCreditCard" NavigateUrl="~/UseCaseSamples/RecurringPaymentsUsingCreditCard.aspx" Text="CreateRecurringPaymentsProfile - CreditCard" /></li>
+                    <li><asp:HyperLink runat="server" ID="HyperLinkSetExpressCheckoutPaymentAuthorization" NavigateUrl="~/UseCaseSamples/SetExpressCheckoutPaymentAuthorization.aspx" Text="SetExpressCheckout - PaymentAuthorization - DoExpressCheckoutPayment - DoCapture" /></li>
+                    <li><asp:HyperLink runat="server" ID="HyperLinkSetExpressCheckoutPaymentOrder" NavigateUrl="~/UseCaseSamples/SetExpressCheckoutPaymentOrder.aspx" Text="SetExpressCheckout - PaymentOrder - DoExpressCheckoutPayment - DoAuthorize - DoCapture" /></li>
+                    <li><asp:HyperLink runat="server" ID="HyperLinkParallelPayment" NavigateUrl="~/UseCaseSamples/ParallelPayment.aspx" Text="SetExpressCheckout - ParallelPayment" /></li>
                 </ul>
             </div>
-            <br />
             <br />
             <h2>PayPal SDK - API Samples</h2>
             <table>

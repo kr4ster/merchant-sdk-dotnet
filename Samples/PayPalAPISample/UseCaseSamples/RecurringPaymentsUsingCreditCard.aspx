@@ -12,7 +12,7 @@
         <div id="header">
             <h3>Create Recurring Payments Profile Using Credit Card</h3>
             <div id="apidetails">
-                <p><i>CreateRecurringPaymentsProfile API operation creates Recurring Payments Profile. Directly use Credit Card for creating Profile.</i></p>
+                <ul><li><i><b>CreateRecurringPaymentsProfile</b> API operation creates Recurring Payments Profile</i></li><li><i>Directly use <b>Credit Card</b> for creating Profile</i></li></ul>
             </div>
         </div>
         <form id="form1" runat="server" method="post">
@@ -31,9 +31,6 @@
                     </th>
                     <th class="param_name">
                         Expiry
-                    </th>
-                    <th class="param_name">
-                        Buyer Email
                     </th>
                     <th class="param_name">
                         Credit Card
@@ -81,11 +78,6 @@
                     </td>
                     <td>
                         <div class="param_value">
-                            <asp:TextBox runat="server" ID="BuyerEmailId" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="param_value">
                             <asp:DropDownList runat="server" ID="creditCardType">
                                 <asp:ListItem Value="VISA" Text="Visa" />
                                 <asp:ListItem Value="MASTERCARD" Text="Mastercard" />
@@ -106,14 +98,9 @@
             </table>
             <br />
             <asp:Label runat="server" ID="LabelRecurringPaymentsProfileDetails" Text="Recurring Payments Profile Details"
-                Font-Underline="true" Font-Bold="true"></asp:Label>
+                Font-Underline="true" Font-Bold="true" />
             <br />
             <br />
-            <div class="param_name">
-                Subscriber Name</div>
-            <div class="param_value">
-                <asp:TextBox runat="server" ID="subscriberName" />
-            </div>
             <div class="param_name">
                 Billing Start Date</div>
             <div id="DivCalendar" style="display: none;">
@@ -123,111 +110,30 @@
                 <asp:TextBox ID="billingStartDate" runat="server" />
                 <img src="../APICalls/calendar_icon.png" alt="calendar" onclick="popupCalendar()" />
             </div>
-            <div class="param_name">
-                Subscriber Shipping Address (If different from Buyer's PayPal Account)</div>
-            <table class="line_item">
-                <tr>
-                    <th>
-                        Name
-                    </th>
-                    <th>
-                        Street 1
-                    </th>
-                    <th>
-                        Street 2
-                    </th>
-                    <th>
-                        City
-                    </th>
-                    <th>
-                        State
-                    </th>
-                    <th>
-                        Postal Code
-                    </th>
-                    <th>
-                        Country
-                    </th>
-                    <th>
-                        Phone
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="param_value">
-                            <asp:TextBox runat="server" ID="shippingName" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="param_value">
-                            <asp:TextBox runat="server" ID="shippingStreet1" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="param_value">
-                            <asp:TextBox runat="server" ID="shippingStreet2" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="param_value">
-                            <asp:TextBox runat="server" ID="shippingCity" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="param_value">
-                            <asp:TextBox runat="server" ID="shippingState" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="param_value">
-                            <asp:TextBox runat="server" ID="shippingPostalCode" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="param_value">
-                            <asp:TextBox runat="server" ID="shippingCountry" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="param_value">
-                            <asp:TextBox runat="server" ID="shippingPhone" />
-                        </div>
-                    </td>
-                </tr>
-            </table>
             <br />
             <div class="section_header">
                 <asp:Label runat="server" ID="LabelScheduleDetails" Text="Schedule Details" Font-Underline="true"
-                    Font-Bold="true"></asp:Label>
+                    Font-Bold="true" />
             </div>
             <br />
             <div class="params">
                 <div class="param_name">
                     Description*</div>
                 <div class="param_value">
-                    <asp:TextBox runat="server" ID="profileDescription" Rows="5" Columns="60" Text="Sample Profile Description" />
+                    <asp:TextBox runat="server" ID="profileDescription" Text="Description" />
                 </div>
             </div>
             <br />
-            <asp:Label runat="server" ID="LabelActivationDetails" Text="Activation Details" Font-Underline="true"
-                Font-Bold="true"></asp:Label>
+            <asp:Label runat="server" ID="LabelActivationDetails" Text="Activation Details" Font-Underline="true" Font-Bold="true" />
             <br />
             <br />
             <table class="params">
                 <tr>
                     <th>
-                        Initial Amount
-                    </th>
-                    <th>
                         Failed Payment Action
                     </th>
                 </tr>
-                <tr>
-                    <td>
-                        <div class="param_value">
-                            <asp:TextBox runat="server" ID="initialAmount" />
-                        </div>
-                    </td>
+                <tr>   
                     <td>
                         <div class="param_value">
                             <asp:DropDownList runat="server" ID="failedInitialAmountAction">
@@ -255,17 +161,11 @@
                     <th>
                         Amount Per Billing Cycle
                     </th>
-                    <th>
-                        Shipping Amount
-                    </th>
-                    <th>
-                        Tax
-                    </th>
                 </tr>
                 <tr>
                     <td>
                         <div class="param_value">
-                            <asp:TextBox runat="server" ID="trialBillingFrequency" Text="1" Width="200" />
+                            <asp:TextBox runat="server" ID="trialBillingFrequency" Text="1" />
                         </div>
                     </td>
                     <td>
@@ -282,22 +182,12 @@
                     </td>
                     <td>
                         <div class="param_value">
-                            <asp:TextBox runat="server" ID="trialBillingCycles" Text="2" Width="200" />
+                            <asp:TextBox runat="server" ID="trialBillingCycles" Text="2" />
                         </div>
                     </td>
                     <td>
                         <div class="param_value">
-                            <asp:TextBox runat="server" ID="trialBillingAmount" Text="2.0" Width="200" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="param_value">
-                            <asp:TextBox runat="server" ID="trialShippingAmount" Text="0.0" Width="200" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="param_value">
-                            <asp:TextBox runat="server" ID="trialTaxAmount" Text="0.0" Width="200" />
+                            <asp:TextBox runat="server" ID="trialBillingAmount" Text="2.0" />
                         </div>
                     </td>
                 </tr>
@@ -318,18 +208,12 @@
                     </th>
                     <th>
                         Amount Per Billing Cycle
-                    </th>
-                    <th>
-                        Shipping Amount
-                    </th>
-                    <th>
-                        Tax
-                    </th>
+                    </th>     
                 </tr>
                 <tr>
                     <td>
                         <div class="param_value">
-                            <asp:TextBox runat="server" ID="billingFrequency" Text="1" Width="200" />
+                            <asp:TextBox runat="server" ID="billingFrequency" Text="1" />
                         </div>
                     </td>
                     <td>
@@ -346,35 +230,27 @@
                     </td>
                     <td>
                         <div class="param_value">
-                            <asp:TextBox runat="server" ID="totalBillingCycles" Text="8" Width="200" />
+                            <asp:TextBox runat="server" ID="totalBillingCycles" Text="8" />
                         </div>
                     </td>
                     <td>
                         <div class="param_value">
-                             <asp:TextBox runat="server" ID="billingAmount" Text="5.0" Width="200" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="param_value">
-                             <asp:TextBox runat="server" ID="shippingAmount" Text="1.0" Width="200" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="param_value">
-                             <asp:TextBox runat="server" ID="taxAmount" Text="0.0" Width="200" />
+                             <asp:TextBox runat="server" ID="billingAmount" Text="5.0" />
                         </div>
                     </td>
                 </tr>
             </table>
             <div class="params">
                 <div class="param_name">
-                    Maximum Failed Payments Before Profile Suspension</div>
+                    Maximum Failed Payments Before Profile Suspension
+                </div>
                 <div class="param_value">
                     <asp:TextBox runat="server" ID="maxFailedPayments" Text="3" />
                 </div>
             </div>
             <div class="param_name">
-                Auto Billing Of Outstanding Amount</div>
+                Auto Billing Of Outstanding Amount
+            </div>
             <div class="param_value">
                 <asp:DropDownList ID="autoBillOutstandingAmount" runat="server">
                     <asp:ListItem Text="No Auto Billing" Value="NOAUTOBILL"></asp:ListItem>
@@ -387,7 +263,7 @@
                     PostBackUrl="~/UseCaseSamples/Payments.ashx" />
             </div>
             <br />
-            <asp:HyperLink runat="server" ID="HyperLinkHome" NavigateUrl="~/Default.aspx" Text="Home" />
+            <asp:HyperLink runat="server" ID="HyperLinkHome" NavigateUrl="~/Default.aspx" Text="Home"/>
             <br />
             <br />
             <asp:HyperLink ID="HyperLinkBack" runat="server" NavigateUrl="javascript:history.back();"

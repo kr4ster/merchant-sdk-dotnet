@@ -12,29 +12,27 @@
         <div id="header">
             <h3>SetExpressCheckoutForRecurringPayments</h3>
             <div id="apidetails">
-                <p><i>Set the details of ExpressCheckout Billing Agreements for Reference Transactions and Recurring Payments.</i></p>
+                <ul><li><i>Set the details of <b>ExpressCheckout</b> Billing Agreements for Recurring Payments</i></li></ul>
             </div>
         </div>
         <form id="form1" runat="server" method="post">
         <div id="request_form">
             <div class="params">
                 <div class="param_name">
-                    <asp:Label runat="server" ID="LabelBuyerMail" Text="Buyer Mail" Font-Bold="true"></asp:Label>
-                </div>
-                <div class="param_value">
-                    <asp:TextBox runat="server" ID="buyerMail" Text="platfo_1255077030_biz@gmail.com"
-                        Width="240" />
+                    <asp:Label runat="server" ID="LabelBuyerMail" Text="Buyer Email" Font-Bold="true" />
+                    <asp:TextBox runat="server" ID="buyerMail" Text="platfo_1255077030_biz@gmail.com" Width="20%" />
                 </div>
             </div>
             <br />
             <div class="section_header">
                 <asp:Label runat="server" ID="LabelPaymentDetails" Text="Payment Details" Font-Underline="true"
-                    Font-Bold="true"></asp:Label>
+                    Font-Bold="true" />
             </div>
             <br />
             <div class="params">
                 <div class="param_name">
-                    Total Shipping Cost</div>
+                    Total Shipping Cost
+                </div>
                 <div class="param_value">
                     <asp:TextBox runat="server" ID="shippingTotal" Text="0.50" />
                 </div>
@@ -68,19 +66,21 @@
                     Order Description
                 </div>
                 <div class="param_value">
-                    <asp:TextBox runat="server" ID="orderDescription" Rows="5" Columns="40" Text="TextBox4" />
+                    <asp:TextBox runat="server" ID="orderDescription" Text="Description" />
                 </div>
             </div>
             <div class="params">
                 <div class="param_name">
-                    Currency Code</div>
+                    Currency Code
+                </div>
                 <div class="param_value">
-                    <asp:TextBox runat="server" ID="currencyCode" Text="USD" Width="240" />
+                    <asp:TextBox runat="server" ID="currencyCode" Text="USD" />
                 </div>
             </div>
             <div class="params">
                 <div class="param_name">
-                    Payment Type</div>
+                    Payment Type
+                </div>
                 <div class="param_value">
                     <asp:DropDownList runat="server" ID="paymentType">
                         <asp:ListItem Text="Sale" Value="SALE" />
@@ -107,19 +107,16 @@
                         Quantity
                     </th>
                     <th class="param_name">
-                        Sales tax
+                        Sales Tax
                     </th>
                     <th class="param_name">
-                        Item Category
-                    </th>
-                    <th class="param_name">
-                        Description (Optional)
+                        Category
                     </th>
                 </tr>
                 <tr>
                     <td>
                         <div class="param_value">
-                            <asp:TextBox runat="server" ID="itemName" Text="Sample Item Name" />
+                            <asp:TextBox runat="server" ID="itemName" Text="Name" />
                         </div>
                     </td>
                     <td>
@@ -145,39 +142,36 @@
                             </asp:DropDownList>
                         </div>
                     </td>
-                    <td>
-                        <div class="param_value">
-                            <asp:TextBox runat="server" ID="itemDescription" />
-                        </div>
-                    </td>
                 </tr>
             </table>
             <div class="params">
                 <div class="param_name">
-                    IPN Notification Url (Receive IPN callback from PayPal)</div>
+                    IPN Notification Url (Receive IPN callback from PayPal)
+                </div>
                 <div class="param_value">
                     <asp:TextBox runat="server" ID="notifyURL" />
                 </div>
             </div>
             <br />
             <div class="section_header">
-                <asp:Label runat="server" ID="Label1" Text="Billing Agreement (Required for Recurring Payments)"
-                    Font-Underline="true" Font-Bold="true"></asp:Label>
+                <asp:Label runat="server" ID="LabelBillingAgreement" Text="Billing Agreement (Required for Recurring Payments)" Font-Underline="true" Font-Bold="true" />
             </div>
             <br />
             <div class="param_name">
-                Billing Agreement Description*</div>
+                Billing Agreement Description*
+            </div>
             <div class="param_value">
-                <asp:TextBox runat="server" ID="billingAgreementText" Rows="10" Columns="80" Text="Sample Billing Agreement Description" />
+                <asp:TextBox runat="server" ID="billingAgreementText" Text="Description" />
             </div>
             <div class="param_name">
-                Billing Type* (Recurring Payments, other options disabled for the sample)</div>
+                Billing Type* (Select Recurring Payments UseCase)
+            </div>
             <div class="param_value">
                 <asp:DropDownList runat="server" ID="billingType">
                     <asp:ListItem Text="None" Value="NONE" Enabled="false" />
                     <asp:ListItem Text="Merchant Initiated Billing" Value="MERCHANTINITIATEDBILLING"
                         Enabled="false" />
-                    <asp:ListItem Text="Recurring Payments" Value="RECURRINGPAYMENTS" Enabled="true"
+                    <asp:ListItem Text="Recurring Payments" Value="RECURRINGPAYMENTS"
                         Selected="True" />
                     <asp:ListItem Text="Merchant Initiated Billing Single Agreement" Value="MERCHANTINITIATEDBILLINGSINGLEAGREEMENT"
                         Enabled="false" />

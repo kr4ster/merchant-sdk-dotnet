@@ -11,15 +11,14 @@
     <div id="wrapper">
         <div id="header">
             <h3>DoAuthorization</h3>
-            <div id="apidetails"><p><i>Used to authorize an Order Payment, created using ExpressCheckout for Order Payment Type.</i></p></div>
+            <div id="apidetails"><ul><li><i>Used to authorize an Order Payment, created using ExpressCheckout for Order Payment Type</i></li></ul></div>
         </div>
-        <br />
         <form id="form1" runat="server" method="post">
             <div id="request_form">
                 <div class="params">
                     <div class="param_name">TransactionID*(Transaction ID via ExpressCheckout with PaymentType "Order")</div>
                     <div class="param_value">
-                        <input type="text" name="authID" id="authID" size="50" maxlength="260" runat="server" readonly="readonly" />
+                        <asp:TextBox runat="server" ID="authID" ReadOnly="true" />
                     </div>
                 </div>
                 <div class="params">
@@ -40,7 +39,10 @@
                 <asp:Button ID="ButtonPayments" Text="DoAuthorization" runat="server" PostBackUrl="~/UseCaseSamples/Payments.ashx" />
             </div>
             <br />
-            <a href="../Default.aspx">Home</a>
+            <asp:HyperLink runat="server" ID="HyperLinkHome" NavigateUrl="~/Default.aspx" Text="Home" />
+            <br />
+            <br />
+            <asp:HyperLink ID="HyperLinkBack" runat="server" NavigateUrl="javascript:history.back();" Text="Back" />
         </form>
     </div>
 </body>
