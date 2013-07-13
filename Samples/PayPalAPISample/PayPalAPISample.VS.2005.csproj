@@ -388,15 +388,19 @@
     <Compile Include="UseCaseSamples\PaymentCapture.aspx.designer.cs">
       <DependentUpon>PaymentCapture.aspx</DependentUpon>
     </Compile>
-    <Compile Include="UseCaseSamples\Payments.ashx.cs">
-      <DependentUpon>Payments.ashx</DependentUpon>
-    </Compile>
     <Compile Include="UseCaseSamples\RecurringPaymentsUsingCreditCard.aspx.cs">
       <DependentUpon>RecurringPaymentsUsingCreditCard.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="UseCaseSamples\RecurringPaymentsUsingCreditCard.aspx.designer.cs">
       <DependentUpon>RecurringPaymentsUsingCreditCard.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UseCaseSamples\RequestResponse.aspx.cs">
+      <DependentUpon>RequestResponse.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UseCaseSamples\RequestResponse.aspx.designer.cs">
+      <DependentUpon>RequestResponse.aspx</DependentUpon>
     </Compile>
     <Compile Include="UseCaseSamples\SetExpressCheckoutForRecurringPayments.aspx.cs">
       <DependentUpon>SetExpressCheckoutForRecurringPayments.aspx</DependentUpon>
@@ -427,13 +431,12 @@
     <Content Include="UseCaseSamples\DoAuthorizationForOrderPayment.aspx" />
     <Content Include="UseCaseSamples\DoExpressCheckout.aspx" />
     <Content Include="UseCaseSamples\PaymentCapture.aspx" />
-    <Content Include="UseCaseSamples\Payments.ashx" />
     <Content Include="UseCaseSamples\ParallelPayment.aspx" />
     <Content Include="UseCaseSamples\RecurringPaymentsUsingCreditCard.aspx" />
+    <Content Include="UseCaseSamples\RequestResponse.aspx" />
     <Content Include="UseCaseSamples\SetExpressCheckoutForRecurringPayments.aspx" />
     <Content Include="UseCaseSamples\SetExpressCheckoutPaymentAuthorization.aspx" />
     <Content Include="UseCaseSamples\SetExpressCheckoutPaymentOrder.aspx" />
-    <Content Include="Web.config" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v8.0\WebApplications\Microsoft.WebApplication.targets" />

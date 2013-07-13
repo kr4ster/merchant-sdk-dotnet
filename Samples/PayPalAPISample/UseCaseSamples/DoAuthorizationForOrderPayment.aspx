@@ -11,7 +11,7 @@
     <div id="wrapper">
         <div id="header">
             <h3>DoAuthorization</h3>
-            <div id="apidetails"><ul><li><i>Used to authorize an Order Payment, created using ExpressCheckout for Order Payment Type</i></li></ul></div>
+            <div id="apidetails"><ul><li><i>Used to <b>Authorize</b> Order Payment created using <b>ExpressCheckout</b></i></li></ul></div>
         </div>
         <form id="form1" runat="server" method="post">
             <div id="request_form">
@@ -36,7 +36,7 @@
             </div>
             <br />
             <div class="submit">
-                <asp:Button ID="ButtonPayments" Text="DoAuthorization" runat="server" PostBackUrl="~/UseCaseSamples/Payments.ashx" />
+                <asp:Button ID="ButtonPayments" Text="DoAuthorization" runat="server" PostBackUrl="~/UseCaseSamples/RequestResponse.aspx" />
             </div>
             <br />
             <asp:HyperLink runat="server" ID="HyperLinkHome" NavigateUrl="~/Default.aspx" Text="Home" />

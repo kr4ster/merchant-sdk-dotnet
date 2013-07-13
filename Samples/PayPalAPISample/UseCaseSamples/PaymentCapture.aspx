@@ -12,7 +12,7 @@
         <div id="header">
             <h3>DoCapture</h3>
 			<div id="apidetails">
-                <ul><li><i>Used to captures an authorized payment</i></li></ul>
+                <ul><li><i>Used to Capture Authorized Payment</i></li></ul>
 			</div>
         </div>
         <form id="form1" runat="server" method="post">
@@ -45,7 +45,7 @@
 				</div>
         <br />
         <div class="submit">
-            <asp:Button ID="ButtonPayments" Text="DoCapture" runat="server" PostBackUrl="~/UseCaseSamples/Payments.ashx" />
+            <asp:Button ID="ButtonPayments" Text="DoCapture" runat="server" PostBackUrl="~/UseCaseSamples/RequestResponse.aspx" />
         </div>
         <br />
         <asp:HyperLink runat="server" ID="HyperLinkHome" NavigateUrl="~/Default.aspx" Text="Home" />

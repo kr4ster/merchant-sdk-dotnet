@@ -129,7 +129,7 @@
 				</div>				
 				<br />
 				<div class="submit">
-                    <asp:Button ID="ButtonPayments" Text="SetExpressCheckoutPaymentAuthorization"  runat="server" PostBackUrl="~/UseCaseSamples/Payments.ashx" />
+                    <asp:Button ID="ButtonPayments" Text="SetExpressCheckoutPaymentAuthorization"  runat="server" PostBackUrl="~/UseCaseSamples/RequestResponse.aspx" />
 				</div>
 				<br />
                 <asp:HyperLink runat="server" ID="HyperLinkHome" NavigateUrl="~/Default.aspx" Text="Home" />

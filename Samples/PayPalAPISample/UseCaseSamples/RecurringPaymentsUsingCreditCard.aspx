@@ -260,7 +260,7 @@
             <br />
             <div class="submit">
                 <asp:Button ID="ButtonPayments" Text="CreateRecurringPaymentsProfile" runat="server"
-                    PostBackUrl="~/UseCaseSamples/Payments.ashx" />
+                    PostBackUrl="~/UseCaseSamples/RequestResponse.aspx" />
             </div>
             <br />
             <asp:HyperLink runat="server" ID="HyperLinkHome" NavigateUrl="~/Default.aspx" Text="Home"/>
