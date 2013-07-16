@@ -313,12 +313,9 @@ namespace PayPalAPISample.UseCaseSamples
             if (!response.Ack.ToString().Trim().ToUpper().Equals(AckCode.FAILURE.ToString()) && !response.Ack.ToString().Trim().ToUpper().Equals(AckCode.FAILUREWITHWARNING.ToString()))
             {
                 redirectUrl = ConfigurationManager.AppSettings["PAYPAL_REDIRECT_URL"].ToString() + "_express-checkout&token=" + response.Token;
-                responseValues.Add("Acknowledgement", response.Ack.ToString());
             }
-            else
-            {
-                responseValues.Add("Acknowledgement", response.Ack.ToString());
-            }
+
+            responseValues.Add("Acknowledgement", response.Ack.ToString().Trim().ToUpper());
 
             Display(contextHttp, "SetExpressCheckoutForRecurringPayments", "SetExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
         }
@@ -528,10 +525,9 @@ namespace PayPalAPISample.UseCaseSamples
 
             Dictionary<string, string> responseValues = new Dictionary<string, string>();
             string redirectUrl = null;
-            if (!(response.Ack.Equals(AckCode.FAILURE) && !(response.Ack.Equals(AckCode.FAILUREWITHWARNING))))
-            {
-                responseValues.Add("Acknowledgement", response.Ack.ToString());
-            }
+            
+            responseValues.Add("Acknowledgement", response.Ack.ToString());
+
             Display(contextHttp, "CreateRecurringPaymentsProfile", "SetExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
         }
 
@@ -767,11 +763,13 @@ namespace PayPalAPISample.UseCaseSamples
 
             Dictionary<string, string> responseValues = new Dictionary<string, string>();
             string redirectUrl = null;
-            if (!(response.Ack.Equals(AckCode.FAILURE) && !(response.Ack.Equals(AckCode.FAILUREWITHWARNING))))
+
+            if (!response.Ack.ToString().Trim().ToUpper().Equals(AckCode.FAILURE.ToString()) && !response.Ack.ToString().Trim().ToUpper().Equals(AckCode.FAILUREWITHWARNING.ToString()))
             {
                 redirectUrl = ConfigurationManager.AppSettings["PAYPAL_REDIRECT_URL"].ToString() + "_express-checkout&token=" + response.Token;
-                responseValues.Add("Acknowledgement", response.Ack.ToString());
             }
+            responseValues.Add("Acknowledgement", response.Ack.ToString().Trim().ToUpper());
+                
             Display(contextHttp, "SetExpressCheckoutPaymentAuthorization", "SetExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
         }
 
@@ -1007,11 +1005,13 @@ namespace PayPalAPISample.UseCaseSamples
 
             Dictionary<string, string> responseValues = new Dictionary<string, string>();
             string redirectUrl = null;
-            if (!(response.Ack.Equals(AckCode.FAILURE) && !(response.Ack.Equals(AckCode.FAILUREWITHWARNING))))
+
+            if (!response.Ack.ToString().Trim().ToUpper().Equals(AckCode.FAILURE.ToString()) && !response.Ack.ToString().Trim().ToUpper().Equals(AckCode.FAILUREWITHWARNING.ToString()))
             {
                 redirectUrl = ConfigurationManager.AppSettings["PAYPAL_REDIRECT_URL"].ToString() + "_express-checkout&token=" + response.Token;
-                responseValues.Add("Acknowledgement", response.Ack.ToString());
             }
+            responseValues.Add("Acknowledgement", response.Ack.ToString().Trim().ToUpper());
+
             Display(contextHttp, "SetExpressCheckoutPaymentOrder", "SetExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
         }
 
@@ -1177,12 +1177,18 @@ namespace PayPalAPISample.UseCaseSamples
 
             Dictionary<string, string> responseValues = new Dictionary<string, string>();
             string redirectUrl = null;
-            if (!(response.Ack.Equals(AckCode.FAILURE) && !(response.Ack.Equals(AckCode.FAILUREWITHWARNING))))
+
+            if (!response.Ack.ToString().Trim().ToUpper().Equals(AckCode.FAILURE.ToString()) && !response.Ack.ToString().Trim().ToUpper().Equals(AckCode.FAILUREWITHWARNING.ToString()))
             {
-                responseValues.Add("Acknowledgement", response.Ack.ToString());
+                responseValues.Add("Acknowledgement", response.Ack.ToString().Trim().ToUpper());
                 responseValues.Add("PaymentType", parameters["paymentType"]);
-                responseValues.Add("TransactionId", response.DoExpressCheckoutPaymentResponseDetails.PaymentInfo[0].TransactionID);                
+                responseValues.Add("TransactionId", response.DoExpressCheckoutPaymentResponseDetails.PaymentInfo[0].TransactionID);
             }
+            else
+            {
+                responseValues.Add("Acknowledgement", response.Ack.ToString().Trim().ToUpper());
+            }
+                
             Display(contextHttp, "DoExpressCheckout", "DoExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
         }
 
@@ -1247,10 +1253,8 @@ namespace PayPalAPISample.UseCaseSamples
 
             Dictionary<string, string> responseValues = new Dictionary<string, string>();
             string redirectUrl = null;
-            if (!(response.Ack.Equals(AckCode.FAILURE) && !(response.Ack.Equals(AckCode.FAILUREWITHWARNING))))
-            {
-                responseValues.Add("Acknowledgement", response.Ack.ToString());
-            }
+            responseValues.Add("Acknowledgement", response.Ack.ToString().Trim().ToUpper());
+            
             Display(contextHttp, "DoCapture", "DoCapture", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
         }
 
@@ -1297,11 +1301,17 @@ namespace PayPalAPISample.UseCaseSamples
 
             Dictionary<string, string> responseValues = new Dictionary<string, string>();
             string redirectUrl = null;
-            if (!(response.Ack.Equals(AckCode.FAILURE) && !(response.Ack.Equals(AckCode.FAILUREWITHWARNING))))
+
+            if (!response.Ack.ToString().Trim().ToUpper().Equals(AckCode.FAILURE.ToString()) && !response.Ack.ToString().Trim().ToUpper().Equals(AckCode.FAILUREWITHWARNING.ToString()))
             {
-                responseValues.Add("Acknowledgement", response.Ack.ToString());
+                responseValues.Add("Acknowledgement", response.Ack.ToString().Trim().ToUpper());
                 responseValues.Add("TransactionId", response.TransactionID);
             }
+            else
+            {
+                responseValues.Add("Acknowledgement", response.Ack.ToString().Trim().ToUpper());
+            }
+
             Display(contextHttp, "DoAuthorization", "DoAuthorization", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
         }
 
@@ -1404,10 +1414,8 @@ namespace PayPalAPISample.UseCaseSamples
 
             Dictionary<string, string> responseValues = new Dictionary<string, string>();
             string redirectUrl = null;
-            if (!(response.Ack.Equals(AckCode.FAILURE) && !(response.Ack.Equals(AckCode.FAILUREWITHWARNING))))
-            {
-                responseValues.Add("Acknowledgement", response.Ack.ToString());
-            }
+
+            responseValues.Add("Acknowledgement", response.Ack.ToString().Trim().ToUpper());
             Display(contextHttp, "ParallelPayment", "SetExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
         }
 
@@ -1444,7 +1452,14 @@ namespace PayPalAPISample.UseCaseSamples
             }
             else
             {
-                GridViewResponseValues.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(0, 200, 100);
+                if (responseValues["Acknowledgement"].Equals(AckCode.SUCCESS.ToString()))
+                {
+                    GridViewResponseValues.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(0, 200, 100);
+                }
+                else
+                {
+                    GridViewResponseValues.HeaderStyle.BackColor = System.Drawing.Color.FromArgb(255, 255, 0);
+                }
                 if (redirectUrl != null)
                 {
                     LabelWebFlow.Text = "This API has Web Flow to redirect the user to complete the API call, please click the hyperlink to redirect the user to ";
