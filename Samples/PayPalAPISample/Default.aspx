@@ -13,13 +13,13 @@
             <br />
             <h2>Merchant UseCase Samples</h2>
             <div>
-                <ul>
-                    <li><asp:HyperLink runat="server" ID="HyperLinkSetExpressCheckoutForRecurringPayments" NavigateUrl="~/UseCaseSamples/SetExpressCheckoutForRecurringPayments.aspx" Text="SetExpressCheckout - RecurringPayments" /></li>
-                    <li><asp:HyperLink runat="server" ID="HyperLinkRecurringPaymentsUsingCreditCard" NavigateUrl="~/UseCaseSamples/RecurringPaymentsUsingCreditCard.aspx" Text="CreateRecurringPaymentsProfile - CreditCard" /></li>
-                    <li><asp:HyperLink runat="server" ID="HyperLinkSetExpressCheckoutPaymentAuthorization" NavigateUrl="~/UseCaseSamples/SetExpressCheckoutPaymentAuthorization.aspx" Text="SetExpressCheckout - PaymentAuthorization - DoExpressCheckoutPayment - DoCapture" /></li>
-                    <li><asp:HyperLink runat="server" ID="HyperLinkSetExpressCheckoutPaymentOrder" NavigateUrl="~/UseCaseSamples/SetExpressCheckoutPaymentOrder.aspx" Text="SetExpressCheckout - PaymentOrder - DoExpressCheckoutPayment - DoAuthorize - DoCapture" /></li>
-                    <li><asp:HyperLink runat="server" ID="HyperLinkParallelPayment" NavigateUrl="~/UseCaseSamples/ParallelPayment.aspx" Text="SetExpressCheckout - ParallelPayment" /></li>
-                </ul>
+                <asp:BulletedList runat="server" ID="BulletedListUseCaseSamples" DisplayMode="HyperLink"> 
+                    <asp:ListItem Value="~/UseCaseSamples/SetExpressCheckoutForRecurringPayments.aspx" Text="SetExpressCheckout - RecurringPayments" />
+                    <asp:ListItem Value="~/UseCaseSamples/RecurringPaymentsUsingCreditCard.aspx" Text="CreateRecurringPaymentsProfile - CreditCard" />
+                    <asp:ListItem Value="~/UseCaseSamples/SetExpressCheckoutPaymentAuthorization.aspx" Text="SetExpressCheckout - PaymentAuthorization - DoExpressCheckoutPayment - DoCapture" />
+                    <asp:ListItem Value="~/UseCaseSamples/SetExpressCheckoutPaymentOrder.aspx" Text="SetExpressCheckout - PaymentOrder - DoExpressCheckoutPayment - DoAuthorize - DoCapture" />
+                    <asp:ListItem Value="~/UseCaseSamples/ParallelPayment.aspx" Text="SetExpressCheckout - ParallelPayment" /> 
+                </asp:BulletedList>
             </div>
             <br />
             <h2>PayPal SDK - API Samples</h2>

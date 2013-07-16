@@ -52,10 +52,10 @@ namespace PayPalAPISample.UseCaseSamples
         /// <summary>
         /// Handles Set Express Checkout For Recurring Payments
         /// </summary>
-        /// <param name="context"></param>
-        private void SetExpressCheckoutForRecurringPayments(HttpContext context)
+        /// <param name="contextHttp"></param>
+        private void SetExpressCheckoutForRecurringPayments(HttpContext contextHttp)
         {
-            NameValueCollection parameters = context.Request.Params;
+            NameValueCollection parameters = contextHttp.Request.Params;
 
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
@@ -74,8 +74,8 @@ namespace PayPalAPISample.UseCaseSamples
             // Note:
             // PayPal recommends that the value be the final review page on which the buyer confirms the order and payment or billing agreement.
             UriBuilder uriBuilder = new UriBuilder(requestUrl);
-            uriBuilder.Path = context.Request.ApplicationPath
-                + (context.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
+            uriBuilder.Path = contextHttp.Request.ApplicationPath
+                + (contextHttp.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
                 + "UseCaseSamples/SetExpressCheckoutForRecurringPayments.aspx";
             string returnUrl = uriBuilder.Uri.ToString();
 
@@ -83,12 +83,11 @@ namespace PayPalAPISample.UseCaseSamples
             // Note:
             // PayPal recommends that the value be the original page on which the buyer chose to pay with PayPal or establish a billing agreement.
             uriBuilder = new UriBuilder(requestUrl);
-            uriBuilder.Path = context.Request.ApplicationPath
-                + (context.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
+            uriBuilder.Path = contextHttp.Request.ApplicationPath
+                + (contextHttp.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
                 + "UseCaseSamples/SetExpressCheckoutForRecurringPayments.aspx";
             string cancelUrl = uriBuilder.Uri.ToString();
-
-            
+                        
             // (Required) URL to which the buyer's browser is returned after choosing 
             // to pay with PayPal. For digital goods, you must add JavaScript to this 
             // page to close the in-context experience.
@@ -98,8 +97,7 @@ namespace PayPalAPISample.UseCaseSamples
             // Character length and limitations: 2048 single-byte characters            
             details.ReturnURL = returnUrl + "?currencyCodeType=" + parameters["currencyCode"];
             details.CancelURL = cancelUrl;
-
-            
+                        
             // (Optional) Email address of the buyer as entered during checkout.
             // PayPal uses this value to pre-fill the PayPal membership sign-up portion on the PayPal pages.
             // Character length and limitations: 127 single-byte alphanumeric characters            
@@ -110,14 +108,12 @@ namespace PayPalAPISample.UseCaseSamples
 
             // Cost of item. This field is required when you pass a value for ItemCategory.
             string amountItems = parameters["itemAmount"];
-
-             
+                         
             // Item quantity. This field is required when you pass a value for ItemCategory. 
             // For digital goods (ItemCategory=Digital), this field is required.
             // Character length and limitations: Any positive integer             
             string qtyItems = parameters["itemQuantity"];
-
-            
+                        
             // Item name. This field is required when you pass a value for ItemCategory.
             // Character length and limitations: 127 single-byte characters            
             string names = parameters["itemName"];
@@ -156,7 +152,6 @@ namespace PayPalAPISample.UseCaseSamples
             List<PaymentDetailsType> payDetails = new List<PaymentDetailsType>();
             PaymentDetailsType paydtl = new PaymentDetailsType();
             
-
             // How you want to obtain payment. When implementing parallel payments, 
             // this field is required and must be set to Order.
             // When implementing digital goods, this field is required and must be set to Sale.
@@ -267,8 +262,7 @@ namespace PayPalAPISample.UseCaseSamples
             details.PaymentDetails = payDetails;
 
             if (parameters["billingAgreementText"] != string.Empty)
-            {
-                
+            {  
                 // (Required) Type of billing agreement. For recurring payments,
                 // this field must be set to RecurringPayments. 
                 // In this case, you can specify up to ten billing agreements. 
@@ -302,34 +296,40 @@ namespace PayPalAPISample.UseCaseSamples
             SetExpressCheckoutReq expressCheckoutReq = new SetExpressCheckoutReq();
             expressCheckoutReq.SetExpressCheckoutRequest = setExpressCheckoutReq;
 
-            SetExpressCheckoutResponseType resp = null;
+            SetExpressCheckoutResponseType response = null;
             try
             {
-                resp = service.SetExpressCheckout(expressCheckoutReq);
+                response = service.SetExpressCheckout(expressCheckoutReq);
             }
-            catch (System.Exception e)
+            catch (System.Exception ex)
             {
-                context.Response.Write(e.StackTrace);
+                contextHttp.Response.Write(ex.Message);
                 return;
             }
 
             Dictionary<string, string> responseValues = new Dictionary<string, string>();
             string redirectUrl = null;
-            if (!(resp.Ack.Equals(AckCode.FAILURE) && !(resp.Ack.Equals(AckCode.FAILUREWITHWARNING))))
+
+            if (!response.Ack.ToString().Trim().ToUpper().Equals(AckCode.FAILURE.ToString()) && !response.Ack.ToString().Trim().ToUpper().Equals(AckCode.FAILUREWITHWARNING.ToString()))
             {
-                redirectUrl = ConfigurationManager.AppSettings["PAYPAL_REDIRECT_URL"].ToString() + "_express-checkout&token=" + resp.Token;
-                responseValues.Add("Acknowledgement", resp.Ack.ToString());
+                redirectUrl = ConfigurationManager.AppSettings["PAYPAL_REDIRECT_URL"].ToString() + "_express-checkout&token=" + response.Token;
+                responseValues.Add("Acknowledgement", response.Ack.ToString());
             }
-            Display(context, "SetExpressCheckoutForRecurringPayments", "SetExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), resp.Errors, redirectUrl);
+            else
+            {
+                responseValues.Add("Acknowledgement", response.Ack.ToString());
+            }
+
+            Display(contextHttp, "SetExpressCheckoutForRecurringPayments", "SetExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
         }
 
         /// <summary>
         /// Handles Create Recurring Payments Profile
         /// </summary>
-        /// <param name="context"></param>
-        private void CreateRecurringPaymentsProfile(HttpContext context)
+        /// <param name="contextHttp"></param>
+        private void CreateRecurringPaymentsProfile(HttpContext contextHttp)
         {
-            NameValueCollection parameters = context.Request.Params;
+            NameValueCollection parameters = contextHttp.Request.Params;
 
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
@@ -498,8 +498,7 @@ namespace PayPalAPISample.UseCaseSamples
 
             // Expiry Year
             cc.ExpYear = Convert.ToInt32(parameters["expYear"]);
-
-
+            
             // (Optional) Type of credit card. 
             // For UK, only Maestro, MasterCard, Discover, and Visa are allowable. 
             // For Canada, only MasterCard and Visa are allowable and 
@@ -516,33 +515,33 @@ namespace PayPalAPISample.UseCaseSamples
             reqType.CreateRecurringPaymentsProfileRequestDetails = reqDetails;
             req.CreateRecurringPaymentsProfileRequest = reqType;
 
-            CreateRecurringPaymentsProfileResponseType resp = null;
+            CreateRecurringPaymentsProfileResponseType response = null;
             try
             {
-                resp = service.CreateRecurringPaymentsProfile(req);
+                response = service.CreateRecurringPaymentsProfile(req);
             }
-            catch (System.Exception e)
+            catch (System.Exception ex)
             {
-                context.Response.Write(e.StackTrace);
+                contextHttp.Response.Write(ex.Message);
                 return;
             }
 
             Dictionary<string, string> responseValues = new Dictionary<string, string>();
             string redirectUrl = null;
-            if (!(resp.Ack.Equals(AckCode.FAILURE) && !(resp.Ack.Equals(AckCode.FAILUREWITHWARNING))))
+            if (!(response.Ack.Equals(AckCode.FAILURE) && !(response.Ack.Equals(AckCode.FAILUREWITHWARNING))))
             {
-                responseValues.Add("Acknowledgement", resp.Ack.ToString());
+                responseValues.Add("Acknowledgement", response.Ack.ToString());
             }
-            Display(context, "CreateRecurringPaymentsProfile", "SetExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), resp.Errors, redirectUrl);
+            Display(contextHttp, "CreateRecurringPaymentsProfile", "SetExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
         }
 
         /// <summary>
         /// Handles Set ExpressCheckout Payment Authorization
         /// </summary>
-        /// <param name="context"></param>
-        private void SetExpressCheckoutPaymentAuthorization(HttpContext context)
+        /// <param name="contextHttp"></param>
+        private void SetExpressCheckoutPaymentAuthorization(HttpContext contextHttp)
         {
-            NameValueCollection parameters = context.Request.Params;
+            NameValueCollection parameters = contextHttp.Request.Params;
 
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
@@ -561,8 +560,8 @@ namespace PayPalAPISample.UseCaseSamples
             // Note:
             // PayPal recommends that the value be the final review page on which the buyer confirms the order and payment or billing agreement.
             UriBuilder uriBuilder = new UriBuilder(requestUrl);
-            uriBuilder.Path = context.Request.ApplicationPath
-                + (context.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
+            uriBuilder.Path = contextHttp.Request.ApplicationPath
+                + (contextHttp.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
                 + "UseCaseSamples/DoExpressCheckout.aspx";
             string returnUrl = uriBuilder.Uri.ToString();
 
@@ -570,8 +569,8 @@ namespace PayPalAPISample.UseCaseSamples
             // Note:
             // PayPal recommends that the value be the original page on which the buyer chose to pay with PayPal or establish a billing agreement.
             uriBuilder = new UriBuilder(requestUrl);
-            uriBuilder.Path = context.Request.ApplicationPath
-                + (context.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
+            uriBuilder.Path = contextHttp.Request.ApplicationPath
+                + (contextHttp.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
                 + "UseCaseSamples/SetExpressCheckoutPaymentAuthorization.aspx";
             string cancelUrl = uriBuilder.Uri.ToString();
 
@@ -755,34 +754,34 @@ namespace PayPalAPISample.UseCaseSamples
             SetExpressCheckoutReq expressCheckoutReq = new SetExpressCheckoutReq();
             expressCheckoutReq.SetExpressCheckoutRequest = setExpressCheckoutReq;
 
-            SetExpressCheckoutResponseType resp = null;
+            SetExpressCheckoutResponseType response = null;
             try
             {
-                resp = service.SetExpressCheckout(expressCheckoutReq);
+                response = service.SetExpressCheckout(expressCheckoutReq);
             }
-            catch (System.Exception e)
+            catch (System.Exception ex)
             {
-                context.Response.Write(e.StackTrace);
+                contextHttp.Response.Write(ex.Message);
                 return;
             }
 
             Dictionary<string, string> responseValues = new Dictionary<string, string>();
             string redirectUrl = null;
-            if (!(resp.Ack.Equals(AckCode.FAILURE) && !(resp.Ack.Equals(AckCode.FAILUREWITHWARNING))))
+            if (!(response.Ack.Equals(AckCode.FAILURE) && !(response.Ack.Equals(AckCode.FAILUREWITHWARNING))))
             {
-                redirectUrl = ConfigurationManager.AppSettings["PAYPAL_REDIRECT_URL"].ToString() + "_express-checkout&token=" + resp.Token;
-                responseValues.Add("Acknowledgement", resp.Ack.ToString());
+                redirectUrl = ConfigurationManager.AppSettings["PAYPAL_REDIRECT_URL"].ToString() + "_express-checkout&token=" + response.Token;
+                responseValues.Add("Acknowledgement", response.Ack.ToString());
             }
-            Display(context, "SetExpressCheckoutPaymentAuthorization", "SetExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), resp.Errors, redirectUrl);
+            Display(contextHttp, "SetExpressCheckoutPaymentAuthorization", "SetExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
         }
 
         /// <summary>
         /// Handles Set ExpressCheckout Payment Order
         /// </summary>
-        /// <param name="context"></param>
-        private void SetExpressCheckoutPaymentOrder(HttpContext context)
+        /// <param name="contextHttp"></param>
+        private void SetExpressCheckoutPaymentOrder(HttpContext contextHttp)
         {
-            NameValueCollection parameters = context.Request.Params;
+            NameValueCollection parameters = contextHttp.Request.Params;
 
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
@@ -801,8 +800,8 @@ namespace PayPalAPISample.UseCaseSamples
             // Note:
             // PayPal recommends that the value be the final review page on which the buyer confirms the order and payment or billing agreement.
             UriBuilder uriBuilder = new UriBuilder(requestUrl);
-            uriBuilder.Path = context.Request.ApplicationPath
-                + (context.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
+            uriBuilder.Path = contextHttp.Request.ApplicationPath
+                + (contextHttp.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
                 + "UseCaseSamples/DoExpressCheckout.aspx";
             string returnUrl = uriBuilder.Uri.ToString();
 
@@ -810,8 +809,8 @@ namespace PayPalAPISample.UseCaseSamples
             // Note:
             // PayPal recommends that the value be the original page on which the buyer chose to pay with PayPal or establish a billing agreement.
             uriBuilder = new UriBuilder(requestUrl);
-            uriBuilder.Path = context.Request.ApplicationPath
-                + (context.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
+            uriBuilder.Path = contextHttp.Request.ApplicationPath
+                + (contextHttp.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
                 + "UseCaseSamples/SetExpressCheckoutPaymentAuthorization.aspx";
             string cancelUrl = uriBuilder.Uri.ToString();
 
@@ -995,34 +994,34 @@ namespace PayPalAPISample.UseCaseSamples
             SetExpressCheckoutReq expressCheckoutReq = new SetExpressCheckoutReq();
             expressCheckoutReq.SetExpressCheckoutRequest = setExpressCheckoutReq;
 
-            SetExpressCheckoutResponseType resp = null;
+            SetExpressCheckoutResponseType response = null;
             try
             {
-                resp = service.SetExpressCheckout(expressCheckoutReq);
+                response = service.SetExpressCheckout(expressCheckoutReq);
             }
-            catch (System.Exception e)
+            catch (System.Exception ex)
             {
-                context.Response.Write(e.StackTrace);
+                contextHttp.Response.Write(ex.Message);
                 return;
             }
 
             Dictionary<string, string> responseValues = new Dictionary<string, string>();
             string redirectUrl = null;
-            if (!(resp.Ack.Equals(AckCode.FAILURE) && !(resp.Ack.Equals(AckCode.FAILUREWITHWARNING))))
+            if (!(response.Ack.Equals(AckCode.FAILURE) && !(response.Ack.Equals(AckCode.FAILUREWITHWARNING))))
             {
-                redirectUrl = ConfigurationManager.AppSettings["PAYPAL_REDIRECT_URL"].ToString() + "_express-checkout&token=" + resp.Token;
-                responseValues.Add("Acknowledgement", resp.Ack.ToString());
+                redirectUrl = ConfigurationManager.AppSettings["PAYPAL_REDIRECT_URL"].ToString() + "_express-checkout&token=" + response.Token;
+                responseValues.Add("Acknowledgement", response.Ack.ToString());
             }
-            Display(context, "SetExpressCheckoutPaymentOrder", "SetExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), resp.Errors, redirectUrl);
+            Display(contextHttp, "SetExpressCheckoutPaymentOrder", "SetExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
         }
 
         /// <summary>
         /// Handles DoExpressCheckout
         /// </summary>
-        /// <param name="context"></param>
-        private void DoExpressCheckout(HttpContext context)
+        /// <param name="contextHttp"></param>
+        private void DoExpressCheckout(HttpContext contextHttp)
         {
-            NameValueCollection parameters = context.Request.Params;
+            NameValueCollection parameters = contextHttp.Request.Params;
 
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
@@ -1165,35 +1164,35 @@ namespace PayPalAPISample.UseCaseSamples
             doCheckoutPaymentRequestType.DoExpressCheckoutPaymentRequestDetails = details;
             DoExpressCheckoutPaymentReq doExpressCheckoutPaymentReq = new DoExpressCheckoutPaymentReq();
             doExpressCheckoutPaymentReq.DoExpressCheckoutPaymentRequest = doCheckoutPaymentRequestType;
-            DoExpressCheckoutPaymentResponseType resp = null;
+            DoExpressCheckoutPaymentResponseType response = null;
             try
             {
-                resp = service.DoExpressCheckoutPayment(doExpressCheckoutPaymentReq);
+                response = service.DoExpressCheckoutPayment(doExpressCheckoutPaymentReq);
             }
             catch (System.Exception ex)
             {
-                context.Response.Write(ex.StackTrace);
+                contextHttp.Response.Write(ex.StackTrace);
                 return;
             }
 
             Dictionary<string, string> responseValues = new Dictionary<string, string>();
             string redirectUrl = null;
-            if (!(resp.Ack.Equals(AckCode.FAILURE) && !(resp.Ack.Equals(AckCode.FAILUREWITHWARNING))))
+            if (!(response.Ack.Equals(AckCode.FAILURE) && !(response.Ack.Equals(AckCode.FAILUREWITHWARNING))))
             {
-                responseValues.Add("Acknowledgement", resp.Ack.ToString());
+                responseValues.Add("Acknowledgement", response.Ack.ToString());
                 responseValues.Add("PaymentType", parameters["paymentType"]);
-                responseValues.Add("TransactionId", resp.DoExpressCheckoutPaymentResponseDetails.PaymentInfo[0].TransactionID);                
+                responseValues.Add("TransactionId", response.DoExpressCheckoutPaymentResponseDetails.PaymentInfo[0].TransactionID);                
             }
-            Display(context, "DoExpressCheckout", "DoExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), resp.Errors, redirectUrl);
+            Display(contextHttp, "DoExpressCheckout", "DoExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
         }
 
         /// <summary>
         /// Handles DoCapture
         /// </summary>
-        /// <param name="context"></param>
-        private void DoCapture(HttpContext context)
+        /// <param name="contextHttp"></param>
+        private void DoCapture(HttpContext contextHttp)
         {
-            NameValueCollection parameters = context.Request.Params;
+            NameValueCollection parameters = contextHttp.Request.Params;
 
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
@@ -1235,33 +1234,33 @@ namespace PayPalAPISample.UseCaseSamples
             );
 
             req.DoCaptureRequest = reqType;
-            DoCaptureResponseType resp = null;
+            DoCaptureResponseType response = null;
             try
             {
-                resp = service.DoCapture(req);
+                response = service.DoCapture(req);
             }
             catch (System.Exception ex)
             {
-                context.Response.Write(ex.StackTrace);
+                contextHttp.Response.Write(ex.StackTrace);
                 return;
             }
 
             Dictionary<string, string> responseValues = new Dictionary<string, string>();
             string redirectUrl = null;
-            if (!(resp.Ack.Equals(AckCode.FAILURE) && !(resp.Ack.Equals(AckCode.FAILUREWITHWARNING))))
+            if (!(response.Ack.Equals(AckCode.FAILURE) && !(response.Ack.Equals(AckCode.FAILUREWITHWARNING))))
             {
-                responseValues.Add("Acknowledgement", resp.Ack.ToString());
+                responseValues.Add("Acknowledgement", response.Ack.ToString());
             }
-            Display(context, "DoCapture", "DoCapture", responseValues, service.getLastRequest(), service.getLastResponse(), resp.Errors, redirectUrl);
+            Display(contextHttp, "DoCapture", "DoCapture", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
         }
 
         // <summary>
         /// Handles DoAuthorization
         /// </summary>
-        /// <param name="context"></param>
-        private void DoAuthorization(HttpContext context)
+        /// <param name="contextHttp"></param>
+        private void DoAuthorization(HttpContext contextHttp)
         {
-            NameValueCollection parameters = context.Request.Params;
+            NameValueCollection parameters = contextHttp.Request.Params;
 
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
@@ -1285,34 +1284,34 @@ namespace PayPalAPISample.UseCaseSamples
             DoAuthorizationRequestType reqType = new DoAuthorizationRequestType(parameters["authID"], amount);
 
             req.DoAuthorizationRequest = reqType;
-            DoAuthorizationResponseType resp = null;
+            DoAuthorizationResponseType response = null;
             try
             {
-                resp = service.DoAuthorization(req);
+                response = service.DoAuthorization(req);
             }
             catch (System.Exception ex)
             {
-                context.Response.Write(ex.StackTrace);
+                contextHttp.Response.Write(ex.StackTrace);
                 return;
             }
 
             Dictionary<string, string> responseValues = new Dictionary<string, string>();
             string redirectUrl = null;
-            if (!(resp.Ack.Equals(AckCode.FAILURE) && !(resp.Ack.Equals(AckCode.FAILUREWITHWARNING))))
+            if (!(response.Ack.Equals(AckCode.FAILURE) && !(response.Ack.Equals(AckCode.FAILUREWITHWARNING))))
             {
-                responseValues.Add("Acknowledgement", resp.Ack.ToString());
-                responseValues.Add("TransactionId", resp.TransactionID);
+                responseValues.Add("Acknowledgement", response.Ack.ToString());
+                responseValues.Add("TransactionId", response.TransactionID);
             }
-            Display(context, "DoAuthorization", "DoAuthorization", responseValues, service.getLastRequest(), service.getLastResponse(), resp.Errors, redirectUrl);
+            Display(contextHttp, "DoAuthorization", "DoAuthorization", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
         }
 
         /// <summary>
         /// Handles ParallelPayment
         /// </summary>
-        /// <param name="context"></param>
-        private void ParallelPayment(HttpContext context)
+        /// <param name="contextHttp"></param>
+        private void ParallelPayment(HttpContext contextHttp)
         {
-            NameValueCollection parameters = context.Request.Params;
+            NameValueCollection parameters = contextHttp.Request.Params;
 
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
@@ -1331,8 +1330,8 @@ namespace PayPalAPISample.UseCaseSamples
             // Note:
             // PayPal recommends that the value be the final review page on which the buyer confirms the order and payment or billing agreement.
             UriBuilder uriBuilder = new UriBuilder(requestUrl);
-            uriBuilder.Path = context.Request.ApplicationPath
-                + (context.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
+            uriBuilder.Path = contextHttp.Request.ApplicationPath
+                + (contextHttp.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
                 + "UseCaseSamples/SetExpressCheckoutPaymentAuthorization.aspx";
             string returnUrl = uriBuilder.Uri.ToString();
 
@@ -1340,8 +1339,8 @@ namespace PayPalAPISample.UseCaseSamples
             // Note:
             // PayPal recommends that the value be the original page on which the buyer chose to pay with PayPal or establish a billing agreement.
             uriBuilder = new UriBuilder(requestUrl);
-            uriBuilder.Path = context.Request.ApplicationPath
-                + (context.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
+            uriBuilder.Path = contextHttp.Request.ApplicationPath
+                + (contextHttp.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
                 + "UseCaseSamples/SetExpressCheckoutPaymentAuthorization.aspx";
             string cancelUrl = uriBuilder.Uri.ToString();
 
@@ -1391,25 +1390,25 @@ namespace PayPalAPISample.UseCaseSamples
 
             SetExpressCheckoutReq expressCheckoutReq = new SetExpressCheckoutReq();
             expressCheckoutReq.SetExpressCheckoutRequest = setExpressCheckoutReq;
-            SetExpressCheckoutResponseType resp = null;
+            SetExpressCheckoutResponseType response = null;
 
             try
             {
-                resp = service.SetExpressCheckout(expressCheckoutReq);
+                response = service.SetExpressCheckout(expressCheckoutReq);
             }
-            catch (System.Exception e)
+            catch (System.Exception ex)
             {
-                context.Response.Write(e.StackTrace);
+                contextHttp.Response.Write(ex.Message);
                 return;
             }
 
             Dictionary<string, string> responseValues = new Dictionary<string, string>();
             string redirectUrl = null;
-            if (!(resp.Ack.Equals(AckCode.FAILURE) && !(resp.Ack.Equals(AckCode.FAILUREWITHWARNING))))
+            if (!(response.Ack.Equals(AckCode.FAILURE) && !(response.Ack.Equals(AckCode.FAILUREWITHWARNING))))
             {
-                responseValues.Add("Acknowledgement", resp.Ack.ToString());
+                responseValues.Add("Acknowledgement", response.Ack.ToString());
             }
-            Display(context, "ParallelPayment", "SetExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), resp.Errors, redirectUrl);
+            Display(contextHttp, "ParallelPayment", "SetExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
         }
 
         private string IndentXml(XmlDocument xmlDoc)
