@@ -445,9 +445,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="IPN-README.md" />
     <None Include="paypal_cert.p12" />
-    <None Include="README.md" />
     <Content Include="UseCaseSamples\DoAuthorizationForOrderPayment.aspx" />
     <Content Include="UseCaseSamples\DoExpressCheckout.aspx" />
     <Content Include="UseCaseSamples\PaymentCapture.aspx" />
