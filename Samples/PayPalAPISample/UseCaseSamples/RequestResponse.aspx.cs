@@ -60,7 +60,7 @@ namespace PayPalAPISample.UseCaseSamples
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
             // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
-            Dictionary<string, string> configurationMap = Configuration.GetSignatureConfig();
+            Dictionary<string, string> configurationMap = Configuration.GetAcctAndConfig();
 
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
@@ -331,7 +331,7 @@ namespace PayPalAPISample.UseCaseSamples
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
             // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
-            Dictionary<string, string> configurationMap = Configuration.GetSignatureConfig();
+            Dictionary<string, string> configurationMap = Configuration.GetAcctAndConfig();
 
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
@@ -542,7 +542,7 @@ namespace PayPalAPISample.UseCaseSamples
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
             // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
-            Dictionary<string, string> configurationMap = Configuration.GetSignatureConfig();
+            Dictionary<string, string> configurationMap = Configuration.GetAcctAndConfig();
 
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
@@ -784,7 +784,7 @@ namespace PayPalAPISample.UseCaseSamples
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
             // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
-            Dictionary<string, string> configurationMap = Configuration.GetSignatureConfig();
+            Dictionary<string, string> configurationMap = Configuration.GetAcctAndConfig();
 
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
@@ -1026,7 +1026,7 @@ namespace PayPalAPISample.UseCaseSamples
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
             // [https://github.com/paypal/merchant-sdk-java/wiki/SDK-Configuration-Parameters]
-            Dictionary<String, String> configurationMap = Configuration.GetSignatureConfig();
+            Dictionary<String, String> configurationMap = Configuration.GetAcctAndConfig();
 
             // Creating service wrapper object to make an API call by loading configuration map.
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
@@ -1203,7 +1203,7 @@ namespace PayPalAPISample.UseCaseSamples
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
             // [https://github.com/paypal/merchant-sdk-java/wiki/SDK-Configuration-Parameters]
-            Dictionary<String, String> configurationMap = Configuration.GetSignatureConfig();
+            Dictionary<String, String> configurationMap = Configuration.GetAcctAndConfig();
 
             // Creating service wrapper object to make an API call by loading configuration map.
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
@@ -1269,7 +1269,7 @@ namespace PayPalAPISample.UseCaseSamples
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
             // [https://github.com/paypal/merchant-sdk-java/wiki/SDK-Configuration-Parameters]
-            Dictionary<String, String> configurationMap = Configuration.GetSignatureConfig();
+            Dictionary<String, String> configurationMap = Configuration.GetAcctAndConfig();
 
             // Creating service wrapper object to make an API call by loading configuration map.
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
@@ -1326,7 +1326,7 @@ namespace PayPalAPISample.UseCaseSamples
             // Configuration map containing signature credentials and other required configuration.
             // For a full list of configuration parameters refer at 
             // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
-            Dictionary<string, string> configurationMap = Configuration.GetSignatureConfig();
+            Dictionary<string, string> configurationMap = Configuration.GetAcctAndConfig();
 
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
             PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);

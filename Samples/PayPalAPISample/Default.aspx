@@ -14,11 +14,11 @@
             <h2>Merchant UseCase Samples</h2>
             <div>
                 <asp:BulletedList runat="server" ID="BulletedListUseCaseSamples" DisplayMode="HyperLink"> 
-                    <asp:ListItem Value="~/UseCaseSamples/SetExpressCheckoutForRecurringPayments.aspx" Text="SetExpressCheckout - RecurringPayments" />
+                    <asp:ListItem Value="~/UseCaseSamples/SetExpressCheckoutForRecurringPayments.aspx" Text="CreateRecurringPaymentsProfile - ExpressCheckout" />
                     <asp:ListItem Value="~/UseCaseSamples/RecurringPaymentsUsingCreditCard.aspx" Text="CreateRecurringPaymentsProfile - CreditCard" />
                     <asp:ListItem Value="~/UseCaseSamples/SetExpressCheckoutPaymentAuthorization.aspx" Text="SetExpressCheckout - PaymentAuthorization - DoExpressCheckoutPayment - DoCapture" />
                     <asp:ListItem Value="~/UseCaseSamples/SetExpressCheckoutPaymentOrder.aspx" Text="SetExpressCheckout - PaymentOrder - DoExpressCheckoutPayment - DoAuthorize - DoCapture" />
-                    <asp:ListItem Value="~/UseCaseSamples/ParallelPayment.aspx" Text="SetExpressCheckout - ParallelPayment" /> 
+                    <asp:ListItem Value="~/UseCaseSamples/ParallelPayment.aspx" Text="ParallelPayment" /> 
                 </asp:BulletedList>
             </div>
             <br />
