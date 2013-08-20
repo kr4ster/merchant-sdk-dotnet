@@ -1,13 +1,6 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 
 using PayPal.PayPalAPIInterfaceService;
 using PayPal.PayPalAPIInterfaceService.Model;
@@ -25,7 +18,7 @@ namespace PayPalAPISample.APICalls
         {
             // Create request object
             BillUserRequestType request = new BillUserRequestType();            
-            request.ReturnFMFDetails = Int32.Parse(returnFMFDetails.SelectedValue);
+            request.ReturnFMFDetails = Convert.ToInt32(returnFMFDetails.SelectedValue);
 
             MerchantPullPaymentType paymentDetails = new MerchantPullPaymentType();
             request.MerchantPullPaymentDetails = paymentDetails;            
@@ -37,50 +30,50 @@ namespace PayPalAPISample.APICalls
                 paymentDetails.PaymentType =
                     (MerchantPullPaymentCodeType)Enum.Parse(typeof(MerchantPullPaymentCodeType), paymentType.SelectedValue);
             }
-            if (memo.Value != "")
+            if (memo.Value != string.Empty)
             {
                 paymentDetails.Memo = memo.Value;
             }
-            if (emailSubject.Value != "")
+            if (emailSubject.Value != string.Empty)
             {
                 paymentDetails.EmailSubject = emailSubject.Value;
             }
-            if (tax.Value != "" && taxCurrencyCode.SelectedIndex != 0)
+            if (tax.Value != string.Empty && taxCurrencyCode.SelectedIndex != 0)
             {
                 paymentDetails.Tax = new BasicAmountType(
                     (CurrencyCodeType)Enum.Parse(typeof(CurrencyCodeType), taxCurrencyCode.SelectedValue), tax.Value);
             }
-            if (shipping.Value != "" && shippingCurrencyCode.SelectedIndex != 0)
+            if (shipping.Value != string.Empty && shippingCurrencyCode.SelectedIndex != 0)
             {
                 paymentDetails.Shipping = new BasicAmountType(
                     (CurrencyCodeType)Enum.Parse(typeof(CurrencyCodeType), shippingCurrencyCode.SelectedValue), shipping.Value);
             }
-            if (handling.Value != "" && handlingCurrencyCode.SelectedIndex != 0)
+            if (handling.Value != string.Empty && handlingCurrencyCode.SelectedIndex != 0)
             {
                 paymentDetails.Handling = new BasicAmountType(
                     (CurrencyCodeType)Enum.Parse(typeof(CurrencyCodeType), handlingCurrencyCode.SelectedValue), handling.Value);
             }
-            if (itemName.Value != "")
+            if (itemName.Value != string.Empty)
             {
                 paymentDetails.ItemName = itemName.Value;
             }
-            if (itemNumber.Value != "")
+            if (itemNumber.Value != string.Empty)
             {
                 paymentDetails.ItemNumber = itemNumber.Value;
             }
-            if (invoiceNumber.Value != "")
+            if (invoiceNumber.Value != string.Empty)
             {
                 paymentDetails.Invoice = invoiceNumber.Value;
             }
-            if (custom.Value != "")
+            if (custom.Value != string.Empty)
             {
                 paymentDetails.Custom = custom.Value;
             }
-            if (buttonSource.Value != "")
+            if (buttonSource.Value != string.Empty)
             {
                 paymentDetails.ButtonSource = buttonSource.Value;
             }
-            if (softDescriptor.Value != "")
+            if (softDescriptor.Value != string.Empty)
             {
                 paymentDetails.SoftDescriptor = softDescriptor.Value;
             }
@@ -90,8 +83,15 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             BillUserReq wrapper = new BillUserReq();
             wrapper.BillUserRequest = request;
+
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer in wiki page 
+            // [https://github.com/paypal/sdk-core-dotnet/wiki/SDK-Configuration-Parameters]
+            Dictionary<string, string> configurationMap = Configuration.GetAcctAndConfig();
+
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
-            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
+
             // # API call 
             // Invoke the BillUser method in service wrapper object 
             BillUserResponseType billUserResponse = service.BillUser(wrapper);

@@ -1,13 +1,6 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 
 using PayPal.PayPalAPIInterfaceService;
 using PayPal.PayPalAPIInterfaceService.Model;
@@ -26,8 +19,8 @@ namespace PayPalAPISample.APICalls
             DoUATPAuthorizationRequestType request = new DoUATPAuthorizationRequestType();
             request.UATPDetails = new UATPDetailsType();
             request.UATPDetails.UATPNumber = uatpNumber.Value;
-            request.UATPDetails.ExpMonth = Int32.Parse(expMonth.Value);
-            request.UATPDetails.ExpYear = Int32.Parse(expYear.Value);
+            request.UATPDetails.ExpMonth = Convert.ToInt32(expMonth.Value);
+            request.UATPDetails.ExpYear = Convert.ToInt32(expYear.Value);
 
             request.TransactionEntity = (TransactionEntityType)
                 Enum.Parse(typeof(TransactionEntityType), transactionEntity.SelectedValue);
@@ -40,7 +33,13 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             DoUATPAuthorizationReq wrapper = new DoUATPAuthorizationReq();
             wrapper.DoUATPAuthorizationRequest = request;
-            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer in wiki page 
+            // [https://github.com/paypal/sdk-core-dotnet/wiki/SDK-Configuration-Parameters]
+            Dictionary<string, string> configurationMap = Configuration.GetAcctAndConfig();
+
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
             DoUATPAuthorizationResponseType response = service.DoUATPAuthorization(wrapper);
 
             // Check for API return status

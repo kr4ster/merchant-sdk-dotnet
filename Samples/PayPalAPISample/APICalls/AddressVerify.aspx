@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="sdk.css" />
 </head>
 <body>
+	<img src="https://devtools-paypal.com/image/bdg_payments_by_pp_2line.png" alt="PAYMENTS BY PayPal" />
     <div id="wrapper">
         <div id="header">
             <h3>
@@ -37,7 +38,7 @@
                     <input id="submit" type="submit" name="submit" value="Submit" runat="server" onserverclick="Submit_Click" />
                     <br />
                     <br />
-                    <a href="../Default.aspx">Home</a>&nbsp;&nbsp;<a href="javascript:history.back();">Back</a>
+                    <a href="../Default.aspx">Home</a>&nbsp;&nbsp;<a href="javascript:history.back();">Back</a>z
                 </div>
             </div>
         </form>

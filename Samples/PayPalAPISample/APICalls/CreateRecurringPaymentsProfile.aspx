@@ -19,6 +19,7 @@
 
 </head>
 <body>
+	<img src="https://devtools-paypal.com/image/bdg_payments_by_pp_2line.png" alt="PAYMENTS BY PayPal" />
     <div id="wrapper">
         <div id="header">
             <h3>
@@ -245,11 +246,12 @@
                         <td>
                             <span class="param_value">
                                 <asp:DropDownList ID="trialBillingPeriod" runat="server">
+                                    <asp:ListItem Text="NoBillingPeriodType" Value="NOBILLINGPERIODTYPE" />
                                     <asp:ListItem Text="Day" Value="DAY" />
-                                    <asp:ListItem Text="Week" Value="WEEK" />
-                                    <asp:ListItem Text="SemiMonth" Value="SEMIMONTH" />
-                                    <asp:ListItem Text="Month" Value="MONTH" />
-                                    <asp:ListItem Text="Year" Value="YEAR" />
+                                    <asp:ListItem Text="WEEK" Value="WEEK" />
+                                    <asp:ListItem Text="SEMIMONTH" Value="SEMIMONTH" />
+                                    <asp:ListItem Text="MONTH" Value="MONTH" />
+                                    <asp:ListItem Text="YEAR" Value="YEAR" />
                                 </asp:DropDownList>
                             </span>
                         </td>
@@ -342,8 +344,8 @@
                     Auto billing of outstanding amount</div>
                 <div class="param_value">
                     <asp:DropDownList ID="autoBillOutstandingAmount" runat="server">
-                        <asp:ListItem Text="No Auto billing" Value="NOAUTOBILL"></asp:ListItem>
-                        <asp:ListItem Text="Add to next billing" Value="ADDTONEXTBILLING"></asp:ListItem>
+                        <asp:ListItem Text="No Auto Billing" Value="NOAUTOBILL"></asp:ListItem>
+                        <asp:ListItem Text="Add To Next billing" Value="ADDTONEXTBILLING"></asp:ListItem>
                     </asp:DropDownList>
                 </div>
                 <div class="submit">

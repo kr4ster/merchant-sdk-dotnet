@@ -37,8 +37,15 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             CreateRecurringPaymentsProfileReq wrapper = new CreateRecurringPaymentsProfileReq();
             wrapper.CreateRecurringPaymentsProfileRequest = request;
+
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer in wiki page 
+            // [https://github.com/paypal/sdk-core-dotnet/wiki/SDK-Configuration-Parameters]
+            Dictionary<string, string> configurationMap = Configuration.GetAcctAndConfig();
+
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
-            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
+
             // # API call 
             // Invoke the CreateRecurringPaymentsProfile method in service wrapper object  
             CreateRecurringPaymentsProfileResponseType createRPProfileResponse = service.CreateRecurringPaymentsProfile(wrapper);
@@ -57,12 +64,12 @@ namespace PayPalAPISample.APICalls
             request.CreateRecurringPaymentsProfileRequestDetails = profileDetails;
             // A timestamped token, the value of which was returned in the response to the first call to SetExpressCheckout. You can also use the token returned in the SetCustomerBillingAgreement response. Either this token or a credit card number is required. If you include both token and credit card number, the token is used and credit card number is ignored Call CreateRecurringPaymentsProfile once for each billing agreement included in SetExpressCheckout request and use the same token for each call. Each CreateRecurringPaymentsProfile request creates a single recurring payments profile.
             // Note: Tokens expire after approximately 3 hours.
-            if(token.Value != "") 
+            if(token.Value != string.Empty) 
             {
                 profileDetails.Token = token.Value;
             }
             // Credit card information for recurring payments using direct payments. Either a token or a credit card number is required. If you include both token and credit card number, the token is used and credit card number is ignored.
-            else if (creditCardNumber.Value != "" && cvv.Value != "") 
+            else if (creditCardNumber.Value != string.Empty && cvv.Value != string.Empty) 
             {
                 CreditCardDetailsType cc = new CreditCardDetailsType();
                 // (Required) Credit card number.
@@ -70,9 +77,9 @@ namespace PayPalAPISample.APICalls
                 // Card Verification Value, version 2. Your Merchant Account settings determine whether this field is required. To comply with credit card processing regulations, you must not store this value after a transaction has been completed.
                 cc.CVV2 = cvv.Value;
                 // (Required) Credit card expiration month.
-                cc.ExpMonth = Int32.Parse(expMonth.SelectedValue);
+                cc.ExpMonth = Convert.ToInt32(expMonth.SelectedValue);
                 // (Required) Credit card expiration year.
-                cc.ExpYear = Int32.Parse(expYear.SelectedValue);
+                cc.ExpYear = Convert.ToInt32(expYear.SelectedValue);
                 profileDetails.CreditCard = cc;
             }
 
@@ -82,14 +89,14 @@ namespace PayPalAPISample.APICalls
                 new RecurringPaymentsProfileDetailsType(billingStartDate.Text);
             profileDetails.RecurringPaymentsProfileDetails = rpProfileDetails;
             // (Optional) Full name of the person receiving the product or service paid for by the recurring payment. If not present, the name in the buyer's PayPal account is used.
-            if(subscriberName.Value != "") 
+            if(subscriberName.Value != string.Empty) 
             {
                 rpProfileDetails.SubscriberName = subscriberName.Value;
             }
 
             // (Optional) The subscriber's shipping address associated with this profile, if applicable. If not specified, the ship-to address from buyer's PayPal account is used.
-            if(shippingName.Value != "" && shippingStreet1.Value != "" && shippingCity.Value != ""
-                && shippingState.Value != "" && shippingPostalCode.Value != "" && shippingCountry.Value != "") 
+            if(shippingName.Value != string.Empty && shippingStreet1.Value != string.Empty && shippingCity.Value != string.Empty
+                && shippingState.Value != string.Empty && shippingPostalCode.Value != string.Empty && shippingCountry.Value != string.Empty) 
             {
                 AddressType shippingAddr = new AddressType();
                 // Person's name associated with this shipping address. It is required if using a shipping address.
@@ -106,12 +113,12 @@ namespace PayPalAPISample.APICalls
                 shippingAddr.PostalCode = shippingPostalCode.Value;
 
                 // (Optional) Second street address.
-                if(shippingStreet2.Value != "") 
+                if(shippingStreet2.Value != string.Empty) 
                 {
                     shippingAddr.Street2 = shippingStreet2.Value;
                 }
                 // (Optional) Phone number.
-                if(shippingPhone.Value != "") 
+                if(shippingPhone.Value != string.Empty) 
                 {
                     shippingAddr.Phone = shippingPhone.Value;
                 }
@@ -123,14 +130,14 @@ namespace PayPalAPISample.APICalls
             ScheduleDetailsType scheduleDetails = new ScheduleDetailsType();
             // (Required) Description of the recurring payment.
             // Note: You must ensure that this field matches the corresponding billing agreement description included in the SetExpressCheckout request.
-            if(profileDescription.Value != "") 
+            if(profileDescription.Value != string.Empty) 
             {
                 scheduleDetails.Description = profileDescription.Value;
             }
             // (Optional) Number of scheduled payments that can fail before the profile is automatically suspended. An IPN message is sent to the merchant when the specified number of failed payments is reached.
-            if(maxFailedPayments.Value != "") 
+            if(maxFailedPayments.Value != string.Empty) 
             {
-                scheduleDetails.MaxFailedPayments = Int32.Parse(maxFailedPayments.Value);
+                scheduleDetails.MaxFailedPayments = Convert.ToInt32(maxFailedPayments.Value);
             }
             // (Optional) Indicates whether you would like PayPal to automatically bill the outstanding balance amount in the next billing cycle. The outstanding balance is the total amount of any previously failed scheduled payments that have yet to be successfully paid. It is one of the following values:
             // * NoAutoBill – PayPal does not automatically bill the outstanding balance.
@@ -141,7 +148,7 @@ namespace PayPalAPISample.APICalls
                     Enum.Parse(typeof(AutoBillType), autoBillOutstandingAmount.SelectedValue);
             }
             // (Optional) Information about activating a profile, such as whether there is an initial non-recurring payment amount immediately due upon profile creation and how to override a pending profile PayPal suspends when the initial payment amount fails.
-            if(initialAmount.Value != "")
+            if(initialAmount.Value != string.Empty)
             {
                 // (Optional) Initial non-recurring payment amount due immediately upon profile creation. Use an initial amount for enrolment or set-up fees.
                 // Note: All amounts included in the request must have the same currency.
@@ -159,8 +166,8 @@ namespace PayPalAPISample.APICalls
                 scheduleDetails.ActivationDetails = activationDetails;
             }
             // (Optional) Trial period for this schedule.
-            if(trialBillingAmount.Value != "" && trialBillingFrequency.Value != "" 
-                    && trialBillingCycles.Value != "") 
+            if(trialBillingAmount.Value != string.Empty && trialBillingFrequency.Value != string.Empty 
+                    && trialBillingCycles.Value != string.Empty) 
             {
                 // Number of billing periods that make up one billing cycle; 
                 // required if you specify an optional trial period.
@@ -170,7 +177,7 @@ namespace PayPalAPISample.APICalls
                 // if the billing cycle is Week, the maximum value for billing frequency is 52.
                 // Note:
                 // If the billing period is SemiMonth, the billing frequency must be 1.
-                int frequency = Int32.Parse(trialBillingFrequency.Value); 
+                int frequency = Convert.ToInt32(trialBillingFrequency.Value); 
                 
                 //Billing amount for each billing cycle during this payment period; 
                 //required if you specify an optional trial period. 
@@ -202,14 +209,14 @@ namespace PayPalAPISample.APICalls
                 //if the billing cycle is Week, the maximum value for billing frequency is 52.
                 //Note:
                 //If the billing period is SemiMonth, the billing frequency must be 1.
-                int numCycles = Int32.Parse(trialBillingCycles.Value);
+                int numCycles = Convert.ToInt32(trialBillingCycles.Value);
 
                 BillingPeriodDetailsType trialPeriod = new BillingPeriodDetailsType(period, frequency, paymentAmount);
                 trialPeriod.TotalBillingCycles = numCycles;
                 //(Optional) Shipping amount for each billing cycle during this payment period.
                 //Note:
                 //All amounts in the request must have the same currency.
-                if(trialShippingAmount.Value != "") 
+                if(trialShippingAmount.Value != string.Empty) 
                 {
                     trialPeriod.ShippingAmount = new BasicAmountType(currency, trialShippingAmount.Value);
                 }
@@ -221,7 +228,7 @@ namespace PayPalAPISample.APICalls
                 //It includes no currency symbol. It must have 2 decimal places, 
                 //the decimal separator must be a period (.), and the optional 
                 //thousands separator must be a comma (,).
-                if(trialTaxAmount.Value != "")
+                if(trialTaxAmount.Value != string.Empty)
                 {
                     trialPeriod.TaxAmount = new BasicAmountType(currency, trialTaxAmount.Value);
                 }
@@ -229,8 +236,8 @@ namespace PayPalAPISample.APICalls
                 scheduleDetails.TrialPeriod = trialPeriod;
             }
             // (Required) Regular payment period for this schedule.
-            if(billingAmount.Value != "" && billingFrequency.Value != "" 
-                    && totalBillingCycles.Value != "") 
+            if(billingAmount.Value != string.Empty && billingFrequency.Value != string.Empty 
+                    && totalBillingCycles.Value != string.Empty) 
             {
                 // Number of billing periods that make up one billing cycle; 
                 // required if you specify an optional trial period.
@@ -240,7 +247,7 @@ namespace PayPalAPISample.APICalls
                 // if the billing cycle is Week, the maximum value for billing frequency is 52.
                 // Note:
                 // If the billing period is SemiMonth, the billing frequency must be 1.
-                int frequency = Int32.Parse(billingFrequency.Value);
+                int frequency = Convert.ToInt32(billingFrequency.Value);
                 //Billing amount for each billing cycle during this payment period; 
                 //required if you specify an optional trial period. 
                 //This amount does not include shipping and tax amounts.
@@ -263,7 +270,7 @@ namespace PayPalAPISample.APICalls
                 //if the billing cycle is Week, the maximum value for billing frequency is 52.
                 //Note:
                 //If the billing period is SemiMonth, the billing frequency must be 1.
-                int numCycles = Int32.Parse(totalBillingCycles.Value);
+                int numCycles = Convert.ToInt32(totalBillingCycles.Value);
 
                 //Unit for billing during this subscription period; 
                 //required if you specify an optional trial period. 
@@ -276,7 +283,7 @@ namespace PayPalAPISample.APICalls
                 //(Optional) Shipping amount for each billing cycle during this payment period.
                 //Note:
                 //All amounts in the request must have the same currency.
-                if(trialShippingAmount.Value != "") 
+                if(trialShippingAmount.Value != string.Empty) 
                 {
                     paymentPeriod.ShippingAmount = new BasicAmountType(currency, shippingAmount.Value);
                 }
@@ -289,7 +296,7 @@ namespace PayPalAPISample.APICalls
                 //It includes no currency symbol. It must have 2 decimal places, 
                 //the decimal separator must be a period (.), and the optional 
                 //thousands separator must be a comma (,).
-                if(trialTaxAmount.Value != "")
+                if(trialTaxAmount.Value != string.Empty)
                 {
                     paymentPeriod.TaxAmount = new BasicAmountType(currency, taxAmount.Value);                     
                 }
