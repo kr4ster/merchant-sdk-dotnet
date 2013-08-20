@@ -374,6 +374,13 @@
     <Compile Include="UseCaseSamples\DoExpressCheckout.aspx.designer.cs">
       <DependentUpon>DoExpressCheckout.aspx</DependentUpon>
     </Compile>
+    <Compile Include="UseCaseSamples\DoExpressCheckoutForParallelPayment.aspx.cs">
+      <SubType>ASPXCodeBehind</SubType>
+      <DependentUpon>DoExpressCheckoutForParallelPayment.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UseCaseSamples\DoExpressCheckoutForParallelPayment.aspx.designer.cs">
+      <DependentUpon>DoExpressCheckoutForParallelPayment.aspx</DependentUpon>
+    </Compile>
     <Compile Include="UseCaseSamples\ParallelPayment.aspx.cs">
       <DependentUpon>ParallelPayment.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -428,6 +435,7 @@
     <None Include="paypal_cert.p12" />
     <Content Include="UseCaseSamples\DoAuthorizationForOrderPayment.aspx" />
     <Content Include="UseCaseSamples\DoExpressCheckout.aspx" />
+    <Content Include="UseCaseSamples\DoExpressCheckoutForParallelPayment.aspx" />
     <Content Include="UseCaseSamples\PaymentCapture.aspx" />
     <Content Include="UseCaseSamples\ParallelPayment.aspx" />
     <Content Include="UseCaseSamples\RecurringPaymentsUsingCreditCard.aspx" />

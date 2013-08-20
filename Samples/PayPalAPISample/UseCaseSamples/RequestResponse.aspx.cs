@@ -35,6 +35,9 @@ namespace PayPalAPISample.UseCaseSamples
                 case "DoExpressCheckout":
                     DoExpressCheckout(Context);
                     break;
+                case "DoExpressCheckoutForParallelPayment":
+                    DoExpressCheckoutForParallelPayment(Context);
+                    break;
                 case "DoAuthorization":
                     DoAuthorization(Context);
                     break;
@@ -58,8 +61,8 @@ namespace PayPalAPISample.UseCaseSamples
             NameValueCollection parameters = contextHttp.Request.Params;
 
             // Configuration map containing signature credentials and other required configuration.
-            // For a full list of configuration parameters refer at 
-            // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
+            // For a full list of configuration parameters refer in wiki page 
+            // [https://github.com/paypal/sdk-core-dotnet/wiki/SDK-Configuration-Parameters]
             Dictionary<string, string> configurationMap = Configuration.GetAcctAndConfig();
 
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
@@ -329,8 +332,8 @@ namespace PayPalAPISample.UseCaseSamples
             NameValueCollection parameters = contextHttp.Request.Params;
 
             // Configuration map containing signature credentials and other required configuration.
-            // For a full list of configuration parameters refer at 
-            // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
+            // For a full list of configuration parameters refer in wiki page 
+            // [https://github.com/paypal/sdk-core-dotnet/wiki/SDK-Configuration-Parameters]
             Dictionary<string, string> configurationMap = Configuration.GetAcctAndConfig();
 
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
@@ -540,8 +543,8 @@ namespace PayPalAPISample.UseCaseSamples
             NameValueCollection parameters = contextHttp.Request.Params;
 
             // Configuration map containing signature credentials and other required configuration.
-            // For a full list of configuration parameters refer at 
-            // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
+            // For a full list of configuration parameters refer in wiki page 
+            // [https://github.com/paypal/sdk-core-dotnet/wiki/SDK-Configuration-Parameters]
             Dictionary<string, string> configurationMap = Configuration.GetAcctAndConfig();
 
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
@@ -782,8 +785,8 @@ namespace PayPalAPISample.UseCaseSamples
             NameValueCollection parameters = contextHttp.Request.Params;
 
             // Configuration map containing signature credentials and other required configuration.
-            // For a full list of configuration parameters refer at 
-            // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
+            // For a full list of configuration parameters refer in wiki page 
+            // [https://github.com/paypal/sdk-core-dotnet/wiki/SDK-Configuration-Parameters]
             Dictionary<string, string> configurationMap = Configuration.GetAcctAndConfig();
 
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
@@ -1024,8 +1027,8 @@ namespace PayPalAPISample.UseCaseSamples
             NameValueCollection parameters = contextHttp.Request.Params;
 
             // Configuration map containing signature credentials and other required configuration.
-            // For a full list of configuration parameters refer at 
-            // [https://github.com/paypal/merchant-sdk-java/wiki/SDK-Configuration-Parameters]
+            // For a full list of configuration parameters refer in wiki page 
+            // [https://github.com/paypal/sdk-core-dotnet/wiki/SDK-Configuration-Parameters]
             Dictionary<String, String> configurationMap = Configuration.GetAcctAndConfig();
 
             // Creating service wrapper object to make an API call by loading configuration map.
@@ -1191,6 +1194,159 @@ namespace PayPalAPISample.UseCaseSamples
                 
             Display(contextHttp, "DoExpressCheckout", "DoExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
         }
+        /// <summary>
+        /// Handles DoExpressCheckoutForParallelPayments
+        /// </summary>
+        /// <param name="contextHttp"></param>
+        private void DoExpressCheckoutForParallelPayment(HttpContext contextHttp)
+        {
+            NameValueCollection parameters = contextHttp.Request.Params;
+
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer in wiki page 
+            // [https://github.com/paypal/sdk-core-dotnet/wiki/SDK-Configuration-Parameters]
+            Dictionary<String, String> configurationMap = Configuration.GetAcctAndConfig();
+
+            // Creating service wrapper object to make an API call by loading configuration map.
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
+
+            DoExpressCheckoutPaymentRequestType doCheckoutPaymentRequestType = new DoExpressCheckoutPaymentRequestType();
+            DoExpressCheckoutPaymentRequestDetailsType details = new DoExpressCheckoutPaymentRequestDetailsType();
+
+            // A timestamped token by which you identify to PayPal that you are processing
+            // this payment with Express Checkout. The token expires after three hours. 
+            // If you set the token in the SetExpressCheckout request, the value of the token
+            // in the response is identical to the value in the request.
+            // Character length and limitations: 20 single-byte characters
+            details.Token = parameters["token"];
+
+            // Unique PayPal Customer Account identification number.
+            // Character length and limitations: 13 single-byte alphanumeric characters
+            details.PayerID = parameters["payerID"];
+
+            // (Optional) How you want to obtain payment. If the transaction does not include a one-time purchase, this field is ignored. 
+            // It is one of the following values:
+            // Sale – This is a final sale for which you are requesting payment (default).
+            // Authorization – This payment is a basic authorization subject to settlement with PayPal Authorization and Capture.
+            // Order – This payment is an order authorization subject to settlement with PayPal Authorization and Capture.
+            // Note:
+            // You cannot set this field to Sale in SetExpressCheckout request and then change 
+            // this value to Authorization or Order in the DoExpressCheckoutPayment request. 
+            // If you set the field to Authorization or Order in SetExpressCheckout, you may set the field to Sale.
+            // Character length and limitations: Up to 13 single-byte alphabetic characters
+            // This field is deprecated. Use PaymentAction in PaymentDetailsType instead.
+            details.PaymentAction = (PaymentActionCodeType)Enum.Parse(typeof(PaymentActionCodeType), parameters["paymentType"]);
+
+            PaymentDetailsType paymentDetails1 = new PaymentDetailsType();
+            BasicAmountType orderTotal1 = new BasicAmountType();
+            orderTotal1.value = parameters["orderTotal"];
+
+            //PayPal uses 3-character ISO-4217 codes for specifying currencies in fields and variables.
+            orderTotal1.currencyID = (CurrencyCodeType)Enum.Parse(typeof(CurrencyCodeType), parameters["currencyCode"]);
+
+            // (Required) The total cost of the transaction to the buyer. 
+            // If shipping cost (not applicable to digital goods) and tax charges are known, 
+            // include them in this value. If not, this value should be the current sub-total 
+            // of the order. If the transaction includes one or more one-time purchases, this 
+            // field must be equal to the sum of the purchases. Set this field to 0 if the 
+            // transaction does not include a one-time purchase such as when you set up a 
+            // billing agreement for a recurring payment that is not immediately charged. 
+            // When the field is set to 0, purchase-specific fields are ignored. 
+            // For digital goods, the following must be true:
+            // total cost > 0
+            // total cost <= total cost passed in the call to SetExpressCheckout
+            // Note:
+            // You must set the currencyID attribute to one of the 3-character currency codes 
+            // for any of the supported PayPal currencies.
+            // When multiple payments are passed in one transaction, all of the payments must 
+            // have the same currency code.
+            // Character length and limitations: Value is a positive number which cannot 
+            // exceed $10,000 USD in any currency. It includes no currency symbol. 
+            // It must have 2 decimal places, the decimal separator must be a period (.), 
+            // and the optional thousands separator must be a comma (,).
+            paymentDetails1.OrderTotal = orderTotal1;
+
+            SellerDetailsType sellerDetailsType1 = new SellerDetailsType();
+            sellerDetailsType1.PayPalAccountID = parameters["receiverEmail_0"];
+
+            paymentDetails1.PaymentRequestID = parameters["paymentRequestID_0"];
+            paymentDetails1.SellerDetails = sellerDetailsType1;
+
+            PaymentDetailsType paymentDetails2 = new PaymentDetailsType();
+            BasicAmountType orderTotal2 = new BasicAmountType();
+            orderTotal2.value = parameters["orderTotal"];
+
+            //PayPal uses 3-character ISO-4217 codes for specifying currencies in fields and variables.
+            orderTotal2.currencyID = (CurrencyCodeType)Enum.Parse(typeof(CurrencyCodeType), parameters["currencyCode"]);
+
+            // (Required) The total cost of the transaction to the buyer. 
+            // If shipping cost (not applicable to digital goods) and tax charges are known, 
+            // include them in this value. If not, this value should be the current sub-total 
+            // of the order. If the transaction includes one or more one-time purchases, this 
+            // field must be equal to the sum of the purchases. Set this field to 0 if the 
+            // transaction does not include a one-time purchase such as when you set up a 
+            // billing agreement for a recurring payment that is not immediately charged. 
+            // When the field is set to 0, purchase-specific fields are ignored. 
+            // For digital goods, the following must be true:
+            // total cost > 0
+            // total cost <= total cost passed in the call to SetExpressCheckout
+            // Note:
+            // You must set the currencyID attribute to one of the 3-character currency codes 
+            // for any of the supported PayPal currencies.
+            // When multiple payments are passed in one transaction, all of the payments must 
+            // have the same currency code.
+            // Character length and limitations: Value is a positive number which cannot 
+            // exceed $10,000 USD in any currency. It includes no currency symbol. 
+            // It must have 2 decimal places, the decimal separator must be a period (.), 
+            // and the optional thousands separator must be a comma (,).
+            paymentDetails2.OrderTotal = orderTotal2;
+
+            SellerDetailsType sellerDetailsType2 = new SellerDetailsType();
+            sellerDetailsType2.PayPalAccountID = parameters["receiverEmail_1"];
+
+            paymentDetails2.PaymentRequestID = parameters["paymentRequestID_1"];
+            paymentDetails2.SellerDetails = sellerDetailsType2;
+
+            List<PaymentDetailsType> payDetailType = new List<PaymentDetailsType>();
+            payDetailType.Add(paymentDetails1);
+            payDetailType.Add(paymentDetails2);
+
+            // When implementing parallel payments, you can create up to 10 sets of payment 
+            // details type parameter fields, each representing one payment you are hosting 
+            // on your marketplace.
+            details.PaymentDetails = payDetailType;
+
+            doCheckoutPaymentRequestType.DoExpressCheckoutPaymentRequestDetails = details;
+            DoExpressCheckoutPaymentReq doExpressCheckoutPaymentReq = new DoExpressCheckoutPaymentReq();
+            doExpressCheckoutPaymentReq.DoExpressCheckoutPaymentRequest = doCheckoutPaymentRequestType;
+            DoExpressCheckoutPaymentResponseType response = null;
+            try
+            {
+                response = service.DoExpressCheckoutPayment(doExpressCheckoutPaymentReq);
+            }
+            catch (System.Exception ex)
+            {
+                contextHttp.Response.Write(ex.StackTrace);
+                return;
+            }
+
+            Dictionary<string, string> responseValues = new Dictionary<string, string>();
+            string redirectUrl = null;
+
+            if (!response.Ack.ToString().Trim().ToUpper().Equals(AckCode.FAILURE.ToString()) && !response.Ack.ToString().Trim().ToUpper().Equals(AckCode.FAILUREWITHWARNING.ToString()))
+            {
+                responseValues.Add("Acknowledgement", response.Ack.ToString().Trim().ToUpper());
+                responseValues.Add("PaymentType", parameters["paymentType"]);
+                responseValues.Add("TransactionId", response.DoExpressCheckoutPaymentResponseDetails.PaymentInfo[0].TransactionID);
+            }
+            else
+            {
+                responseValues.Add("Acknowledgement", response.Ack.ToString().Trim().ToUpper());
+            }
+
+            Display(contextHttp, "DoExpressCheckoutForParallelPayment", "DoExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
+        }
+
 
         /// <summary>
         /// Handles DoCapture
@@ -1201,8 +1357,8 @@ namespace PayPalAPISample.UseCaseSamples
             NameValueCollection parameters = contextHttp.Request.Params;
 
             // Configuration map containing signature credentials and other required configuration.
-            // For a full list of configuration parameters refer at 
-            // [https://github.com/paypal/merchant-sdk-java/wiki/SDK-Configuration-Parameters]
+            // For a full list of configuration parameters refer in wiki page 
+            // [https://github.com/paypal/sdk-core-dotnet/wiki/SDK-Configuration-Parameters]
             Dictionary<String, String> configurationMap = Configuration.GetAcctAndConfig();
 
             // Creating service wrapper object to make an API call by loading configuration map.
@@ -1267,8 +1423,8 @@ namespace PayPalAPISample.UseCaseSamples
             NameValueCollection parameters = contextHttp.Request.Params;
 
             // Configuration map containing signature credentials and other required configuration.
-            // For a full list of configuration parameters refer at 
-            // [https://github.com/paypal/merchant-sdk-java/wiki/SDK-Configuration-Parameters]
+            // For a full list of configuration parameters refer in wiki page 
+            // [https://github.com/paypal/sdk-core-dotnet/wiki/SDK-Configuration-Parameters]
             Dictionary<String, String> configurationMap = Configuration.GetAcctAndConfig();
 
             // Creating service wrapper object to make an API call by loading configuration map.
@@ -1324,8 +1480,8 @@ namespace PayPalAPISample.UseCaseSamples
             NameValueCollection parameters = contextHttp.Request.Params;
 
             // Configuration map containing signature credentials and other required configuration.
-            // For a full list of configuration parameters refer at 
-            // [https://github.com/paypal/merchant-sdk-dotnet/wiki/SDK-Configuration-Parameters]
+            // For a full list of configuration parameters refer in wiki page 
+            // [https://github.com/paypal/sdk-core-dotnet/wiki/SDK-Configuration-Parameters]
             Dictionary<string, string> configurationMap = Configuration.GetAcctAndConfig();
 
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
@@ -1342,7 +1498,7 @@ namespace PayPalAPISample.UseCaseSamples
             UriBuilder uriBuilder = new UriBuilder(requestUrl);
             uriBuilder.Path = contextHttp.Request.ApplicationPath
                 + (contextHttp.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
-                + "UseCaseSamples/SetExpressCheckoutPaymentAuthorization.aspx";
+                + "UseCaseSamples/DoExpressCheckoutForParallelPayment.aspx";
             string returnUrl = uriBuilder.Uri.ToString();
 
             // (Required) URL to which the buyer is returned if the buyer does not approve the use of PayPal to pay you. For digital goods, you must add JavaScript to this page to close the in-context experience.
@@ -1351,7 +1507,7 @@ namespace PayPalAPISample.UseCaseSamples
             uriBuilder = new UriBuilder(requestUrl);
             uriBuilder.Path = contextHttp.Request.ApplicationPath
                 + (contextHttp.Request.ApplicationPath.EndsWith("/") ? string.Empty : "/")
-                + "UseCaseSamples/SetExpressCheckoutPaymentAuthorization.aspx";
+                + "UseCaseSamples/DoExpressCheckout.aspx";
             string cancelUrl = uriBuilder.Uri.ToString();
 
 
@@ -1375,7 +1531,7 @@ namespace PayPalAPISample.UseCaseSamples
             seller1.PayPalAccountID = parameters["receiverEmail_0"];
             PaymentDetailsType paymentDetails1 = new PaymentDetailsType();
             paymentDetails1.SellerDetails = seller1;
-            paymentDetails1.PaymentRequestID = "CART286-PAYMENT1";
+            paymentDetails1.PaymentRequestID = parameters["paymentRequestID_0"];
             BasicAmountType orderTotal1 = new BasicAmountType();
             orderTotal1.currencyID = (CurrencyCodeType)Enum.Parse(typeof(CurrencyCodeType), parameters["currencyCode"]);
             orderTotal1.value = parameters["orderTotal"];
@@ -1385,7 +1541,7 @@ namespace PayPalAPISample.UseCaseSamples
             seller2.PayPalAccountID = parameters["receiverEmail_1"];
             PaymentDetailsType paymentDetails2 = new PaymentDetailsType();
             paymentDetails2.SellerDetails = seller2;
-            paymentDetails2.PaymentRequestID = "CART286-PAYMENT2";
+            paymentDetails2.PaymentRequestID = parameters["paymentRequestID_1"];
             BasicAmountType orderTotal2 = new BasicAmountType();
             orderTotal2.currencyID = (CurrencyCodeType)Enum.Parse(typeof(CurrencyCodeType), parameters["currencyCode"]);
             orderTotal2.value = parameters["orderTotal"];
@@ -1414,7 +1570,10 @@ namespace PayPalAPISample.UseCaseSamples
 
             Dictionary<string, string> responseValues = new Dictionary<string, string>();
             string redirectUrl = null;
-
+            if (!response.Ack.ToString().Trim().ToUpper().Equals(AckCode.FAILURE.ToString()) && !response.Ack.ToString().Trim().ToUpper().Equals(AckCode.FAILUREWITHWARNING.ToString()))
+            {
+                redirectUrl = ConfigurationManager.AppSettings["PAYPAL_REDIRECT_URL"].ToString() + "_express-checkout&token=" + response.Token;
+            }
             responseValues.Add("Acknowledgement", response.Ack.ToString().Trim().ToUpper());
             Display(contextHttp, "ParallelPayment", "SetExpressCheckout", responseValues, service.getLastRequest(), service.getLastResponse(), response.Errors, redirectUrl);
         }

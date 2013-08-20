@@ -5,6 +5,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>PayPal Merchant SDK = Parallel Payment using SetExpressCheckout</title>
+    <link href="../APICalls/sdk.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
     <img src="https://devtools-paypal.com/image/bdg_payments_by_pp_2line.png" alt="PAYMENTS BY PayPal" />
@@ -59,10 +60,12 @@
             Receiver Emails</div>
         <div class="param_value">
             1.<asp:TextBox runat="server" ID="receiverEmail_0" Text="platfo_1255170694_biz@gmail.com" Width="20%" />
+            <asp:TextBox runat="server" ID="paymentRequestID_0" Text="CART286-PAYMENT0" Width="20%" />
         </div>
         <br />
         <div class="param_value">
             2.<asp:TextBox runat="server" ID="receiverEmail_1" Text="platfo_1255611349_biz@gmail.com" Width="20%" />
+            <asp:TextBox runat="server" ID="paymentRequestID_1" Text="CART286-PAYMENT1" Width="20%" />
         </div>
         <br />
         <div class="submit">

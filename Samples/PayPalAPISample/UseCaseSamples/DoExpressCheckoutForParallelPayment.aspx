@@ -1,9 +1,9 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DoExpressCheckout.aspx.cs"
-    Inherits="PayPalAPISample.UseCaseSamples.DoExpressCheckout" %>
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="DoExpressCheckoutForParallelPayment.aspx.cs" Inherits="PayPalAPISample.UseCaseSamples.DoExpressCheckoutForParallelPayment" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<head id="Head1" runat="server">
     <title>PayPal Merchant SDK - DoExpressCheckout</title>
     <link href="../APICalls/sdk.css" type="text/css" rel="stylesheet" />
 </head>
@@ -44,54 +44,37 @@
                     </asp:DropDownList>
                 </div>
             </div>
-            <table class="params">
-                <tr>
-                    <th class="param_name">
-                        Name
-                    </th>
-                    <th class="param_name">
-                        Cost
-                    </th>
-                    <th class="param_name">
-                        Currency Code
-                    </th>
-                    <th class="param_name">
-                        Quantity
-                    </th>
-                </tr>
-                <tr>
-                    <td>
-                        <div class="param_value">
-                            <asp:TextBox runat="server" ID="itemName" Text="Name" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="param_value">
-                            <asp:TextBox runat="server" ID="amt" Text="5.27" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="param_value">
-                            <asp:TextBox runat="server" ID="currencyCode" Text="USD" ReadOnly="true" />
-                        </div>
-                    </td>
-                    <td>
-                        <div class="param_value">
-                            <asp:TextBox runat="server" ID="itemQuantity" Text="2" />
-                        </div>
-                    </td>
-                </tr>
-            </table>
             <div class="params">
-                <div class="param_name">IPN Notification Url (Receive IPN call back from PayPal)</div>
-                <div class="param_value">
-                    <asp:TextBox runat="server" ID="notifyURL" />
-                </div>
+            <div class="param_name">
+                Currency Code</div>
+            <div class="param_value">
+                <asp:TextBox runat="server" ID="currencyCode" Text="USD" />
             </div>
+        </div>
+        <div class="params">
+            <div class="param_name">
+                Order Total</div>
+            <div class="param_value">
+                <asp:TextBox runat="server" ID="orderTotal" Text="1.00" />
+            </div>
+        </div>
+            <div class="param_name">
+            Receiver Emails</div>
+            <div class="param_value">
+                1.<asp:TextBox runat="server" ID="receiverEmail_0" Text="platfo_1255170694_biz@gmail.com" Width="20%" />
+                <asp:TextBox runat="server" ID="paymentRequestID_0" Text="CART286-PAYMENT0" Width="20%" />
+            </div>
+            <br />
+            <div class="param_value">
+                2.<asp:TextBox runat="server" ID="receiverEmail_1" Text="platfo_1255611349_biz@gmail.com" Width="20%" />
+                <asp:TextBox runat="server" ID="paymentRequestID_1" Text="CART286-PAYMENT1" Width="20%" />
+            </div>
+           <br />
+           
         </div>
         <br />
         <div class="submit">
-            <asp:Button ID="ButtonPayments" Text="DoExpressCheckout" runat="server" PostBackUrl="~/UseCaseSamples/RequestResponse.aspx" />
+            <asp:Button ID="ButtonPayments" Text="DoExpressCheckoutForParallelPayment" runat="server" PostBackUrl="~/UseCaseSamples/RequestResponse.aspx" />
         </div>
         <br />
         <asp:HyperLink runat="server" ID="HyperLinkHome" NavigateUrl="~/Default.aspx" Text="Home" />

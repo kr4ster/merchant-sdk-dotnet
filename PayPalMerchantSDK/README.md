@@ -62,6 +62,8 @@ The PayPal Merchant SDK C#.NET Class Library project contains classes that allow
     PayPalAPIInterfaceService s = new  PayPalAPIInterfaceService(config);
     ```
 
+	You can refer full list of configuration parameters in [wiki](https://github.com/paypal/sdk-core-dotnet/wiki/SDK-Configuration-Parameters)
+	
 ## Links
 
    * [Installing NuGet in Visual Studio 2005 & 2008] (https://github.com/paypal/sdk-core-dotnet/wiki/Using-Nuget-in-Visual-Studio-2005-&-2008)
