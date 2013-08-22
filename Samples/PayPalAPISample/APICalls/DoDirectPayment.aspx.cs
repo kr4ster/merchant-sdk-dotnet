@@ -1,17 +1,10 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
 using System.Collections.Generic;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 
 using PayPal.PayPalAPIInterfaceService;
 using PayPal.PayPalAPIInterfaceService.Model;
-using PayPal.Manager;
 
 namespace PayPalAPISample.APICalls
 {
@@ -76,9 +69,9 @@ namespace PayPalAPISample.APICalls
             if (cardExpiryDetails.Length == 2)
             {
                 // (Required) Credit card expiration month.
-                creditCard.ExpMonth = Int32.Parse(cardExpiryDetails[0]);
+                creditCard.ExpMonth = Convert.ToInt32(cardExpiryDetails[0]);
                 // (Required) Credit card expiration year.
-                creditCard.ExpYear = Int32.Parse(cardExpiryDetails[1]);
+                creditCard.ExpYear = Convert.ToInt32(cardExpiryDetails[1]);
             }
 
             requestDetails.PaymentDetails = new PaymentDetailsType();
@@ -88,8 +81,8 @@ namespace PayPalAPISample.APICalls
 
             // (Optional) Buyer's shipping address information. 
             AddressType billingAddr = new AddressType();
-            if (firstName.Value != "" && lastName.Value != ""
-                && street1.Value != "" && country.Value != "")
+            if (firstName.Value != string.Empty && lastName.Value != string.Empty
+                && street1.Value != string.Empty && country.Value != string.Empty)
             {
                 billingAddr.Name = payerName.Value;
                 // (Required) First street address.
@@ -121,8 +114,15 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             DoDirectPaymentReq wrapper = new DoDirectPaymentReq();
             wrapper.DoDirectPaymentRequest = request;
+
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer in wiki page 
+            // [https://github.com/paypal/sdk-core-dotnet/wiki/SDK-Configuration-Parameters]
+            Dictionary<string, string> configurationMap = Configuration.GetAcctAndConfig();
+
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
-            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
+
             // # API call 
             // Invoke the DoDirectPayment method in service wrapper object  
             DoDirectPaymentResponseType response = service.DoDirectPayment(wrapper);

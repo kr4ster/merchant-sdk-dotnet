@@ -1,12 +1,5 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 using System.Collections.Generic;
 
 using PayPal.PayPalAPIInterfaceService;
@@ -24,8 +17,14 @@ namespace PayPalAPISample.APICalls
 
         protected void Submit_Click(object sender, EventArgs e)
         {
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer in wiki page 
+            // [https://github.com/paypal/sdk-core-dotnet/wiki/SDK-Configuration-Parameters]
+            Dictionary<string, string> configurationMap = Configuration.GetAcctAndConfig();
+
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
-            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
+
             GetExpressCheckoutDetailsReq getECWrapper = new GetExpressCheckoutDetailsReq();
             // (Required) A timestamped token, the value of which was returned by SetExpressCheckout response.
             // Character length and limitations: 20 single-byte characters

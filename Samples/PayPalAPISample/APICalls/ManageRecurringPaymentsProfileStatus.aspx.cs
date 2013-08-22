@@ -1,13 +1,6 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 
 using PayPal.PayPalAPIInterfaceService;
 using PayPal.PayPalAPIInterfaceService.Model;
@@ -40,7 +33,7 @@ namespace PayPalAPISample.APICalls
             details.Action = (StatusChangeActionType)
                 Enum.Parse(typeof(StatusChangeActionType), action.SelectedValue);
             // (Optional) The reason for the change in status. For profiles created using Express Checkout, this message is included in the email notification to the buyer when the status of the profile is successfully changed, and can also be seen by both you and the buyer on the Status History page of the PayPal account.
-            if (note.Value != "")
+            if (note.Value != string.Empty)
             {
                 details.Note = note.Value;
             }
@@ -48,8 +41,15 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             ManageRecurringPaymentsProfileStatusReq wrapper = new ManageRecurringPaymentsProfileStatusReq();
             wrapper.ManageRecurringPaymentsProfileStatusRequest = request;
+
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer in wiki page 
+            // [https://github.com/paypal/sdk-core-dotnet/wiki/SDK-Configuration-Parameters]
+            Dictionary<string, string> configurationMap = Configuration.GetAcctAndConfig();
+            
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
-            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
+
             // # API call 
             // Invoke the ManageRecurringPaymentsProfileStatus method in service wrapper object  
             ManageRecurringPaymentsProfileStatusResponseType manageProfileStatusResponse =

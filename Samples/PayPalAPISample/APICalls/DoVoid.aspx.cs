@@ -1,13 +1,6 @@
 using System;
-using System.Data;
-using System.Configuration;
-using System.Collections;
 using System.Collections.Generic;
 using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System.Web.UI.WebControls.WebParts;
-using System.Web.UI.HtmlControls;
 
 using PayPal.PayPalAPIInterfaceService;
 using PayPal.PayPalAPIInterfaceService.Model;
@@ -30,7 +23,7 @@ namespace PayPalAPISample.APICalls
             // Important: If you are voiding a transaction that has been reauthorized, use the ID from the original authorization, and not the reauthorization.
             request.AuthorizationID = authorizationId.Value;
             // (Optional) Informational note about this void that is displayed to the buyer in email and in their transaction history.
-            if (note.Value != "")
+            if (note.Value != string.Empty)
             {
                 request.Note = note.Value;                
             }
@@ -38,8 +31,15 @@ namespace PayPalAPISample.APICalls
             // Invoke the API
             DoVoidReq wrapper = new DoVoidReq();
             wrapper.DoVoidRequest = request;
+
+            // Configuration map containing signature credentials and other required configuration.
+            // For a full list of configuration parameters refer in wiki page 
+            // [https://github.com/paypal/sdk-core-dotnet/wiki/SDK-Configuration-Parameters]
+            Dictionary<string, string> configurationMap = Configuration.GetAcctAndConfig();
+            
             // Create the PayPalAPIInterfaceServiceService service object to make the API call
-            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService();
+            PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(configurationMap);
+
             // # API call 
             // Invoke the DoVoid method in service wrapper object  
             DoVoidResponseType doVoidResponse =
