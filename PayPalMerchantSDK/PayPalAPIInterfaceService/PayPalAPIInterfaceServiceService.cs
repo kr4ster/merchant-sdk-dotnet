@@ -16,7 +16,7 @@ namespace PayPal.PayPalAPIInterfaceService
 		/// <summary>
 		/// Service Version
 		/// </summary>
-		private const string ServiceVersion = "98.0";
+		private const string ServiceVersion = "106.0";
 
 		/// <summary>
 		/// Service Name
@@ -31,7 +31,7 @@ namespace PayPal.PayPalAPIInterfaceService
 		/// <summary>
 		/// SDK Version
 		/// </summary>
-		private const string SDKVersion = "2.5.103";
+		private const string SDKVersion = "2.6.106";
 
 		/// <summary>
 		/// Default constructor for loading configuration from *.Config file
@@ -1995,6 +1995,60 @@ namespace PayPal.PayPalAPIInterfaceService
 			xmlDocument.LoadXml(Call(apiCallPreHandler));			
 			return new DoAuthorizationResponseType(
 				xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='DoAuthorizationResponse']")
+			);
+			
+	 	}
+
+		/// <summary>
+		/// 
+	 	/// </summary>
+		///<param name="updateAuthorizationReq"></param>
+		///<param name="apiUserName">API Username that you want to authenticate this call against. This username and the corresponding 3-token/certificate credentials must be available in Web.Config/App.Config</param>
+	 	public UpdateAuthorizationResponseType UpdateAuthorization(UpdateAuthorizationReq updateAuthorizationReq, string apiUserName)
+	 	{	 		
+			setStandardParams(updateAuthorizationReq.UpdateAuthorizationRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(this.config, updateAuthorizationReq.ToXMLString(null, "UpdateAuthorizationReq"), null, null);
+			IAPICallPreHandler apiCallPreHandler = new MerchantAPICallPreHandler(this.config, defaultHandler, apiUserName, getAccessToken(), getAccessTokenSecret());
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			((MerchantAPICallPreHandler) apiCallPreHandler).PortName = "PayPalAPIAA";
+			
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(Call(apiCallPreHandler));			
+			return new UpdateAuthorizationResponseType(
+				xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='UpdateAuthorizationResponse']")
+			);
+			
+	 	}
+	 
+	 	/// <summary> 
+		/// 
+	 	/// </summary>
+		///<param name="updateAuthorizationReq"></param>
+	 	
+	 	public UpdateAuthorizationResponseType UpdateAuthorization(UpdateAuthorizationReq updateAuthorizationReq)
+	 	{
+	 		return UpdateAuthorization(updateAuthorizationReq,(string) null);
+	 	}
+	 	
+	 	/// <summary>
+		/// 
+	 	/// </summary>
+		///<param name="updateAuthorizationReq"></param>
+		///<param name="credential">An explicit ICredential object that you want to authenticate this call against</param> 
+	 	public UpdateAuthorizationResponseType UpdateAuthorization(UpdateAuthorizationReq updateAuthorizationReq, ICredential credential)
+	 	{	 			 		
+			setStandardParams(updateAuthorizationReq.UpdateAuthorizationRequest);
+			DefaultSOAPAPICallHandler defaultHandler = new DefaultSOAPAPICallHandler(this.config, updateAuthorizationReq.ToXMLString(null, "UpdateAuthorizationReq"), null, null);
+			IAPICallPreHandler apiCallPreHandler = new MerchantAPICallPreHandler(this.config, defaultHandler, credential);
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKName = SDKName;
+			((MerchantAPICallPreHandler) apiCallPreHandler).SDKVersion = SDKVersion;
+			((MerchantAPICallPreHandler) apiCallPreHandler).PortName = "PayPalAPIAA";
+			
+			XmlDocument xmlDocument = new XmlDocument();
+			xmlDocument.LoadXml(Call(apiCallPreHandler));			
+			return new UpdateAuthorizationResponseType(
+				xmlDocument.SelectSingleNode("*[local-name()='Envelope']/*[local-name()='Body']/*[local-name()='UpdateAuthorizationResponse']")
 			);
 			
 	 	}
