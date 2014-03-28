@@ -7578,6 +7578,23 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		
 
 		/// <summary>
+		/// 
+		/// </summary>
+		private string riskSessionCorrelationIDField;
+		public string RiskSessionCorrelationID
+		{
+			get
+			{
+				return this.riskSessionCorrelationIDField;
+			}
+			set
+			{
+				this.riskSessionCorrelationIDField = value;
+			}
+		}
+		
+
+		/// <summary>
 		/// Default Constructor
 	 	/// </summary>
 	 	public BuyerDetailType()
@@ -7602,6 +7619,11 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			if(IdentificationInfo != null)
 			{
 				sb.Append(IdentificationInfo.ToXMLString(PreferredPrefix,"IdentificationInfo"));
+			}
+			if(RiskSessionCorrelationID != null)
+			{
+				sb.Append("<").Append(PreferredPrefix).Append(":RiskSessionCorrelationID>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.RiskSessionCorrelationID));
+				sb.Append("</").Append(PreferredPrefix).Append(":RiskSessionCorrelationID>");
 			}
 			if (name != null)
 			{
@@ -9404,6 +9426,23 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		/// <summary>
 		/// 
 		/// </summary>
+		private string useSessionPaymentDetailsField;
+		public string UseSessionPaymentDetails
+		{
+			get
+			{
+				return this.useSessionPaymentDetailsField;
+			}
+			set
+			{
+				this.useSessionPaymentDetailsField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
 		private List<CoupledBucketsType> coupledBucketsField = new List<CoupledBucketsType>();
 		public List<CoupledBucketsType> CoupledBuckets
 		{
@@ -9536,6 +9575,11 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			{
 				sb.Append("<").Append(PreferredPrefix).Append(":SkipBACreation>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(Convert.ToString(this.SkipBACreation, DefaultCulture)));
 				sb.Append("</").Append(PreferredPrefix).Append(":SkipBACreation>");
+			}
+			if(UseSessionPaymentDetails != null)
+			{
+				sb.Append("<").Append(PreferredPrefix).Append(":UseSessionPaymentDetails>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.UseSessionPaymentDetails));
+				sb.Append("</").Append(PreferredPrefix).Append(":UseSessionPaymentDetails>");
 			}
 			if(CoupledBuckets != null)
 			{
