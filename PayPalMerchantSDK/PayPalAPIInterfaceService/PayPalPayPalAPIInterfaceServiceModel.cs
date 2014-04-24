@@ -2674,6 +2674,19 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 
 
 	/// <summary>
+	/// 
+	/// </summary>
+    [Serializable]
+	public enum WalletItemType {
+		[Description("MERCHANT_COUPON")]MERCHANTCOUPON,	
+		[Description("LOYALTY_CARD")]LOYALTYCARD,	
+		[Description("MANUFACTURER_COUPON")]MANUFACTURERCOUPON	
+	}
+
+
+
+
+	/// <summary>
 	/// Value of the application-specific error parameter.  
     /// </summary>
 	public partial class ErrorParameterType	{
@@ -9171,6 +9184,23 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		/// <summary>
 		/// 
 		/// </summary>
+		private string msgSubIDField;
+		public string MsgSubID
+		{
+			get
+			{
+				return this.msgSubIDField;
+			}
+			set
+			{
+				this.msgSubIDField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
 		private List<PaymentDetailsType> paymentDetailsField = new List<PaymentDetailsType>();
 		public List<PaymentDetailsType> PaymentDetails
 		{
@@ -9499,6 +9529,11 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 				sb.Append("<").Append(PreferredPrefix).Append(":OrderURL>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.OrderURL));
 				sb.Append("</").Append(PreferredPrefix).Append(":OrderURL>");
 			}
+			if(MsgSubID != null)
+			{
+				sb.Append("<").Append(PreferredPrefix).Append(":MsgSubID>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.MsgSubID));
+				sb.Append("</").Append(PreferredPrefix).Append(":MsgSubID>");
+			}
 			if(PaymentDetails != null)
 			{
 				for(int i = 0; i < PaymentDetails.Count; i++)
@@ -9706,6 +9741,23 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		/// <summary>
 		/// 
 		/// </summary>
+		private string msgSubIDField;
+		public string MsgSubID
+		{
+			get
+			{
+				return this.msgSubIDField;
+			}
+			set
+			{
+				this.msgSubIDField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
 		private string successPageRedirectRequestedField;
 		public string SuccessPageRedirectRequested
 		{
@@ -9794,6 +9846,11 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
 			{
 				this.Note = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'MsgSubID']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.MsgSubID = ChildNode.InnerText;
 			}
 			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'SuccessPageRedirectRequested']");
 			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
@@ -13400,6 +13457,23 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		/// <summary>
 		/// 
 		/// </summary>
+		private List<WalletItemsType> walletItemsField = new List<WalletItemsType>();
+		public List<WalletItemsType> WalletItems
+		{
+			get
+			{
+				return this.walletItemsField;
+			}
+			set
+			{
+				this.walletItemsField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
 		private TaxIdDetailsType taxIdDetailsField;
 		public TaxIdDetailsType TaxIdDetails
 		{
@@ -13491,6 +13565,13 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 				sb.Append("<").Append(PreferredPrefix).Append(":ContactPhone>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.ContactPhone));
 				sb.Append("</").Append(PreferredPrefix).Append(":ContactPhone>");
 			}
+			if(WalletItems != null)
+			{
+				for(int i = 0; i < WalletItems.Count; i++)
+				{
+					sb.Append(WalletItems[i].ToXMLString(PreferredPrefix,"WalletItems"));
+				}
+			}
 			if(TaxIdDetails != null)
 			{
 				sb.Append(TaxIdDetails.ToXMLString(PreferredPrefix,"TaxIdDetails"));
@@ -13556,6 +13637,15 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
 			{
 				this.ContactPhone = ChildNode.InnerText;
+			}
+			ChildNodeList = xmlNode.SelectNodes("*[local-name() = 'WalletItems']");
+			if (ChildNodeList != null && ChildNodeList.Count > 0)
+			{
+				for(int i = 0; i < ChildNodeList.Count; i++)
+				{
+					XmlNode subNode = ChildNodeList.Item(i);
+					this.WalletItems.Add(new WalletItemsType(subNode));
+				}
 			}
 			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'TaxIdDetails']");
 			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
@@ -17103,6 +17193,40 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		
 
 		/// <summary>
+		/// 
+		/// </summary>
+		private List<DiscountInfoType> redeemedOffersField = new List<DiscountInfoType>();
+		public List<DiscountInfoType> RedeemedOffers
+		{
+			get
+			{
+				return this.redeemedOffersField;
+			}
+			set
+			{
+				this.redeemedOffersField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private List<DiscountInfoType> cummulativePointsField = new List<DiscountInfoType>();
+		public List<DiscountInfoType> CummulativePoints
+		{
+			get
+			{
+				return this.cummulativePointsField;
+			}
+			set
+			{
+				this.cummulativePointsField = value;
+			}
+		}
+		
+
+		/// <summary>
 		/// Default Constructor
 	 	/// </summary>
 	 	public PaymentDetailsType()
@@ -17283,6 +17407,20 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			{
 				sb.Append("<").Append(PreferredPrefix).Append(":PaymentReason>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(EnumUtils.GetDescription(this.PaymentReason)));
 				sb.Append("</").Append(PreferredPrefix).Append(":PaymentReason>");
+			}
+			if(RedeemedOffers != null)
+			{
+				for(int i = 0; i < RedeemedOffers.Count; i++)
+				{
+					sb.Append(RedeemedOffers[i].ToXMLString(PreferredPrefix,"RedeemedOffers"));
+				}
+			}
+			if(CummulativePoints != null)
+			{
+				for(int i = 0; i < CummulativePoints.Count; i++)
+				{
+					sb.Append(CummulativePoints[i].ToXMLString(PreferredPrefix,"CummulativePoints"));
+				}
 			}
 			if (name != null)
 			{
@@ -17475,6 +17613,24 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
 			{
 				this.PaymentReason = (PaymentReasonType)EnumUtils.GetValue(ChildNode.InnerText,typeof(PaymentReasonType));
+			}
+			ChildNodeList = xmlNode.SelectNodes("*[local-name() = 'RedeemedOffers']");
+			if (ChildNodeList != null && ChildNodeList.Count > 0)
+			{
+				for(int i = 0; i < ChildNodeList.Count; i++)
+				{
+					XmlNode subNode = ChildNodeList.Item(i);
+					this.RedeemedOffers.Add(new DiscountInfoType(subNode));
+				}
+			}
+			ChildNodeList = xmlNode.SelectNodes("*[local-name() = 'CummulativePoints']");
+			if (ChildNodeList != null && ChildNodeList.Count > 0)
+			{
+				for(int i = 0; i < ChildNodeList.Count; i++)
+				{
+					XmlNode subNode = ChildNodeList.Item(i);
+					this.CummulativePoints.Add(new DiscountInfoType(subNode));
+				}
 			}
 	
 		}
@@ -29994,6 +30150,368 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			return sb.ToString();
 		}
 
+	}
+
+
+
+
+	/// <summary>
+	/// Details about an Item stored in the PayPal Wallet. 
+    /// </summary>
+	public partial class WalletItemsType	{
+		// Namespace for the type
+		private const string NameSpace = "urn:ebay:apis:eBLBaseComponents";
+
+		// Prefix associated with the namespace
+		private const string PreferredPrefix = "ebl";
+		
+		// Default US culture info
+		private static CultureInfo DefaultCulture = new CultureInfo("en-US");
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private WalletItemType? typeField;
+		public WalletItemType? Type
+		{
+			get
+			{
+				return this.typeField;
+			}
+			set
+			{
+				this.typeField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private string idField;
+		public string Id
+		{
+			get
+			{
+				return this.idField;
+			}
+			set
+			{
+				this.idField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private string descriptionField;
+		public string Description
+		{
+			get
+			{
+				return this.descriptionField;
+			}
+			set
+			{
+				this.descriptionField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// Default Constructor
+	 	/// </summary>
+	 	public WalletItemsType()
+	 	{
+		}
+
+
+		public string ToXMLString(string prefix, string name)
+		{
+			StringBuilder sb = new StringBuilder();
+			if(name != null)
+			{
+				if(prefix != null)
+				{
+					sb.Append("<").Append(prefix).Append(":").Append(name).Append(">");
+				}
+				else
+				{
+					sb.Append("<").Append(PreferredPrefix).Append(":").Append(name).Append(">");
+				}
+			}
+			if(Type != null)
+			{
+				sb.Append("<").Append(PreferredPrefix).Append(":Type>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(EnumUtils.GetDescription(this.Type)));
+				sb.Append("</").Append(PreferredPrefix).Append(":Type>");
+			}
+			if(Id != null)
+			{
+				sb.Append("<").Append(PreferredPrefix).Append(":Id>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.Id));
+				sb.Append("</").Append(PreferredPrefix).Append(":Id>");
+			}
+			if(Description != null)
+			{
+				sb.Append("<").Append(PreferredPrefix).Append(":Description>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.Description));
+				sb.Append("</").Append(PreferredPrefix).Append(":Description>");
+			}
+			if (name != null)
+			{
+				if (prefix != null)
+				{
+					sb.Append("</").Append(prefix).Append(":").Append(name).Append(">");
+				}
+				else
+				{
+					sb.Append("</").Append(PreferredPrefix).Append(":").Append(name).Append(">");
+				}
+			}
+			return sb.ToString();
+		}
+
+		public WalletItemsType(XmlNode xmlNode)
+		{
+			XmlNode ChildNode = null;
+			XmlNodeList ChildNodeList = null;
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'Type']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.Type = (WalletItemType)EnumUtils.GetValue(ChildNode.InnerText,typeof(WalletItemType));
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'Id']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.Id = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'Description']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.Description = ChildNode.InnerText;
+			}
+	
+		}
+	}
+
+
+
+
+	/// <summary>
+	/// Describes discount information. 
+    /// </summary>
+	public partial class DiscountInfoType	{
+		// Namespace for the type
+		private const string NameSpace = "urn:ebay:apis:eBLBaseComponents";
+
+		// Prefix associated with the namespace
+		private const string PreferredPrefix = "ebl";
+		
+		// Default US culture info
+		private static CultureInfo DefaultCulture = new CultureInfo("en-US");
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private string nameField;
+		public string Name
+		{
+			get
+			{
+				return this.nameField;
+			}
+			set
+			{
+				this.nameField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private string descriptionField;
+		public string Description
+		{
+			get
+			{
+				return this.descriptionField;
+			}
+			set
+			{
+				this.descriptionField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private BasicAmountType amountField;
+		public BasicAmountType Amount
+		{
+			get
+			{
+				return this.amountField;
+			}
+			set
+			{
+				this.amountField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private RedeemedOfferType? redeemedOfferTypeField;
+		public RedeemedOfferType? RedeemedOfferType
+		{
+			get
+			{
+				return this.redeemedOfferTypeField;
+			}
+			set
+			{
+				this.redeemedOfferTypeField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private string redeemedOfferIdField;
+		public string RedeemedOfferId
+		{
+			get
+			{
+				return this.redeemedOfferIdField;
+			}
+			set
+			{
+				this.redeemedOfferIdField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private decimal? pointsAccruedField;
+		public decimal? PointsAccrued
+		{
+			get
+			{
+				return this.pointsAccruedField;
+			}
+			set
+			{
+				this.pointsAccruedField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// Default Constructor
+	 	/// </summary>
+	 	public DiscountInfoType()
+	 	{
+		}
+
+
+		public string ToXMLString(string prefix, string name)
+		{
+			StringBuilder sb = new StringBuilder();
+			if(name != null)
+			{
+				if(prefix != null)
+				{
+					sb.Append("<").Append(prefix).Append(":").Append(name).Append(">");
+				}
+				else
+				{
+					sb.Append("<").Append(PreferredPrefix).Append(":").Append(name).Append(">");
+				}
+			}
+			if(Name != null)
+			{
+				sb.Append("<").Append(PreferredPrefix).Append(":Name>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.Name));
+				sb.Append("</").Append(PreferredPrefix).Append(":Name>");
+			}
+			if(Description != null)
+			{
+				sb.Append("<").Append(PreferredPrefix).Append(":Description>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.Description));
+				sb.Append("</").Append(PreferredPrefix).Append(":Description>");
+			}
+			if(Amount != null)
+			{
+				sb.Append(Amount.ToXMLString(PreferredPrefix,"Amount"));
+			}
+			if(RedeemedOfferType != null)
+			{
+				sb.Append("<").Append(PreferredPrefix).Append(":RedeemedOfferType>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(EnumUtils.GetDescription(this.RedeemedOfferType)));
+				sb.Append("</").Append(PreferredPrefix).Append(":RedeemedOfferType>");
+			}
+			if(RedeemedOfferId != null)
+			{
+				sb.Append("<").Append(PreferredPrefix).Append(":RedeemedOfferId>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.RedeemedOfferId));
+				sb.Append("</").Append(PreferredPrefix).Append(":RedeemedOfferId>");
+			}
+			if(PointsAccrued != null)
+			{
+				sb.Append("<").Append(PreferredPrefix).Append(":PointsAccrued>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(Convert.ToString(this.PointsAccrued, DefaultCulture)));
+				sb.Append("</").Append(PreferredPrefix).Append(":PointsAccrued>");
+			}
+			if (name != null)
+			{
+				if (prefix != null)
+				{
+					sb.Append("</").Append(prefix).Append(":").Append(name).Append(">");
+				}
+				else
+				{
+					sb.Append("</").Append(PreferredPrefix).Append(":").Append(name).Append(">");
+				}
+			}
+			return sb.ToString();
+		}
+
+		public DiscountInfoType(XmlNode xmlNode)
+		{
+			XmlNode ChildNode = null;
+			XmlNodeList ChildNodeList = null;
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'Name']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.Name = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'Description']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.Description = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'Amount']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.Amount =  new BasicAmountType(ChildNode);
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'RedeemedOfferType']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.RedeemedOfferType = (RedeemedOfferType)EnumUtils.GetValue(ChildNode.InnerText,typeof(RedeemedOfferType));
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'RedeemedOfferId']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.RedeemedOfferId = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'PointsAccrued']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.PointsAccrued = System.Convert.ToDecimal(ChildNode.InnerText, DefaultCulture);
+			}
+	
+		}
 	}
 
 
