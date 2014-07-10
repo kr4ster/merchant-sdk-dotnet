@@ -17,7 +17,7 @@ namespace PayPalAPISample
             configMap.Add("account1.apiPassword", "WX4WTU3S8MY44S7F");
             configMap.Add("account1.apiSignature", "AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy");
             // Optional
-            // configMap.Add("account1.Subject", "");
+            configMap.Add("account1.subject", "testSubject");
 
             // Sample Certificate Credential
             // configMap.Add("account2.apiUsername", "certuser_biz_api1.paypal.com");
@@ -25,7 +25,7 @@ namespace PayPalAPISample
             // configMap.Add("account2.apiCertificate", "resource/sdk-cert.p12");
             // configMap.Add("account2.privateKeyPassword", "password");
             // Optional
-            // configMap.Add("account2.Subject", "");
+            // configMap.Add("account2.subject", "");
             return configMap;
         }
 
