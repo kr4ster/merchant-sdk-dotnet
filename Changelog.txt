@@ -1,3 +1,10 @@
+Version 2.10.116 - July 28, 2014 
+
+	- Updated stubs
+	- Updated new version of core SDK.
+	
+You can see source code of this release in github under https://github.com/paypal/merchant-sdk-dotnet/tree/v2.10.116.
+--------------------------------------------------------------------------------------------------
 Version 2.9.113 - July 10, 2014 
 
 	- Updated core version.
