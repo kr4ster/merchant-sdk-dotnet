@@ -6988,6 +6988,23 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		
 
 		/// <summary>
+		/// 
+		/// </summary>
+		private string uRIField;
+		public string URI
+		{
+			get
+			{
+				return this.uRIField;
+			}
+			set
+			{
+				this.uRIField = value;
+			}
+		}
+		
+
+		/// <summary>
 		/// Default Constructor
 	 	/// </summary>
 	 	public SetDataRequestType()
@@ -7049,6 +7066,11 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			if(ExternalPartnerTrackingDetails != null)
 			{
 				sb.Append(ExternalPartnerTrackingDetails.ToXMLString(PreferredPrefix,"ExternalPartnerTrackingDetails"));
+			}
+			if(URI != null)
+			{
+				sb.Append("<").Append(PreferredPrefix).Append(":URI>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.URI));
+				sb.Append("</").Append(PreferredPrefix).Append(":URI>");
 			}
 			if (name != null)
 			{
@@ -8738,6 +8760,23 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		
 
 		/// <summary>
+		/// 
+		/// </summary>
+		private InstrumentDetailsType instrumentDetailsField;
+		public InstrumentDetailsType InstrumentDetails
+		{
+			get
+			{
+				return this.instrumentDetailsField;
+			}
+			set
+			{
+				this.instrumentDetailsField = value;
+			}
+		}
+		
+
+		/// <summary>
 		/// Default Constructor
 	 	/// </summary>
 	 	public GetExpressCheckoutDetailsResponseDetailsType()
@@ -8898,6 +8937,11 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
 			{
 				this.CartChangeTolerance = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'InstrumentDetails']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.InstrumentDetails =  new InstrumentDetailsType(ChildNode);
 			}
 	
 		}
@@ -17568,6 +17612,23 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		
 
 		/// <summary>
+		/// 
+		/// </summary>
+		private List<MerchantDataType> merchantDataField = new List<MerchantDataType>();
+		public List<MerchantDataType> MerchantData
+		{
+			get
+			{
+				return this.merchantDataField;
+			}
+			set
+			{
+				this.merchantDataField = value;
+			}
+		}
+		
+
+		/// <summary>
 		/// Default Constructor
 	 	/// </summary>
 	 	public PaymentDetailsType()
@@ -17771,6 +17832,13 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 				for(int i = 0; i < CummulativePoints.Count; i++)
 				{
 					sb.Append(CummulativePoints[i].ToXMLString(PreferredPrefix,"CummulativePoints"));
+				}
+			}
+			if(MerchantData != null)
+			{
+				for(int i = 0; i < MerchantData.Count; i++)
+				{
+					sb.Append(MerchantData[i].ToXMLString(PreferredPrefix,"MerchantData"));
 				}
 			}
 			if (name != null)
@@ -17991,6 +18059,15 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 				{
 					XmlNode subNode = ChildNodeList.Item(i);
 					this.CummulativePoints.Add(new DiscountInfoType(subNode));
+				}
+			}
+			ChildNodeList = xmlNode.SelectNodes("*[local-name() = 'MerchantData']");
+			if (ChildNodeList != null && ChildNodeList.Count > 0)
+			{
+				for(int i = 0; i < ChildNodeList.Count; i++)
+				{
+					XmlNode subNode = ChildNodeList.Item(i);
+					this.MerchantData.Add(new MerchantDataType(subNode));
 				}
 			}
 	
@@ -21029,6 +21106,23 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		/// <summary>
 		/// 
 		/// </summary>
+		private string softDescriptorCityField;
+		public string SoftDescriptorCity
+		{
+			get
+			{
+				return this.softDescriptorCityField;
+			}
+			set
+			{
+				this.softDescriptorCityField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
 		private SenderDetailsType senderDetailsField;
 		public SenderDetailsType SenderDetails
 		{
@@ -21134,6 +21228,11 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			{
 				sb.Append("<").Append(PreferredPrefix).Append(":SoftDescriptor>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.SoftDescriptor));
 				sb.Append("</").Append(PreferredPrefix).Append(":SoftDescriptor>");
+			}
+			if(SoftDescriptorCity != null)
+			{
+				sb.Append("<").Append(PreferredPrefix).Append(":SoftDescriptorCity>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.SoftDescriptorCity));
+				sb.Append("</").Append(PreferredPrefix).Append(":SoftDescriptorCity>");
 			}
 			if(SenderDetails != null)
 			{
@@ -30520,6 +30619,22 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			return sb.ToString();
 		}
 
+		public TupleType(XmlNode xmlNode)
+		{
+			XmlNode ChildNode = null;
+			XmlNodeList ChildNodeList = null;
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'Key']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.Key = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'Value']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.Value = ChildNode.InnerText;
+			}
+	
+		}
 	}
 
 
@@ -30599,6 +30714,21 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			return sb.ToString();
 		}
 
+		public MerchantDataType(XmlNode xmlNode)
+		{
+			XmlNode ChildNode = null;
+			XmlNodeList ChildNodeList = null;
+			ChildNodeList = xmlNode.SelectNodes("*[local-name() = 'MerchantDataTuple']");
+			if (ChildNodeList != null && ChildNodeList.Count > 0)
+			{
+				for(int i = 0; i < ChildNodeList.Count; i++)
+				{
+					XmlNode subNode = ChildNodeList.Item(i);
+					this.MerchantDataTuple.Add(new TupleType(subNode));
+				}
+			}
+	
+		}
 	}
 
 
