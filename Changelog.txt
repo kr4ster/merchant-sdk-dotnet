@@ -1,3 +1,9 @@
+Version 2.12.117 - September 10, 2014 
+
+	- NuGet dependency fix
+	
+You can see source code of this release in github under https://github.com/paypal/merchant-sdk-dotnet/tree/v2.12.117.
+--------------------------------------------------------------------------------------------------
 Version 2.11.117 - August 21, 2014 
 
 	- Updated stubs
