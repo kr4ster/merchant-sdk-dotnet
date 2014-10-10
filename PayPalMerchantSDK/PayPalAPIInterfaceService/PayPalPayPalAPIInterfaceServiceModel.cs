@@ -15618,13 +15618,12 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		public OptionType(XmlNode xmlNode)
 		{
 			XmlNode ChildNode = null;
-			XmlNodeList ChildNodeList = null;
-			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'name']");
+			ChildNode = xmlNode.Attributes.GetNamedItem("name");
 			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
 			{
 				this.name = ChildNode.InnerText;
 			}
-			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'value']");
+            ChildNode = xmlNode.Attributes.GetNamedItem("value");
 			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
 			{
 				this.value = ChildNode.InnerText;
