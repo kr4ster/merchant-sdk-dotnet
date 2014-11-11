@@ -1,3 +1,9 @@
+Version 2.13.117 - November 11, 2014
+
+	- Updated Core SDK dependency
+	- Added missing 'refund' value to PaymentTransactionCodeType
+
+--------------------------------------------------------------------------------------------------
 Version 2.12.117 - September 10, 2014 
 
 	- NuGet dependency fix
