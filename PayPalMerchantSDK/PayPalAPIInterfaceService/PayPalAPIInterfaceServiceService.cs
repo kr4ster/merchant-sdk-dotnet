@@ -31,7 +31,7 @@ namespace PayPal.PayPalAPIInterfaceService
 		/// <summary>
 		/// SDK Version
 		/// </summary>
-		private const string SDKVersion = "2.12.117";
+		private const string SDKVersion = "2.13.117";
 
 		/// <summary>
 		/// Default constructor for loading configuration from *.Config file
