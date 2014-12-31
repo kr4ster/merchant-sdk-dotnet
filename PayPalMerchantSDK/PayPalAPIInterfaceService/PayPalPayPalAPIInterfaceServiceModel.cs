@@ -1270,7 +1270,8 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		[Description("pro-hosted")]PROHOSTED,	
 		[Description("pro-api")]PROAPI,	
 		[Description("credit")]CREDIT,
-        [Description("refund")]REFUND
+        [Description("refund")]REFUND,
+        [Description("reversal")]REVERSAL
 	}
 
 
