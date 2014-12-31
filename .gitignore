@@ -18,5 +18,8 @@ ehthumbs.db
 # Folder config file
 Desktop.ini
 
-# Mac crap
+# Mac files
 .DS_Store
+
+# Log files
+*.log
