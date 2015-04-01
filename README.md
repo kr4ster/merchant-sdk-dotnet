@@ -27,6 +27,45 @@ The repository contains the PayPal Merchant SDK C#.NET Class Library Application
 	•	PayPal.Util
 	•	PayPal.Exception
 
+## Using Classic SDKs and PayPal .NET SDK
+
+If you need to use one of the Classic SDKs along with the [PayPal .NET SDK](https://github.com/paypal/PayPal-NET-SDK) (which uses PayPal's REST APIs), then you will need to do the following to your project to allow everything to work properly:
+
+1. Update your project's **web.config** to the following:
+
+  ````xml
+<configuration>
+  <configSections>
+    <section name="paypal" type="PayPal.SDKConfigHandler, PayPal" />
+  </configSections>
+
+  <!-- PayPal SDK settings -->
+  <paypal>
+    <settings>
+      <add name="mode" value="sandbox"/>
+      
+      <!-- REST API credentials -->
+      <add name="clientId" value="_client_Id_"/>
+      <add name="clientSecret" value="_client_secret_"/>
+    
+      <!-- Classic API credentials -->
+      <add name="account1.apiUsername" value="_api_username_"/>
+      <add name="account1.apiPassword" value="_api_password_"/>
+    </settings>
+  </paypal>
+</configuration>
+````
+
+2. When creating the main services object for any of the Classic SDKs, first create the `config` to be used by the service using the `ConfigManager` instance from the `PayPal.Api` namespace.  Then pass that `config` object into the constructor for the Classic SDK service object:
+
+  ````csharp
+// Get the config properties from PayPal.Api.ConfigManager
+Dictionary<string, string> config = PayPal.Api.ConfigManager.Instance.GetProperties();
+
+// Create the Classic SDK service instance to use.
+PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(config);
+````
+
 	
 ## Help
 
