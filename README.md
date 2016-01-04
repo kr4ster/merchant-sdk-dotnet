@@ -71,9 +71,9 @@ Dictionary<string, string> config = PayPal.Api.ConfigManager.Instance.GetPropert
 PayPalAPIInterfaceServiceService service = new PayPalAPIInterfaceServiceService(config);
 ````
 
-	
 ## Help
-
+*	[Upgrade Process from Legacy Merchant SDK](https://github.com/paypal/merchant-sdk-dotnet/wiki/Upgrade-Process-from-Legacy-Merchant-SDK)
+	
 *	Merchant.bat - Automation script that builds the PayPal Merchant SDK C#.NET Class Library Application in release mode and copies the built dlls to the lib folder in the PayPalAPISample Sample ASP.NET C# Web Application
 
 *	Changelog.txt - Release Notes
