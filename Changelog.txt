@@ -1,12 +1,9 @@
-Version 2.16.117 - December 14, 2015
+Version 2.16.204 - October 19, 2016 
 
-    - Update Core SDK dependency
-
---------------------------------------------------------------------------------------------------
-Version 2.15.117 - April 2, 2015
-
-    - Update Core SDK dependency
-
+	- Updated stubs
+	- Updated new version of core SDK.
+	
+You can see source code of this release in github under https://github.com/paypal/merchant-sdk-dotnet/tree/v2.7.109.
 --------------------------------------------------------------------------------------------------
 Version 2.14.117 - December 31, 2014
 

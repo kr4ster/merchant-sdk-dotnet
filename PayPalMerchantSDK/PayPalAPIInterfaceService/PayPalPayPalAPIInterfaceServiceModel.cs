@@ -1166,7 +1166,8 @@ namespace PayPal.PayPalAPIInterfaceService.Model
     [Serializable]
 	public enum APIType {
 		[Description("CHECKOUT_AUTHORIZATION")]CHECKOUTAUTHORIZATION,	
-		[Description("CHECKOUT_SALE")]CHECKOUTSALE	
+		[Description("CHECKOUT_SALE")]CHECKOUTSALE,	
+		[Description("REFUND_TRANSACTION")]REFUNDTRANSACTION	
 	}
 
 
@@ -1269,9 +1270,7 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		[Description("express-checkout")]EXPRESSCHECKOUT,	
 		[Description("pro-hosted")]PROHOSTED,	
 		[Description("pro-api")]PROAPI,	
-		[Description("credit")]CREDIT,
-        [Description("refund")]REFUND,
-        [Description("reversal")]REVERSAL
+		[Description("credit")]CREDIT	
 	}
 
 
@@ -1515,7 +1514,8 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		[Description("authorization")]AUTHORIZATION,	
 		[Description("order")]ORDER,	
 		[Description("payment-review")]PAYMENTREVIEW,	
-		[Description("regulatory-review")]REGULATORYREVIEW	
+		[Description("regulatory-review")]REGULATORYREVIEW,	
+		[Description("delayed-disbursement")]DELAYEDDISBURSEMENT	
 	}
 
 
@@ -2622,7 +2622,8 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		[Description("CreditCard")]CREDITCARD,	
 		[Description("ChinaUnionPay")]CHINAUNIONPAY,	
 		[Description("BML")]BML,	
-		[Description("Finance")]FINANCE	
+		[Description("Finance")]FINANCE,	
+		[Description("QIWI")]QIWI	
 	}
 
 
@@ -2699,7 +2700,8 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 	public enum WalletItemType {
 		[Description("MERCHANT_COUPON")]MERCHANTCOUPON,	
 		[Description("LOYALTY_CARD")]LOYALTYCARD,	
-		[Description("MANUFACTURER_COUPON")]MANUFACTURERCOUPON	
+		[Description("MANUFACTURER_COUPON")]MANUFACTURERCOUPON,	
+		[Description("MERCHANT_CLOSED_LOOP_OFFER")]MERCHANTCLOSEDLOOPOFFER	
 	}
 
 
@@ -7649,6 +7651,23 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		
 
 		/// <summary>
+		/// 
+		/// </summary>
+		private string buyerIPAddressField;
+		public string BuyerIPAddress
+		{
+			get
+			{
+				return this.buyerIPAddressField;
+			}
+			set
+			{
+				this.buyerIPAddressField = value;
+			}
+		}
+		
+
+		/// <summary>
 		/// Default Constructor
 	 	/// </summary>
 	 	public BuyerDetailType()
@@ -7678,6 +7697,11 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			{
 				sb.Append("<").Append(PreferredPrefix).Append(":RiskSessionCorrelationID>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.RiskSessionCorrelationID));
 				sb.Append("</").Append(PreferredPrefix).Append(":RiskSessionCorrelationID>");
+			}
+			if(BuyerIPAddress != null)
+			{
+				sb.Append("<").Append(PreferredPrefix).Append(":BuyerIPAddress>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.BuyerIPAddress));
+				sb.Append("</").Append(PreferredPrefix).Append(":BuyerIPAddress>");
 			}
 			if (name != null)
 			{
@@ -12114,6 +12138,23 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		
 
 		/// <summary>
+		/// 
+		/// </summary>
+		private PayeeInfoType payeeInfoField;
+		public PayeeInfoType PayeeInfo
+		{
+			get
+			{
+				return this.payeeInfoField;
+			}
+			set
+			{
+				this.payeeInfoField = value;
+			}
+		}
+		
+
+		/// <summary>
 		/// Default Constructor
 	 	/// </summary>
 	 	public BAUpdateResponseDetailsType()
@@ -12159,6 +12200,11 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
 			{
 				this.BillingAddress =  new AddressType(ChildNode);
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'PayeeInfo']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.PayeeInfo =  new PayeeInfoType(ChildNode);
 			}
 	
 		}
@@ -13855,6 +13901,77 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
 			{
 				this.EnhancedPayerInfo =  new EnhancedPayerInfoType(ChildNode);
+			}
+	
+		}
+	}
+
+
+
+
+	/// <summary>
+	/// PayeeInfoType Payee Information 
+    /// </summary>
+	public partial class PayeeInfoType	{
+		
+		// Default US culture info
+		private static CultureInfo DefaultCulture = new CultureInfo("en-US");
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private string payeeEmailField;
+		public string PayeeEmail
+		{
+			get
+			{
+				return this.payeeEmailField;
+			}
+			set
+			{
+				this.payeeEmailField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private string payeeIDField;
+		public string PayeeID
+		{
+			get
+			{
+				return this.payeeIDField;
+			}
+			set
+			{
+				this.payeeIDField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// Default Constructor
+	 	/// </summary>
+	 	public PayeeInfoType()
+	 	{
+		}
+
+
+		public PayeeInfoType(XmlNode xmlNode)
+		{
+			XmlNode ChildNode = null;
+			XmlNodeList ChildNodeList = null;
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'PayeeEmail']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.PayeeEmail = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'PayeeID']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.PayeeID = ChildNode.InnerText;
 			}
 	
 		}
@@ -15620,12 +15737,13 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		public OptionType(XmlNode xmlNode)
 		{
 			XmlNode ChildNode = null;
-			ChildNode = xmlNode.Attributes.GetNamedItem("name");
+			XmlNodeList ChildNodeList = null;
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'name']");
 			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
 			{
 				this.name = ChildNode.InnerText;
 			}
-            ChildNode = xmlNode.Attributes.GetNamedItem("value");
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'value']");
 			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
 			{
 				this.value = ChildNode.InnerText;
@@ -19966,6 +20084,40 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		
 
 		/// <summary>
+		/// 
+		/// </summary>
+		private string scheduledShippingDateField;
+		public string ScheduledShippingDate
+		{
+			get
+			{
+				return this.scheduledShippingDateField;
+			}
+			set
+			{
+				this.scheduledShippingDateField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private string scheduledShippingPeriodField;
+		public string ScheduledShippingPeriod
+		{
+			get
+			{
+				return this.scheduledShippingPeriodField;
+			}
+			set
+			{
+				this.scheduledShippingPeriodField = value;
+			}
+		}
+		
+
+		/// <summary>
 		/// Default Constructor
 	 	/// </summary>
 	 	public UserSelectedOptionType()
@@ -20011,6 +20163,16 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 				sb.Append("<").Append(PreferredPrefix).Append(":ShippingOptionName>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.ShippingOptionName));
 				sb.Append("</").Append(PreferredPrefix).Append(":ShippingOptionName>");
 			}
+			if(ScheduledShippingDate != null)
+			{
+				sb.Append("<").Append(PreferredPrefix).Append(":ScheduledShippingDate>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.ScheduledShippingDate));
+				sb.Append("</").Append(PreferredPrefix).Append(":ScheduledShippingDate>");
+			}
+			if(ScheduledShippingPeriod != null)
+			{
+				sb.Append("<").Append(PreferredPrefix).Append(":ScheduledShippingPeriod>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.ScheduledShippingPeriod));
+				sb.Append("</").Append(PreferredPrefix).Append(":ScheduledShippingPeriod>");
+			}
 			if (name != null)
 			{
 				if (prefix != null)
@@ -20053,6 +20215,16 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
 			{
 				this.ShippingOptionName = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'ScheduledShippingDate']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.ScheduledShippingDate = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'ScheduledShippingPeriod']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.ScheduledShippingPeriod = ChildNode.InnerText;
 			}
 	
 		}
@@ -21056,6 +21228,23 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		/// <summary>
 		/// 
 		/// </summary>
+		private string riskSessionCorrelationIDField;
+		public string RiskSessionCorrelationID
+		{
+			get
+			{
+				return this.riskSessionCorrelationIDField;
+			}
+			set
+			{
+				this.riskSessionCorrelationIDField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
 		private string merchantSessionIdField;
 		public string MerchantSessionId
 		{
@@ -21214,6 +21403,11 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			{
 				sb.Append("<").Append(PreferredPrefix).Append(":IPAddress>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.IPAddress));
 				sb.Append("</").Append(PreferredPrefix).Append(":IPAddress>");
+			}
+			if(RiskSessionCorrelationID != null)
+			{
+				sb.Append("<").Append(PreferredPrefix).Append(":RiskSessionCorrelationID>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.RiskSessionCorrelationID));
+				sb.Append("</").Append(PreferredPrefix).Append(":RiskSessionCorrelationID>");
 			}
 			if(MerchantSessionId != null)
 			{
@@ -21408,6 +21602,23 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		
 
 		/// <summary>
+		/// 
+		/// </summary>
+		private string pendingReasonField;
+		public string PendingReason
+		{
+			get
+			{
+				return this.pendingReasonField;
+			}
+			set
+			{
+				this.pendingReasonField = value;
+			}
+		}
+		
+
+		/// <summary>
 		/// Default Constructor
 	 	/// </summary>
 	 	public DoReferenceTransactionResponseDetailsType()
@@ -21458,6 +21669,11 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
 			{
 				this.MsgSubID = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'PendingReason']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.PendingReason = ChildNode.InnerText;
 			}
 	
 		}
@@ -25112,6 +25328,23 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		
 
 		/// <summary>
+		/// 
+		/// </summary>
+		private string pendingReasonField;
+		public string PendingReason
+		{
+			get
+			{
+				return this.pendingReasonField;
+			}
+			set
+			{
+				this.pendingReasonField = value;
+			}
+		}
+		
+
+		/// <summary>
 		/// Default Constructor
 	 	/// </summary>
 	 	public CreateRecurringPaymentsProfileResponseDetailsType()
@@ -25147,6 +25380,11 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
 			{
 				this.DCCReturnCode = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'PendingReason']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.PendingReason = ChildNode.InnerText;
 			}
 	
 		}
@@ -27102,6 +27340,86 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			return sb.ToString();
 		}
 
+		public AirlineItineraryType(XmlNode xmlNode)
+		{
+			XmlNode ChildNode = null;
+			XmlNodeList ChildNodeList = null;
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'PassengerName']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.PassengerName = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'IssueDate']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.IssueDate = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'TravelAgencyName']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.TravelAgencyName = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'TravelAgencyCode']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.TravelAgencyCode = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'TicketNumber']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.TicketNumber = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'IssuingCarrierCode']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.IssuingCarrierCode = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'CustomerCode']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.CustomerCode = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'TotalFare']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.TotalFare =  new BasicAmountType(ChildNode);
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'TotalTaxes']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.TotalTaxes =  new BasicAmountType(ChildNode);
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'TotalFee']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.TotalFee =  new BasicAmountType(ChildNode);
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'RestrictedTicket']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.RestrictedTicket = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'ClearingSequence']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.ClearingSequence = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'ClearingCount']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.ClearingCount = ChildNode.InnerText;
+			}
+			ChildNodeList = xmlNode.SelectNodes("*[local-name() = 'FlightDetails']");
+			if (ChildNodeList != null && ChildNodeList.Count > 0)
+			{
+				for(int i = 0; i < ChildNodeList.Count; i++)
+				{
+					XmlNode subNode = ChildNodeList.Item(i);
+					this.FlightDetails.Add(new FlightDetailsType(subNode));
+				}
+			}
+	
+		}
 	}
 
 
@@ -27527,6 +27845,97 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			return sb.ToString();
 		}
 
+		public FlightDetailsType(XmlNode xmlNode)
+		{
+			XmlNode ChildNode = null;
+			XmlNodeList ChildNodeList = null;
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'ConjuctionTicket']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.ConjuctionTicket = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'ExchangeTicket']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.ExchangeTicket = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'CouponNumber']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.CouponNumber = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'ServiceClass']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.ServiceClass = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'TravelDate']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.TravelDate = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'CarrierCode']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.CarrierCode = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'StopOverPermitted']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.StopOverPermitted = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'DepartureAirport']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.DepartureAirport = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'ArrivalAirport']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.ArrivalAirport = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'FlightNumber']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.FlightNumber = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'DepartureTime']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.DepartureTime = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'ArrivalTime']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.ArrivalTime = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'FareBasisCode']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.FareBasisCode = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'Fare']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.Fare =  new BasicAmountType(ChildNode);
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'Taxes']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.Taxes =  new BasicAmountType(ChildNode);
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'Fee']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.Fee =  new BasicAmountType(ChildNode);
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'EndorsementOrRestrictions']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.EndorsementOrRestrictions = ChildNode.InnerText;
+			}
+	
+		}
 	}
 
 
@@ -31152,7 +31561,7 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 
 
 	/// <summary>
-	/// 
+	/// Enhanced data for different transactions. 
     /// </summary>
 	public partial class EnhancedPaymentDataType	{
 		// Namespace for the type
@@ -31163,6 +31572,23 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		
 		// Default US culture info
 		private static CultureInfo DefaultCulture = new CultureInfo("en-US");
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private AirlineItineraryType airlineItineraryField;
+		public AirlineItineraryType AirlineItinerary
+		{
+			get
+			{
+				return this.airlineItineraryField;
+			}
+			set
+			{
+				this.airlineItineraryField = value;
+			}
+		}
+		
 
 		/// <summary>
 		/// Default Constructor
@@ -31186,6 +31612,10 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 					sb.Append("<").Append(PreferredPrefix).Append(":").Append(name).Append(">");
 				}
 			}
+			if(AirlineItinerary != null)
+			{
+				sb.Append(AirlineItinerary.ToXMLString(null,"AirlineItinerary"));
+			}
 			if (name != null)
 			{
 				if (prefix != null)
@@ -31201,6 +31631,38 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		}
 
 		public EnhancedPaymentDataType(XmlNode xmlNode)
+		{
+			XmlNode ChildNode = null;
+			XmlNodeList ChildNodeList = null;
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'AirlineItinerary']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.AirlineItinerary =  new AirlineItineraryType(ChildNode);
+			}
+	
+		}
+	}
+
+
+
+
+	/// <summary>
+	/// 
+    /// </summary>
+	public partial class EnhancedPaymentInfoType	{
+		
+		// Default US culture info
+		private static CultureInfo DefaultCulture = new CultureInfo("en-US");
+
+		/// <summary>
+		/// Default Constructor
+	 	/// </summary>
+	 	public EnhancedPaymentInfoType()
+	 	{
+		}
+
+
+		public EnhancedPaymentInfoType(XmlNode xmlNode)
 		{
 			XmlNode ChildNode = null;
 			XmlNodeList ChildNodeList = null;
@@ -31261,33 +31723,6 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		}
 
 		public EnhancedItemDataType(XmlNode xmlNode)
-		{
-			XmlNode ChildNode = null;
-			XmlNodeList ChildNodeList = null;
-	
-		}
-	}
-
-
-
-
-	/// <summary>
-	/// 
-    /// </summary>
-	public partial class EnhancedPaymentInfoType	{
-		
-		// Default US culture info
-		private static CultureInfo DefaultCulture = new CultureInfo("en-US");
-
-		/// <summary>
-		/// Default Constructor
-	 	/// </summary>
-	 	public EnhancedPaymentInfoType()
-	 	{
-		}
-
-
-		public EnhancedPaymentInfoType(XmlNode xmlNode)
 		{
 			XmlNode ChildNode = null;
 			XmlNodeList ChildNodeList = null;
@@ -35114,6 +35549,40 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		/// <summary>
 		/// 
 		/// </summary>
+		private BasicAmountType shippingAmountField;
+		public BasicAmountType ShippingAmount
+		{
+			get
+			{
+				return this.shippingAmountField;
+			}
+			set
+			{
+				this.shippingAmountField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
+		private BasicAmountType taxAmountField;
+		public BasicAmountType TaxAmount
+		{
+			get
+			{
+				return this.taxAmountField;
+			}
+			set
+			{
+				this.taxAmountField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
 		private string memoField;
 		public string Memo
 		{
@@ -35231,6 +35700,23 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		
 
 		/// <summary>
+		/// 
+		/// </summary>
+		private MerchantDataType merchantDataField;
+		public MerchantDataType MerchantData
+		{
+			get
+			{
+				return this.merchantDataField;
+			}
+			set
+			{
+				this.merchantDataField = value;
+			}
+		}
+		
+
+		/// <summary>
 		/// Default Constructor
 	 	/// </summary>
 	 	public RefundTransactionRequestType()
@@ -35277,6 +35763,14 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			{
 				sb.Append(Amount.ToXMLString(PreferredPrefix,"Amount"));
 			}
+			if(ShippingAmount != null)
+			{
+				sb.Append(ShippingAmount.ToXMLString(PreferredPrefix,"ShippingAmount"));
+			}
+			if(TaxAmount != null)
+			{
+				sb.Append(TaxAmount.ToXMLString(PreferredPrefix,"TaxAmount"));
+			}
 			if(Memo != null)
 			{
 				sb.Append("<").Append(PreferredPrefix).Append(":Memo>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.Memo));
@@ -35312,6 +35806,10 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			{
 				sb.Append("<").Append(PreferredPrefix).Append(":MsgSubID>").Append(DeserializationUtils.escapeInvalidXmlCharsRegex(this.MsgSubID));
 				sb.Append("</").Append(PreferredPrefix).Append(":MsgSubID>");
+			}
+			if(MerchantData != null)
+			{
+				sb.Append(MerchantData.ToXMLString(null,"MerchantData"));
 			}
 			if (name != null)
 			{
@@ -41451,6 +41949,23 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		/// <summary>
 		/// 
 		/// </summary>
+		private string transactionPendingReasonField;
+		public string TransactionPendingReason
+		{
+			get
+			{
+				return this.transactionPendingReasonField;
+			}
+			set
+			{
+				this.transactionPendingReasonField = value;
+			}
+		}
+		
+
+		/// <summary>
+		/// 
+		/// </summary>
 		private PendingStatusCodeType? pendingReasonField;
 		public PendingStatusCodeType? PendingReason
 		{
@@ -41564,6 +42079,11 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
 			{
 				this.TransactionID = ChildNode.InnerText;
+			}
+			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'TransactionPendingReason']");
+			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+			{
+				this.TransactionPendingReason = ChildNode.InnerText;
 			}
 			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'PendingReason']");
 			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
