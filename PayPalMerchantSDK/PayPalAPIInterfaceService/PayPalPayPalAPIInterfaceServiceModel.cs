@@ -15738,13 +15738,13 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		{
 			XmlNode ChildNode = null;
 			XmlNodeList ChildNodeList = null;
-			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'name']");
+			ChildNode = xmlNode.Attributes.GetNamedItem("name");
 			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
 			{
 				this.name = ChildNode.InnerText;
 			}
-			ChildNode = xmlNode.SelectSingleNode("*[local-name() = 'value']");
-			if(ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
+		    ChildNode = xmlNode.Attributes.GetNamedItem("value");
+            if (ChildNode != null && !DeserializationUtils.isWhiteSpaceNode(ChildNode))
 			{
 				this.value = ChildNode.InnerText;
 			}
