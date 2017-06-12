@@ -1270,7 +1270,8 @@ namespace PayPal.PayPalAPIInterfaceService.Model
 		[Description("express-checkout")]EXPRESSCHECKOUT,	
 		[Description("pro-hosted")]PROHOSTED,	
 		[Description("pro-api")]PROAPI,	
-		[Description("credit")]CREDIT	
+		[Description("credit")]CREDIT,
+		[Description("refund")]REFUND
 	}
 
 
